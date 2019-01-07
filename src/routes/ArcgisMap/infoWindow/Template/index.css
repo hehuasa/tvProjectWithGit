@@ -1,0 +1,216 @@
+.truemap {
+  position: absolute;
+  line-height: 30px;
+  border: 1px solid #eee;
+  background: #fff;
+  z-index: 100;
+}
+.truemap span {
+  margin-right: 20px;
+  margin-left: 8px;
+}
+.deviceInfo {
+  position: absolute;
+  line-height: 30px;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(171, 171, 171, 0.3);
+}
+.deviceInfo .title {
+  height: 30px;
+  font-size: 14px;
+  background: linear-gradient(to bottom, rgba(251, 252, 252, 0.5) 0%, rgba(194, 194, 194, 0.5) 100%);
+}
+.deviceInfo .title .titleName {
+  float: left;
+  line-height: 30px;
+  text-indent: 16px;
+  color: #333;
+}
+.deviceInfo .title .close {
+  width: 8px;
+  height: 8px;
+  float: right;
+  margin-right: 13px;
+  line-height: 30px;
+  font-size: 8px;
+  color: #555;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.deviceInfo .title .rate {
+  float: left;
+  margin-left: 14px;
+  margin-right: 11px;
+  font-size: 10px;
+  color: #ff0405;
+}
+.deviceInfo .title .rate li {
+  margin-right: 2px;
+  line-height: 30px;
+}
+.deviceInfo .title .frequency {
+  float: left;
+  line-height: 30px;
+  font-size: 12px;
+  color: #333;
+}
+/*
+.top {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 14px solid #2f54eb;
+  top:0;
+}
+
+.right {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 30px solid #FFFFFF;
+  right: -28px;
+  top: 108px;
+}
+
+.bottom {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border-top: 30px solid #FFFFFF;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.left {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 30px solid #FFFFFF;
+}
+*/
+.content {
+  font-size: 12px;
+  height: 198px;
+}
+.content .contentItem {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 9px;
+}
+.content .contentItem div {
+  line-height: 25px;
+  color: #333;
+}
+.content .contentItem div:first-child {
+  width: 85px;
+  text-indent: 16px;
+}
+.content .contentItem div:last-child {
+  width: 295px;
+}
+.top:after,
+.top:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  position: absolute;
+  left: 188px;
+}
+.top:after {
+  border-width: 17px;
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+  top: -34px;
+}
+.top:before {
+  border-width: 17px;
+  border-bottom-color: rgba(171, 171, 171, 0.2);
+  top: -36px;
+}
+.right:after,
+.right:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  left: 100%;
+  position: absolute;
+  width: 0;
+}
+.right:after {
+  border-width: 17px;
+  border-left-color: rgba(255, 255, 255, 0.8);
+  top: 98px;
+}
+.right:before {
+  border-width: 17px;
+  border-left-color: rgba(171, 171, 171, 0.2);
+  top: 96px;
+}
+.left:after,
+.left:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  position: absolute;
+  top: 98px;
+}
+.left:after {
+  border-width: 17px;
+  border-right-color: rgba(255, 255, 255, 0.8);
+  left: -32px;
+}
+.left:before {
+  border-width: 17px;
+  border-right-color: rgba(171, 171, 171, 0.2);
+  left: -34px;
+}
+.bottom:after,
+.bottom:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  position: absolute;
+  left: 188px;
+}
+.bottom:after {
+  border-width: 17px;
+  border-top-color: rgba(255, 255, 255, 0.8);
+  top: 228px;
+}
+.bottom:before {
+  border-width: 17px;
+  border-top-color: rgba(171, 171, 171, 0.2);
+  top: 230px;
+}
+.warnBottom:after,
+.warnBottom:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  position: absolute;
+  transform: rotate(48deg);
+}
+.warnBottom:after {
+  border-width: 14px;
+  border-top-width: 83px;
+  border-top-color: rgba(255, 255, 255, 0.8);
+  top: 199px;
+  left: 200px;
+}
+.warnBottom:before {
+  border-width: 14px;
+  border-top-width: 83px;
+  border-top-color: rgba(171, 171, 171, 0.2);
+  top: 201px;
+  left: 198px;
+}

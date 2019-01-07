@@ -1,0 +1,177 @@
+@import '../../../index';
+@import "~antd/lib/style/themes/default.less";
+.warp {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.tools {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  overflow: hidden;
+  z-index: 2;
+  border-left: @border-width-base @border-style-base @border-color;
+  & > div {
+    float: left;
+    padding: 0 12px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    background: @white;
+    color: @bord-text-gray;
+    border-top: @border-width-base @border-style-base @border-color;
+    border-bottom: @border-width-base @border-style-base @border-color;
+    border-right: @border-width-base @border-style-base @border-color;
+    &:hover {
+      background: @border-color;
+      color: #000;
+    }
+  }
+  & > button {
+    float: left;
+    margin: 0 5px;
+    height: 30px;
+    line-height: 30px;
+    border-left: @border-width-base @border-style-base @border-color;
+    border-radius: 0;
+    & img {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+.layers {
+  position: absolute;
+  top: 50px;
+  right: 218px;
+  padding: 8px;
+  background: @white;
+  border: 1px solid #d9d9d9;
+  transition: opacity .35s;
+  & > div {
+    margin: 8px;
+  }
+}
+.left {
+  position: absolute;
+  top: 38px;
+  left: 8px;
+  margin-right: 20px;
+  width: 200px;
+  overflow: hidden;
+  background: @white;
+  z-index: 2;
+  border: 1px solid #d9d9d9;
+  & label {
+    display: block;
+  }
+  & .dragBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & > div {
+      display: flex;
+      float: left;
+      margin-bottom: 8px;
+      padding: 4px 0;
+      flex: 0 0 33.33%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &:hover {
+        background: #eee;
+      }
+      & .pic {
+        margin-bottom: 8px;
+        width: 40px;
+        height: 20px;
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      & .node {
+        margin-bottom: 8px;
+        width: 32px;
+        height: 32px;
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+  }
+  :global {
+    .ant-collapse-header {
+      padding: 0 !important;
+      color: inherit !important;
+    }
+    .arrow {
+      line-height: 25px !important;
+      background: transparent;
+    }
+    .ant-collapse {
+      border: none !important;
+    }
+  }
+}
+.right {
+  position: absolute;
+  top: 48px;
+  right: 8px;
+  width: 200px;
+  overflow: hidden;
+  background: @white;
+  z-index: 2;
+  border: 1px solid #d9d9d9;
+  & div {
+    margin: 8px;
+    & button {
+      float: right;
+      border-radius: 0;
+    }
+  }
+  & span {
+    display: inline-block;
+  }
+}
+.color {
+  position: absolute;
+  top: 120px;
+  right: 8px;
+  z-index: 12;
+}
+& .headerStyle {
+  padding-left: 40px;
+  height: 25px;
+  line-height: 25px;
+  background: @tab-background;
+}
+& .headerStyle1 {
+  padding-left: 40px;
+  height: 25px;
+  line-height: 25px;
+  background: #4299d7;
+  color: @white;
+}
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.renderWarp {
+  position: absolute;
+  z-index: 10;
+  .canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}

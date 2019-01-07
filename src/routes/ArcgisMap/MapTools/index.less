@@ -1,0 +1,96 @@
+@import '../../../index';
+@import "~antd/lib/style/themes/default.less";
+
+.tools {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  overflow: hidden;
+  color: @white;
+  background: @homepage-background;
+  border-top: @border-width-base @border-style-base @border-color;
+  border-bottom: @border-width-base @border-style-base @border-color;
+  border-right: @border-width-base @border-style-base @border-color;
+  z-index: 15;
+  & > div {
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border-left: @border-width-base @border-style-base @border-color;
+    & img {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.legend {
+  position: absolute;
+  top: 80px;
+  right: 16px;
+  width: 400px;
+  background: #fff;
+}
+
+.layers {
+  position: absolute;
+  top: 70px;
+  right: 16px;
+  padding: 8px;
+  font-size: 12px;
+  background: #fff;
+  z-index: 11;
+  & ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid @border-color;
+  }
+  & li {
+    height: 26px;
+    line-height: 26px;
+    &:hover {
+      background: @split-color;
+    }
+  }
+  & .title {
+    background: @split-color;
+  }
+  & .name {
+    padding-left: 4px;
+    display: inline-block;
+    min-width: 132px;
+    border-bottom: 1px solid @border-color;
+  }
+  & .opreate {
+    display: inline-block;
+    min-width: 108px;
+    border-bottom: 1px solid @border-color;
+    border-left: 1px solid @border-color;
+    text-align: center;
+  }
+  & .closeall {
+    display: inline-block;
+    margin: 16px;
+    width: 88px;
+    height: 32px;
+    border: 1px solid #69c4f5;
+    color: #69c4f5;
+  }
+}
+.measure {
+  position: absolute;
+  top: 48px;
+  right: 8px;
+  padding: 8px;
+  width: 200px;
+  background: @white;
+  z-index: 15;
+  & h4 {
+    border-bottom: 1px solid @bord-text-gray;
+  }
+}

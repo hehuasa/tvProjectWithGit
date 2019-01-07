@@ -1,0 +1,59 @@
+@import '../../../../../index.less';
+.eventInfo {
+    p {
+        margin: 0;
+        padding: 0;
+        line-height: 20px;
+        font-size: @public-font-size;
+        color: @public-color;
+    }
+    div {
+        em {
+            font-style: normal;
+            display: inline-block;
+            margin-left: 24px;
+        }
+    }
+    .responseTitle {
+        line-height: 36px;
+        font-size: @public-font-size;
+        .responseTitleColor {
+            color: red;
+        }
+    }
+    .incidentTitle {
+        font-size: @public-font-size;
+        line-height: @public-height;
+        // line-height: 22px;
+    }
+    .eventTitle {
+        font-size: @public-font-size;
+        line-height: @public-height;
+        // line-height: 32px;
+    }
+}
+
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 72px;
+    line-height: 72px;
+    background: #333;
+    overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+
+.carouselBox {
+    :global {
+        .slick-list {
+            height: 100px !important;
+        }
+        .ant-carousel{
+            color: @public-color;
+            font-size: @public-font-m;
+            
+        }
+    }
+}

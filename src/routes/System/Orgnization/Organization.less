@@ -1,0 +1,75 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+@import "../../../index.less";
+.main {
+    // margin-top: 10px;
+    // border: 1px solid @border-color-base;
+    // background-color: white;
+    position: relative; // max-height: 768px;
+    border: @public-border-size solid @public-border-color; // background-color:   @public-background-color;
+}
+
+.content {
+    height: 100%;
+}
+
+.tree {
+    border-right: 8px solid @public-border-color;
+    padding: @public-range;
+    height: 100%;
+    overflow: auto;
+}
+
+.addNewTree {
+    text-align: center;
+}
+
+.form {
+    padding-top: @public-range;
+    padding-right: @public-range;
+    min-height: 768px;
+    :global {
+        .ant-form-item {
+            margin-bottom: 8px;
+            width: 100%;
+        }
+    }
+    .postInfo {
+        :global {
+            .ant-form-item-label {
+                width: @public-font-size + 20px;
+                white-space: normal;
+                text-align: left;
+            }
+        }
+    }
+}
+
+.submitButtons {
+    margin-top: 30px;
+    float: bottom;
+}
+
+.searchRow {
+    width: 100%;
+    :global {
+        .ant-form-item {
+            margin-bottom: 0;
+        }
+    }
+}
+
+:global {
+    .ant-layout {
+        background: initial;
+    }
+    .ant-layout-sider {
+        background: initial;
+    }
+}
+
+.leftContent {
+    width: 292px;
+    height: 100%;
+    border-right: 8px solid @public-border-color;
+}

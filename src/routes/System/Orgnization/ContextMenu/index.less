@@ -1,0 +1,17 @@
+@import "~antd/lib/style/themes/default.less";
+.context-menu{
+  //width: 120px;
+  position: fixed;
+  z-index: 100;
+  opacity: 0.9;
+  border: 1px solid #e4e9ee;
+  border-radius: 5px;
+}
+.item{
+  margin: 0 !important;
+  height: 30px !important;
+  line-height: 30px !important;
+  &:hover{
+    background: @item-active-bg;
+  }
+}

@@ -1,0 +1,44 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../index";
+.side-right {
+    position: relative;
+    margin-left: 8px;
+    z-index: 1;
+    border: 1px solid @split-color;
+}
+
+.panel-zoom-in {
+    position: absolute;
+    top: 2px;
+    right: -439px;
+    z-index: 101;
+}
+
+.mapContent {
+    position: relative;
+}
+
+.arc-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+:global {
+    & .ant-layout-sider-children {
+        height: 100%;
+    }
+}
+
+.alarmTitle {
+    margin-right: 16px;
+    font-size: 16px;
+    color: @public-color;
+}
+
+.titleRange {
+    margin-left: 8px;
+    font-size: 14px;
+    color: @public-color;
+}
+

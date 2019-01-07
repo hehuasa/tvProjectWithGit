@@ -1,0 +1,23 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../index";
+.trigger-left {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  text-align: right;
+  font-size: @public-font-size;
+  color: @white;
+  background: @homepage-panel-head-background;
+  box-shadow: @homepage-panel-box-shadow;
+  z-index: 20;
+  & .title {
+    display: inline-block;
+    position: absolute;
+    left: 80px;
+  }
+  & .icon{
+    margin-right: 8px;
+    cursor: pointer;
+    font-size: @public-font-m;
+  }
+}

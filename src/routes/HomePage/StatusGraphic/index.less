@@ -1,0 +1,31 @@
+.warp {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  .close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    z-index: 1001;
+    & i:hover {
+      background: #f72335;
+    }
+  }
+  .animate {
+    & span {
+      position: absolute;
+    }
+  }
+  .title {
+    padding-top: 8px;
+    color: #48fd3d;
+    font-size: 32px;
+    text-align: center;
+    background: #202121;
+  }
+  .canvas {
+    //height: 100%;
+    background: #202121;
+  }
+}

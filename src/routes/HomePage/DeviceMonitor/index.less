@@ -1,0 +1,144 @@
+@import "../../../index.less";
+@blue1: @public-border-color-hover;
+// @blue2: #2f9ef3;
+@blue2: @public-color-hover;
+@boder1: #d0d0d0;
+// @bg1: #fff;
+@bg1: @homepage-panel-background;
+@bg2: @tabs-background;
+.warp {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    background: @bg1;
+    color: @public-color-hover;
+    .close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.65);
+        z-index: 1001;
+    }
+    & .deviceType {
+        color: @blue2;
+        font-size: @public-font-size;
+        margin: @public-range 0 @public-range @public-range-max;
+    }
+    & .cardWarp {
+        text-align: center;
+        & .rows {
+            float: left;
+            margin-left: @public-range-max;
+            margin-bottom: 56px;
+            & .card {
+                display: inline-block;
+                position: relative;
+                margin-bottom: 8px; // width: 320px;
+                // height: 160px;
+                width: 457px;
+                height: 280px;
+                border: @public-border-size solid @boder1;
+                & .title {
+                    margin: 0 4px;
+                    padding: 0 4px;
+                    width: 98%;
+                    height: @public-height;
+                    line-height: @public-height;
+                    text-align: left;
+                    border-bottom: @public-border-size solid @boder1;
+                    overflow: hidden;
+                    color: @time-color;
+                    & span {
+                        margin: 0 8px;
+                    }
+                    & .left {
+                        float: left;
+                    }
+                    & .right {
+                        float: right;
+                    }
+                }
+                & .text {
+                    display: flex;
+                    margin-left: @public-range-max;
+                    flex-direction: column;
+                    align-items: start;
+                }
+                & .quota1 {
+                    padding: 4px @public-range;
+                    margin-top: @public-range;
+                    min-width: 80px;
+                    border-radius: 3px;
+                    background: @bg2;
+                    & .value {
+                        font-size: @public-font-size;
+                    }
+                    & .units {
+                        font-size: @public-font-m;
+                    }
+                }
+                & .quota2 {
+                    padding: 4px @public-range;
+                    margin-top: @public-range;
+                    min-width: 80px;
+                    border-radius: 3px;
+                    background: @bg2;
+                    & .value {
+                        font-size: @public-font-size;
+                    }
+                    & .units {
+                        font-size: @public-font-m;
+                    }
+                }
+                & .circle {
+                    position: absolute;
+                    top: 55px;
+                    right: 20px;
+                    width: 192px;
+                    height: 192px; // background-color: @blue1;
+                    border-radius: 50%;
+                    border: 8px solid @blue1;
+                }
+                & .content {
+                    // position: absolute;
+                    // display: flex;
+                    // flex-direction: column;
+                    // justify-content: center;
+                    // align-items: center;
+                    // top: 6px;
+                    // right: 6px;
+                    // width: 108px;
+                    // height: 108px;
+                    // background-color: @bg1;
+                    // border-radius: 50%;
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    top: 27px;
+                    right: 20px;
+                    width: 133px;
+                    height: 120px;
+                    border-radius: 50%;
+                    & .quota3 {
+                        font-size: @public-font-max;
+                        color: @blue2;
+                        & .units {
+                            font-size: @public-font-m;
+                            color: @public-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & .name {
+        position: absolute;
+        bottom: 12px;
+        width: 100%;
+        text-align: left;
+        text-indent: @public-range-max;
+    }
+}

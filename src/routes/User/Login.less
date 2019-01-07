@@ -1,0 +1,73 @@
+@import "~antd/lib/style/themes/default.less";
+
+.main {
+  //width: 368px;
+  //margin: 0 auto;
+  margin-right: 70px;
+  float: right;
+  width: 360px;
+  height: 380px;
+  padding: 14px 32px;
+  //position: absolute;
+  //left: 58%;
+  //top: 50%;
+  //transform: translateY(-50%);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 3px #888;
+  :global {
+    .ant-btn-primary{
+      background-color: #3ea7e8 !important;
+      border: none !important;
+    }
+    .ant-input-affix-wrapper .ant-input:not(:first-child) {
+        padding-left: 44px;
+        border: 1px solid #d9d9d9;
+    }
+    & .ant-tabs-nav .ant-tabs-tab-active {
+      color: #666;
+      font-weight: bold;
+      text-shadow: #eff3f9 2px 0 0, #eff3f9 0 2px 0, #eff3f9 -2px 0 0, #eff3f9 0 -2px 0;
+
+      -webkit-text-shadow: #eff3f9 2px 0 0, #eff3f9 0 2px 0, #eff3f9 -2px 0 0, #eff3f9 0 -2px 0;
+
+      -moz-text-shadow: #eff3f9 2px 0 0, #eff3f9 0 2px 0, #eff3f9 -2px 0 0, #eff3f9 0 -2px 0;
+    }
+  }
+  .icon {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.2);
+    margin-left: 16px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color .3s;
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+
+  .other {
+    text-align: left;
+    margin-top: 24px;
+    line-height: 22px;
+
+    .register {
+      float: right;
+    }
+  }
+}
+
+.login_body {
+  width: 258px;
+  padding-left: 32px;
+}
+
+.loginTitle {
+  font-size: 22px;
+  text-align: center;
+  line-height: 46px;
+  margin-bottom: 24px;
+  color: #626262;
+}
+

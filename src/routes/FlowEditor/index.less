@@ -1,0 +1,62 @@
+.warp {
+  width: 100%;
+  position: relative;
+  margin: 32px;
+  & .content {
+    position: absolute;
+    width: 90%;
+    & h2 {
+      text-align: center;
+    }
+  }
+}
+.header {
+  display: flex;
+  background: #e4e9ee;
+  & .save {
+    margin-left: 60px;
+    //overflow: hidden;
+    & div {
+      display: inline-block;
+      & button {
+        margin-left: 16px;
+      }
+    }
+  }
+}
+.left-side {
+  float: left;
+  width: 200px;
+  height: 1500px;
+  & div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    float: left;
+    margin: 8px;
+    height: 70px;
+    width: 70px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px dashed;
+    &:hover {
+      border: 1px solid;
+    }
+  }
+}
+.canvas {
+  width: 100%;
+  height: 100%;
+  background: #202121;
+}
+.edit {
+  & input {
+    width: 120px;
+  }
+  & span {
+    display: inline-block;
+    width: 70px;
+  }
+}

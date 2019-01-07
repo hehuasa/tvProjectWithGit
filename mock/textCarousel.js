@@ -1,0 +1,41 @@
+const getTextCarousel = (req, res) => {
+    res.send({
+        code: 1001,
+        data: [
+            { id: 1, value: 't这是第1条测试' },
+            { id: 20, value: 't这是第2条测试' },
+            { id: 30, value: 't这是第3条测试' },
+            { id: 40, value: 't这是第4条测试' },
+            { id: 50, value: 't这是第5条测试' },
+            { id: 60, value: 't这是第6条测试' },
+            { id: 70, value: 't这是第7条测试' },
+            { id: 80, value: 't这是第8条测试' },
+            { id: 90, value: 't这是第9条测试' },
+            { id: 110, value: 't这是第10条测试' },
+            { id: 220, value: 't这是第11条测试' },
+            { id: 330, value: 't这是第12条测试' },
+            { id: 440, value: 't这是第13条测试' },
+            { id: 5504, value: 't这是第14条测试' },
+            { id: 660, value: 't这是第15条测试' },
+            { id: 770, value: 't这是第16条测试' },
+            { id: 880, value: 't这是第17条测试' },
+            { id: 990, value: 't这是第18条测试' },
+            { id: 1110, value: 't这是第19条测试' },
+            { id: 2220, value: 't这是第20条测试' },
+            { id: 3330, value: 't这是第21条测试' },
+            { id: 4440, value: 't这是第22条测试' },
+            { id: 5550, value: 't这是第23条测试' },
+            { id: 6660, value: 't这是第24条测试' },
+            { id: 77770, value: 't这是第25条测试' },
+            { id: 8880, value: 't这是第26条测试' },
+            { id: 99990, value: 't这是第27条测试' },
+            { id: 2340, value: 't这是第28条测试' },
+            { id: 324230, value: 't这是第29条测试' },
+            { id: 45430, value: 't这是第30条测试' },
+            { id: 5640, value: 't这是第31条测试' },
+        ],
+    });
+};
+export default {
+    getTextCarousel,
+};

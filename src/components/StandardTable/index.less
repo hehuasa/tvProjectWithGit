@@ -1,0 +1,24 @@
+@import "~antd/lib/style/themes/default.less";
+
+.standardTable {
+  :global {
+    .ant-table-pagination {
+      margin-top: 24px;
+    }
+    .ant-table-tbody > tr > td{
+      max-width: 0;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    .ant-table-tbody > tr > td:hover{
+      white-space:normal;
+    }
+  }
+
+  .tableAlert {
+    margin-bottom: 16px;
+  }
+}

@@ -1,0 +1,74 @@
+@import '../../index';
+@import "~antd/lib/style/themes/default.less";
+.side-right {
+  position: relative;
+  margin-left: 8px;
+  //box-shadow: @shadow-1-left;
+  z-index: 1;
+  border: 1px solid @split-color;
+}
+.side-header {
+  height: 35px;
+  box-sizing: content-box;
+  line-height: 35px;
+  background: @tab-background;
+  padding-left: @padding-xs;
+  font-size: @font-size-base;
+  color: @text-color;
+  font-weight: bold;
+  cursor: pointer;
+  border-top: 1px solid @split-color;
+}
+.headerStyle {
+  margin: -12px 0 -12px -12px;
+  height: 35px;
+  background: @header-gradient-background;
+  color: @public-color-hover;
+  & .icon {
+    padding-left: 8px;
+  }
+  & .zoom-in {
+    padding-right: 16px;
+    float: right;
+    line-height: 35px;
+    color: @public-color-hover;
+  }
+  & span {
+    padding-left: 8px;
+    line-height: 35px;
+  }
+}
+.panel-zoom-in {
+  position: absolute;
+  top: 2px;
+  right: -439px;
+  z-index: 10;
+}
+.panel-zoom-in-header {
+  padding: 0 16px;
+  height: 35px;
+  line-height: 35px;
+  background: @header-gradient-background;
+}
+.panel-zoom-in-content {
+  // background: #000;
+  // opacity: .6;
+  // color: #fff !important;
+  // & th,& tr,& span{
+  //   color: #fff !important;
+  //   background: #000 !important;
+  //   opacity: .6 !important;
+  // }
+}
+.panel-zoom-icon {
+  float: right;
+  line-height: 35px;
+  padding-right: 12px;
+  cursor: pointer;
+}
+.data-heading {
+  padding-right: 16px;
+  float: right;
+  line-height: 35px;
+  color: @text-color;
+}

@@ -1,0 +1,25 @@
+@import "../../../index.less";
+.extra{
+  margin-top: -8px;
+  :global{
+    .ant-card-extra{
+      width: 300px;
+      height: @place-ant-card-extra-height;
+      margin-top: -4px;
+    }
+    .ant-card-head{
+      height: @place-ant-card-extra-height;
+    }
+    & .ant-table-tbody tr td{
+      max-width: 0;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    & .ant-table-tbody tr td:hover{
+      white-space: normal;
+    }
+  }
+}

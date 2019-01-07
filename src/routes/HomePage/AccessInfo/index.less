@@ -1,0 +1,174 @@
+@import "../../../index";
+
+@border-access: #585858;
+
+.warp {
+  position: absolute;
+  background: #000;
+  opacity: .8;
+  z-index: 1000;
+  font-size: @public-font-m;
+  border: 1px solid @border-access;
+  & .warpTitle {
+    margin-top: 16px;
+    color: @bord-text-blue;
+    font-size: @public-font-size;
+    text-align: center;
+    & .b {
+      font-size: 20px;
+    }
+    & .c {
+      font-size: 20px;
+    }
+  }
+  & .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    padding: 16px 16px 16px 16px;
+    color: @bord-text-blue;
+  }
+  & .content {
+    position: relative;
+    & > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity .5s;
+    }
+  }
+}
+
+.rowContent {
+  position: relative;
+  width: 100%;
+  & .rowPage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity .5s;
+  }
+}
+
+.orgInfo {
+  display: flex;
+  padding: 0 16px;
+  width: 100%;
+  justify-content: space-between;
+  text-align: center;
+  overflow: hidden;
+  & ul {
+    margin: 0;
+    padding: 0;
+    width: 48%;
+    list-style: none;
+    box-sizing: border-box;
+    border: 1px solid @bord-text-red;
+    & .title {
+      color: @bord-text-gray;
+      height: 30px;
+      line-height: 30px;
+    }
+    & .list {
+      height: 24px;
+      line-height: 24px;
+      & .orgName {
+        color: @bord-text-yellow;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      & .inFac {
+        color: @bord-text-green;
+      }
+      & .inPro {
+        color: @bord-text-green;
+      }
+      & .inOffice {
+        color: @bord-text-green;
+      }
+    }
+    & .orgName {
+      width: 99px;
+    }
+    & .inFac {
+      width: 56px;
+    }
+    & .inPro {
+      width: 60px;
+    }
+    & .inOffice {
+      width: 59px;
+    }
+    & li {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.doorInfo {
+  display: flex;
+  padding: 0 16px;
+  justify-content: space-between;
+  text-align: center;
+  overflow: hidden;
+  & ul {
+    margin: 0;
+    padding: 0;
+    width: 98%;
+    //min-width: 568px;
+    list-style: none;
+    box-sizing: border-box;
+    border: 1px solid @bord-text-red;
+    & .title {
+      color: @bord-text-gray;
+      height: 30px;
+      line-height: 30px;
+    }
+    & .list {
+      height: 24px;
+      line-height: 24px;
+      & .orgName {
+        color: @bord-text-yellow;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      & .name {
+        color: @bord-text-gray1;
+      }
+      & .inFac {
+        color: @bord-text-green;
+      }
+      & .time {
+        font-size: 12px;
+        color: @bord-text-gray1;
+      }
+    }
+    & .orgName {
+      width: 94px;
+    }
+    & .name {
+      width: 85px;
+    }
+    & .inFac {
+      width: 115px;
+    }
+    & .time {
+      width: 160px;
+    }
+    & li {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.chart {
+  margin: 0 16px;
+  border-top: 1px solid #c0c0c0;
+}

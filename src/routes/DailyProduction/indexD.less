@@ -1,0 +1,294 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../index";
+
+@title-size: 40px;
+@font-l: 18px;
+@font-xl: 24px;
+@font-xxl: 30px;
+
+@text-color-white: #fff;
+@text-color-blue-light: #02e2f4;
+@text-color-orange: #fd6631;
+@text-color-blue: #1c9dff;
+
+@bg-blue: #2464b6;
+@bg-blueDark: #0d1836;
+@border-blue: #22459f;
+@border-black: #000;
+
+@row-blue1: #253252;
+@row-blue2: #14315d;
+@row-blue3: #163b6f;
+@row-dark-green: #454432;
+@row-gray1: #303539;
+
+@progress-blue1: #33a1ff;
+@progress-blue2: #256bb1;
+@progress-yellow1: #ffc300;
+@progress-yellow2: #997f20;
+
+@bg-grey: #303438;
+@bg-yellow: #444430;
+
+.daily {
+  height: 100%;
+  :global {
+    & .ant-tabs-tab {
+      height: 100%;
+      margin: 0 1px 0 0  !important;
+      text-align: center !important;
+      background: #fff !important;
+      border-right:  1px solid @border-color-base;
+      border-bottom:  1px solid @border-color-base;
+      border-left:  1px solid @border-color-base;
+    }
+    & .ant-tabs-tab-active{
+      //background: @background-color-base !important;
+    }
+    & .ant-tabs-nav-container {
+      background: #f4f7fc;
+
+    }
+    & .ant-tabs-content {
+      padding: 0 !important;
+      height:  100% !important;
+      border-left-color: transparent;
+      background: white;
+      overflow-y: scroll;
+    }
+    & .ant-tabs-card{
+      height: 100% !important;
+    }
+    & .tabs-row{
+      height: 100% !important;
+    }
+  }
+}
+
+.warp {
+  position: relative;
+  padding-top: 28px;
+  padding-bottom: 120px;
+  height: 100%;
+  color: @text-color-white;
+  background: @bg-blueDark;
+  & .processWarp {
+    display: flex;
+  }
+  & .tableTtitle {
+    padding-bottom: 4px;
+    font-size: @font-xxl;
+    font-weight: 400;
+    color: #fff;
+    border-bottom: 1px solid @text-color-white;
+    margin-bottom: -2px;
+  }
+  & .blue {
+    background: @row-blue2;
+  }
+  & .blueRow {
+    background: @row-blue3;
+  }
+  & .gray {
+    background: @row-dark-green;
+  }
+  & .grayRow {
+    background: @row-gray1;
+  }
+  .title {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    //width: 300px;
+    min-width: 300px;
+    max-width: 400px;
+    height: 30px;
+    z-index: 2;
+    background: @bg-blueDark;
+    justify-content: space-between;
+    & .left {
+      height: 100%;
+      width: 10px;
+      border: 1px solid @border-blue;
+    }
+    & .text {
+      margin: 0 20px;
+      font-size: @font-xl;
+    }
+  }
+  & .content {
+    width: 95%;
+    height: 100%;
+    margin-left: 2.5%;
+    padding-top: 32px;
+    padding-bottom: 48px;
+    background-image: url("../../assets/report/table-border.png");
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+  }
+  :global {
+    .ant-card-head-title {
+      color: @text-color-white !important;
+    }
+    .ant-card {
+      //height: 100%;
+      color: @text-color-white !important;
+      background: @bg-blueDark;
+    }
+    .ant-card-grid:hover {
+      box-shadow: 1px 0 0 0 #e8e8e8, 0 1px 0 0 #e8e8e8, 1px 1px 0 0 #e8e8e8, 1px 0 0 0 #e8e8e8 inset, 0 1px 0 0 #e8e8e8 inset;
+    }
+    .ant-table {
+      width: 98%;
+      margin-left: 1%;
+      color: @text-color-white !important;
+      background: @row-blue1;
+    }
+    .ant-table table {
+      border-radius: 0;
+      border: 1px solid @border-black;
+    }
+    .ant-table-thead {
+      color: @text-color-blue;
+      background-image: url("../../assets/report/row-head.png");
+      background-repeat:no-repeat;
+      background-size: 100% 100%;
+    }
+    .ant-table-thead > tr > th {
+      color: @text-color-blue !important;
+      background: none;
+    }
+    .ant-table-thead > tr > th {
+      border-bottom: 0px solid @border-black;
+    }
+    .ant-table-thead > tr:first-child > th:first-child{
+      border-radius: 0;
+    }
+    .ant-table-thead > tr:first-child > th:last-child {
+      border-radius: 0;
+    }
+    .ant-table-tbody > tr:hover > td {
+      background: none;
+    }
+    .ant-table-tbody > tr > td {
+      border-bottom: 1px solid @border-black;
+    }
+    .ant-table-bordered .ant-table-thead > tr > th {
+      border-right: 0px solid @border-black;
+    }
+    .ant-table-bordered .ant-table-tbody > tr > td {
+      border-right: 1px solid @border-black;
+    }
+    .ant-table-wrapper{
+      margin: 0 8px;
+    }
+  }
+}
+
+
+.equipment{
+  padding-bottom: 50px;
+  :global{
+    .ant-table-tbody tr td{
+      padding: 4px 16px;
+    }
+    .ant-table-thead tr th{
+      padding: 4px 16px;
+    }
+    .ant-table-tbody > tr {
+      cursor: pointer;
+    }
+    //.ant-table-tbody > tr:hover > td {
+    //  background: white;
+    //}
+  }
+}
+.onlyEquipment{
+  padding-bottom: 50px;
+  :global{
+    .ant-table-tbody tr td{
+      padding: 4px 16px;
+    }
+    .ant-table-thead tr th{
+      padding: 4px 16px;
+    }
+    .ant-table-tbody > tr:hover > td {
+      background: white;
+    }
+  }
+}
+.timeArea{
+  width: 98%;
+  margin-left: 1%;
+  padding: 0 8px;
+  & .timeProcess{
+    float: left;
+    margin: -16px 0 10px 0;
+    padding: 4px 16px;
+    color: white;
+    background: @bg-blue;
+  }
+  & .creatTime{
+    float: right;
+    margin: -16px 0 10px 0;
+    padding: 4px 16px;
+    color: white;
+    //border: 1px solid @border-blue;
+    & :global{
+      .ant-calendar-picker{
+        margin-left: 8px;
+      }
+    }
+  }
+}
+.leftTable{
+  width: 50%;
+  float: left;
+  margin: 0 -8px 0 8px;
+}
+.rightTable{
+  width: 50%;
+  float: right;
+  margin: 0 8px 0 -8px;
+}
+.rawName{
+  color: @text-color-blue-light;
+}
+.productInfo{
+  width: 98%;
+  margin-left: 1%;
+  padding: 0 8px;
+  & .header{
+    color: @text-color-blue;
+    background-image: url("../../assets/report/row-head.png");
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+    & .headerTitle{
+      width: 100%;
+      line-height: 53px;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  & .tdContent{
+    height: 100%;
+    width: 100%;
+    padding: 16px 16px;
+    word-break: break-all;
+    border: 1px solid @border-blue;
+  }
+}
+.noTopBorder{
+  border-top: none !important;
+}
+.noRightBorder{
+  border-right: none !important;
+}
+.noBottomBorder{
+  border-bottom: none !important;
+}
+.noLeftBorder{
+  border-left: none !important;
+}

@@ -1,0 +1,39 @@
+@import "../../../node_modules/antd/lib/style/themes/default.less";
+@import "../../index";
+.text-carousel {
+  padding: 0 60px 0 30px;
+  height: 64px;
+  background: @item-active-bg;
+  z-index: 1;
+  background: linear-gradient(to bottom, #070d1c 0%, #0e1832 50%, #02060c 100%);
+  overflow: hidden;
+  & .title {
+    float: left;
+    color: @white;
+    font-size: @public-font-size;
+  }
+
+}
+.text-warp {
+  float: left;
+  width: calc(~ "100% - 200px");
+  display: inline-block;
+  white-space: nowrap;
+  color: @notice-color;
+  font-size: @public-font-l;
+  overflow: hidden;
+  .content {
+    display: inline-block;
+    & div {
+      display: inline-block;
+    }
+    & span {
+      margin-right: 24px;
+    }
+  }
+}
+.close {
+  font-size: @public-font-l;
+  color: @public-color-hover;
+  cursor: pointer;
+}

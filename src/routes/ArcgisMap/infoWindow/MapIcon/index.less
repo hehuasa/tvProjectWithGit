@@ -1,0 +1,83 @@
+.alarmicon {
+  position: absolute;
+  z-index: 12;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  &:hover {
+    z-index: 13;
+  }
+  & img {
+    position: absolute;
+    //margin: 8px;
+    width: 32px;
+    height: 32px;
+    z-index: 11;
+  }
+  & .circle {
+    position: absolute;
+    margin: -8px;
+    width: 48px;
+    height: 48px;
+    opacity: .6;
+    background: red;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    animation: circle-opacity 1.5s infinite;
+  }
+}
+ .selected {
+  position: absolute;
+  margin: -8px;
+  width: 48px;
+  height: 48px;
+  opacity: .8;
+  background: #e6e6e6;
+  box-shadow: 3px 3px 1px #333;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+}
+.eventicon {
+  position: absolute;
+  z-index: 12;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  &:hover {
+    z-index: 13;
+  }
+  & img {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 11;
+  }
+}
+.selsecticon {
+  position: absolute;
+  z-index: 12;
+  width: 48px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+  background: #e6e6e6;
+  box-shadow: 3px 3px 1px #333;
+  border-radius: 50%;
+}
+@keyframes circle-opacity {
+  0% {
+    opacity: .6;
+    transform: scale(0);
+  }
+  75% {
+    opacity: .35;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}

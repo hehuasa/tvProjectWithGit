@@ -1,0 +1,92 @@
+@import "~antd/lib/style/themes/default.less";
+.warp{
+  background-color: @component-background;
+  & .header{
+    height: 30px;
+    background-color: @primary-6;
+    border-radius: 3px;
+    & .name{
+      width: 200px;
+      margin-left: 2em;
+      line-height: 30px;
+      color: white;
+      float: left;
+    }
+    & .close{
+      float: right;
+      & button{
+        height: 30px;
+      }
+    }
+  }
+  & .item{
+    margin: 8px 8px 0 8px;
+    float: left;
+    cursor: pointer;
+    &:hover{
+      background-color: #f3f3f3 !important;
+    }
+  }
+  & .img{
+    display: inline-block;
+    float: left;
+    width: 20px;
+    height: 170px;
+    margin-left: 8px;
+
+  }
+  & .content{
+    display: inline-block;
+    float: left;
+    height: 170px;
+    margin-left: 8px;
+    & div{
+      line-height: 22px;
+    }
+    & .alarmType{
+      font-size: @font-size-lg ;
+      color: @primary-6;
+    }
+    .star{
+      color: #ff3d3d;
+    }
+  }
+}
+.detail{
+  //height: 170px;
+  margin: 8px 8px 0 8px;
+  background-color: @component-background;
+    & .logo img{
+    width: 20px;
+    height: 36px;
+    margin: 4px 0 0 8px;
+  }
+  & .type{
+    font-size: @font-size-lg ;
+    color: @primary-6;
+  }
+}
+.info{
+  height: 108px;
+  margin: 8px 8px 0 8px;
+  background-color: @component-background;
+ & .title{
+   font-size: @font-size-lg ;
+   color: @primary-6;
+ }
+}
+.btn{
+  margin-bottom: 10px;
+  border-top: 1px dashed @border-color-base;
+  & button{
+    margin: 8px 0 0 8px;
+  }
+}
+.panelHeader{
+  font-size: @font-size-base ;
+  color: @primary-6;
+  & .back{
+    float: right;
+    margin-right: 30px;
+  }
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <TrueVisionData>
+        <!-- TWS服务地址 -->
+        <TrueVisionServerUrl>http://119.97.224.99:8037/</TrueVisionServerUrl>
+        <!-- 皮肤的UV信息 -->
+        <BaseUI>flashUI\TVUI.swf</BaseUI>
+        <!-- 没有影像的时候显示的图片 -->
+        <IOErrorPicURL>flashUI\FLASHNo_Image.png</IOErrorPicURL>
+        <!-- 初始站点 -->
+        <InitData stationID="005200-0-201707100656510210" />
+        <!-- 默认的播放速度 -->
+        <VisionSpeed>5</VisionSpeed>
+        <!-- 显示级别是否和屏幕大小关联 ，1为关联，0为不关联-->
+        <ImageRelaxScreen>1</ImageRelaxScreen>
+        <!--站点的请求方式，Normalstation 按站点请求-Longstation-按Sequence请求-Weightsatation-按照权重请求 -->
+        <StationRequestType>2</StationRequestType>
+        <!--是否是调试模式和纠错模式，1标识纠错，0标识进入纠错-->
+        <ErrorCheckMode>0</ErrorCheckMode>
+        <!-- 是否显示箭头 -->
+        <IsArrowVisible>1</IsArrowVisible>
+    </TrueVisionData>
+    <!-- 气泡的 配置 -->
+    <MarkerBubbleConfig skinUiUrl="flashUI\BubbleUI.swf">
+        <TrueVisionView>
+            <Bubble markerType="符号">
+                <node label="DEPTNAME3" name="单位" type="text" ></node>
+                <node label="BGCODE" name="编号" type="text" ></node>
+                <node label="OBJSTATE" name="状态" type="text" ></node>
+            </Bubble>
+            <Bubble markerType="3bao">
+                <node label="DEPTNAME3" name="单位" type="text" ></node>
+                <node label="BGCODE" name="编号" type="text" ></node>
+                <node label="OBJSTATE" name="状态" type="text" ></node>
+            </Bubble>
+            <Bubble markerType="常规">
+                <node label="CDEPNAME" name="主管部门" type="text" ></node>
+                <node label="位置描述" name="位置描述" type="text" ></node>
+                <node label="现势性" name="现势性" type="comboBox">
+                    <nodeItem>1</nodeItem>
+                    <nodeItem>2</nodeItem>
+                    <nodeItem>3</nodeItem>
+                    <nodeItem>4</nodeItem>
+                    <nodeItem>3</nodeItem>
+                    <nodeItem>4</nodeItem>
+                    <nodeItem>3</nodeItem>
+                    <nodeItem>4</nodeItem>
+                </node>
+            </Bubble>
+            <Bubble markerType="tempMarker">
+                <node label="GUUD" name="网格" type="text" ></node>
+            </Bubble>
+        </TrueVisionView>
+        <StreetView>
+            <Bubble id="SinglePano">
+                <node label="Road" name="路名" type="text" ></node>
+                <node label="Address" name="地址" type="text" ></node>
+            </Bubble>
+        </StreetView>
+    </MarkerBubbleConfig>
+    <!-- 皮肤插件的配置 -->
+    <PlugData >
+        <HistoryInfo skinUiUrl="flashUI\History.swf">1</HistoryInfo>
+        <MeasureInfo skinUiUrl="flashUI\Measure.swf">1</MeasureInfo>
+    </PlugData>
+    <!-- 符号管理类 -->
+    <SymbolManager>
+        <UI skinUiUrl="flashUI\MarkerManager.swf"/>
+    </SymbolManager>
+    <!-- 目标街区的配置 -->
+    <StreetImageData>
+        <UI skinUiUrl="flashUI\StreetUI.swf">1</UI>
+    </StreetImageData>
+    <!-- 弹出框的配置 -->
+    <AlertData>
+        <UI skinUiUrl="flashUI\Alert.swf"></UI>
+    </AlertData>
+</root>

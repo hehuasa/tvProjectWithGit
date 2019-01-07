@@ -1,0 +1,39 @@
+.warp {
+  position: absolute;
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    z-index: 11;
+  }
+  & .circle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background: #f0811a;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid #fff;
+  }
+}
+.pop {
+  opacity: .8;
+  color: #fff;
+  :global {
+    .ant-popover-inner {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      min-width: 220px;
+      background: #000;
+    }
+    .ant-popover-arrow {
+      top: 0 !important;
+      left: 16px !important;
+      background: #000;
+    }
+  }
+}

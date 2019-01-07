@@ -1,0 +1,146 @@
+@import '../../../index.less';
+@import "../../../../node_modules/antd/lib/style/themes/default.less";
+
+.side-right {
+  position: relative;
+  margin-left: 8px;
+  z-index: 1;
+  border: 1px solid @split-color;
+}
+
+.side-header {
+  height: @height-header;
+  box-sizing: content-box;
+  line-height: @height-header;
+  background: @homepage-panel-head-background;
+  box-shadow: @homepage-panel-box-shadow;
+  padding-left: @padding-xs;
+  font-size: @public-font-size;
+  color: @white;
+  cursor: pointer;
+}
+
+.headerStyle {
+  margin: -12px 0 -12px -12px;
+  height: @height-header;
+  background: @homepage-panel-head-background;
+  color: @public-color-hover;
+  & .icon {
+    padding-left: 8px;
+    font-size: @public-font-l;
+  }
+  & .zoom-in {
+    padding: 0 6px;
+    float: right;
+    line-height: @height-header;
+    color: @public-color-hover;
+    & img {
+      vertical-align: baseline;
+      //width: 14px;
+      //height: 14px;
+    }
+  }
+  & svg {
+    display: inline !important;
+  }
+  & span {
+    padding-left: 8px;
+    line-height: @height-header;
+  }
+}
+
+.panel-zoom-in {
+  position: fixed;
+  top: 123px;
+  left: 50%;
+  z-index: 201;
+  background: @backgrounds-panel-zoom-right;
+  .leftDrag {
+    width: 2px;
+    z-index: 105;
+    position: absolute;
+    left: 0;
+    top: 49px;
+    background: transparent;
+    cursor: e-resize;
+  }
+  .downDrag {
+    height: 2px;
+    z-index: 105;
+    position: absolute;
+    bottom: -49px;
+    background: transparent;
+    cursor: n-resize;
+  }
+  .rightDrag {
+    width: 2px;
+    z-index: 105;
+    position: absolute;
+    right: 0;
+    top: 49px;
+    background: transparent;
+    cursor: e-resize;
+  }
+}
+
+/*
+// .panel-zoom-in { transparent
+//     position: absolute;
+//     top: 2px;
+//     right: -439px;
+//     z-index: 10;
+// }
+*/
+
+.panel-zoom-in-header {
+  padding: 0 @public-range;
+  height: @height-header;
+  line-height: @height-header;
+  background: @homepage-panel-head-background;
+  color: @public-color-hover;
+  font-size: @public-font-size;
+}
+
+.panel-zoom-in-content {
+  padding: @public-range;
+  // background-color: @backgrounds-panel-zoom-right;
+  // height: 100%;
+  // width: 100%;
+  // padding: 6px 8px;
+  // overflow: auto;
+  // //color: @heading-color-dark  !important;
+  // & th,
+  // & tr,
+  // & td {
+  //   text-align: center;
+  //   border-right: 1px solid #999 !important;
+  //   border-bottom: 1px solid #999 !important;
+  //   //color: @heading-color-dark  !important; // background: #fff !important;
+  //   //background-color: @backgrounds-panel-zoom  !important; // opacity: .6 !important;
+  // }
+  // & tr {
+  //   border-left-color: #999 !important;
+  // }
+  // & thead {
+  //   & th {
+  //     text-align: center;
+  //   }
+  // }
+}
+
+.panel-zoom-icon {
+  float: right;
+  line-height: @height-header;
+  cursor: pointer;
+  padding-right: 16px;
+}
+
+.data-heading {
+  padding-right: 16px;
+  float: right;
+  line-height: @height-header;
+  color: @public-color;
+  & svg {
+    display: inline !important;
+  }
+}

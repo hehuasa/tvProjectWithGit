@@ -1,0 +1,194 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../../index";
+
+.warp {
+  background-color: @homepage-background;
+  font-size: @public-font-m !important;
+  :global {
+  .ant-collapse-borderless {
+    color: @time-color !important;
+    background: @homepage-background;
+  }
+    .ant-collapse-content {
+      color: @time-color !important;
+      font-size: @public-font-m !important;
+    }
+    .arrow {
+      font-size: @public-font-m !important;
+      color: @time-color !important;
+    }
+    .ant-row {
+      line-height: 36px;
+    }
+    .ant-radio-inner {
+      border-color: @time-color !important;
+    }
+    .ant-btn {
+      border-radius: 0 !important;
+      font-size: @public-font-m;
+      line-height: @public-font-m;
+      background: @primary-color !important;
+      border: 1px solid @btn-border;
+    }
+}
+  & .header {
+    height: 50px;
+    line-height: 50px;
+    background-color: @res-panel-head-background;
+    border: 1px solid @border-color;
+    & .name {
+      width: 200px;
+      margin-left: 2em;
+      color: @time-color;
+      float: left;
+      // 超出显示省略号
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    & .close {
+      float: right;
+      margin-right: 16px;
+      & .button {
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer;
+      }
+    }
+  }
+  & .item {
+    margin: 8px 8px 0 8px;
+    float: left;
+    cursor: pointer;
+    &:hover {
+      background-color: #f3f3f3 !important;
+    }
+  }
+  & .img {
+    display: inline-block;
+    float: left;
+    width: 20px;
+    height: 170px;
+    margin-left: 8px;
+  }
+  & .content {
+    display: inline-block;
+    float: left;
+    height: 170px;
+    margin-left: 8px;
+    & div {
+      line-height: 22px;
+    }
+    & .alarmType {
+      font-size: @font-size-lg;
+      color: @primary-6;
+    }
+    .star {
+      color: #ff3d3d;
+    }
+  }
+}
+
+.type {
+  font-size: @public-font-m;
+  color: @time-color;
+  margin-right: 8px;
+}
+
+.info {
+  height: 108px;
+  margin: 8px 8px 0 8px;
+  background-color: @homepage-background;
+  & .title {
+    font-size: @font-size-lg;
+    color: @primary-6;
+  }
+}
+
+.btn {
+  margin-bottom: 10px;
+  border-top: 1px dashed @border-color-base;
+  & button {
+    margin: 8px 0 0 8px;
+  }
+}
+
+.panelHeader {
+  font-size: @public-font-m;
+  color: @time-color;
+  border: 0;
+  background: transparent !important;
+}
+
+.calc {
+  & h3 {
+    text-align: center;
+  }
+  & ul {
+    margin: 0;
+    list-style: none;
+  }
+  & span {
+    margin: 0 8px;
+  }
+}
+
+.checkList {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  & li {
+    padding: 8px;
+    border-bottom: 1px solid @border-color;
+    & > span {
+      text-align: center;
+      color: @time-color !important;
+    }
+    & > span:nth-child(2) {
+      display: inline-block;
+      width: 60px;
+      text-align: center;
+      color: @time-color !important;
+    }
+    & span:nth-child(3) {
+      display: inline-block;
+      color: @time-color !important;
+    }
+  }
+  & .title {
+    background: @homepage-background;
+  }
+}
+
+.panelContent {
+  :global {
+    .ant-collapse-item {
+      border: none;
+    }
+    .ant-collapse-item-active {
+      border-bottom: 1px solid @border-color;
+    }
+    .ant-collapse-header {
+      border-bottom: 1px solid @border-color;
+    }
+    //.ant-collapse-content-box:hover{
+    //  background-color: #f3f3f3;
+    //}
+  }
+}
+
+.alarmList {
+  width: 100%;
+  :global {
+    .ant-collapse-header {
+      padding: 8px 0 8px 36px !important;
+    }
+  }
+}
+
+:global {
+  .ant-collapse {
+    font-size: 12px;
+  }
+}

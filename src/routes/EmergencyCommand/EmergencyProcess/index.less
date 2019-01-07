@@ -1,0 +1,125 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../index";
+.process {
+    height: @place-bottom-height;
+    line-height: @place-bottom-line-height;
+    border-bottom: @public-border-size solid @border-color;
+    overflow: hidden;
+    .btn {
+        float: left;
+        margin-left: 18px;
+        & .arrow {
+            width: 50px;
+            margin-left: 20px;
+            background: url("../../../assets/emergency/arrow.png") no-repeat;
+        }
+        & button {
+            display: inline-block;
+        }
+        & .view {
+            box-shadow: -3px 4px 10px #666;
+            transform: scale(1.15);
+        }
+        & img {
+            margin: 0 12px;
+        }
+    }
+    .linkMap {
+        float: right;
+        margin-right: 20px;
+        cursor: pointer;
+        & i {
+            color: @public-color-hover;
+        }
+    }
+}
+
+@height: 45px;
+@fontSize: 24px; 
+@borderColor: #00feff;
+@bodybackground: #0f1d30;
+
+.Arrow {
+    height: @height;
+    background: #363636;
+    position: relative;
+    float: left;
+    margin-right: 5px;
+    padding: 0 20px 0 22px;
+    border-top: 2px solid @borderColor;
+    border-bottom: 2px solid @borderColor;
+    text-align: center;
+    line-height: @height - 6px;
+    font-size: @fontSize;
+    color: @borderColor;
+    margin-top: 22px;
+    .triangleLeft {
+        width: 0;
+        height: 0;
+        position: absolute;
+        z-index: 10;
+        bottom: -1px;
+        left: 0;
+        border-left: 15px solid @borderColor;
+        border-top: 21px solid transparent;
+        border-bottom: 24px solid transparent;
+    }
+    .triangleLeft_1 {
+        width: 0;
+        height: 0;
+        position: absolute;
+        z-index: 11;
+        bottom: -1px;
+        left: -2px;
+        border-left: 15px solid @bodybackground;
+        border-top: 21px solid transparent;
+        border-bottom: 24px solid transparent;
+    }
+    .triangleRightTop {
+        width: 0;
+        height: 0;
+        position: absolute;
+        z-index: 10;
+        bottom: -2px;
+        right: 2px;
+        border-top: 25px solid @borderColor;
+        border-left: 16px solid transparent;
+        border-bottom: 20px solid transparent;
+    }
+    .triangleRightTop_1 {
+        width: 0;
+        height: 0;
+        position: absolute;
+        z-index: 11;
+        bottom: -2px;
+        right: -1px;
+        border-top: 25px solid @bodybackground;
+        border-left: 16px solid transparent;
+        border-bottom: 20px solid transparent;
+    }
+    .triangleRightBottom {
+        width: 0;
+        height: 0;
+        position: absolute;
+        z-index: 10;
+        bottom: 0px;
+        right: 0px;
+        border-bottom: 24px solid @borderColor;
+        border-left: 16px solid transparent;
+        border-top: 0px solid transparent;
+    }
+    .triangleRightBottom_1 {
+        width: 0;
+        height: 0;
+        position: absolute;
+        z-index: 11;
+        bottom: -2px;
+        right: -1px;
+        border-bottom: 24px solid @bodybackground;
+        border-left: 16px solid transparent;
+        border-top: 0px solid transparent;
+    }
+}
+.iconMap{
+  font-size: @fontSize;
+}

@@ -1,0 +1,142 @@
+@import "~antd/lib/style/themes/default.less";
+@import '../index.less';
+//.warp {
+//  position: absolute;
+//  top: 8px;
+//  left: 8px;
+//  z-index: 200;
+//  padding: 8px;
+//  width: 316px;
+//  background: @component-background;
+//  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+//  border-radius: 3px;
+//}
+.searchBox {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 460px;
+  font-size: @public-font-m;
+  line-height: @public-font-m;
+  z-index: 100;
+  :global {
+    .ant-input {
+      //height: 40px;
+      background: @homepage-background !important;
+    }
+    .ant-btn {
+      float: left;
+      //height: 40px;
+      //background: transparent !important;
+      border: none !important;
+      //line-height: 1 !important;
+      &:hover {
+        border: none !important;
+      }
+    }
+    .anticon-close-circle {
+      float: left;
+      height: 40px;
+      line-height: 44px !important;
+    }
+    .anticon {
+      font-size: @public-font-m !important;
+      //vertical-align: middle;
+      color: @white !important;
+    }
+  }
+  & input {
+    border-radius: 0;
+  }
+  & button {
+    border-radius: 0;
+  }
+  & .option {
+    transition: opacity .8s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    background: @homepage-background;
+    & .groups {
+      margin-top: 8px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      & div {
+        float: left;
+        height: 40px;
+        width: 150px;
+        line-height: 40px;
+        font-size: @public-font-m;
+        cursor: pointer;
+        text-align: center;
+        & img {
+          display: inline-block;
+          margin-right: 4px;
+        }
+        &:hover {
+          color: @time-color;
+        }
+      }
+    }
+    :global {
+      .ant-divider-horizontal {
+        margin: 0;
+      }
+    }
+
+    & .history {
+      & div {
+        margin-top: 8px;
+        padding: 0 20px;
+        height: 35px;
+        line-height: 35px;
+        cursor: pointer;
+        & span {
+          margin-left: 8px;
+        }
+        &:hover {
+          background: @hover-color;
+        }
+      }
+    }
+  }
+}
+
+.searchResult {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: @time-color;
+  :global {
+    .ant-pagination {
+      margin-top: 8px;
+      color: @time-color;
+      font-size: @public-font-m;
+      text-align: center;
+    }
+    .ant-pagination-item a {
+      color: @time-color;
+    }
+    .ant-pagination-item-ellipsis {
+      color: @time-color !important;
+    }
+  }
+  & > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background: @hover-color;
+    }
+    & .img {
+      position: relative;
+      margin-right: 16px;
+      margin-left: 8px;
+      & div {
+        position: absolute;
+        top: 3px;
+        left: 50%;
+        color: #000;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}

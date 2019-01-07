@@ -1,0 +1,16 @@
+const resTreeCode = {
+  GasConstantly: '气体实时数据图',
+  EnvConstantly: '环保（外排口）实时数据专题图',
+  GuardAreaConstantly: '人员进出门禁区域专题图',
+  GuardDoorConstantly: '人员进出门禁专题图',
+  AlarmMaping: '报警总览',
+  VocConstantly: 'VOCs治理专题图',
+  DangerSource: '危险源专题图',
+  DangerRisk: '安全风险专题图',
+  WaterConstantly: '水专题图',
+  HighSteamConstantly: '高压蒸汽专题图',
+  HigherSteamConstantly: '超高压蒸汽专题图',
+  MiddleSteamConstantly: '中压蒸汽专题图',
+  LowSteamConstantly: '低压蒸汽专题图',
+  CrackingConstantly: '裂解炉专题图',
+};

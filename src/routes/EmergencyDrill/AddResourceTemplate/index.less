@@ -1,0 +1,35 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+@import "../../../index";
+
+.orgColor {
+  // background-color: #f3f3f3;
+  :global {
+    .ant-input-group-addon {
+      background-color: @primary-color;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+    }
+  }
+  .content {
+    padding-top: 24px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    :global {
+      .ant-form-item {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+.addColor {
+  color: @primary-6;
+}
+
+.icon {
+  margin-left: 80px;
+  font-size: 22px;
+  cursor: pointer;
+}

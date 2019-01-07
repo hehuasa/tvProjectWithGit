@@ -1,0 +1,100 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../../index";
+
+.warp {
+  background-color: @component-background;
+  & .header {
+    height: 30px;
+    background-color: @primary-6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    & .name {
+      width: 200px;
+      height: 30px;
+      margin-left: 2em;
+      line-height: 30px;
+      color: white;
+      float: left;
+      // 超出显示省略号
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    & .close {
+      float: right;
+      & button {
+        height: 30px;
+      }
+    }
+  }
+  & .item {
+    margin: 8px 8px 0 8px;
+    float: left;
+    cursor: pointer;
+    &:hover {
+      background-color: #f3f3f3 !important;
+    }
+  }
+  & .img {
+    display: inline-block;
+    float: left;
+    width: 20px;
+    height: 170px;
+    margin-left: 8px;
+
+  }
+  & .content {
+    display: inline-block;
+    float: left;
+    height: 170px;
+    margin-left: 8px;
+    & div {
+      line-height: 22px;
+    }
+    & .alarmType {
+      font-size: @font-size-lg;
+      color: @primary-6;
+    }
+    .star {
+      color: #ff3d3d;
+    }
+  }
+}
+
+.switch {
+  //display: flex;
+  //justify-content: center;
+  //margin: 8px 0 ;
+  & > span {
+    margin: 0 4px;
+  }
+  .play {
+    margin-right: 8px;
+    padding-left: 26px;
+    background-image: url("../../../../assets/map/PASys/扩音播放2.png");
+    background-repeat: no-repeat;
+    background-position: 10% 50%;
+    &:hover {
+      background-image: url("../../../../assets/map/PASys/扩音播放.png");
+    }
+  }
+  .close {
+    padding-left: 26px;
+    color: rgba(0, 0, 0, 0.65);
+    background-image: url("../../../../assets/map/PASys/扩音关闭2.png");
+    background-repeat: no-repeat;
+    background-position: 10% 50%;
+    &:hover {
+      color: #fff;
+      background-image: url("../../../../assets/map/PASys/扩音关闭.png");
+    }
+  }
+}
+
+.btn {
+  margin-bottom: 10px;
+  border-top: 1px dashed @border-color-base;
+  & button {
+    margin: 8px 0 0 8px;
+  }
+}

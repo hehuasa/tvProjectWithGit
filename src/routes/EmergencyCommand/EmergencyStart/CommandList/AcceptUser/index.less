@@ -1,0 +1,40 @@
+@import "../../../../../index.less";
+.sedMsg {
+  margin-top: 32px;
+  :global {
+    .ant-form-item {
+      margin-bottom: 0;
+    }
+  }
+  .rows{
+    margin-bottom: @public-margin-bottom;
+  }
+}
+.addIcon {
+  line-height: 40px;
+  :global {
+    .anticon-plus-circle {
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+  }
+}
+.searchForm {
+  padding: @public-padding;
+  background: initial;
+  border: @public-border-size solid @calendar-border-color;
+  border-radius: @table-border-radius;
+  margin-bottom: @public-margin-bottom;
+
+}
+.searchBtn {
+  :global {
+    .ant-btn {
+      margin-top: 8px;
+    }
+    .ant-btn-primary {
+      margin-right: 4px;
+    }
+  }
+}

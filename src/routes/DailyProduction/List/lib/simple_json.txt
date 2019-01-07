@@ -1,0 +1,31 @@
+﻿{
+    "Table": [
+        {
+            "CustomerID": "HUNGC",
+            "CompanyName": "五金机械",
+            "ContactName": "苏先生",
+            "Address": "德昌路甲 29 号",
+            "City": "大连",
+            "Region": "东北",
+            "Phone": "(053) 5556874"
+        },
+        {
+            "CustomerID": "CENTC",
+            "CompanyName": "三捷实业",
+            "ContactName": "王先生",
+            "Address": "英雄山路 84 号",
+            "City": "大连",
+            "Region": "东北",
+            "Phone": "(061) 15553392"
+        },
+        {
+            "CustomerID": "CACTU",
+            "CompanyName": "威航货运有限公司",
+            "ContactName": "刘先生",
+            "Address": "经七纬二路 13 号",
+            "City": "大连",
+            "Region": "东北",
+            "Phone": "(061) 11355555"
+        }
+    ]
+}

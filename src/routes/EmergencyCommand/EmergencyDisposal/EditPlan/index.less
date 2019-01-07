@@ -1,0 +1,29 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../../../src/index.less";
+.level{
+  width: 300px;
+}
+.extra{
+  margin-top: -1px;
+  :global{
+    .ant-card-extra{
+      width: 600px;
+      margin-top: -9px;
+    }
+    .ant-card-head{
+      margin-top: -1px;
+      height: @place-ant-card-extra-height;
+    }
+    .ant-card-body{
+      & .ant-card-head{
+        margin-top: 1px;
+      }
+    }
+  }
+}
+
+.labelStyle{
+  margin-right: @public-range;
+  font-size: @public-font-size;
+  color:  @public-color;
+}

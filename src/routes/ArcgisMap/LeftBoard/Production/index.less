@@ -1,0 +1,55 @@
+@import "~antd/lib/style/themes/default.less";
+.machine{
+  height: 200px;
+  margin-top: 50px;
+  & div{
+    text-align: center;
+    line-height: 36px;
+  }
+  & .ring{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px lightgrey ;
+    margin: 10px;
+    text-align: center;
+    & .value{
+      padding-top: 20px;
+      font-size: 24px;
+    }
+  }
+  & .state{
+    text-align: center;
+    line-height: 24px;
+    background-color: red;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  & .days{
+    padding: 5px 10px;
+    background-color: lightgrey;
+    border-radius: 5px;
+    & strong{
+      font-size: 18px;
+    }
+  }
+}
+.header{
+  height: 30px;
+  background-color: @primary-6;
+  border-radius: 3px;
+  & .name{
+    width: 200px;
+    margin-left: 2em;
+    line-height: 30px;
+    color: white;
+    float: left;
+  }
+  & .btn{
+    float: right;
+    & button{
+      height: 30px;
+    }
+  }
+}

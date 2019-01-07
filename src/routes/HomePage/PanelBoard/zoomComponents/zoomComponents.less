@@ -1,0 +1,113 @@
+@import '../../../../index';
+@import "../../../../../node_modules/antd/lib/style/themes/default.less";
+
+.breadcrumb {
+  padding: 6px 0;
+  i {
+    color: @text-color-dark;
+    padding: 0 10px;
+  }
+  a {
+    color: #afe0ff;
+  }
+  span:last-child {
+    color: @text-color-dark;
+  }
+}
+
+.linkColot {
+  color: #afe0ff;
+}
+
+.fomQuery {
+  :global {
+    .ant-form-item {
+      display: block !important;
+      margin-right: 0 !important;
+    }
+    .ant-form-item-label label {
+      color: @text-color-dark;
+    }
+    .ant-input {
+      background-color: @backgrounds-panel-zoom;
+    }
+    .ant-select-selection {
+      background-color: @backgrounds-panel-zoom;
+    }
+    .ant-btn {
+      background-color: @backgrounds-panel-zoom;
+      color: @text-color-dark;
+    }
+    .ant-btn-primary {
+      background-color: @backgrounds-panel-zoom;
+      color: #afe0ff;
+    }
+    .ant-select {
+      color: @text-color-dark;
+    }
+    .ant-input {
+      color: @text-color-dark;
+    }
+    .ant-calendar-picker-clear {
+      background: rgba(225, 146, 146, 0.5)
+    }
+    .ant-calendar-range-picker-separator {
+      color: @text-color-dark;
+    }
+  }
+}
+
+.tableListForm {
+  :global {
+      .ant-form-item {
+          margin-bottom: 24px;
+          margin-right: 0;
+          display: flex;
+          >.ant-form-item-label {
+              width: auto;
+              line-height: 32px;
+              padding-right: 8px;
+          }
+          .ant-form-item-control {
+              line-height: 32px;
+          }
+      }
+      .ant-form-item-control-wrapper {
+          flex: 1;
+      }
+  }
+  .submitButtons {
+      white-space: nowrap;
+      margin-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .tableListForm :global(.ant-form-item) {
+      margin-right: 24px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .tableListForm :global(.ant-form-item) {
+      margin-right: 8px;
+  }
+}
+
+.regionWarp {
+  :global {
+    .ant-table-tbody > tr:hover > td {
+      // background: rgba(22, 124, 187, 0.5);
+      background: @table-hover-background;
+    }
+    .ant-table-tbody > tr{
+      font-size: @public-font-m;
+      font-weight: bold;
+    }
+  }
+}
+
+.cursorStyle {
+  text-align: center;
+  cursor: pointer;
+}

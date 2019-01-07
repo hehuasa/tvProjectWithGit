@@ -1,0 +1,57 @@
+
+@import "../../../index.less";
+.planInfo{
+  max-height: 500px;
+  overflow-y: scroll;
+  :global{
+    & .ant-tabs-nav-scroll{
+      margin-top: 0 !important;
+    }
+    & .ant-tabs-content {
+      padding-left: 24px !important;
+      // border-left: 1px solid #e8e8e8 !important;
+      border-left: @public-border-size solid @tabs-border-color-right !important;
+    }
+    & .ant-tabs-nav-container{
+      margin-right: 0 !important;
+    }
+  }
+}
+.cardExtra{
+  :global{
+    & .ant-card-extra{
+      width: 40% !important;
+      margin-top: 0 !important;
+    }
+    & .ant-card-head-title{
+      color: #666 !important;
+      font-weight: normal !important;
+    }
+    & .ant-card-body{
+      padding: 0 !important;
+    }
+  }
+}
+.picture{
+  max-width: 100%;
+  max-height: 100%;
+}
+.emgcResource {
+  :global {
+    .ant-card-head-title {
+      padding: 0;
+    }
+  }
+  & .emgcResourceTitle {
+    width: 100%;
+    :global {
+      .ant-row {
+        height: 50px;
+        line-height: 50px;
+      }
+      .ant-form-item {
+        margin: 6px 0 0 0;
+      }
+    }
+  }
+}

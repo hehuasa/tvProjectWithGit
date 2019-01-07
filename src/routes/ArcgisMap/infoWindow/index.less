@@ -1,0 +1,52 @@
+.counts {
+  position: absolute;
+  padding: 8px;
+  //width: 170px;
+  //height: 45px;
+  color: #fff;
+  border-radius: 4px;
+  background: #ff0000;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  cursor: pointer;
+  & .total {
+    text-align: center;
+  }
+  & .detail {
+    //height: 22.5px;
+    //line-height: 22.5px;
+    //padding: 0 2px;
+  }
+}
+.constantly {
+  position: absolute;
+  padding-bottom: 8px;
+  transform: translate(-50%);
+  z-index: 100;
+  color: #fff;
+  opacity: .8;
+  background: #296fce;
+  border-radius: 3px;
+  &:hover {
+    z-index: 101;
+    background: #2fa162;
+  }
+  & span{
+    display: block;
+    padding-top: 8px;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .bottom {
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border-top: 5px solid #296fce;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+}

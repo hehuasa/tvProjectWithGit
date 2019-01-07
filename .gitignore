@@ -1,0 +1,6 @@
+.idea
+.dist
+.svn
+.history
+node_modules/
+/.webpackrc.js

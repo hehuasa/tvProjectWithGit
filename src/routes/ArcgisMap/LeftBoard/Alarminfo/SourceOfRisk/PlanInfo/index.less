@@ -1,0 +1,59 @@
+@import "../../../../../../index.less";
+.planInfo {
+    max-height: 500px;
+    overflow-y: scroll;
+    :global {
+        // & .ant-tabs-nav-scroll {
+        //     margin-top: 0 !important;
+        // }
+        & .ant-tabs-content {
+            padding-left: 24px !important;
+            // border-left: 1px solid #e8e8e8 !important;
+            border-left: @public-border-size solid @tabs-border-color-right !important;
+        }
+        & .ant-tabs-nav-container {
+            margin-right: 0 !important;
+        }
+        .ant-tabs-nav-scroll {
+            margin-top: @public-range  !important;
+        }
+        .ant-tabs-nav-wrap {
+            margin: 0 !important;
+        }
+        .ant-tabs-tab {
+            margin: 0 !important;
+            background: initial !important;
+        }
+        .ant-tabs-ink-bar {
+            background-color: @public-color-hover;
+        }
+        .ant-tabs-tab-active {
+            color: @public-color-hover  !important;
+        }
+        .ant-tabs-bar{
+            border-bottom: none !important;
+        }
+    }
+}
+
+.cardExtra {
+    :global {
+        & .ant-card-extra {
+            width: 40% !important;
+            margin-top: 0 !important;
+        }
+        & .ant-card-head-title {
+            // color: #666 !important;
+            color: @public-color;
+            font-weight: normal !important;
+        }
+        & .ant-card-body {
+            padding: 0 !important;
+        }
+    }
+}
+
+.picture {
+    max-width: 100%;
+    max-height: 100%;
+}

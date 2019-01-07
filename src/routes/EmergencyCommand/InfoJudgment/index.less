@@ -1,0 +1,85 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../index.less";
+.infoJudgment {
+    :global {
+        & .ant-tabs-tab {
+            padding: 0 20px !important;
+            height: @tabs-height  !important;
+            line-height: @tabs-height  !important;
+            text-align: center;
+            background: @tabs-background;
+            color: @public-color  !important;
+            border: none !important;
+            margin: @tabs-margin  !important;
+        }
+        .ant-tabs-nav-wrap {
+            margin: @tabs-margin;
+        }
+        .ant-tabs-tab-prev.ant-tabs-tab-arrow-show,
+        .ant-tabs-tab-next.ant-tabs-tab-arrow-show {
+            height: @tabs-height;
+            background: @tabs-background  !important;
+            margin-top: @ant-tabs-nav-scroll ;
+            color: @public-color-hover ;
+        }
+        :root .ant-tabs-tab-prev-icon-target,
+        :root .ant-tabs-tab-next-icon-target {
+            font-size: @public-font-m;
+        }
+        & .ant-tabs-tab-active {
+            // background: @tabs-background-selcet !important;
+            background: @tabs-background-selcet;
+            color: @public-color-hover  !important;
+        }
+        & .ant-tabs-nav-container {
+            //padding-top: 19px !important;
+            margin-bottom: 0 !important;
+            background: initial !important;
+            box-shadow: none !important;
+        }
+        & .ant-tabs-ink-bar-animated {
+            margin-bottom: -1px !important;
+        }
+        & .ant-tabs-bar {
+            // border-bottom: @public-border-size solid @border-color !important;
+            border-bottom: @public-border-size solid @border-color;
+            margin-bottom: 8px !important;
+        }
+        & .ant-tabs-nav-scroll {
+            // margin-top: 19px;
+            margin-top: @ant-tabs-nav-scroll  !important;
+        }
+        & .ant-tabs-extra-content {
+            margin: @public-margin-range  !important;
+        }
+        & .ant-table-tbody tr td {
+            max-width: 0;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+        & .ant-table-tbody tr td:hover {
+            white-space: normal;
+        } // & .ant-card-body{
+        //padding-top: 0;
+        // }
+    }
+}
+
+.extraBtn {
+    :global {
+        .ant-btn {
+            margin: 0 8px;
+        }
+    }
+}
+
+.infoContent {
+    :global {
+        .ant-card-body {
+            padding-top: 0;
+        }
+    }
+}

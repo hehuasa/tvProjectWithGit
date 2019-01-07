@@ -1,0 +1,168 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../index";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content {
+  padding: 32px 0;
+  flex: 1;
+}
+
+.tool {
+  //position: fixed;
+  //top: 0;
+  height: 50px;
+  width: 100%;
+  background: #296fce;
+  .close {
+    width: 52px;
+    margin: 0 8px;
+    font-size: 20px;
+    line-height: 50px;
+    vertical-align: text-top;
+    &:hover {
+      //background: red;
+      //color: red
+    }
+  }
+  .minWarp {
+    float: right;
+    display: inline-block;
+    cursor: pointer;
+    height: 100%;
+    &:hover {
+      background-color: @border-color;
+    }
+  }
+  .closeWarp {
+    float: right;
+    display: inline-block;
+    cursor: pointer;
+    height: 100%;
+    &:hover {
+      background-color: #f72335;
+    }
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  .container {
+    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+  }
+
+  .content {
+    padding: 112px 0 24px 0;
+  }
+}
+
+.top {
+  text-align: center;
+}
+
+.header {
+  height: 44px;
+  line-height: 44px;
+  a {
+    text-decoration: none;
+  }
+}
+
+.logo {
+  height: 44px;
+  vertical-align: top;
+  margin-right: 16px;
+}
+
+.title {
+  font-size: 33px;
+  color: @public-color;
+  font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  position: relative;
+  top: 2px;
+}
+
+.desc {
+  font-family: "楷体", sans-serif;
+  font-style: italic;
+  font-size: @font-size-base;
+  color: @text-color-secondary;
+  margin-top: 12px;
+  margin-bottom: 40px;
+}
+
+.login_content {
+  margin-top: 76px;
+  width: 100%;
+  //height: 100%;
+  height: 708px;
+  min-width: 1650px;
+  //position: absolute;
+  //top: 50%;
+  //transform: translateY(-50%);
+}
+
+.login_header {
+  margin: 0 auto 28px;
+  height: 58px;
+  line-height: 58px;
+  max-width: 1200px;
+}
+
+.header_logo {
+  display: inline-block;
+  height: 100%;
+  & img {
+    height: 58px;
+    width: 400px;
+  }
+}
+
+.login_body {
+  //height: 68%;
+  height: 650px;
+  width: 100%;
+  background: url("../assets/login/1920.png") no-repeat 0 0;
+  background-size: 100% 100%;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: center;
+  & .content {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}
+
+.login_footer {
+  //height: 8%;
+  height: 64px;
+  width: 100%;
+  //background-color: #f9f9f9;
+  background-color: #fff;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer_desc {
+  & div {
+    height: 24px;
+  }
+  text-align: center;
+  color: #969696;
+}
+
+.login_bottom {
+  height: 16%;
+  width: 100%;
+}

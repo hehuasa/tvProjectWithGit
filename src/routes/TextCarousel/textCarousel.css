@@ -1,0 +1,29 @@
+/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
+.text-carousel {
+  padding: 0 60px 0 30px;
+  height: 30px;
+  background: #e6f7ff;
+  z-index: 1;
+  overflow: hidden;
+}
+.text-carousel span {
+  height: 30px;
+  font-weight: 600;
+  line-height: 30px;
+  font-size: 12px;
+}
+.text-warp {
+  width: calc(~ "100% - 100px");
+  /*width: calc(100% - 185px);*/
+  white-space: normal;
+  overflow: hidden;
+}
+.text-warp > span {
+  width: 90%;
+}
+.showCarousel {
+  display: none;
+}

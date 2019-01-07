@@ -1,0 +1,99 @@
+@import "~antd/lib/style/themes/default.less";
+.warp {
+  position: absolute;
+  top: 32px;
+  left: 16px;
+  z-index: 100;
+  padding: 8px;
+  width: 316px;
+  background: @component-background;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  border-radius: 3px;
+}
+.searchBox{
+  & input{
+    border-radius: 0;
+  }
+  & button{
+    border-radius: 0;
+  }
+  & .option {
+    transition: opacity .8s;
+    & .groups {
+      margin-top: 8px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      & div {
+        float: left;
+        height: 40px;
+        width: 100px;
+        line-height: 40px;
+        font-size: 12px;
+        cursor: pointer;
+        text-align: center;
+        & img {
+          display: inline-block;
+          margin-right: 4px;
+        }
+        &:hover {
+          background: #eee;
+        }
+      }
+    }
+    :global{
+      .ant-divider-horizontal {
+        margin: 0;
+      }
+    }
+
+    & .history {
+      & div {
+        margin-top: 8px;
+        padding: 0 20px;
+        height: 35px;
+        line-height: 35px;
+        cursor: pointer;
+        & span{
+          margin-left: 8px;
+        }
+        &:hover {
+          background: #eee;
+        }
+      }
+    }
+  }
+}
+.searchResult {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  & >div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60px;
+    cursor: pointer;
+    &:hover {
+      background: #eee;
+    }
+    & .img{
+      position: relative;
+      margin-right: 16px;
+      margin-left: 8px;
+      & div {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+      }
+    }
+    & .resultName{
+      color: @primary-color;
+    }
+  }
+  :global{
+    .ant-pagination {
+      margin-top: 8px;
+    }
+  }
+}

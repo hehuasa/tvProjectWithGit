@@ -1,0 +1,62 @@
+@import "../../../../index.less";
+.planInfo {
+    :global {
+        // & .ant-tabs-nav-scroll {
+ //     margin-top: 0 !important;
+ // }
+        & .ant-tabs-content {
+            padding-left: 24px !important;
+            // border-left: 1px solid #e8e8e8 !important;
+            // border-left: 1px solid @public-border-color !important;
+            border-left: @public-border-size solid @tabs-border-color-right !important;
+        }
+        & .ant-tabs-nav-container {
+            margin-right: 0 !important;
+        }
+        & .ant-tabs-nav-scroll {
+            margin-top: @public-range  !important;
+        }
+        & .ant-tabs-nav-wrap {
+            margin: 0 !important;
+        }
+        & .ant-tabs-tab {
+            margin: 0 !important;
+            background: initial !important;
+        }
+        & .ant-tabs-ink-bar {
+            background-color: @public-color-hover !important;
+        }
+        & .ant-tabs-tab-active {
+            color: @public-color-hover  !important;
+        }
+        .ant-tabs-bar{
+            border-bottom: none !important;
+        }
+    }
+}
+
+.eventContent {
+    :global {
+        .ant-form-item {
+            margin-bottom: @ant-form-item-bottom;
+        }
+    }
+    padding-top: 16px;
+    .eventButton {
+        margin: 3px 8px 0 0;
+    }
+    .ColBottom{
+        // margin-bottom: @col-bottom;
+    }
+}
+
+.search {
+    margin-bottom: 16px;
+}
+.rowPaddingRight{
+    padding-right: @row-padding-right;
+}
+
+.tableStyle{
+    padding: @table-padding-topBottom;
+}

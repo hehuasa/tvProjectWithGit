@@ -1,0 +1,25 @@
+.spin {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.warp {
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+.eventTable {
+  & :global {
+    .ant-table-tbody > tr > td {
+      max-width: 0;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    .ant-table-tbody > tr > td:hover {
+      white-space: normal;
+    }
+  }
+}

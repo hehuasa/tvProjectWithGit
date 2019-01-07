@@ -1,0 +1,52 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../../index.less";
+@margin-top: -4px;
+.footer{
+  margin-bottom: 100px;
+  text-align: center;
+  :global{
+    .ant-btn-primary{
+      margin: 0 8px;
+    }
+  }
+}
+.insertBtn{
+  //margin-bottom: 50px;
+  //margin-top: 16px;
+  // margin-top: -8px;
+  margin-top: @margin-top;
+  text-align: left;
+}
+.commandList{
+  margin-top: -9px;
+  :global{
+    .ant-card-head{
+      height: @place-ant-card-extra-height;
+      // height: 50px;
+    }
+    .ant-card-extra{
+      height: @place-ant-card-extra-height;
+      // height: 50px;
+    }
+    .ant-table-tbody tr td{
+      max-width: 0;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    .ant-table-tbody tr td:hover{
+      white-space: normal;
+    }
+  }
+  .tableStyle{
+    padding: @table-padding-topBottom;
+  }
+}
+.extra{
+  margin-top: @margin-top;
+}
+.endColor {
+  color: red;
+}

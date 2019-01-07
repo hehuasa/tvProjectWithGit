@@ -1,0 +1,79 @@
+.warp {
+  position: absolute;
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    z-index: 11;
+  }
+  & .redCircle {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    top: 0;
+    background: #e6111d;
+    border-radius: 20px 20px 0 0;
+    border-top: 1px solid #d51c26;
+    border-right: 1px solid #d51c26;
+    //transform: translate(-50%, -50%);
+    //border-radius: 50%;
+  }
+  & .blueCircle {
+    position: absolute;
+    top: 20px;
+    width: 40px;
+    height: 20px;
+    line-height: 17px;
+    background: #296fce;
+    border-bottom: 1px solid #0756c1;
+    border-right: 1px solid #0756c1;
+    border-radius: 0 0 20px 20px;
+  }
+  & .blueCircleOnly {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background: #296fce;
+    border-bottom: 1px solid #0756c1;
+    border-right: 1px solid #0756c1;
+    border-radius: 50%;
+  }
+  & .redCircleOnly {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background: #e6111d;
+    border-bottom: 1px solid #d51c26;
+    border-right: 1px solid #d51c26;
+    border-radius: 50%;
+  }
+}
+
+.pop {
+  opacity: .8;
+  color: #fff;
+  //transform: translate(30px,20px);
+  & .alarm {
+    color: #fff;
+  }
+  & .device {
+    color: #fff;
+  }
+  :global {
+    .ant-popover-inner {
+      position: absolute;
+      left: 40px;
+      width: 120px;
+      background: #000;
+    }
+    .ant-popover-arrow {
+      left: 36px !important;
+      background: #000;
+    }
+  }
+}

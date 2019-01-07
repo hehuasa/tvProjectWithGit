@@ -1,0 +1,54 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../../../src/index";
+.selectPlan {
+    margin: -8px 24px;
+    // padding: 5px 0 @public-range 0;
+    & .planTitle {
+        height: 42px;
+        border-bottom: 1px solid @border-color;
+        & .titleName {
+            float: left;
+            line-height: 32px;
+            margin-left: 8px;
+        }
+        & .planLevel {
+            width: 250px;
+            margin-right: 8px;
+            float: right;
+            .levelName {
+                margin-right: 16px;
+            }
+        }
+    }
+    & .planList {
+        :global {
+            .ant-pagination {
+                margin-bottom: 50px;
+            }
+        }
+        margin-top: 16px;
+        .tableStyle {
+            padding: @table-padding-topBottom;
+        }
+    }
+}
+
+.footer {
+    margin-bottom: 100px;
+    margin-top: -20px;
+    text-align: center;
+}
+
+.submitButtons {
+    height: 32px;
+    line-height: 39px;
+}
+
+.search {
+    margin-bottom: 20px;
+    :global {
+        .ant-form-item {
+            margin-bottom: @col-bottom;
+        }
+    }
+}

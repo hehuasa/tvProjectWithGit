@@ -1,0 +1,99 @@
+@import "../../../../index";
+@import "~antd/lib/style/themes/default.less";
+.warp {
+  position: absolute;
+  width: 360px;
+  height: 86px;
+  font-size: 14px;
+  background: #fff;
+  box-shadow: @mapPop-box-shadow;
+  z-index: 102;
+  & .title {
+    padding: 8px;
+    height: 34px;
+    line-height: 18px;
+    color: #000;
+    cursor: all-scroll;
+    background: @tab-background;
+  }
+  & .middle {
+    position: relative;
+  }
+  & .content {
+    padding: 8px;
+    overflow: hidden;
+  }
+  & .input {
+    float: left;
+    padding-left: 8px;
+    margin: 6px 0;
+    width: 108px;
+    height: 24px;
+    color: #000;
+    font-size: 14px !important;
+    &::-webkit-input-placeholder{
+      font-size: 14px !important;
+    }
+  }
+  & .btn {
+    float: left;
+    margin: 6px 8px;
+    padding: 0;
+    width: 48px;
+    height: 24px;
+    line-height: 24px;
+    cursor: pointer;
+    color: #000;
+    border: 1px solid #e4e9ee;
+    border-radius: 3px;
+    font-size: 14px !important;
+    background: @header-gradient-background;
+  }
+  & .options {
+    float: left;
+    width: 170px;
+    color: @primary-color;
+    font-size: 12px !important;
+    & span {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+  }
+  & .close {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 20px;
+    color: @bord-background;
+    cursor: pointer;
+  }
+  & .circle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid red;
+  }
+  & .bottom {
+    position: absolute;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border-top: 5px solid #fff;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  & .bottom-border {
+    position: absolute;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    border-top: 6px solid #999;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    transform: translateX(-50%);
+  }
+}

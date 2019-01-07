@@ -1,0 +1,25 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../index.less";
+.text-carousel{
+  padding: 0 60px 0 35px;
+  height: 35px;
+  background: @component-background;
+  box-shadow: @shadow-1-down;
+  z-index: 1;
+  overflow: hidden;
+  & span{
+    display: inline-block;
+    height: 35px;
+    font-weight: 600;
+    line-height: 35px;
+  }
+}
+.text-warp{
+  width: calc(~ "100% - 185px");
+  white-space: nowrap;
+  overflow: hidden;
+ & >span{
+   width: 90%;
+ }
+}
+

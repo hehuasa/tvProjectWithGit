@@ -1,0 +1,54 @@
+@import '../../../../index.less';
+@import "../../../../../node_modules/antd/lib/style/themes/default.less";
+.alarmDeal {
+    :global {
+        .ant-form-item {
+            margin-bottom: @ant-form-item-bottom;
+        }
+    }
+    .totalInfo{
+        color: @public-color;
+    }
+}
+
+.tableListForm {
+    :global {
+        .ant-form-item {
+            margin-right: 0;
+            display: flex;
+            >.ant-form-item-label {
+                // width: auto;
+                line-height: 39px;
+            }
+            .ant-form-item-control {
+                line-height: 39px;
+            }
+        }
+        .ant-form-item-control-wrapper {
+            flex: 1;
+        }
+        .ant-calendar-picker {
+            width: 100%;
+        }
+    }
+    .submitButtons {
+        white-space: nowrap;
+        margin-bottom: 24px;
+    }
+}
+
+.rowPaddingRight {
+    padding-right: @row-padding-right;
+}
+
+@media screen and (max-width: @screen-lg) {
+    .tableListForm :global(.ant-form-item) {
+        margin-right: 24px;
+    }
+}
+
+@media screen and (max-width: @screen-md) {
+    .tableListForm :global(.ant-form-item) {
+        margin-right: 8px;
+    }
+}
