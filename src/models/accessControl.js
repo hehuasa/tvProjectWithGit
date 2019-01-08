@@ -15,12 +15,6 @@ export default {
     countByDay: [],
     style: {},
     spaceTime: 30000,
-
-
-
-
-
-    
   },
 
   effects: {
