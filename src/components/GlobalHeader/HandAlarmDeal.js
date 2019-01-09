@@ -572,15 +572,14 @@ export default class HandAlarmDeal extends PureComponent {
             <FormItem
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
-              label="装置区域"
+              label="事发区域"
             >
               {form.getFieldDecorator('alarmAreaID')(
                 <Select
-                  placeholder="请选择装置区域"
+                  placeholder="请选择事发区域"
                   // onChange={this.handleChange}
                   optionFilterProp="title"
                   showSearch
-                  disabled
                   style={{ width: '100%' }}
                 >
                   {alarmDeal.areaList.map(item => (

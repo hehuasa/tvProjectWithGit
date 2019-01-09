@@ -71,7 +71,7 @@ class AlarmCounting extends PureComponent {
       type: 'resourceTree/saveClickedAlarmId',
       payload: record.alarmId,
     });
-    const { alarmExtendAlarmInfoVO } = record;
+    const { alarmExtendAlarmInfoVO, alarmType } = record;
     if (record.resourceGisCode) {
       searchByAttr({ searchText: record.resourceGisCode, searchFields: ['ObjCode'] }).then(
         (res) => {
@@ -119,8 +119,18 @@ class AlarmCounting extends PureComponent {
         type: 'alarmDeal/saveDealModel',
         payload: { isDeal: true },
       });
+    } else if (alarmType.profession === '107.999') {
+      this.props.dispatch({
+        type: 'alarmDeal/saveAlarmInfo',
+        payload: record,
+      });
+      this.props.dispatch({
+        type: 'alarmDeal/saveDealModel',
+        payload: { isDeal: true },
+      });
     }
-  };
+  }
+  ;
   render() {
     const { list } = this.props;
     return (

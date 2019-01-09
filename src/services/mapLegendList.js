@@ -7,7 +7,7 @@ const imgArray = [
   { name: '红外对射', sort: 5 },
   { name: '手动报警按钮', sort: 6 },
   { name: '环保在线仪表', sort: 7 },
-  { name: '周界', sort: 8 },
+  { name: '周界设备', sort: 8 },
   { name: '工业视频', sort: 9 },
   { name: '扩音对讲', sort: 10 },
   { name: '火炬', sort: 11 },
@@ -67,6 +67,7 @@ const createList = () => {
     return a.sort - b.sort > 0 ? 1 : -1;
   });
   // 按颜色排个序
+
   return { mapLegendList, mapLegendListWithAlarm };
 };
 

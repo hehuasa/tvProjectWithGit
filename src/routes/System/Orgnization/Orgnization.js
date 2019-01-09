@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Tree, Form, Input, Row, Col, Button, Icon, Select, Radio, Popconfirm, Transfer, Modal } from 'antd';
+import { Tree, Form, Input, Row, Col, Button, Icon, Select, Radio, Popconfirm, Transfer, Modal, Upload } from 'antd';
 import { connect } from 'dva';
 import { Scrollbars } from 'react-custom-scrollbars';
 import styles from './Organization.less';
@@ -51,30 +51,19 @@ export default class Orgnization extends PureComponent {
     selectedRowKeys: [], // 应急岗位配置的实体岗位
     postionID: null, // 配置岗位ID
     emgcPosition: {}, // 应急岗位的配置信息
+    fileList: [],
+    uploading: false,
   };
   componentDidMount() {
     const { dispatch } = this.props;
     this.getFunctionMenus();
     // 请求部门数据
     dispatch({
-      // type: 'organization/list',
       type: 'organization/getEmgcOrgTree',
     });
-    // 请求机构类别数据
-    // dispatch({
-    //   type: 'typeCode/orgType',
-    //   payload: 101,
-    // });
-    // 请求应急级别
     dispatch({
       type: 'organization/getEmgcLevelList',
     });
-    // // 请求实体岗位列表
-    // dispatch({
-    //   type: 'organization/selectEntityPostion',
-    // }).then(() => {
-    //   this.getMock([], false);
-    // });
     // 请求应急岗位列表
     dispatch({
       type: 'organization/selectEmgcPostion',
@@ -82,11 +71,6 @@ export default class Orgnization extends PureComponent {
   }
   getMock = (targetKeys, isEmergency) => {
     let mockData = [];
-    // if (isEmergency) {
-    //   mockData = this.props.emgcPostion;
-    // } else {
-    //   mockData = this.props.entityPostion;
-    // }
     mockData = this.props.emgcPostion;
     this.setState({ mockData, targetKeys });
   };
@@ -159,6 +143,7 @@ export default class Orgnization extends PureComponent {
         this.setState({
           isEmergency: true,
           emgcPosition,
+          fileList: obj.archiveInfos,
         });
         this.getMock(targetKeys, true);
         form.setFieldsValue({
@@ -183,20 +168,19 @@ export default class Orgnization extends PureComponent {
       this.setState({ isAdd: false });
     }
   };
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit= (fileList) => {
     const { form } = this.props;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       if (this.state.isAdd) {
-        this.doAdd(fieldsValue);
+        this.doAdd(fieldsValue, fileList);
       } else {
-        this.doUpdate(fieldsValue);
+        this.doUpdate(fieldsValue, fileList);
       }
     });
   };
   // 添加部门
-  addOrg = () => {
+  addOrg= () => {
     const { form } = this.props;
     this.setState({ isAdd: true, targetKeys: [] });
     const parentOrgnization = this.props.organization.selectedNodes[0].orgnizationCode;
@@ -205,7 +189,7 @@ export default class Orgnization extends PureComponent {
     form.setFieldsValue({ parentOrgnization, parentOrganizationName });
   };
   // 删除部门
-  deleteOrg = () => {
+  deleteOrg= () => {
     const { dispatch, form } = this.props;
     dispatch({
       type: 'organization/delete',
@@ -214,66 +198,54 @@ export default class Orgnization extends PureComponent {
     form.resetFields();
   };
   // 新增根节点
-  addNewRootNode = () => {
+  addNewRootNode= () => {
     const { form } = this.props;
     this.setState({ isAdd: true, targetKeys: [] });
     form.resetFields();
   };
-  doAdd = (values) => {
+  doAdd= (values) => {
     const { dispatch, form } = this.props;
-    let entityPostionIDs = [];
-    if (this.state.isEmergency) {
-      const { emgcPosition, targetKeys } = this.state;
-      targetKeys.forEach((item) => {
-        const obj = {};
-        obj.postionID = item;
-        obj.entityIDs = emgcPosition[item] || [];
-        entityPostionIDs.push(obj);
-      });
-      const emgcPostionIDs = JSON.stringify(entityPostionIDs);
-      dispatch({
-        type: 'organization/add',
-        payload: { ...values, emgcPostionIDs },
-      });
-    } else {
-      entityPostionIDs = this.state.targetKeys;
-      dispatch({
-        type: 'organization/add',
-        payload: { ...values, entityPostionIDs },
-      });
-    }
+    const entityPostionIDs = [];
+    const { emgcPosition, targetKeys } = this.state;
+    targetKeys.forEach((item) => {
+      const obj = {};
+      obj.postionID = item;
+      obj.entityIDs = emgcPosition[item] || [];
+      entityPostionIDs.push(obj);
+    });
+    const emgcPostionIDs = JSON.stringify(entityPostionIDs);
+    dispatch({
+      type: 'organization/add',
+      payload: { ...values, emgcPostionIDs },
+    }).then(() => {
+      this.handleUpload();
+    });
     form.resetFields();
   };
-  doUpdate = (values) => {
+  doUpdate= (values) => {
     const { dispatch } = this.props;
-    let entityPostionIDs = [];
-    if (this.state.isEmergency) {
-      const { emgcPosition, targetKeys } = this.state;
-      targetKeys.forEach((item) => {
-        const obj = {};
-        obj.postionID = item;
-        obj.entityIDs = emgcPosition[item] || [];
-        entityPostionIDs.push(obj);
-      });
-      const emgcPostionIDs = JSON.stringify(entityPostionIDs);
-      dispatch({
-        type: 'organization/update',
-        payload: { ...values, emgcPostionIDs },
-      });
-    } else {
-      entityPostionIDs = this.state.targetKeys;
-      dispatch({
-        type: 'organization/update',
-        payload: { ...values, entityPostionIDs },
-      });
-    }
+    const entityPostionIDs = [];
+    const { emgcPosition, targetKeys } = this.state;
+    targetKeys.forEach((item) => {
+      const obj = {};
+      obj.postionID = item;
+      obj.entityIDs = emgcPosition[item] || [];
+      entityPostionIDs.push(obj);
+    });
+    const emgcPostionIDs = JSON.stringify(entityPostionIDs);
+    dispatch({
+      type: 'organization/update',
+      payload: { ...values, emgcPostionIDs },
+    }).then(() => {
+      this.handleUpload();
+    });
   };
   handleFormReset = () => {
     const { form } = this.props;
     form.resetFields();
     this.getMock([], false);
   };
-  handleRightClick = ({ event, node }) => {
+  handleRightClick =({ event, node }) => {
     // if (!node.props.dataRef.treeMenu) {
     //   return;
     // }
@@ -288,10 +260,10 @@ export default class Orgnization extends PureComponent {
       payload: [node.props.dataRef],
     });
   };
-  handleContextMenu = (e) => {
+  handleContextMenu= (e) => {
     e.preventDefault();
   };
-  handleClick = () => {
+  handleClick =() => {
     const { dispatch } = this.props;
     dispatch({
       type: 'organization/getContext',
@@ -368,11 +340,43 @@ export default class Orgnization extends PureComponent {
     const arr = functionMenus.filter(item => item.functionName === functionName);
     return arr.length > 0;
   };
+  handleChange = (info) => {
+    let { fileList } = info;
+    fileList = fileList.map((file) => {
+      if (file.response) {
+        file.url = file.response.url;
+      }
+      return file;
+    });
+    fileList = fileList.filter((file) => {
+      if (file.response) {
+        return file.response.status === 'success';
+      }
+      return false;
+    });
+    this.setState({ fileList });
+  }
   render() {
-    const { searchValue, expandedKeys, autoExpandParent, isAdd } = this.state;
+    const { searchValue, expandedKeys, autoExpandParent, isAdd, uploading, fileList } = this.state;
+    const props = {
+      action: '/emgc/system/baseOrgaArchiveInfo/addOrgArchive',
+      onRemove: (file) => {
+        this.setState((state) => {
+          const index = state.fileList.indexOf(file);
+          const newFileList = state.fileList.slice();
+          newFileList.splice(index, 1);
+          return {
+            fileList: newFileList,
+          };
+        });
+      },
+      handleChange: this.handleChange,
+      fileList,
+      listType: 'picture ',
+      accept: '.png, .jpg, .jpeg',
+    };
     const { emgcOrgTree } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { orgTypeList } = this.props.typeCode;
     const { contextMenu, selectedNodes, emgcLevelList } = this.props.organization;
     const { dispatch, form } = this.props;
     return (
@@ -396,7 +400,7 @@ export default class Orgnization extends PureComponent {
                   >
                     {this.renderTreeNodes(emgcOrgTree)}
                   </Tree>
-                  {this.judgeFunction('新增权限') ? (
+                  { this.judgeFunction('新增权限') ? (
                     <TreeContextMenu
                       contextMenu={contextMenu}
                       addOrg={this.addOrg}
@@ -410,7 +414,7 @@ export default class Orgnization extends PureComponent {
             </Col>
             <Col md={18} sm={16}>
               <div className={styles.form}>
-                <Form onSubmit={this.handleSubmit} layout="inline">
+                <Form layout="inline">
                   <FormItem>
                     {getFieldDecorator('orgID')(
                       <Input type="hidden" placeholder="请输入" />
@@ -546,18 +550,31 @@ export default class Orgnization extends PureComponent {
                         )}
                       </FormItem>
                     </Col>
+                    <Col md={16} sm={12}>
+                      <FormItem
+                        labelCol={{ span: 4 }}
+                        wrapperCol={{ span: 20 }}
+                        label="组织机构图"
+                      >
+                        <Upload {...props}>
+                          <Button>
+                            <Icon type="upload" /> 选择组织机构图
+                          </Button>
+                        </Upload>
+                      </FormItem>
+                    </Col>
                   </Row>
                   <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-                    <Col md={20} offset={2} className={styles.postInfo}>
+                    <Col md={20} offset={2}>
                       <FormItem label="岗位信息">
                         <Transfer
                           dataSource={this.state.mockData}
                           showSearch
                           titles={['未选择', '已选择']}
                           listStyle={{
-                            width: 280,
-                            height: 280,
-                          }}
+                              width: 280,
+                              height: 280,
+                            }}
                           rowKey={record => record.postionID}
                           targetKeys={this.state.targetKeys}
                           onChange={this.handleChange}
@@ -570,7 +587,7 @@ export default class Orgnization extends PureComponent {
                     <Col sm={6} offset={9}>
                       <span className={styles.submitButtons}>
                         {(this.judgeFunction('新增权限') && isAdd) || (this.judgeFunction('修改权限') && !isAdd) ?
-                          <Button type="primary" htmlType="submit">保存</Button> : null
+                          <Button type="primary" htmlType="submit" onClick={() => this.handleSubmit(fileList)}>保存</Button> : null
                           }
                         <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
                       </span>

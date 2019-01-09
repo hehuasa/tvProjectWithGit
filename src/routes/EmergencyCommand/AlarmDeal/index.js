@@ -102,9 +102,9 @@ export default class AlarmDeal extends PureComponent {
             alarmId,
           },
         }).then(() => {
-          dispatch({
-            type: 'alarm/fetch',
-          });
+          // dispatch({
+          //   type: 'alarm/fetch',
+          // });
           // 删除地图报警图标
           delAlarmAnimation(alarmIconData, alarmInfo, dispatch);
           // 更新事件图标
@@ -164,9 +164,9 @@ export default class AlarmDeal extends PureComponent {
             alarmId,
           },
         }).then(() => {
-          dispatch({
-            type: 'alarm/fetch',
-          });
+          // dispatch({
+          //   type: 'alarm/fetch',
+          // });
           // 关闭资源信息窗.
           dispatch({
             type: 'resourceTree/saveCtrlResourceType',

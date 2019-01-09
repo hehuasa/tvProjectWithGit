@@ -201,9 +201,9 @@ export default class GlobalHeader extends PureComponent {
           rawMaterialIds,
         },
       }).then(() => {
-        this.props.dispatch({
-          type: 'alarm/fetch',
-        });
+        // this.props.dispatch({
+        //   type: 'alarm/fetch',
+        // });
         form.resetFields();
         this.setState({
           showAlarm: false,

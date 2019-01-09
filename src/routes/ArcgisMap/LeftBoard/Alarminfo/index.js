@@ -707,7 +707,6 @@ class AlarmInfo extends PureComponent {
         videoArray.push({ sort: index + 1, ...value });
       }
     }
-
     // 检测对象列表数据
     const monitorsCols = [
       {

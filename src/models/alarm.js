@@ -36,11 +36,10 @@ export default {
         payload: response.data,
       });
     },
-    *fetch({ payload }, { call, put, select }) {
+    *fetch({ payload }, { call, put }) {
       let response;
       if (payload.list) {
-        const list = yield select(({ alarm }) => alarm.list);
-        response = [...payload.list, ...list ];
+        response = payload.list;
       } else {
         response = yield call(alarmList);
       }
