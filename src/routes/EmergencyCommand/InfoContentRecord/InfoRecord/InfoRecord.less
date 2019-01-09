@@ -1,14 +1,17 @@
 @import "../../../../index.less";
+.CardBox {
+    padding: @public-range;
+}
+
 .planInfo {
     :global {
         // & .ant-tabs-nav-scroll {
- //     margin-top: 0 !important;
- // }
+        //     margin-top: 0 !important;
+        // }
         & .ant-tabs-content {
-            padding-left: 24px !important;
-            // border-left: 1px solid #e8e8e8 !important;
+            padding-left: 24px !important; // border-left: 1px solid #e8e8e8 !important;
             // border-left: 1px solid @public-border-color !important;
-            border-left: @public-border-size solid @tabs-border-color-right !important;
+            border-left: @public-border-size solid @tabs-border-color-right  !important;
         }
         & .ant-tabs-nav-container {
             margin-right: 0 !important;
@@ -23,13 +26,14 @@
             margin: 0 !important;
             background: initial !important;
         }
-        & .ant-tabs-ink-bar {
-            background-color: @public-color-hover !important;
-        }
+        // & .ant-tabs-ink-bar {
+        //     background-color: @public-color-hover  !important;
+        // }
         & .ant-tabs-tab-active {
             color: @public-color-hover  !important;
+            background: @tabs-background-selcet !important;
         }
-        .ant-tabs-bar{
+        .ant-tabs-bar {
             border-bottom: none !important;
         }
     }
@@ -45,7 +49,7 @@
     .eventButton {
         margin: 3px 8px 0 0;
     }
-    .ColBottom{
+    .ColBottom {
         // margin-bottom: @col-bottom;
     }
 }
@@ -53,10 +57,11 @@
 .search {
     margin-bottom: 16px;
 }
-.rowPaddingRight{
+
+.rowPaddingRight {
     padding-right: @row-padding-right;
 }
 
-.tableStyle{
-    padding: @table-padding-topBottom;
+.tableStyle {
+    padding: 0 @public-range @public-range @public-range;
 }

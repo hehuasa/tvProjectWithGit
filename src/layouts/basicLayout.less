@@ -116,6 +116,9 @@
 
 // 全局
 :global {
+    .ant-tabs-ink-bar{
+        background-color: initial;
+    }
     .ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
         background: initial !important;
     }
@@ -364,6 +367,9 @@
     .ant-tabs-nav .ant-tabs-tab:hover {
         color: @time-color;
     }
+    .ant-tabs .ant-tabs-left-bar{
+        border-right: none;
+    }
     .ant-tabs-vertical.ant-tabs-left>.ant-tabs-bar {
         // border-right: @public-border-size solid @public-border-color;
         // border-right: @public-border-size solid @tabs-border-color-right;
@@ -385,6 +391,7 @@
     .ant-btn:hover,
     .ant-btn:focus {
         color: @public-color;
+        border-color: @ant-btn-background-color-hove;
     }
     .ant-btn:hover,
     .ant-btn:focus,
@@ -795,9 +802,9 @@
         color: @public-color;
         border-bottom: @public-border-size solid @tabs-border-color-right;
     }
-    .ant-card-head-title {
-        padding: 7px 0;
-    }
+    // .ant-card-head-title {
+    //     padding: 7px 0;
+    // }
     .ant-card-body {
         margin: 0;
     }

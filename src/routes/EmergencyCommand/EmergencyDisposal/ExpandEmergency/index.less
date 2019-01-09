@@ -11,10 +11,10 @@
   }
 }
 .steps{
-  padding: 5px 0 12px 24px;
-  border-bottom: 1px solid @border-color;
+  height: @place-ant-card-extra-height;
   & .stepContent{
     width: 800px;
+    padding: @public-range 0 0 @public-range;
   }
 }
 .stepFooter{
@@ -33,13 +33,19 @@
   text-align: center;
 }
 .expand{
-  margin-top: -1px;
+  padding: 0 @public-range @public-range @public-range;
   :global{
     .ant-card-head{
       height: @place-ant-card-extra-height;
     }
     .ant-card-wider-padding .ant-card-head {
       padding: 0 20px;
+    }
+    .ant-card-wider-padding .ant-card-body{
+      padding: @public-range !important;
+    }
+    .ant-radio-wrapper{
+      top: 0;
     }
   }
 }

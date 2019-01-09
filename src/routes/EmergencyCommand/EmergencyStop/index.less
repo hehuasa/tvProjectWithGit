@@ -10,10 +10,16 @@
             background: @tabs-background;
             color: @public-color  !important;
             border: none !important;
-            margin: @tabs-margin  !important;
+            margin: 0 @tabs-margin;
+        }
+        .ant-tabs-tab:first-child {
+            margin: 0 @tabs-margin 0 0;
+        }
+        .ant-tabs-tab:last-child {
+            margin: 0 0 0 @tabs-margin;
         }
         .ant-tabs-nav-wrap {
-            margin: @tabs-margin;
+            margin: 0 @tabs-margin;
         }
         .ant-tabs-tab-prev.ant-tabs-tab-arrow-show,
         .ant-tabs-tab-next.ant-tabs-tab-arrow-show {
@@ -49,7 +55,7 @@
         & .ant-tabs-bar {
             // border-bottom: @public-border-size solid @border-color !important;
             border-bottom: @public-border-size solid @border-color;
-            margin-bottom: 8px !important;
+            // margin-bottom: 8px !important;
         }
         & .ant-tabs-nav-scroll {
             margin-top: @ant-tabs-nav-scroll  !important;

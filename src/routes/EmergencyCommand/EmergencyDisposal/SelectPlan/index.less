@@ -1,8 +1,8 @@
 @import "~antd/lib/style/themes/default.less";
 @import "../../../../index.less";
 .selectPlan{
-  margin: 0 24px;
-  padding: 5px 0 @public-range 0;
+  // margin: 0 24px;
+  padding: @public-range @public-range @public-range;
   & .planTitle{
     height: 34px;
     border-bottom: 1px solid @border-color;
@@ -21,7 +21,6 @@
     }
   }
   & .planList{
-    margin-top: @public-range;
     :global{
       .ant-pagination{
         margin-bottom: 50px;
@@ -33,4 +32,8 @@
   margin-bottom: 100px;
   margin-top: -20px;
   text-align: center;
+}
+.formStyle{
+  // padding-top: @public-range;
+  height: @place-ant-card-extra-height;
 }

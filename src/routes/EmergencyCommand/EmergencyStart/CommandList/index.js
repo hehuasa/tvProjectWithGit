@@ -195,8 +195,8 @@ export default class CommandList extends PureComponent {
         }),
         // onFilter: (value, record) => record.commandStat === parseInt(value, 0),
         onFilter: (value, record) => {
-          console.log( 1212 )
-          console.log( value, record )
+          console.log(1212)
+          console.log(value, record)
           return record.commandStat === parseInt(value, 0)
         },
         render: (value, record) => {
@@ -289,26 +289,28 @@ export default class CommandList extends PureComponent {
           );
         },
       }];
-    const extra = (
-      <div className={styles.extra}>
-        <span style={{ marginRight: 16 }}>指令分类</span>
-        <Select defaultValue="" style={{ width: 200 }} onChange={this.commandTypeChange}>
-          <Option value="">全部</Option>
-          {commandModel.map(type =>
-            <Option key={type.commandModelID} value={type.modelCode}>{type.modelName}</Option>
-          )}
-        </Select>
-      </div>
-    );
-    const title = (
-      <div className={styles.insertBtn}>
-        <Button disabled={viewNode < current} type="primary" onClick={this.openInsert}>插入新指令</Button>
-      </div>
-    );
+
     return (
       <div className={styles.commandList}>
         {!isInsert ? (
-          <Card title={this.judgeFunction() ? title : ''} extra={extra}>
+          <div>
+            <div className={styles.insertBtnBox}>
+              {
+                this.judgeFunction() ?
+                  <div className={styles.insertBtn}>
+                    <Button disabled={viewNode < current} type="primary" onClick={this.openInsert}>插入新指令</Button>
+                  </div> : null
+              }
+              <div className={styles.extra}>
+                <span style={{ marginRight: 16 }}>指令分类</span>
+                <Select defaultValue="" style={{ width: 200 }} onChange={this.commandTypeChange}>
+                  <Option value="">全部</Option>
+                  {commandModel.map(type =>
+                    <Option key={type.commandModelID} value={type.modelCode}>{type.modelName}</Option>
+                  )}
+                </Select>
+              </div>
+            </div>
             <Table
               // rowKey={record => record.cmdExecID}
               rowKey="cmdExecID"
@@ -319,7 +321,7 @@ export default class CommandList extends PureComponent {
               scroll={{ x: 1420 + win3 * commandCols.length }}
               className={styles.tableStyle}
             />
-          </Card>
+          </div>
         ) : (
             <InsertCommand />
           )}
@@ -341,3 +343,34 @@ export default class CommandList extends PureComponent {
     );
   }
 }
+
+
+{/* 
+   const extra = (
+      <div className={styles.extra}>
+        <span style={{ marginRight: 16 }}>指令分类</span>
+        <Select defaultValue="" style={{ width: 200 }} onChange={this.commandTypeChange}>
+          <Option value="">全部</Option>
+          {commandModel.map(type =>
+            <Option key={type.commandModelID} value={type.modelCode}>{type.modelName}</Option>
+          )}
+        </Select>
+      </div>
+    );
+    const title = (
+      <div className={styles.insertBtn}>
+        <Button disabled={viewNode < current} type="primary" onClick={this.openInsert}>插入新指令</Button>
+      </div>
+    );
+  <Card title={this.judgeFunction() ? title : ''} extra={extra}>
+  <Table
+    // rowKey={record => record.cmdExecID}
+    rowKey="cmdExecID"
+    columns={commandCols}
+    dataSource={commandList}
+    pagination={{ pageSize: 5 }}
+    rowClassName={record => (record.executeEndTime && record.executeEndTime < moment().valueOf() ? `${styles.endColor}` : '')}
+    scroll={{ x: 1420 + win3 * commandCols.length }}
+    className={styles.tableStyle}
+  />
+</Card> */}

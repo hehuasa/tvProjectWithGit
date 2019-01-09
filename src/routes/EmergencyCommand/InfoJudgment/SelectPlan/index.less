@@ -1,7 +1,6 @@
 @import "~antd/lib/style/themes/default.less";
 @import "../../../../../src/index";
 .selectPlan {
-    margin: -8px 24px;
     // padding: 5px 0 @public-range 0;
     & .planTitle {
         height: 42px;
@@ -21,14 +20,11 @@
         }
     }
     & .planList {
+        padding: @public-range;
         :global {
             .ant-pagination {
                 margin-bottom: 50px;
             }
-        }
-        margin-top: 16px;
-        .tableStyle {
-            padding: @table-padding-topBottom;
         }
     }
 }
@@ -45,7 +41,7 @@
 }
 
 .search {
-    margin-bottom: 20px;
+    margin-bottom: @public-range;
     :global {
         .ant-form-item {
             margin-bottom: @col-bottom;
