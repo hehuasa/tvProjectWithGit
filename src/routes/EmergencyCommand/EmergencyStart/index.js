@@ -212,12 +212,31 @@ export default class EmergencyStart extends PureComponent {
         </TabPane>
         <TabPane tab="查看实施方案" key="4">
           <div className={styles.planInfo}>
-            <Card bordered={false} extra={extra}>
-              <PlanInfo onRef={() => {}} />
-            </Card>
+            <div className={styles.selectPlan}>
+              <div className={styles.selectPlanCon}>
+                <span style={{ marginRight: 16 }}>方案选择</span>
+                <Select
+                  style={{ width: 400 }}
+                  value={this.props.eventExecPlanID}
+                  onChange={this.onExecuteChange}
+                >
+                  {this.props.executeList.map(item => (
+                    <Option
+                      key={item.eventExecPlanID}
+                      value={item.eventExecPlanID}
+                    >{item.planName}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+            <PlanInfo onRef={() => { }} />
           </div>
         </TabPane>
       </Tabs>
     );
   }
 }
+
+// <Card bordered={false} extra={extra}>
+// </Card>

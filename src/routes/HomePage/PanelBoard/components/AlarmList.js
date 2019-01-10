@@ -66,24 +66,25 @@ class AlarmCounting extends PureComponent {
   }
   handleClick = (record) => {
     const { popupScale, dispatch, infoPops, alarmIconData } = this.props;
-    const { view, mainMap } = mapConstants;
+    const { view } = mapConstants;
     dispatch({
       type: 'resourceTree/saveClickedAlarmId',
       payload: record.alarmId,
     });
     const { alarmExtendAlarmInfoVO, alarmType } = record;
     if (record.resourceGisCode) {
+      const iconIndex = alarmIconData.findIndex(value => value.alarm.alarmCode === record.alarmCode);
       searchByAttr({ searchText: record.resourceGisCode, searchFields: ['ObjCode'] }).then(
         (res) => {
           if (res.length > 0) {
             view.goTo({ center: res[0].feature.geometry, scale: popupScale - 100 }).then(() => {
-              const iconIndex = alarmIconData.findIndex(value => value.alarm.alarmCode === record.alarmCode);
+
               const screenPoint = view.toScreen(res[0].feature.geometry);
-              hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, screenPoint, infoPops, alarmIconData, iconIndex, iconData: alarmIconData, iconDataType: 'alarm' });
               dispatch({
                 type: 'resourceTree/selectByGISCode',
                 payload: { pageNum: 1, pageSize: 1, isQuery: true, fuzzy: false, gISCode: record.resourceGisCode },
               });
+              hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, screenPoint, infoPops, alarmIconData, iconIndex, iconData: alarmIconData, iconDataType: 'alarm' });
             });
           }
         }
@@ -100,11 +101,11 @@ class AlarmCounting extends PureComponent {
                 view.goTo({ center: res[0].feature.geometry, scale: popupScale - 100 }).then(() => {
                   const screenPoint = view.toScreen(res[0].feature.geometry);
                   const iconIndex = alarmIconData.findIndex(value => value.alarm.alarmCode === record.alarmCode);
-                  hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, screenPoint, infoPops, alarmIconData, iconIndex, iconData: alarmIconData, iconDataType: 'alarm' });
                   dispatch({
                     type: 'resourceTree/selectByGISCode',
                     payload: { pageNum: 1, pageSize: 1, isQuery: true, fuzzy: false, gISCode: alarmOrg.gisCode },
                   });
+                  hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, screenPoint, infoPops, alarmIconData, iconIndex, iconData: alarmIconData, iconDataType: 'alarm' });
                 });
               }
             }

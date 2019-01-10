@@ -82,31 +82,30 @@ export default class InfoContentRecord extends PureComponent {
   render() {
     const { current } = this.props;
     return (
-      <Tabs
-        className={styles.infoJudgment}
-        defaultActiveKey="2"
-        tabBarExtraContent={
-          current !== -1 && current !== -2 ? (
-            <DisposalResearch
-              onConfirm={this.onConfirm}
-              child={this.child}
-              emergency={this.props.emergency}
-              judgeFunction={this.judgeFunction}
-            />) : null
-        }
-      >
-        <TabPane tab="事件信息记录" key="1">
-          <Card bordered={false}>
-            <InfoRecord />
-          </Card>
-        </TabPane>
-        <TabPane tab="信息接报" key="2">
-          <Card bordered={false}>
-            <InfoContent onRef={this.onRef} />
-          </Card>
-        </TabPane>
-      </Tabs>
-
+        <Tabs
+          className={styles.infoJudgment}
+          defaultActiveKey="2"
+          tabBarExtraContent={
+            current !== -1 && current !== -2 ? (
+              <DisposalResearch
+                onConfirm={this.onConfirm}
+                child={this.child}
+                emergency={this.props.emergency}
+                judgeFunction={this.judgeFunction}
+              />) : null
+          }
+        >
+          <TabPane tab="事件信息记录" key="1">
+            <Card bordered={false}>
+              <InfoRecord />
+            </Card>
+          </TabPane>
+          <TabPane tab="信息接报" key="2">
+            <Card bordered={false}>
+              <InfoContent onRef={this.onRef} />
+            </Card>
+          </TabPane>
+        </Tabs>
     );
   }
 }

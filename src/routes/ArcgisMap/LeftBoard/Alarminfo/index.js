@@ -2,17 +2,17 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from 'dva';
-import { Row, Col, Button, Collapse, Checkbox, Divider, Radio } from 'antd';
+import { Row, Col, Button, Collapse, Checkbox, Radio } from 'antd';
 import styles from './index.less';
-import UniversalTemplate from './RealTimeData/universalTemplate';
+// import UniversalTemplate from './RealTimeData/universalTemplate';
 import { mapConstants } from '../../../../services/mapConstant';
-import SourceOfRisk from './SourceOfRisk/index';
+// import SourceOfRisk from './SourceOfRisk/index';
 import levelGray from '../../../../assets/map/alarm/levelGray.png';
 import levelRed from '../../../../assets/map/alarm/levelRed.png';
 import { alarmStatus, getBrowserStyle, getBrowserScroll, formatDuring } from '../../../../utils/utils';
 import { searchByAttr, addVideoIcon, changeIcon, transToPoint, delLayer } from '../../../../utils/mapService';
 import { infoConstantly, constantlyPanelModal, infoPopsModal } from '../../../../services/constantlyModal';
-import { getRealData, getRealHistoryData } from '../../../../utils/Panel';
+import { getRealHistoryData } from '../../../../utils/Panel';
 import close from '../../../../assets/map/叉叉.png';
 
 const CheckboxGroup = Checkbox.Group;
@@ -73,9 +73,9 @@ class AlarmInfo extends PureComponent {
   };
   // 报警模板
   componentDidMount() {
-    const { dispatch, list } = this.props;
-    const { rowInfo, resourceInfo } = this.props.resourceTree;
-    const { resourceID, ctrlResourceType } = resourceInfo;
+    const { dispatch, list, resourceTree } = this.props;
+    const { resourceInfo } = resourceTree;
+    const { ctrlResourceType } = resourceInfo;
     updateTimeId = setInterval(() => {
       // 筛选报警信息
       const alarmList = this.props.list.filter(item => item.resourceCode === this.props.resourceTree.resourceInfo.resourceCode);
@@ -96,27 +96,28 @@ class AlarmInfo extends PureComponent {
     this.setState({
       alarmSelectIndex: alarmList.length > 0 ? alarmList.length - 1 : 0,
     });
-    if (resourceInfo.extendFields) {
-      // const { extendFields } = resourceInfo;
-      // 根据资源ID 获取原料信息
-      const { rawMaterialID } = rowInfo || {};
-      dispatch({
-        type: 'resourceTree/getByResourceID',
-        payload: resourceID,
-      }).then(() => {
-        // 请求原料消防措施与物料危害
-        if (rawMaterialID) {
-          dispatch({
-            type: 'resourceTree/materialHarmInfo',
-            payload: { rawMaterialID, pageNum: 1, pageSize: 10000, isQuery: true, fuzzy: false },
-          });
-          dispatch({
-            type: 'resourceTree/materialFireControl',
-            payload: { rawMaterialID, pageNum: 1, pageSize: 10000, isQuery: true, fuzzy: false },
-          });
-        }
-      });
-    }
+    // if (resourceInfo.extendFields) {
+    //   // const { extendFields } = resourceInfo;
+    //   // 根据资源ID 获取原料信息
+    //   // const { rawMaterialID } = rowInfo || {};
+    //   dispatch({
+    //     type: 'resourceTree/getByResourceID',
+    //     payload: resourceID,
+    //   })
+    //   //   .then(() => {
+    //   //   // 请求原料消防措施与物料危害
+    //   //   if (rawMaterialID) {
+    //   //     dispatch({
+    //   //       type: 'resourceTree/materialHarmInfo',
+    //   //       payload: { rawMaterialID, pageNum: 1, pageSize: 10000, isQuery: true, fuzzy: false },
+    //   //     });
+    //   //     dispatch({
+    //   //       type: 'resourceTree/materialFireControl',
+    //   //       payload: { rawMaterialID, pageNum: 1, pageSize: 10000, isQuery: true, fuzzy: false },
+    //   //     });
+    //   //   }
+    //   // });
+    // }
     //  请求监测资源与被检测资源
     if (resourceInfo && resourceInfo.resourceID) {
       //  根据资源ID，请求监测该资源的对象
@@ -692,7 +693,7 @@ class AlarmInfo extends PureComponent {
   render() {
     const { mapHeight, resourceTree, alarmBoardData, ctrlResourceType } = this.props;
     const { alarmSelectIndex } = this.state;
-    const { resourceInfo, rowInfo, materialHarmInfo, materialFireControl } = resourceTree;
+    const { resourceInfo } = resourceTree;
     const { event } = resourceInfo;
     const rawMaterialInfoVOS = resourceInfo.rawMaterialInfoVOS || [];
     const { universalData } = infoConstantly.data; // 实时数据
@@ -726,7 +727,7 @@ class AlarmInfo extends PureComponent {
         <div className={styles.header}>
           <div className={styles.name} title={`${resourceInfo.resourceName}-${resourceInfo.processNumber}`}>{resourceInfo.resourceName}-{resourceInfo.processNumber}</div>
           <div className={styles.close}>
-            <div className={styles.button} onClick={this.handleClick}><img src={close} alt="关闭" /></div>
+            <Button type="primary" size="small" onClick={this.handleClick}><img src={close} alt="关闭" /></Button>
           </div>
         </div>
         <Scrollbars
@@ -762,7 +763,7 @@ class AlarmInfo extends PureComponent {
     {alarmBoardData.length > 0 ? (
       <Panel header={<div className={styles.panelHeader}>报警信息</div>} key="17">
         <RadioGroup onChange={this.handleAlarmChange} value={alarmSelectIndex} className={styles.alarmList}>
-          <Collapse bordered={false} defaultActiveKey={String(alarmBoardData.length - 1)}>
+          <Collapse bordered={false} style={{ width: 294, fontSize: 12 }} defaultActiveKey={String(alarmBoardData.length - 1)}>
             {alarmBoardData.map((item, index) => {
                             const newIndex = String(JSON.parse(JSON.stringify(index)));
                             const level = parseInt(item.alarmType.dangerCoefficient, 0);
@@ -839,12 +840,12 @@ class AlarmInfo extends PureComponent {
                       ) :
                       null
                   }
-    {universalData && universalData.length > 0 ? (
-      <Panel header={<div className={styles.panelHeader}>实时数据信息</div>} key="16" className={styles.type}>
-        <UniversalTemplate data={universalData} showDashBoard dispatch={this.props.dispatch} />
-      </Panel>
-                  ) : null
-                  }
+    {/*{universalData && universalData.length > 0 ? (*/}
+      {/*<Panel header={<div className={styles.panelHeader}>实时数据信息</div>} key="16" className={styles.type}>*/}
+        {/*<UniversalTemplate data={universalData} showDashBoard dispatch={this.props.dispatch} />*/}
+      {/*</Panel>*/}
+                  {/*) : null*/}
+                  {/*}*/}
     {
                     resourceInfo && resourceInfo.ctrlResourceType.indexOf('101.201') === -1 ? (
                       <Panel header={<div className={styles.panelHeader}>基本信息</div>} key="1">
@@ -917,71 +918,46 @@ class AlarmInfo extends PureComponent {
         </Panel>)
     ) : null
                   }
-    {materialFireControl.length > 0 ? (
-      <Panel header={<div className={styles.panelHeader}>消防措施</div>} key="6">
-        {materialFireControl.map((item, index) => (
-          <div>
-            <Row gutter={{ xs: 8, sm: 16, md: 24 }} type="flex">
-              <Col span={8}>危险特性：</Col><Col span={16}>{item.dangerous}</Col>
-              <Col span={8}>消防处理：</Col><Col span={16}>{item.fireControlDeal}</Col>
-              <Col span={8}>使用物品：</Col><Col span={16}>{item.useFireDevice}</Col>
-              <Col span={8}>应急处理：</Col><Col span={16}>{item.emergencyDeal}</Col>
-            </Row>
-            {index === (materialFireControl.length - 1) ? null : <Divider dashed />}
-          </div>
-                      ))}
-      </Panel>
-                  ) : null}
-    {materialHarmInfo.length > 0 ? (
-      <Panel header={<div className={styles.panelHeader}>急救措施</div>} key="7">
-        {materialHarmInfo.map((item, index) => (
-          <div>
-            <Row gutter={{ xs: 8, sm: 16, md: 24 }} type="flex">
-              <Col span={8}>危害方式：</Col><Col span={16}>{item.harmMethod}</Col>
-              <Col span={8}>处理方式：</Col><Col span={16}>{item.processMethod}</Col>
-            </Row>
-            {index === (materialHarmInfo.length - 1) ? null : <Divider dashed />}
-          </div>
-                      ))}
-      </Panel>
-                  ) : null}
-    {resourceInfo && resourceInfo.ctrlResourceType.indexOf('101.201.101') === 0 ? (
-      <Panel header={<div className={styles.panelHeader}>危险源</div>} key="14" className={styles.type}>
-        <SourceOfRisk />
-      </Panel>
-                  ) : null
-                  }
-    {resourceInfo && resourceInfo.ctrlResourceType.indexOf('101.201.102') === 0 ? (
-      <Panel header={<div className={styles.panelHeader}>安全风险</div>} key="15" className={styles.type}>
-        <SourceOfRisk />
-      </Panel>
-                  ) : null
-                  }
-    {resourceInfo && resourceInfo.ctrlResourceType.indexOf('901.109.131') === 0 ? (
-      <Panel header={<div className={styles.panelHeader}>作业监控</div>} key="17" className={styles.type}>
-        <Collapse
-          bordered={false}
-        >
-          <Panel header={<div className={styles.panelHeader}>作业监控1</div>} key="17-1" className={styles.type}>
-            <Row type="flex">
-              <Col span={10}>作业流水号：</Col><Col span={14}>123</Col>
-              <Col span={10}>申请人：</Col><Col span={14}>123</Col>
-              <Col span={10}>申请单位：</Col><Col span={14}>123</Col>
-              <Col span={10}>装置区域：</Col><Col span={14}>123</Col>
-              <Col span={10}>作业开始时间：</Col><Col span={14}>123</Col>
-              <Col span={10}>作业结束时间：</Col><Col span={14}>123</Col>
-              <Col span={10}>作业类别：</Col><Col span={14}>123</Col>
-              <Col span={10}>作业等级：</Col><Col span={14}>123</Col>
-              <Col span={10}>作业地点描述：</Col><Col span={14}>123</Col>
-              <Col span={10}>项目负责人：</Col><Col span={14}>123</Col>
-              <Col span={10}>施工单位：</Col><Col span={14}>123</Col>
-              <Col span={10}>作业内容：</Col><Col span={14}>123</Col>
-            </Row>
-          </Panel>
-        </Collapse>
-      </Panel>
-                  ) : null
-                  }
+    {/*{materialFireControl.length > 0 ? (*/}
+      {/*<Panel header={<div className={styles.panelHeader}>消防措施</div>} key="6">*/}
+        {/*{materialFireControl.map((item, index) => (*/}
+          {/*<div>*/}
+            {/*<Row gutter={{ xs: 8, sm: 16, md: 24 }} type="flex">*/}
+              {/*<Col span={8}>危险特性：</Col><Col span={16}>{item.dangerous}</Col>*/}
+              {/*<Col span={8}>消防处理：</Col><Col span={16}>{item.fireControlDeal}</Col>*/}
+              {/*<Col span={8}>使用物品：</Col><Col span={16}>{item.useFireDevice}</Col>*/}
+              {/*<Col span={8}>应急处理：</Col><Col span={16}>{item.emergencyDeal}</Col>*/}
+            {/*</Row>*/}
+            {/*{index === (materialFireControl.length - 1) ? null : <Divider dashed />}*/}
+          {/*</div>*/}
+                      {/*))}*/}
+      {/*</Panel>*/}
+                  {/*) : null}*/}
+    {/*{materialHarmInfo.length > 0 ? (*/}
+      {/*<Panel header={<div className={styles.panelHeader}>急救措施</div>} key="7">*/}
+        {/*{materialHarmInfo.map((item, index) => (*/}
+          {/*<div>*/}
+            {/*<Row gutter={{ xs: 8, sm: 16, md: 24 }} type="flex">*/}
+              {/*<Col span={8}>危害方式：</Col><Col span={16}>{item.harmMethod}</Col>*/}
+              {/*<Col span={8}>处理方式：</Col><Col span={16}>{item.processMethod}</Col>*/}
+            {/*</Row>*/}
+            {/*{index === (materialHarmInfo.length - 1) ? null : <Divider dashed />}*/}
+          {/*</div>*/}
+                      {/*))}*/}
+      {/*</Panel>*/}
+                  {/*) : null}*/}
+    {/*{resourceInfo && resourceInfo.ctrlResourceType.indexOf('101.201.101') === 0 ? (*/}
+      {/*<Panel header={<div className={styles.panelHeader}>危险源</div>} key="14" className={styles.type}>*/}
+        {/*<SourceOfRisk />*/}
+      {/*</Panel>*/}
+                  {/*) : null*/}
+                  {/*}*/}
+    {/*{resourceInfo && resourceInfo.ctrlResourceType.indexOf('101.201.102') === 0 ? (*/}
+      {/*<Panel header={<div className={styles.panelHeader}>安全风险</div>} key="15" className={styles.type}>*/}
+        {/*<SourceOfRisk />*/}
+      {/*</Panel>*/}
+                  {/*) : null*/}
+                  {/*}*/}
   </Collapse>
 )}
 
@@ -996,13 +972,13 @@ class AlarmInfo extends PureComponent {
             }
 
               {/* 该资源被检测 */}
-              {resourceInfo.beMonitorObjs && resourceInfo.beMonitorObjs.length > 0 ?
-                <Button htmlType="button" size="small" disabled={this.state.selectedRows.checkedVideos.length === 0} style={{ background: this.state.selectedRows.checkedVideos.length === 0 ? '#2a3ea9' : '' , color: this.state.selectedRows.checkedVideos.length === 0 ? '#dcdcdc' : ''}}  onClick={() => { this.handleVideoPlay(videoArray); }}>视频联动</Button> : null
-          }
+              {/*{resourceInfo.beMonitorObjs && resourceInfo.beMonitorObjs.length > 0 ?*/}
+                {/*<Button htmlType="button" size="small" disabled={this.state.selectedRows.checkedVideos.length === 0} onClick={() => { this.handleVideoPlay(videoArray); }}>视频联动</Button> : null*/}
+          {/*}*/}
               {/* 视频设备 */}
-              {resourceInfo.ctrlResourceType && resourceInfo.ctrlResourceType.indexOf('101.102.101') === 0 ?
-                <Button htmlType="button" size="small" onClick={this.handleVideoPlay}>播放视频</Button> : null
-          }
+              {/*{resourceInfo.ctrlResourceType && resourceInfo.ctrlResourceType.indexOf('101.102.101') === 0 ?*/}
+                {/*<Button htmlType="button" size="small" onClick={this.handleVideoPlay}>播放视频</Button> : null*/}
+          {/*}*/}
               {
             resourceInfo.ctrlResourceType && ctrlResourceType !== 'event' && (resourceInfo.ctrlResourceType.indexOf('101.107.102') === 0 ||
               // 环保

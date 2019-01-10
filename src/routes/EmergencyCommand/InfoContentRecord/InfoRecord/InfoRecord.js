@@ -5,7 +5,7 @@ import { Form, Tabs, Button, Row, Col, Input, Icon, Card, Table } from 'antd';
 import EventContent from './EventContent';
 import Casualties from './Casualties';
 import styles from './InfoRecord.less';
-import {emgcIntervalInfo} from "../../../../services/constantlyData";
+import { emgcIntervalInfo } from "../../../../services/constantlyData";
 
 const { TabPane } = Tabs;
 const columns = [{
@@ -55,12 +55,12 @@ export default class InfoRecord extends PureComponent {
   };
   render() {
     return (
-      <div style={{ padding: '16px 8px' }} >
-        <Card
-          bodyStyle={{ padding: 0 }}
-          style={{ width: '100%' }}
-        >
-          <div>
+      <div>
+        <div className={styles.CardBox}>
+          <Card
+            bodyStyle={{ padding: 0 }}
+            style={{ width: '100%' }}
+          >
             <Tabs
               defaultActiveKey="1"
               tabPosition="left"
@@ -74,13 +74,12 @@ export default class InfoRecord extends PureComponent {
                 <Casualties />
               </TabPane>
             </Tabs>
-          </div>
-        </Card>
+          </Card>
+        </div>
         <Table
           columns={columns}
           dataSource={this.props.emergency.infoRecordList}
           rowKey={record => record.eventProcessID}
-          style={{ paddingTop: 16 }}
           className={styles.tableStyle}
         />
       </div>

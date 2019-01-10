@@ -84,6 +84,10 @@ class AlarmCounting extends PureComponent {
           view.goTo({ center: res[0].feature.geometry, scale: popupScale }).then(() => {
             const iconIndex = alarmIconData.findIndex(value => value.alarm.alarmCode === record.alarmCode);
             const screenPoint = view.toScreen(res[0].feature.geometry);
+            dispatch({
+              type: 'resourceTree/selectByGISCode',
+              payload: { pageNum: 1, pageSize: 1, isQuery: true, fuzzy: false, gISCode: record.resourceGisCode },
+            });
             hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, screenPoint, infoPops, alarmIconData, iconIndex, iconData: alarmIconData, iconDataType: 'alarm' });
           });
         }

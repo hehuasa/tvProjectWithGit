@@ -176,7 +176,7 @@ export default class Expand extends PureComponent {
         <Card title={title} extra={extra}>
           <Row gutter={16}>
             <Col span={12}>
-              <Card title="事件特征" >
+              <Card title="事件特征" className={styles.cardStyle1} >
                 <Table
                   columns={featureCol}
                   rowKey={(record, index) => index}
@@ -187,7 +187,7 @@ export default class Expand extends PureComponent {
                 />
               </Card>
             </Col>
-            <Col span={12}>
+            <Col span={12} className={styles.cardStyle2}>
               <Card title="国家规范条件">
                 <Table columns={regulationsCol} size="small" dataSource={regulations} bordered />
               </Card>
