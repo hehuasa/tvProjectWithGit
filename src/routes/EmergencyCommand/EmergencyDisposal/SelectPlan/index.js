@@ -11,7 +11,7 @@ const SearchForm = Form.create()((props) => {
   const { form, planLevelList, planTypeList, handleSearch, handleFormReset } = props;
   const { getFieldDecorator } = form;
   return (
-    <div style={{ marginTop: 8 }}>
+    <div className={styles.formStyle}>
       <Form layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={9} sm={24}>

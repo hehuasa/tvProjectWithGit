@@ -4,20 +4,23 @@
   width: 300px;
 }
 .extra{
-  margin-top: -1px;
+  margin-top: @public-range;
   :global{
     .ant-card-extra{
-      width: 600px;
-      margin-top: -9px;
+      width: 490px;
+      text-align: right;
     }
     .ant-card-head{
-      margin-top: -1px;
+      // margin-top: -1px;
       height: @place-ant-card-extra-height;
     }
     .ant-card-body{
       & .ant-card-head{
         margin-top: 1px;
       }
+    }
+    .ant-card-wider-padding .ant-card-head{
+      padding: 0 @public-range;
     }
   }
 }

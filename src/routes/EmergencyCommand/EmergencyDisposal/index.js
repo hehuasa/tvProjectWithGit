@@ -277,9 +277,27 @@ export default class EmergencyDisposal extends PureComponent {
         </TabPane>
         <TabPane tab="查看实施方案" key="4">
           <div className={styles.planExtra}>
-            <Card bordered={false} extra={extra}>
-              <PlanInfo onRef={() => {}} />
-            </Card>
+            <div className={styles.planExtraHea}>
+
+            <div className={styles.planExtraCon}>
+              <span style={{ marginRight: 16 }}>方案选择</span>
+              <Select
+                style={{ width: 220 }}
+                value={this.props.eventExecPlanID}
+                onChange={this.onExecuteChange}
+              >
+                {this.props.executeList.map(item => (
+                  <Option
+                    key={item.eventExecPlanID}
+                    value={item.eventExecPlanID}
+                  >{item.planName}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            </div>
+
+            <PlanInfo onRef={() => { }} />
           </div>
         </TabPane>
         <TabPane tab="扩大应急" key="5" disabled={current === -1 || viewNode < current || !this.judgeFunction('应急处理权限')}>
@@ -289,3 +307,6 @@ export default class EmergencyDisposal extends PureComponent {
     );
   }
 }
+
+{/* <Card bordered={false} extra={extra}>
+</Card> */}

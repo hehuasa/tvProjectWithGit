@@ -10,15 +10,8 @@
     }
   }
 }
-.insertBtn{
-  //margin-bottom: 50px;
-  //margin-top: 16px;
-  // margin-top: -8px;
-  margin-top: @margin-top;
-  text-align: left;
-}
+
 .commandList{
-  margin-top: -9px;
   :global{
     .ant-card-head{
       height: @place-ant-card-extra-height;
@@ -41,11 +34,23 @@
     }
   }
   .tableStyle{
-    padding: @table-padding-topBottom;
+    padding: 0 @public-range @public-range @public-range;
   }
 }
+.insertBtnBox{
+  height: @place-ant-card-extra-height;
+}
+.insertBtn{
+  //margin-bottom: 50px;
+  //margin-top: 16px;
+  // margin-top: -8px;
+  text-align: left;
+  float: left;
+  margin: @public-range 0 0 @public-range;
+}
 .extra{
-  margin-top: @margin-top;
+  float: right;
+  margin: @public-range @public-range 0 0;
 }
 .endColor {
   color: red;

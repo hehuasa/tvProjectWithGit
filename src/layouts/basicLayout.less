@@ -116,6 +116,9 @@
 
 // 全局
 :global {
+    .ant-tabs-ink-bar {
+        background-color: initial;
+    }
     .ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
         background: initial !important;
     }
@@ -136,12 +139,18 @@
         line-height: @public-font-size + 10px;
     }
     .ant-popover-content {
-        border: 1px solid @border-color;
+        // border: 1px solid @border-color;
     }
     .ant-popover-arrow {
         background: @public-background-color;
         width: 15px;
         height: 15px;
+    }
+    .ant-tooltip {
+        font-size: @public-font-m;
+    }
+    .ant-tooltip-inner {
+        padding: 8px 12px;
     }
     .ant-tooltip-arrow {
         border-bottom-color: @border-color  !important;
@@ -364,6 +373,9 @@
     .ant-tabs-nav .ant-tabs-tab:hover {
         color: @time-color;
     }
+    .ant-tabs .ant-tabs-left-bar {
+        border-right: none;
+    }
     .ant-tabs-vertical.ant-tabs-left>.ant-tabs-bar {
         // border-right: @public-border-size solid @public-border-color;
         // border-right: @public-border-size solid @tabs-border-color-right;
@@ -385,6 +397,7 @@
     .ant-btn:hover,
     .ant-btn:focus {
         color: @public-color;
+        border-color: @ant-btn-background-color-hove;
     }
     .ant-btn:hover,
     .ant-btn:focus,
@@ -561,7 +574,7 @@
     } // 气泡卡片
     .ant-popover-inner {
         background: @public-background-color;
-        border-radius: @table-border-radius;
+        border-radius: 0;
         box-shadow: none;
         border: @public-border-size solid @public-border-color;
     }
@@ -580,6 +593,8 @@
     .ant-popover-placement-bottomLeft>.ant-popover-content>.ant-popover-arrow,
     .ant-popover-placement-bottomRight>.ant-popover-content>.ant-popover-arrow {
         box-shadow: -3px -3px 1px @border-color  !important;
+        border-top-color: transparent;
+        border-left-color: transparent;
     }
     .ant-popover-placement-top>.ant-popover-content>.ant-popover-arrow,
     .ant-popover-placement-topLeft>.ant-popover-content>.ant-popover-arrow,
@@ -774,6 +789,20 @@
     .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-sorters:active .ant-table-column-sorter-up:not(.on),
     .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-sorters:active .ant-table-column-sorter-down:not(.on) {
         color: @time-color;
+    }
+    .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-filters:hover .anticon-filter:hover,
+    .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-filters:hover .ant-table-filter-icon:hover {
+        background-color: @ant-btn-background-color-hove;
+        color: @public-color-hover;
+    }
+    .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-filters .anticon-filter.ant-table-filter-open,
+    .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-filters .ant-table-filter-icon.ant-table-filter-open {
+        background-color: @ant-btn-background-color-hove;
+        color: @public-color-hover;
+    }
+    .ant-table-thead>tr>th .anticon-filter>svg,
+    .ant-table-thead>tr>th .ant-table-filter-icon>svg {
+        margin-left: -10px;
     } // 时间框里的小图标
     .ant-calendar-picker-clear,
     .ant-calendar-picker-icon {
@@ -794,10 +823,9 @@
         font-size: @public-font-size;
         color: @public-color;
         border-bottom: @public-border-size solid @tabs-border-color-right;
-    }
-    .ant-card-head-title {
-        padding: 7px 0;
-    }
+    } // .ant-card-head-title {
+    //     padding: 7px 0;
+    // }
     .ant-card-body {
         margin: 0;
     }
@@ -941,7 +969,7 @@
         background-color: initial;
         background-origin: padding-box;
     }
-    .ant-radio-checked .ant-radio-inner{
+    .ant-radio-checked .ant-radio-inner {
         border-color: @ant-checkbox-border-color-hover;
     }
     .ant-radio-inner:after {
