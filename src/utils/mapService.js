@@ -2839,6 +2839,35 @@ export const addAlarmAnimation = async ({ alarm, geometry, layer, PictureMarkerS
   const alarmGraphic = new Graphic(geometry, pictureMarkerSymbol, { ...alarm, symbolObj: pictureMarkerSymbol });
   mapConstants.alarmGraphics.push(alarmGraphic);
 };
+// 报警（事件）列表被选中
+export const alarmOrEventClick = ({ alarmIconData, record, popupScale, dispatch, infoPops, iconDataType }) => {
+  const { view } = mapConstants;
+  const iconIndex = alarmIconData.findIndex(value => value.alarm.alarmCode === record.alarmCode);
+  const iconData = alarmIconData.find(value => value.alarm.alarmCode === record.alarmCode);
+  if (iconData) {
+    view.goTo({ center: iconData.geometry, scale: popupScale - 100 }).then(() => {
+      dispatch({
+        type: 'resourceTree/selectByGISCode',
+        payload: { pageNum: 1, pageSize: 1, isQuery: true, fuzzy: false, gISCode: record.resourceGisCode },
+      });
+      hoveringAlarm({ geometry: iconData.geometry, alarm: record, dispatch, infoPops, iconIndex, iconData: alarmIconData, iconDataType });
+    });
+  } else {
+    searchByAttr({ searchText: record.resourceGisCode, searchFields: ['ObjCode'] }).then(
+      (res) => {
+        if (res.length > 0) {
+          view.goTo({ center: res[0].feature.geometry, scale: popupScale - 100 }).then(() => {
+            dispatch({
+              type: 'resourceTree/selectByGISCode',
+              payload: { pageNum: 1, pageSize: 1, isQuery: true, fuzzy: false, gISCode: record.resourceGisCode },
+            });
+            hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, infoPops, iconIndex, iconData: alarmIconData, iconDataType });
+          });
+        }
+      }
+    );
+  }
+};
 // 报警图标选中
 export const hoveringAlarm = ({ geometry, alarm, infoPops, dispatch, iconData, iconDataType, iconIndex }) => {
   if (alarm) {
@@ -2885,25 +2914,11 @@ export const hoveringAlarm = ({ geometry, alarm, infoPops, dispatch, iconData, i
       type: 'mapRelation/queryInfoPops',
       payload: infoPops,
     });
-    // const iconIndex = newIconData.findIndex(value => value.alarm.alarmCode === alarm.alarmCode);
-    newIconData[iconIndex].isSelected = true;
-    // const obj = mapConstants.alarmGraphics.find(value => value.attributes.resourceCode === alarm.resourceCode);
-    // let iconObj = {};
-    // if (obj) {
-    //   iconObj = obj.attributes.symbolObj; 'mapRelation/queryAlarmIconData'
-    // }
-    // const hoverSy = {
-    //   type: 'picture-marker', // autocasts as new SimpleMarkerSymbol()
-    //   url: iconObj.url,
-    //   width: '32px',
-    //   height: '32px',
-    //   angle,
-    // };
-    // const hoverGraphic = new Graphic(newG, iconObj, alarm);
-    // layer.graphics.add(hoverGraphic);
-    // console.log('screenPoint', screenPoint);
-    // const { x, y } = screenPoint;
+    if (iconIndex !== -1) {
+      newIconData[iconIndex].isSelected = true;
+    } else {
 
+    }
     dispatch({
       type: dispatchType,
       payload: newIconData,
@@ -3022,6 +3037,7 @@ export const addMapAlarms = ({ alarmIconData, iconObj, dispatch, scale, alarms, 
                 resolve();
               }
             } else {
+              alarmIconData.push({ alarm, geometry: null, style: null });
               index += 1;
               if (index === addArray.length) {
                 dispatch({

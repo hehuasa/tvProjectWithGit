@@ -972,13 +972,13 @@ class AlarmInfo extends PureComponent {
             }
 
               {/* 该资源被检测 */}
-              {/*{resourceInfo.beMonitorObjs && resourceInfo.beMonitorObjs.length > 0 ?*/}
-                {/*<Button htmlType="button" size="small" disabled={this.state.selectedRows.checkedVideos.length === 0} onClick={() => { this.handleVideoPlay(videoArray); }}>视频联动</Button> : null*/}
-          {/*}*/}
+              {resourceInfo.beMonitorObjs && resourceInfo.beMonitorObjs.length > 0 ?
+                <Button htmlType="button" size="small" disabled={this.state.selectedRows.checkedVideos.length === 0} onClick={() => { this.handleVideoPlay(videoArray); }}>视频联动</Button> : null
+          }
               {/* 视频设备 */}
-              {/*{resourceInfo.ctrlResourceType && resourceInfo.ctrlResourceType.indexOf('101.102.101') === 0 ?*/}
-                {/*<Button htmlType="button" size="small" onClick={this.handleVideoPlay}>播放视频</Button> : null*/}
-          {/*}*/}
+              {resourceInfo.ctrlResourceType && resourceInfo.ctrlResourceType.indexOf('101.102.101') === 0 ?
+                <Button htmlType="button" size="small" onClick={this.handleVideoPlay}>播放视频</Button> : null
+          }
               {
             resourceInfo.ctrlResourceType && ctrlResourceType !== 'event' && (resourceInfo.ctrlResourceType.indexOf('101.107.102') === 0 ||
               // 环保

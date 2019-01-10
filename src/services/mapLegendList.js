@@ -24,6 +24,7 @@ const imgArray = [
   { name: '放射源', sort: 22 },
   { name: '呼吸机', sort: 23 },
   { name: '空气呼吸机,', sort: 24 },
+  { name: '默认设备,', default: true },
 ];
 
 const createList = () => {
@@ -58,9 +59,7 @@ const createList = () => {
           cacheArray2.push({ name, url: item, sort });
         }
       }
-    } catch (e) {
-
-    }
+    } catch (e){}
   }
   const mapLegendList = cacheArray1.concat(cacheArray2);
   mapLegendList.sort((a, b) => {
