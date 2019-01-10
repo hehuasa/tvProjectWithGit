@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Table } from 'antd';
 import moment from 'moment';
 import { connect } from 'dva';
-import { hoveringAlarm, searchByAttr } from '../../../../utils/mapService';
+import { alarmOrEventClick, hoveringAlarm, searchByAttr } from '../../../../utils/mapService';
 import styles from './zoomComponents.less';
 import { mapConstants } from '../../../../services/mapConstant';
 
@@ -77,22 +77,40 @@ class AlarmCounting extends PureComponent {
   }
   handleClick = (record) => {
     const { popupScale, dispatch, infoPops, alarmIconData } = this.props;
-    const { view } = mapConstants;
-    searchByAttr({ searchText: record.resourceGisCode, searchFields: ['ObjCode'] }).then(
-      (res) => {
-        if (res.length > 0) {
-          view.goTo({ center: res[0].feature.geometry, scale: popupScale }).then(() => {
-            const iconIndex = alarmIconData.findIndex(value => value.alarm.alarmCode === record.alarmCode);
-            const screenPoint = view.toScreen(res[0].feature.geometry);
-            dispatch({
-              type: 'resourceTree/selectByGISCode',
-              payload: { pageNum: 1, pageSize: 1, isQuery: true, fuzzy: false, gISCode: record.resourceGisCode },
-            });
-            hoveringAlarm({ geometry: res[0].feature.geometry, alarm: record, dispatch, screenPoint, infoPops, alarmIconData, iconIndex, iconData: alarmIconData, iconDataType: 'alarm' });
-          });
+    dispatch({
+      type: 'resourceTree/saveClickedAlarmId',
+      payload: record.alarmId,
+    });
+    const { alarmExtendAlarmInfoVO, alarmType } = record;
+    if (record.resourceGisCode) {
+      alarmOrEventClick({ alarmIconData, record, popupScale, dispatch, infoPops, iconDataType: 'alarm' });
+    } else if (alarmExtendAlarmInfoVO) {
+      const { alarmOrg } = alarmExtendAlarmInfoVO;
+      if (alarmOrg) {
+        if (alarmOrg.gisCode) {
+          record.resourceCode = alarmOrg.gisCode;
+          record.resourceName = alarmOrg.orgnizationName;
+          alarmOrEventClick({ alarmIconData, record, popupScale, dispatch, infoPops, iconDataType: 'alarm' });
         }
       }
-    );
+      this.props.dispatch({
+        type: 'alarmDeal/saveAlarmInfo',
+        payload: record,
+      });
+      this.props.dispatch({
+        type: 'alarmDeal/saveDealModel',
+        payload: { isDeal: true },
+      });
+    } else if (alarmType.profession === '107.999') {
+      this.props.dispatch({
+        type: 'alarmDeal/saveAlarmInfo',
+        payload: record,
+      });
+      this.props.dispatch({
+        type: 'alarmDeal/saveDealModel',
+        payload: { isDeal: true },
+      });
+    }
   };
   render() {
     const { alarm } = this.props;

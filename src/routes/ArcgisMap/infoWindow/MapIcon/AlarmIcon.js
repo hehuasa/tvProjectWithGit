@@ -9,7 +9,6 @@ import { hoveringAlarm } from '../../../../utils/mapService';
 
 export const getIcon = (alarm) => {
   const legendLayer = mapLayers.FeatureLayers.find(value => value.mapIcon === alarm.ctrlResourceType);
-
   if (!legendLayer) {
     return undefined;
   }
