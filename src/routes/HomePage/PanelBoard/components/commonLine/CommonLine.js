@@ -93,16 +93,22 @@ class CommonLine extends PureComponent {
     }
     const dataName = newdatabyDataName({ newData });
     const allDv = [];
-    const ds = new DataSet();
-    for (const item of newData.entries()) {
-      const dv = ds.createView().source(item[1]);
-      dv.transform({
-        type: 'fold',
-        fields: dataName[item[0]], // 展开字段集
-        key: 'city', // key字段
-        value: 'temperature', // value字段
-      });
-      allDv.push(dv);
+    if (newData.length > 0) {
+      const ds = new DataSet();
+      console.log('newData[0]', newData[0]);
+      if (newData[0] && newData[0][0]) {
+        for (const item of newData.entries()) {
+          debugger;
+          const dv = ds.createView().source(item[1]);
+          dv.transform({
+            type: 'fold',
+            fields: dataName[item[0]], // 展开字段集
+            key: 'city', // key字段
+            value: 'temperature', // value字段
+          });
+          allDv.push(dv);
+        }
+      }
     }
     return (
       <div>

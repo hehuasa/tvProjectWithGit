@@ -2991,7 +2991,7 @@ export const addMapAlarms = ({ alarmIconData, iconObj, dispatch, scale, alarms, 
       findParams.searchFields = ['ObjCode'];
 
       // 新建或获取报警动画图层
-      const alarmLayer = mapConstants.mainMap.findLayerById('报警动画');
+      // const alarmLayer = mapConstants.mainMap.findLayerById('报警动画');
       for (const alarm of addArray) {
         if (alarm.resourceGisCode) {
           findParams.searchText = alarm.resourceGisCode;

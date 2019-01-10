@@ -153,15 +153,17 @@ export const objByArea = ({ data = { obj: {}, target: {} }, dataOll = [] }) => {
   return data;
 };
 // 曲线图需要的数据
-export const newdatabyDataName = ({ list = [], newData }) => {
+export const newdatabyDataName = ({ list = [], newData = [] }) => {
   let trme = [];
-  newData.map((item, index) => {
-    for (const i of Object.keys(item[0])) {
-      if (i !== 'month') { trme.push(i); }
-    }
-    list.push(trme);
-    trme = [];
-  });
+  if (newData[0] &&newData[0][0]) {
+    newData.map((item) => {
+      for (const i of Object.keys(item[0])) {
+        if (i !== 'month') { trme.push(i); }
+      }
+      list.push(trme);
+      trme = [];
+    });
+  }
   trme = null;
   return list;
 };

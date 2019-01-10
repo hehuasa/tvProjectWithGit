@@ -1,7 +1,7 @@
 import Sockette from 'sockette';
 // import fetch from 'dva/fetch';
 
-const Socket = ({ onmessage, currentUser, alarmList }) => {
+const Socket = ({ onmessage, currentUser, parent }) => {
   // console.log('currentUser', currentUser.baseUserInfo.userID);
   if (window.serviceUrl.socketUrl !== '') {
     const id = (Math.ceil(currentUser.baseUserInfo.userID * Math.random() * 100 * Math.random() * 10));
@@ -19,7 +19,7 @@ const Socket = ({ onmessage, currentUser, alarmList }) => {
           window.socketAlarms.isDealing = true;
           setTimeout(() => {
             // console.clear();
-            onmessage(alarmList);
+            onmessage(parent.props.alarmList);
           }, 200);
 
       }
