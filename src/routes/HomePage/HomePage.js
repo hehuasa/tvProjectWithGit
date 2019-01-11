@@ -68,25 +68,30 @@ export default class HomePage extends PureComponent {
       payload: { isDeal: false },
     });
   };
-    handleMouseDown = (e) => {
-      if (e.target.tagName === 'EMBED') {
-        e.stopPropagation();
-        return false;
-      }
-      if (e.target.title === 'spaceQueryTitle') {
-        dragEvent.isDrag = true;
-        dragEvent.start = {
-          x: e.clientX,
-          y: e.clientY,
-        };
-        e.stopPropagation();
-      }
-    };
-    handleMouseMove = (e) => {
-      if (e.target.tagName === 'EMBED') {
-        e.stopPropagation();
-        return false;
-      }
+  handleMouseDown = (e) => {
+    if (e.target.title !== 'spaceQueryTitle') {
+      e.stopPropagation();
+      return false;
+    }
+    if (e.target.tagName === 'EMBED') {
+      e.stopPropagation();
+      return false;
+    }
+    if (e.target.title === 'spaceQueryTitle') {
+      dragEvent.isDrag = true;
+      dragEvent.start = {
+        x: e.clientX,
+        y: e.clientY,
+      };
+      e.stopPropagation();
+    }
+  };
+  handleMouseMove = (e) => {
+    if (e.target.tagName === 'EMBED') {
+      e.stopPropagation();
+      return false;
+    }
+    if (dragEvent.isDrag) {
       const { spaceQueryPop, dispatch } = this.props;
       if (spaceQueryPop) {
         const { mapPoint, screenPoint } = spaceQueryPop;
@@ -101,33 +106,34 @@ export default class HomePage extends PureComponent {
           });
           e.stopPropagation();
           e.preventDefault();
-        } else {
-          e.stopPropagation();
-          e.preventDefault();
         }
       }
-    };
-    handleMouseUp = (e) => {
-      if (e.target.tagName === 'EMBED') {
-        e.stopPropagation();
-        return false;
-      }
-      const { spaceQueryPop, dispatch } = this.props;
-      if (spaceQueryPop) {
-        const { style } = spaceQueryPop;
-        if (dragEvent.isDrag) {
-          dragEvent.isDrag = false;
-          dispatch({
-            type: 'mapRelation/setSpaceQuery',
-            payload: { load: true, show: true, style, point: mapConstants.view.toMap({ x: style.left, y: style.top }), screenPoint: { x: style.left, y: style.top } },
-          });
-        }
-      }
-
-
-      e.stopPropagation();
+    } else {
       e.preventDefault();
-    };
+    }
+
+  };
+  handleMouseUp = (e) => {
+    if (e.target.tagName === 'EMBED') {
+      e.stopPropagation();
+      return false;
+    }
+    const { spaceQueryPop, dispatch } = this.props;
+    if (spaceQueryPop) {
+      const { style } = spaceQueryPop;
+      if (dragEvent.isDrag) {
+        dragEvent.isDrag = false;
+        dispatch({
+          type: 'mapRelation/setSpaceQuery',
+          payload: { load: true, show: true, style, point: mapConstants.view.toMap({ x: style.left, y: style.top }), screenPoint: { x: style.left, y: style.top } },
+        });
+      }
+    }
+
+
+    e.stopPropagation();
+    e.preventDefault();
+  };
   titleNodeText = () => {
     const { alarmInfoConten, alarmInfo } = this.props;
     return (
@@ -155,8 +161,14 @@ export default class HomePage extends PureComponent {
               deviceMonitor.show ? <DeviceMonitor ztreeObj={ztreeObj} zIndex={modalType === 'deviceMonitor' ? modalZIndex : -1} currentFlows={currentFlows} deviceMonitors={deviceMonitors} mapHeight={mapHeight} dispatch={dispatch} deviceMonitor={deviceMonitor} currentFlow={currentFlow} /> : null
             }
         <div className={styles.mapContent}>
-          <ArcgisMap />
-          <MapRelation />
+          <div
+            onMouseDown={this.handleMouseDown}
+            onMouseMove={this.handleMouseMove}
+            onMouseUp={this.handleMouseUp}
+          >
+            <ArcgisMap />
+            <MapRelation />
+          </div>
           {accessControl.show ? <AccessInfo dispatch={dispatch} accessControl={accessControl} /> : null}
           <TrueMap />
           <Modal

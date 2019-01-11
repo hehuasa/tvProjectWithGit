@@ -127,6 +127,7 @@ export default class AlarmEventInfo extends PureComponent {
           param.isQuery = true;
           param.fuzzy = true;
           param.orgID = orgID;
+          param.monitor = 1;
           param.pageNum = 1;
           param.pageSize = 10;
         }
@@ -431,7 +432,6 @@ export default class AlarmEventInfo extends PureComponent {
   render() {
     const { form, alarmInfoConten, isEvent, emergency } = this.props;
     const { alarmInfo, apparatusList } = this.props.alarmDeal;
-    // const { alarmInfoConten.alarmExtendAlarmInfoVO, alarmInfoConten.monitorResourceInfoVO } = alarmInfoConten;
     form.getFieldDecorator('eventName', {
       initialValue: alarmInfo.eventName,
     });
@@ -541,15 +541,14 @@ export default class AlarmEventInfo extends PureComponent {
             <FormItem
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
-              label="装置区域"
+              label="事发区域"
             >
               {form.getFieldDecorator('alarmAreaID')(
                 <Select
-                  placeholder="请选择装置区域"
+                  placeholder="请选择事发区域"
                   // onChange={this.handleChange}
                   optionFilterProp="title"
                   showSearch
-                  disabled
                   style={{ width: '100%' }}
                 >
                   {this.props.alarmDeal.areaList.map(item => (

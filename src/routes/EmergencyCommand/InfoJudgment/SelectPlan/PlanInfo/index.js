@@ -42,7 +42,7 @@ export default class PlanInfo extends PureComponent {
       case '2': // 组织机构
         this.props.dispatch({
           type: 'emergency/getOrgAnnex',
-          payload: { planInfoID: this.props.planInfoID, uploadType: 1 },
+          payload: { planInfoID: this.props.planInfoID },
         });
         break;
       case '3':

@@ -266,7 +266,7 @@ export default class SelectPlan extends PureComponent {
         width: '10%',
         dataIndex: 'weight',
         render: (text, record) => {
-          return !record.featureNames ? <span style={{ color: 'red' }} >{`${text * 100} %`}</span> : null;
+          return !record.featureNames ? <span style={{ color: 'red' }} >{`${(text * 100).toFixed(2)} %`}</span> : null;
         },
       }];
 

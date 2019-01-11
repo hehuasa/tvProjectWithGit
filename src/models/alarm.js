@@ -8,8 +8,8 @@ export default {
 
   state: {
     count: 0,
-    linkMap: 1,
-    linkVideo: 1,
+    linkMap: 0,
+    linkVideo: 0,
     alarmTypeList: [],
     overviewShow: {
       showSafety: false,

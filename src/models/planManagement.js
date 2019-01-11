@@ -6,11 +6,11 @@ import {
   addPlanCommand, updatePlanCommand, deletePlanCommand, findPlanCommand, planCommandPage,
   planLevel, getPlanCommand, planExecutePosition, getFlowList, getPlanResource, findPlanResource,
   addPlanResource, updatePlanResource, addPlanInfo, updatePlanInfo, getPublisher, selectPlanCode,
-  deleteResourceInfo, materialDelete, materialAdd, materialUpdate, materialGet, materialPage,
+  getOrgImages, materialDelete, materialAdd, materialUpdate, materialGet, materialPage,
   emgcReportPage, exportReport, getCommandStatusList, ifFromPlan, annexPage, annexDelete,
   getPlanAnnexPage, deletePlanAnnex, getDealCard, deletePlanManagementInfo, changePlanStatu,
   deletePlanResourceInfo,
-  judgeMaterialCode, getFunctionMenus, checkFeature,
+  judgeMaterialCode, getFunctionMenus, checkFeature, deleteOrgAnnex,
 } from '../services/api';
 import { commonData } from '../../mock/commonData';
 import { checkCode } from '../utils/utils';
@@ -429,7 +429,7 @@ export default {
     },
     //  获取组织结构信息
     *getOrgAnnex({ payload }, { call, put }) {
-      const response = yield call(getDealCard, payload);
+      const response = yield call(getOrgImages, payload);
       yield put({
         type: 'saveOrgAnnex',
         payload: response.data,
@@ -483,6 +483,10 @@ export default {
         type: 'saveResult',
         payload: res,
       });
+    },
+    * deleteOrgAnnex({ payload }, { call }) {
+      const res = yield call(deleteOrgAnnex, payload);
+      checkCode(res);
     },
   },
 

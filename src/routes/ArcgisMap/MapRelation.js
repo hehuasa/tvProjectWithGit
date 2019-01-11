@@ -29,6 +29,9 @@ import Legend from './Legend/Legend';
 
 const current = {};
 
+const dragEvent = {
+  isDrag: false,
+};
 const mapStateToProps = ({ map, mapRelation, homepage, alarm, resourceTree, constantlyData, loading, global, emergency }) => {
   const { infoWindow, scale, popupScale, baseLayer, trueMapShow, locateTrueMap, mapPoint, screenBeforePoint, searchDeviceArray, screenPoint,
     constantlyValue, doorConstantlyValue, doorAreaConstantlyValue, gasConstantlyValue, envConstantlyValue, stopPropagation,
@@ -163,7 +166,6 @@ export default class MapRelation extends PureComponent {
       legendIndex: legendIndex === -1 ? 12 : -1,
     });
   };
-
   render() {
     const { stopPropagation, popupShow, markShow, envIconShow, resourceInfo, undoneEventList, alarmIconData, eventIconData, envIconData, mapIconShow, markData, markType, trueMapShow, dispatch, serviceUrl, contextPosition, screenPoint, mapPoint, resourceClusterPopup, constructMonitorClusterPopup, clusterPopups, infoPops, vocsPopup, alarmClusterPopup, accessPops, baseLayer, paPopup, mapHeight } = this.props;
     const { legendIndex } = this.state;
@@ -213,7 +215,8 @@ export default class MapRelation extends PureComponent {
     const mapStyle = { height: mapHeight };
     return (
       serviceUrl.mapApiUrl === '' ? null : (
-        <div className={styles.warpR} style={{ display: trueMapShow ? 'none' : '' }} >
+        <div
+          className={styles.warpR} style={{ display: trueMapShow ? 'none' : '' }} >
           {!markShow.show ? <Search stopPropagation={stopPropagation} /> : null }
           <LeftBoard />
           {/* <div style={{ overflow: 'hidden' }}> */}
@@ -240,7 +243,7 @@ export default class MapRelation extends PureComponent {
             { popupShow ? getCurrentPopups() : null }
             { popupShow ? paPopupComponents() : null }
             {/*<MeasurePop />*/}
-            { popupShow && envIconShow ? <EnvIcon envIconData={envIconData} infoPops={infoPops} resourceInfo={resourceInfo} dispatch={dispatch} /> :null }
+            { popupShow && envIconShow ? <EnvIcon envIconData={envIconData} infoPops={infoPops} resourceInfo={resourceInfo} dispatch={dispatch} /> : null }
             <SpaceQuery />
             { popupShow && mapIconShow ? <MapIcon mapIconData={{ alarmIconData, eventIconData }} resourceInfo={resourceInfo} infoPops={infoPops} dispatch={dispatch} undoneEventList={undoneEventList} /> : null }
           </div>

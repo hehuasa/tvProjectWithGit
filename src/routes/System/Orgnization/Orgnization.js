@@ -12,21 +12,6 @@ const { Option } = Select;
 const RadioGroup = Radio.Group;
 const { TextArea } = Input;
 
-class TreeTitle extends PureComponent {
-  render() {
-    const { title, addOrg, deleteOrg } = this.props;
-    return (
-      <div>
-        <span>{title}</span>
-        <Icon type="plus-circle-o" onClick={addOrg} style={{ marginLeft: 20 }} />
-        <Popconfirm title="确定删除？" onConfirm={deleteOrg}>
-          <Icon type="delete" style={{ marginLeft: 10 }} />
-        </Popconfirm>
-      </div>
-    );
-  }
-}
-
 @connect(({ organization, typeCode, resourceTree }) => ({
   organization,
   entityPostion: organization.entityPostion,
@@ -51,8 +36,6 @@ export default class Orgnization extends PureComponent {
     selectedRowKeys: [], // 应急岗位配置的实体岗位
     postionID: null, // 配置岗位ID
     emgcPosition: {}, // 应急岗位的配置信息
-    fileList: [],
-    uploading: false,
   };
   componentDidMount() {
     const { dispatch } = this.props;
@@ -143,7 +126,6 @@ export default class Orgnization extends PureComponent {
         this.setState({
           isEmergency: true,
           emgcPosition,
-          fileList: obj.archiveInfos,
         });
         this.getMock(targetKeys, true);
         form.setFieldsValue({
@@ -168,14 +150,14 @@ export default class Orgnization extends PureComponent {
       this.setState({ isAdd: false });
     }
   };
-  handleSubmit= (fileList) => {
+  handleSubmit= () => {
     const { form } = this.props;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       if (this.state.isAdd) {
-        this.doAdd(fieldsValue, fileList);
+        this.doAdd(fieldsValue);
       } else {
-        this.doUpdate(fieldsValue, fileList);
+        this.doUpdate(fieldsValue);
       }
     });
   };
@@ -200,6 +182,7 @@ export default class Orgnization extends PureComponent {
   // 新增根节点
   addNewRootNode= () => {
     const { form } = this.props;
+    this.getMock([]);
     this.setState({ isAdd: true, targetKeys: [] });
     form.resetFields();
   };
@@ -217,8 +200,6 @@ export default class Orgnization extends PureComponent {
     dispatch({
       type: 'organization/add',
       payload: { ...values, emgcPostionIDs },
-    }).then(() => {
-      this.handleUpload();
     });
     form.resetFields();
   };
@@ -236,8 +217,6 @@ export default class Orgnization extends PureComponent {
     dispatch({
       type: 'organization/update',
       payload: { ...values, emgcPostionIDs },
-    }).then(() => {
-      this.handleUpload();
     });
   };
   handleFormReset = () => {
@@ -340,41 +319,8 @@ export default class Orgnization extends PureComponent {
     const arr = functionMenus.filter(item => item.functionName === functionName);
     return arr.length > 0;
   };
-  handleChange = (info) => {
-    let { fileList } = info;
-    fileList = fileList.map((file) => {
-      if (file.response) {
-        file.url = file.response.url;
-      }
-      return file;
-    });
-    fileList = fileList.filter((file) => {
-      if (file.response) {
-        return file.response.status === 'success';
-      }
-      return false;
-    });
-    this.setState({ fileList });
-  }
   render() {
-    const { searchValue, expandedKeys, autoExpandParent, isAdd, uploading, fileList } = this.state;
-    const props = {
-      action: '/emgc/system/baseOrgaArchiveInfo/addOrgArchive',
-      onRemove: (file) => {
-        this.setState((state) => {
-          const index = state.fileList.indexOf(file);
-          const newFileList = state.fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            fileList: newFileList,
-          };
-        });
-      },
-      handleChange: this.handleChange,
-      fileList,
-      listType: 'picture ',
-      accept: '.png, .jpg, .jpeg',
-    };
+    const { searchValue, expandedKeys, autoExpandParent, isAdd } = this.state;
     const { emgcOrgTree } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { contextMenu, selectedNodes, emgcLevelList } = this.props.organization;
@@ -550,19 +496,6 @@ export default class Orgnization extends PureComponent {
                         )}
                       </FormItem>
                     </Col>
-                    <Col md={16} sm={12}>
-                      <FormItem
-                        labelCol={{ span: 4 }}
-                        wrapperCol={{ span: 20 }}
-                        label="组织机构图"
-                      >
-                        <Upload {...props}>
-                          <Button>
-                            <Icon type="upload" /> 选择组织机构图
-                          </Button>
-                        </Upload>
-                      </FormItem>
-                    </Col>
                   </Row>
                   <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
                     <Col md={20} offset={2}>
@@ -587,7 +520,7 @@ export default class Orgnization extends PureComponent {
                     <Col sm={6} offset={9}>
                       <span className={styles.submitButtons}>
                         {(this.judgeFunction('新增权限') && isAdd) || (this.judgeFunction('修改权限') && !isAdd) ?
-                          <Button type="primary" htmlType="submit" onClick={() => this.handleSubmit(fileList)}>保存</Button> : null
+                          <Button type="primary" htmlType="submit" onClick={() => this.handleSubmit()}>保存</Button> : null
                           }
                         <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
                       </span>
