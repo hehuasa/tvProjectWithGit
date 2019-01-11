@@ -727,7 +727,7 @@ class AlarmInfo extends PureComponent {
         <div className={styles.header}>
           <div className={styles.name} title={`${resourceInfo.resourceName}-${resourceInfo.processNumber}`}>{resourceInfo.resourceName}-{resourceInfo.processNumber}</div>
           <div className={styles.close}>
-            <Button type="primary" size="small" onClick={this.handleClick}><img src={close} alt="关闭" /></Button>
+            <div className={styles.button} onClick={this.handleClick}><img src={close} alt="关闭" /></div>
           </div>
         </div>
         <Scrollbars
@@ -763,7 +763,7 @@ class AlarmInfo extends PureComponent {
     {alarmBoardData.length > 0 ? (
       <Panel header={<div className={styles.panelHeader}>报警信息</div>} key="17">
         <RadioGroup onChange={this.handleAlarmChange} value={alarmSelectIndex} className={styles.alarmList}>
-          <Collapse bordered={false} style={{ width: 294, fontSize: 12 }} defaultActiveKey={String(alarmBoardData.length - 1)}>
+          <Collapse bordered={false} style={{ fontSize: 12 }} defaultActiveKey={String(alarmBoardData.length - 1)}>
             {alarmBoardData.map((item, index) => {
                             const newIndex = String(JSON.parse(JSON.stringify(index)));
                             const level = parseInt(item.alarmType.dangerCoefficient, 0);

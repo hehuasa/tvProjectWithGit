@@ -194,26 +194,26 @@ export const getBrowserScroll = () => {
 export const autoContentHeight = (domType, changingType) => {
   const header = 90; const points = 64; const evrVideo = 0; const footer = 0;
   const map = 275; const space = 8; const tabs = 50;
-
   let height;
   let chengingHeight;
   // 获取浏览器窗口高度
   let { winHeight } = getBrowserStyle();
+  console.log('winHeightwinHeight', winHeight);
   switch (domType) {
     case 'page':
-      winHeight -= header;
+      winHeight = winHeight - header - points;
       break;
     case 'content':
-      winHeight = winHeight - header - space - footer;
+      winHeight = winHeight - header - points - footer;
       break;
     case 'map':
-      winHeight = winHeight - header - space - footer - tabs;
+      winHeight = winHeight - header - space - points - footer - tabs;
       break;
     case 'rightSide':
-      winHeight = winHeight - header - footer - space - tabs;
+      winHeight = winHeight - header - footer - points - space - tabs;
       break;
     case 'sideZoom':
-      winHeight = winHeight - footer - tabs - header - space;
+      winHeight = winHeight - footer - tabs - points - header - space;
       break;
     default: break;
   }

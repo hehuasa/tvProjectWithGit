@@ -40,10 +40,7 @@ class InfoPops extends PureComponent {
     return (
       <div className={styles.simpleInfo} style={style}>
         <span>{popValue.name}</span>
-        <Icon
-          type="close"
-          onClick={this.handleClick}
-        />
+        <div className={styles.close} onClick={this.handleClick}>x</div>
         <div
           className={styles.bottom}
           style={{ left: '50%',

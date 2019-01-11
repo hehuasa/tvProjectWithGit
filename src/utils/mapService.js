@@ -2943,17 +2943,12 @@ export const addMapAlarms = ({ alarmIconData, iconObj, dispatch, scale, alarms, 
       // 需要新增的图标
       const newAlarms = []; // 去重
       const newHistoryList = [];
-      console.log('alarms', alarms);
-      console.log('historyList', historyList);
       for (const item of alarms) {
-        if (item.resourceGisCode === '783') {
-          debugger;
-        }
+
         if (!newAlarms.find(value => value.resourceGisCode === item.resourceGisCode)) {
           newAlarms.push(item);
         }
       }
-      console.log('newAlarms', newAlarms);
       for (const item of historyList) {
         if (!newHistoryList.find(value => value.resourceGisCode === item.resourceGisCode)) {
           newHistoryList.push(item);

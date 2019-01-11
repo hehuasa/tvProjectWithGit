@@ -171,7 +171,7 @@ class BasicLayout extends React.PureComponent {
       const contents = document.getElementsByClassName('ant-layout-sider-children');
       if (contents) {
         for (const content of contents) {
-          content.style.height = `${winHeight - 50 - 35 - 30 - 8}px`;
+          content.style.height = `${winHeight - 90 - 64 - 50 - 8}px`;
           // content.style.height =  '100%';
         }
         clearInterval(a);
@@ -1083,7 +1083,7 @@ class BasicLayout extends React.PureComponent {
                   </Content>
                   {/*<Footer style={{ padding: 0, position: 'relative', zIndex: 101 }}><HomePageVideo /></Footer>*/}
                 </Layout>
-                <Sider className={styles['side-right']} width={520} collapsible collapsed={rightCollapsed} collapsedWidth={0}><TriggerRight domWarp={this.content} accessControlShow={accessControlShow} /><PanelBoard /></Sider>
+                <Sider className={styles['side-right']} width={520} trigger={null} collapsible collapsed={rightCollapsed} collapsedWidth={0}><TriggerRight domWarp={this.content} accessControlShow={accessControlShow} /><PanelBoard /></Sider>
               </Layout>
             </div>
 )}

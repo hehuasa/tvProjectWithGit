@@ -1,5 +1,5 @@
 .idea
-.dist
+dist
 .svn
 .history
 node_modules/
