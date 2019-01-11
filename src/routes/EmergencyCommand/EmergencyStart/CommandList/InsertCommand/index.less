@@ -1,31 +1,55 @@
 @import "../../../../../../node_modules/antd/lib/style/themes/default.less";
-.footer{
-  margin-bottom: 100px;
-  margin-top: 24px;
-  text-align: center;
-  :global{
-    .ant-btn-primary,.ant-btn{
-      margin: 0 8px;
+@import "../../../../../index.less";
+.footer {
+    // margin-bottom: 100px;
+    // margin-top: 24px;
+    text-align: center;
+    :global {
+        .ant-btn-primary,
+        .ant-btn {
+            margin: 0 8px;
+        }
     }
-  }
 }
-.search{
-  margin-bottom: 16px;
-}
-.insert{
-  :global{
-    .ant-form-item{
-      margin-bottom: 8px;
-    }
-  }
-}
-.submitButtons{
-  line-height: 40px;
-  margin-left: 8px;
-  & :global{
-    .ant-btn{
-      margin-left: 8px;
-    }
+
+.search {
+    padding: @public-padding;
+    .ant-form-item {
+      margin-bottom: 0;
   }
 }
 
+.insert {
+    padding: @public-range;
+    :global {
+        .ant-form-item {
+            margin-bottom: 8px;
+        }
+        .ant-card-head {
+            height: @tabs-height;
+        }
+        .ant-card-head-title {
+            padding: 0;
+            line-height: @tabs-height;
+        }
+    }
+    .insertCon {
+        margin-bottom: 100px;
+        .insertCard {
+            padding: @public-padding;
+        }
+    }
+    .commandtable{
+      padding: 0 @public-padding-left; 
+    }
+}
+
+.submitButtons {
+    line-height: 40px;
+    margin-left: 8px;
+    & :global {
+        .ant-btn {
+            margin-left: 8px;
+        }
+    }
+}

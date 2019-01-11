@@ -26,7 +26,7 @@ const SearchArea = Form.create()((props) => {
             >
               {getFieldDecorator('commandContent')(
                 <Input placeholder="请输入指令内容" />
-            )}
+              )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -41,7 +41,7 @@ const SearchArea = Form.create()((props) => {
                   <Option value={1}>指令</Option>
                   <Option value={2}>通知</Option>
                 </Select>
-            )}
+              )}
             </FormItem>
           </Col>
           <Col md={8}>
@@ -120,7 +120,8 @@ export default class InsertCommand extends PureComponent {
           ...fieldsValue,
           eventID,
           userList: JSON.stringify(userList),
-          userJson: JSON.stringify(this.state.checkedUser) },
+          userJson: JSON.stringify(this.state.checkedUser)
+        },
       }).then(() => {
         this.resetAcceptUser();
         dispatch({
@@ -286,7 +287,7 @@ export default class InsertCommand extends PureComponent {
       {
         title: '流程节点',
         dataIndex: 'nodeName',
-        width: win8,
+        width: win10,
         key: 'nodeName',
         render: (text, record) => {
           return record.planFlowNode ? (record.planFlowNode.nodeName || '') : '';
@@ -351,140 +352,144 @@ export default class InsertCommand extends PureComponent {
         <Card bordered={false}>
           <Row>
             <Col span={8}>
-              <Card title="指令插入">
-                <Form onSubmit={this.handleSearch}>
-                  <Row type="flex" justify="center">
-                    <div>{getFieldDecorator('nodeType', { initialValue: this.props.viewNodeType })(
-                      <Input type="hidden" />
-                    )}
-                    </div>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="指令类型"
-                      >
-                        {getFieldDecorator('commandType', {
-                      })(
-                        <Select placeholder="请选择" style={{ width: '100%' }}>
-                          <Option value="">请选择</Option>
-                          <Option value={1}>指令</Option>
-                          <Option value={2}>通知</Option>
-                        </Select>
+              <div className={styles.insertCon}>
+                <Card title="指令插入">
+                  <Form onSubmit={this.handleSearch}>
+                    <Row type="flex" justify="center" className={styles.insertCard}>
+                      <div>{getFieldDecorator('nodeType', { initialValue: this.props.viewNodeType })(
+                        <Input type="hidden" />
                       )}
-                      </FormItem>
-                    </Col>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="指令分类"
-                      >
-                        {getFieldDecorator('commandModel', {
-                      })(
-                        <Select placeholder="请选择" style={{ width: '100%' }}>
-                          <Option value="">请选择</Option>
-                          {allCommandModelList.map(type =>
-                            <Option key={type.commandModelID} value={type.modelCode}>{type.modelName}</Option>
-                          )}
-                        </Select>
-                      )}
-                      </FormItem>
-                    </Col>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="指令内容"
-                      >
-                        {getFieldDecorator('commandContent', {
-                          rules: [
-                            { required: true, message: '指令内容必填' },
-                          ],
-                      })(
-                        <Input.TextArea row={4} placeholder="请输入指令内容" />
-                      )}
-                      </FormItem>
-                    </Col>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="执行岗位"
-                      >
-                        {getFieldDecorator('executePostion', {
-                      })(
-                        <TreeSelect
-                          showSearch
-                          style={{ width: '100%' }}
-                          // value={this.state.value}
-                          dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                          placeholder="请选择岗位"
-                          allowClear
-                          treeCheckable
-                          onChange={this.onChange}
-                          onSelect={this.onSelect}
+                      </div>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="指令类型"
                         >
-                          { this.props.commandReceiver.map(item => (
-                            <TreeNode
-                              value={item.postionName}
-                              title={item.postionName}
-                              key={item.orgPostionID}
-                            />
-                            ))
-                            }
-                        </TreeSelect>
-                      )}
-                      </FormItem>
-                    </Col>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="指令接收人"
-                      >
-                        <AcceptUser
-                          visible={this.state.visible}
-                          hideModal={this.hideModal}
-                          childRef={this.childRef}
-                        />
-                        <Button type="primary" size="small" onClick={this.showModal}>选择接收人</Button>
-                      </FormItem>
-                    </Col>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="执行时长"
-                      >
-                        {getFieldDecorator('executeTime', {
-                          rules: [
-                            { pattern: /^[0-9]*$/, message: '请输入有效数字' },
-                          ],
-                        })(
-                          <Input placeholder="请输入执行时长(分钟)" />
-                      )}
-                      </FormItem>
-                    </Col>
-                    <Col sm={24}>
-                      <FormItem
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
-                        label="注意事项"
-                      >
-                        {getFieldDecorator('attention')(
-                          <Input.TextArea placeholder="请输入注意事项" rows={4} />
-                      )}
-                      </FormItem>
-                    </Col>
-                  </Row>
-                </Form>
-                <div className={styles.footer}>
-                  <Button onClick={this.resetCommand}>清空</Button>
-                  <Button onClick={this.backToList}>返回</Button>
-                  <Button type="primary" onClick={this.add}>确定</Button>
-                </div>
-              </Card>
+                          {getFieldDecorator('commandType', {
+                          })(
+                            <Select placeholder="请选择" style={{ width: '100%' }}>
+                              <Option value="">请选择</Option>
+                              <Option value={1}>指令</Option>
+                              <Option value={2}>通知</Option>
+                            </Select>
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="指令分类"
+                        >
+                          {getFieldDecorator('commandModel', {
+                          })(
+                            <Select placeholder="请选择" style={{ width: '100%' }}>
+                              <Option value="">请选择</Option>
+                              {allCommandModelList.map(type =>
+                                <Option key={type.commandModelID} value={type.modelCode}>{type.modelName}</Option>
+                              )}
+                            </Select>
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="指令内容"
+                        >
+                          {getFieldDecorator('commandContent', {
+                            rules: [
+                              { required: true, message: '指令内容必填' },
+                            ],
+                          })(
+                            <Input.TextArea row={4} placeholder="请输入指令内容" />
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="执行岗位"
+                        >
+                          {getFieldDecorator('executePostion', {
+                          })(
+                            <TreeSelect
+                              showSearch
+                              style={{ width: '100%' }}
+                              // value={this.state.value}
+                              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                              placeholder="请选择岗位"
+                              allowClear
+                              treeCheckable
+                              onChange={this.onChange}
+                              onSelect={this.onSelect}
+                            >
+                              {this.props.commandReceiver.map(item => (
+                                <TreeNode
+                                  value={item.postionName}
+                                  title={item.postionName}
+                                  key={item.orgPostionID}
+                                />
+                              ))
+                              }
+                            </TreeSelect>
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="指令接收人"
+                        >
+                          <AcceptUser
+                            visible={this.state.visible}
+                            hideModal={this.hideModal}
+                            childRef={this.childRef}
+                          />
+                          <Button type="primary" size="small" onClick={this.showModal}>选择接收人</Button>
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="执行时长"
+                        >
+                          {getFieldDecorator('executeTime', {
+                            rules: [
+                              { pattern: /^[0-9]*$/, message: '请输入有效数字' },
+                            ],
+                          })(
+                            <Input placeholder="请输入执行时长(分钟)" />
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 16 }}
+                          label="注意事项"
+                        >
+                          {getFieldDecorator('attention')(
+                            <Input.TextArea placeholder="请输入注意事项" rows={4} />
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col sm={24}>
+                        <div className={styles.footer}>
+                          <Button onClick={this.resetCommand}>清空</Button>
+                          <Button onClick={this.backToList}>返回</Button>
+                          <Button type="primary" onClick={this.add}>确定</Button>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Card>
+              </div>
             </Col>
             <Col span={15} offset={1}>
               <Card title="已有指令选择">
@@ -492,19 +497,21 @@ export default class InsertCommand extends PureComponent {
                   handleSearch={this.handleSearch}
                   handleFormReset={this.handleFormReset}
                 />
+                <div className={styles.commandtable}>
                 <Table
                   columns={commandCols}
                   rowSelection={rowSelection}
                   pagination={{
-                  onChange: this.pageChange,
-                  current: this.state.pageNum,
-                  pageSize: this.state.pageSize,
-                  total: this.state.total,
-                }}
+                    onChange: this.pageChange,
+                    current: this.state.pageNum,
+                    pageSize: this.state.pageSize,
+                    total: this.state.total,
+                  }}
                   dataSource={this.props.existCommandPage.result}
                   rowKey={record => record.commandID}
                   scroll={{ x: 1200 + win3 * commandCols.length }}
                 />
+                </div>
               </Card>
             </Col>
           </Row>
