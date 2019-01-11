@@ -79,7 +79,7 @@ export default class InfoJudgment extends PureComponent {
           });
           this.props.dispatch({
             type: 'emergency/getImplOrgAnnex',
-            payload: { eventID, uploadType: 1, eventExecPlanID: value },
+            payload: { eventExecPlanID: value },
           });
           this.props.dispatch({
             type: 'emergency/getImplEmgcProcess',

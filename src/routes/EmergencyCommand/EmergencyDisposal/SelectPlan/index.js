@@ -190,14 +190,20 @@ export default class SelectPlan extends PureComponent {
         width: '18%',
         dataIndex: 'drectFeature',
         render: (text) => {
-          return text === 1 ? <span style={{ color: 'red' }} >已匹配</span> : null;
+          let str = '';
+          if (text && text.length > 0) {
+            text.forEach((name, index) => {
+              str += `${name}, `;
+            });
+          }
+          return str;
         },
       }, {
         title: '匹配度',
         width: '12%',
         dataIndex: 'weight',
-        render: (text) => {
-          return text ? <span style={{ color: 'red' }} >`${text * 100} %`</span> : null;
+        render: (text, record) => {
+          return !record.featureNames ? <span style={{ color: 'red' }} >{`${(text * 100).toFixed(2)} %`}</span> : null;
         },
       }, {
         title: '操作',

@@ -15,7 +15,7 @@ const columnsTitle = () => {
         return text ? text.orgnizationName : '';
       },
     }, {
-      title: '装置区域',
+      title: '事发区域',
       dataIndex: 'area',
       width: 200,
       render: (text) => {
@@ -307,12 +307,12 @@ export default class CommonQuery extends PureComponent {
                       <FormItem
                         labelCol={{ span: 7 }}
                         wrapperCol={{ span: 15 }}
-                        label="装置区域"
+                        label="事发区域"
                       >
                         {form.getFieldDecorator('areaID', {
                         })(
                           <Select
-                            placeholder="请选择装置区域"
+                            placeholder="请选择事发区域"
                             onChange={this.handleChange}
                             optionFilterProp="title"
                             disabled={this.state.areaDisabled}

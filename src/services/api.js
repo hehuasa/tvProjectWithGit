@@ -1888,6 +1888,13 @@ export async function getDealCard(params) {
     body: params,
   });
 }
+// 请求预案 组织结构
+export async function getOrgImages(params) {
+  return request(`${path}/system/baseOrgaArchiveInfo/getByPlanID`, {
+    method: 'POST',
+    body: params,
+  });
+}
 // 请求方案 组织结构 处置卡的存储路径 Integer eventID, Integer uploadType
 export async function getImplPicture(params) {
   return request(`${path}/emgc/emgcEventExecPlanArchive/selectPicture`, {
@@ -2457,6 +2464,20 @@ export async function getServerTime(params) {
 // 校验特征是否存在
 export async function checkFeature(params) {
   return request(`${path}/plan/planPanFeature/checkFeature`, {
+    method: 'POST',
+    body: params,
+  });
+}
+// 删除预案的应急组织
+export async function deleteOrgAnnex(params) {
+  return request(`${path}/system/baseOrgaArchiveInfo/delete`, {
+    method: 'POST',
+    body: params,
+  });
+}
+// 删除预案的应急组织
+export async function getImplOrgAnnex(params) {
+  return request(`${path}/system/baseOrgaArchiveInfo/getByExecPlanID`, {
     method: 'POST',
     body: params,
   });

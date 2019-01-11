@@ -215,6 +215,7 @@ export default class HandAlarmDeal extends PureComponent {
           param.isQuery = true;
           param.fuzzy = true;
           param.orgID = orgID;
+          param.monitor = 1;
           param.pageNum = 1;
           param.pageSize = 10;
         }

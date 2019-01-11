@@ -203,6 +203,11 @@ export default class AddFeature extends PureComponent {
         width: win10,
         key: 'executeTime',
       }, {
+        title: '排列序号',
+        dataIndex: 'executeIndex',
+        width: 100,
+        key: 'executeIndex',
+      }, {
         title: '注意事项',
         dataIndex: 'attention',
         // width: win20,
@@ -402,6 +407,22 @@ export default class AddFeature extends PureComponent {
                           rules: [],
                         })(
                           <TextArea placeholder="请输入注意事项" rows={4} />
+                        )}
+                        </FormItem>
+                      </Col>
+                      <Col md={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 15 }}
+                          label="排列序号"
+                        >
+                          {form.getFieldDecorator('executeIndex', {
+                          initialValue: isAdd ? '' : commandInfo.executeIndex,
+                          rule: [{
+                            type: 'integer', message: '请输入正确的数字', transform(value) { if (value) { return Number(value); } },
+                          }],
+                        })(
+                          <Input placeholder="请输入排列序号" />
                         )}
                         </FormItem>
                       </Col>

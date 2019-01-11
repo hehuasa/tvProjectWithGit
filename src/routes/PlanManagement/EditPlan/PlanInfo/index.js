@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Popconfirm, Checkbox, Icon, Form, Input, Modal } from 'antd';
+import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Popconfirm, Checkbox, Icon, Form, Input, Modal, Upload } from 'antd';
 import { connect } from 'dva';
 import Zmage from 'react-zmage';
 import moment from 'moment';
@@ -76,7 +76,7 @@ export default class PlanInfo extends PureComponent {
           // 获取组织结构
           this.props.dispatch({
             type: 'planManagement/getOrgAnnex',
-            payload: { planInfoID, uploadType: 1 },
+            payload: { planInfoID },
           });
           break;
         case '3':
@@ -591,33 +591,19 @@ export default class PlanInfo extends PureComponent {
   // 清空实时方案
   clearPlan = () => {
     const { dispatch, eventID } = this.props;
-    // 清空实施方案
-    // dispatch({
-    //   type: 'emergency/clearPlan',
-    //   payload: { eventID },
-    // }).then(() => {
-    //   // 根据eventID获取预案基本信息
-    //   this.props.dispatch({
-    //     type: 'emergency/getPlanBaseInfo',
-    //     payload: { eventID },
-    //   });
-    //   // 通过eventID获取预案指令
-    //   this.props.dispatch({
-    //     type: 'emergency/getEmgcCommandByEventID',
-    //     payload: { eventID },
-    //   });
-    //   // 通过eventID获取应急资源
-    //   this.props.dispatch({
-    //     type: 'emergency/getEmgcResourceByEventID',
-    //     payload: { eventID },
-    //   });
-    //   // 通过eventID获取事件特征
-    //   this.props.dispatch({
-    //     type: 'emergency/getEmgcFeatureByEventID',
-    //     payload: { eventID },
-    //   });
-    // });
   }
+  deleteOrgAnnex = (record) => {
+    const { planBasicInfo } = this.props;
+    this.props.dispatch({
+      type: 'planManagement/deleteOrgAnnex',
+      payload: { id: record.orgaArchiveInfoID },
+    }).then(() => {
+      this.props.dispatch({
+        type: 'planManagement/getOrgAnnex',
+        payload: { planInfoID: planBasicInfo.planInfoID },
+      });
+    });
+  };
   // 删除附件
   delete = (record, uploadType) => {
     // uploadType:1 为组织、2为附件、3为处置卡
@@ -627,12 +613,6 @@ export default class PlanInfo extends PureComponent {
     }).then(() => {
       const { pageNum, pageSize } = this.props.annexPage;
       switch (uploadType) {
-        case 1:
-          this.props.dispatch({
-            type: 'planManagement/getOrgAnnex',
-            payload: { planInfoID: record.planInfoID, uploadType: 1 },
-          });
-          break;
         case 2:
           this.annexPageChange(pageNum, pageSize);
           break;
@@ -681,6 +661,15 @@ export default class PlanInfo extends PureComponent {
     const { form } = this.props;
     form.resetFields();
     this.searchResource(1, 10);
+  }
+  orgFileChange = (info) => {
+    if (info.file.status === 'done') {
+      const { planInfoID } = this.props.planBasicInfo;
+      this.props.dispatch({
+        type: 'planManagement/getOrgAnnex',
+        payload: { planInfoID },
+      });
+    }
   }
   render() {
     const { isEdit, planResource, planCommand,
@@ -848,7 +837,7 @@ export default class PlanInfo extends PureComponent {
       }, {
         title: '执行岗位',
         dataIndex: 'excutePostionList',
-        width: 120,
+        width: 200,
         key: 'excutePostionList',
         render: (text) => {
           let str = '';
@@ -865,13 +854,18 @@ export default class PlanInfo extends PureComponent {
         width: 100,
         key: 'executeTime',
       }, {
+        title: '排列顺序',
+        dataIndex: 'executeIndex',
+        width: 100,
+        key: 'executeIndex',
+      }, {
         title: '注意事项',
         dataIndex: 'attention',
-        width: 200,
         key: 'attention',
       }, {
         title: isEdit ? '操作' : '',
         width: 200,
+        fixed: 'right',
         key: 'action',
         render: (text, record) => (
           isEdit ? (
@@ -1029,6 +1023,13 @@ export default class PlanInfo extends PureComponent {
         </Row>
       </div>
     );
+    const props = {
+      action: `/emgc/system/baseOrgaArchiveInfo/addOrgArchive?orgID=${planBasicInfo.emgcOrgID}`,
+      listType: 'picture ',
+      accept: '.png, .jpg, .jpeg',
+      onChange: this.orgFileChange,
+      showUploadList: false,
+    };
     return (
       <div className={styles.planInfo} >
         <Tabs tabPosition="left" onChange={this.tabChange}>
@@ -1043,7 +1044,16 @@ export default class PlanInfo extends PureComponent {
             </Card>
           </TabPane>
           <TabPane tab="应急组织" key="2" disabled={Object.keys(planBasicInfo).length === 0 || planBasicInfo.statu === 0}>
-            <Card title="组织机构" extra={isEdit ? <Button onClick={this.openOrgAnnexModel}>新增组织机构图</Button> : null} style={{}}>
+            <Card
+              title="组织机构"
+              extra={isEdit ? (
+                <Upload {...props}>
+                  <Button>
+                    <Icon type="upload" /> 上传织机构图
+                  </Button>
+                </Upload>) : null}
+              style={{}}
+            >
               <div className={styles.cardExtra}>
                 <Row gutter={16}>
                   {this.props.orgAnnexList.map((card, index) => {
@@ -1053,7 +1063,7 @@ export default class PlanInfo extends PureComponent {
                           title={card.resArchiveInfo.fileName}
                           style={{ marginBottom: 8 }}
                           extra={
-                            <Popconfirm title="确认删除" onConfirm={() => this.delete(card, 1)} okText="确定" cancelText="取消">
+                            <Popconfirm title="确认删除" onConfirm={() => this.deleteOrgAnnex(card)} okText="确定" cancelText="取消">
                               <a href="#">
                                 <Icon title="删除" type="close" />
                               </a>
@@ -1115,7 +1125,7 @@ export default class PlanInfo extends PureComponent {
                 rowKey="commandID"
                 columns={commandCols}
                 dataSource={planCommand}
-                scroll={{ x: 1200, y: 270 }}
+                scroll={{ x: 1100, y: 270 }}
               />
             </Card>
           </TabPane>

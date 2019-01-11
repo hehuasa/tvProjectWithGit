@@ -41,6 +41,7 @@ import {
   alarmClustering,
   delAlarmAnimation,
   searchByAttr,
+  hoveringAlarm,
 } from '../utils/mapService';
 import { infoPopsModal } from '../services/constantlyModal';
 
@@ -481,7 +482,7 @@ class BasicLayout extends React.PureComponent {
             window.socketAlarms.del = [];
             for (const [index, alarm] of window.socketAlarms.add.entries()) {
               // 播放该设备关联的视频
-              if (linkVideo === 0) {
+              if (linkVideo) {
                 dispatch({
                   type: 'resourceTree/getBeMonitorsByResourceID',
                   payload: { resourceID: alarm.resourceID, ctrlResourceType: '101.102.101' },
@@ -511,31 +512,23 @@ class BasicLayout extends React.PureComponent {
                     payload: { searchText: alarm.resourceGisCode, searchFields: ['ObjCode'] },
                   })
                     .then(() => {
-                      mapConstants.view.goTo({
-                        center: this.props.map.searchDeviceArray[0].feature.geometry,
-                        scale: popupScale - 100,
-                      })
-                        .then(() => {
-                          // 请求报警对应的资源(如监控对象)
-                          dispatch({
-                            type: 'resourceTree/selectByGISCode',
-                            payload: { gISCode: alarm.resourceGisCode },
+                      if (!this.props.map.stopPropagation) {
+                        mapConstants.view.goTo({
+                          center: this.props.map.searchDeviceArray[0].feature.geometry,
+                          scale: popupScale - 100,
+                        })
+                          .then(() => {
+                            // 请求报警对应的资源(如监控对象)
+                            dispatch({
+                              type: 'resourceTree/selectByGISCode',
+                              payload: { gISCode: alarm.resourceGisCode },
+                            });
+                            const iconIndex = this.props.alarmIconData.findIndex(value => value.alarm.resourceGisCode === alarm.resourceGisCode);
+                            hoveringAlarm({ geometry: this.props.map.searchDeviceArray[0].feature.geometry, alarm, infoPops, dispatch, iconData: this.props.alarmIconData, iconDataType: 'alarm', iconIndex });
+                            window.socketAlarms.add = [];
                           });
-                          const iconIndex = this.props.alarmIconData.findIndex(value => value.alarm.resourceGisCode === alarm.resourceGisCode);
-                          console.log('this.props.alarmIconData', this.props.alarmIconData);
-                          console.log('alarm', alarm);
-                          onsole.log('iconIndex', iconIndex);
-                          hoveringAlarm({ geometry: this.props.map.searchDeviceArray[0].feature.geometry, alarm, infoPops, dispatch, iconData: this.props.alarmIconData, iconDataType: 'alarm', iconIndex })
-                          // alarmAnimation(
-                          //   {
-                          //     alarm: alarm,
-                          //     alarmIconData: this.props.alarmIconData,
-                          //     geometry: this.props.map.searchDeviceArray[0].feature.geometry,
-                          //     dispatch,
-                          //   });
-                          window.socketAlarms.add = [];
-                        });
-                    })
+                      }
+                    });
                 } else {
                   window.socketAlarms.add = [];
                 }

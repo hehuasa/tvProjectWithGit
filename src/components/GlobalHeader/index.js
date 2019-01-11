@@ -555,18 +555,18 @@ export default class GlobalHeader extends PureComponent {
         <div className={styles.controlIcon}>
           <div>报警定位</div>
           <div>
-            <Select defaultValue="1" className={styles.selectStyle} getPopupContainer={triggerNode => triggerNode.parentNode} onChange={this.handleMapLinkChange} >
-              <Option value="0" title="自动定位">自动定位</Option>
-              <Option value="1" title="不定位">不定位</Option>
+            <Select defaultValue="0" className={styles.selectStyle} getPopupContainer={triggerNode => triggerNode.parentNode} onChange={this.handleMapLinkChange} >
+              <Option value="1" title="自动定位">自动定位</Option>
+              <Option value="0" title="不定位">不定位</Option>
             </Select>
           </div>
         </div>
         <div className={styles.controlIcon}>
           <div>视频联动</div>
           <div>
-            <Select defaultValue="1" className={styles.selectStyle} getPopupContainer={triggerNode => triggerNode.parentNode} onChange={this.handleVideoLinkChange} >
-              <Option value="0" title="执行联动">执行联动</Option>
-              <Option value="1" title="不执行">不执行</Option>
+            <Select defaultValue="0" className={styles.selectStyle} getPopupContainer={triggerNode => triggerNode.parentNode} onChange={this.handleVideoLinkChange} >
+              <Option value="1" title="执行联动">执行联动</Option>
+              <Option value="0" title="不执行">不执行</Option>
             </Select>
           </div>
         </div>

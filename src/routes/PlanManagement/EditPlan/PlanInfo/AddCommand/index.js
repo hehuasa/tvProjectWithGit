@@ -136,6 +136,22 @@ export default class AddFeature extends PureComponent {
             <FormItem
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 15 }}
+              label="排列序号"
+            >
+              {form.getFieldDecorator('executeIndex', {
+                initialValue: isAdd ? '' : commandInfo.executeIndex,
+                rule: [{
+                  type: 'integer', message: '请输入正确的数字', transform(value) { if (value) { return Number(value); } },
+                }],
+              })(
+                <Input placeholder="请输入排列序号" />
+              )}
+            </FormItem>
+          </Col>
+          <Col md={24}>
+            <FormItem
+              labelCol={{ span: 5 }}
+              wrapperCol={{ span: 15 }}
               label="执行岗位"
             >
               {form.getFieldDecorator('executePostion', {

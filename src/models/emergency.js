@@ -25,7 +25,7 @@ import {
   annexDelete, getPlanAnnexPage, getDealCard, getImplPicture, getExecuteList, resourcePage,
   materialPage, resMaterialPage,
   addFeature, getPlansByEventID, findUserPage, expandPlanPage, judgeAcceptUser, updateEmgcOrg,
-  getFunctionMenus, historyEventPage, editAlarm,
+  getFunctionMenus, historyEventPage, editAlarm, getImplOrgAnnex, getOrgImages,
 } from '../services/api';
 import { checkCode, formatDuring } from '../utils/utils';
 
@@ -786,7 +786,7 @@ export default {
     },
     //  获取预案组织结构信息
     *getOrgAnnex({ payload }, { call, put }) {
-      const response = yield call(getDealCard, payload);
+      const response = yield call(getOrgImages, payload);
       yield put({
         type: 'saveOrgAnnex',
         payload: response.data,
@@ -810,7 +810,7 @@ export default {
     },
     //  获取方案组织结构信息
     *getImplOrgAnnex({ payload }, { call, put }) {
-      const response = yield call(getImplPicture, payload);
+      const response = yield call(getImplOrgAnnex, payload);
       yield put({
         type: 'saveImplOrgAnnex',
         payload: response.data,

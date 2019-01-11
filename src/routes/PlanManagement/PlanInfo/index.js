@@ -495,7 +495,7 @@ export default class PlanInfo extends PureComponent {
             </Card>
           </TabPane>
           <TabPane tab="应急组织" key="2" disabled={Object.keys(planBasicInfo).length === 0}>
-            <Card title="组织机构" extra={isEdit ? <Button onClick={this.openOrgAnnexModel}>新增组织机构图</Button> : null} style={{}}>
+            <Card title="组织机构">
               <div className={styles.cardExtra}>
                 <Row gutter={16}>
                   {this.props.orgAnnexList.map((card, index) => {
