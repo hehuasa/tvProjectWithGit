@@ -84,8 +84,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-markdown": "^1.0.0-beta.8",
     "eslint-plugin-react": "^7.0.1",
-    "esri-loader": "^2.3.0",
-    "esri-loader-react": "^2.0.3",
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "jest": "^23.6.0",
@@ -98,8 +96,7 @@
     "roadhog-api-doc": "^0.3.4",
     "rollbar": "^2.4.7",
     "stylelint": "^8.4.0",
-    "stylelint-config-standard": "^18.0.0",
-    "wangeditor": "^3.1.1"
+    "stylelint-config-standard": "^18.0.0"
   },
   "optionalDependencies": {
     "nightmare": "^2.10.0"
