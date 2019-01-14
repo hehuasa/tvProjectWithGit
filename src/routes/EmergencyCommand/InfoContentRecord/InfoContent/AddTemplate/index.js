@@ -40,16 +40,16 @@ const columns = [{
   width: 200,
 }];
 
-const formItemLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 10 },
-};
+// const formItemLayout = {
+//   labelCol: { span: 8 },
+//   wrapperCol: { span: 10 },
+// };
 // const withOutLabel = {
 //   wrapperCol: { span: 8, offset: 10 },
 // };
 const formItemLayout1 = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 8 },
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
 };
 // const withOutLabel1 = {
 //   wrapperCol: { span: 6, offset: 6 },
@@ -298,9 +298,10 @@ export default class AddTemplate extends PureComponent {
               placeholder="已有数据id"
             />
           )}
-          <Col sm={12} md={8} lg={5}>
+          <Col sm={12} md={8}>
             <FormItem
-              formItemLayout
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
               label="伤亡位置"
               required={false}
             >
@@ -312,9 +313,10 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8} lg={3}>
+          <Col sm={12} md={8}>
             <FormItem
-              formItemLayout1
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
               label="受伤人数"
               required={false}
             >
@@ -333,9 +335,10 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8} lg={3}>
+          <Col sm={12} md={8}>
             <FormItem
-              formItemLayout1
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
               label="死亡人数"
               required={false}
             >
@@ -372,10 +375,11 @@ export default class AddTemplate extends PureComponent {
               placeholder="选择报告人"
             />
           )}
-          <Col sm={12} md={8} lg={3}>
+          <Col sm={12} md={8}>
             <FormItem
-              formItemLayout1
-              label="报告人"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
+              label="报告人2"
               required={false}
             >
               {getFieldDecorator(`reportUserName[${k}]`, {
@@ -390,9 +394,10 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8} lg={3}>
+          <Col sm={12} md={8}>
             <FormItem
-              formItemLayout1
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
               label="电话"
               required={false}
             >
@@ -406,9 +411,10 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8} lg={6} >
+          <Col sm={12} md={8}>
             <FormItem
-              formItemLayout1
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
               label="时间"
               required={false}
               style={{ width: '100%' }}
@@ -465,7 +471,7 @@ export default class AddTemplate extends PureComponent {
           {
             isHidden ? (
               <Row>
-                <Col span={5}>
+                <Col span={24}>
                   总共受伤：{this.state.sumSnjured || injuredSum} {' '}总共死亡：{this.state.sumDeaths || deathSum}
                 </Col>
               </Row>
@@ -475,7 +481,7 @@ export default class AddTemplate extends PureComponent {
             {formItems}
           </div>
           <FormItem {...formItemLayoutWithOutLabel}>
-            { this.props.hiddenAddButton ? null : (
+            {this.props.hiddenAddButton ? null : (
               <Button
                 type="dashed"
                 onClick={this.add}

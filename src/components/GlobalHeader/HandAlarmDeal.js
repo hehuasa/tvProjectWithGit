@@ -751,7 +751,7 @@ export default class HandAlarmDeal extends PureComponent {
           </Col>
         </Row>
         <Row>
-          <Col span={23} offset={1}><AddTemplate form={form} /></Col>
+          <Col span={24}><AddTemplate form={form} /></Col>
         </Row>
         <Modal
           title="选择人员"

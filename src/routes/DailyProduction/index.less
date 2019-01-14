@@ -64,6 +64,9 @@
   }
 }
 
+.center {
+  text-align: center;
+}
 .warp {
   position: relative;
   padding-top: 28px;
@@ -189,7 +192,14 @@
   }
 }
 
-
+.rowHover {
+  :global {
+    .ant-table-tbody > tr:hover > td {
+      color: @public-color-hover;
+      cursor: pointer;
+    }
+  }
+}
 .equipment{
   padding-bottom: 50px;
   :global{
@@ -298,4 +308,68 @@
 
 .fileTable{
   margin-top: @public-range;
+}
+.dataSource {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  max-width: 400px;
+  line-height: 30px;
+  z-index: 2;
+  background: @bg-blueDark;
+  color: #999;
+  text-align: center;
+}
+.secondTitle {
+  margin: 8px 0 8px 24px;
+  font-size: @font-l;
+}
+.productTable {
+  float: left;
+  width: 50%;
+  :global {
+    & .ant-table-thead tr th {
+      padding: 0;
+    }
+    & .ant-table {
+      width: 100%;
+      margin-left: 0;
+    }
+    & .ant-table-wrapper {
+      margin: 0;
+    }
+  }
+}
+.tdOne {
+  float: left;
+  width: 10%;
+  padding: 16px 16px;
+}
+.tdTwo {
+  float: left;
+  width: 60%;
+  padding: 16px 16px;
+  border-left: 1px solid #e8e8e8;
+}
+.tdThree {
+  float: left;
+  width: 10%;
+  padding: 16px 16px;
+  border-left: 1px solid #e8e8e8;
+}
+.tdFour {
+  float: left;
+  width: 20%;
+  padding: 16px 16px;
+  border-left: 1px solid #e8e8e8;
+}
+.thDiv {
+  padding: 16px 16px;
+}
+.tableWidth {
+  width: 98%;
+  margin-left: 1%;
+  padding: 0 8px;
 }
