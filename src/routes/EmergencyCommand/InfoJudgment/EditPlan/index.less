@@ -1,15 +1,26 @@
 @import "~antd/lib/style/themes/default.less";
 @import "../../../../index.less";
 .extra {
-  margin-top: -8px;
+  // margin-top: -8px;
   :global {
     .ant-card-extra {
-      width: 600px;
       height: @place-ant-card-extra-height;
-      margin-top: -4px;
+      min-width: 700px;
+      text-align: right;
     }
     .ant-card-head {
       height: @place-ant-card-extra-height;
     }
+    .ant-card-wider-padding .ant-card-head {
+      padding: 0 @public-range;
   }
+  }
+}
+
+.textSelect{
+  margin-right: @public-range;
+}
+.selectInput{
+  margin-right: @public-range;
+  width: 320px;
 }

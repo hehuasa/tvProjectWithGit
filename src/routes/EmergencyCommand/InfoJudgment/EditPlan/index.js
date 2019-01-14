@@ -99,11 +99,10 @@ export default class EditPlan extends PureComponent {
 
   render() {
     const extra = (
-      <Row>
-        <Col span={18}>
-          <span style={{ marginRight: 16 }}>方案选择</span>
+      <div>
+          <span className={styles.textSelect}>方案选择</span>
           <Select
-            style={{ width: 320 }}
+            className={styles.selectInput}
             value={this.props.eventExecPlanID}
             onChange={this.onExecuteChange}
           >
@@ -116,11 +115,8 @@ export default class EditPlan extends PureComponent {
               </Option>
               ))}
           </Select>
-        </Col>
-        <Col span={6}>
           <Button type="primary" onClick={() => { this.child.clearPlan(); }}>清空实施方案</Button>
-        </Col>
-      </Row>
+      </div>
     );
     return (
       <div className={styles.extra}>
