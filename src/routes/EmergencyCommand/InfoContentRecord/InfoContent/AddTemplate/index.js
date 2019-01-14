@@ -379,7 +379,7 @@ export default class AddTemplate extends PureComponent {
             <FormItem
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
-              label="报告人2"
+              label="报告人"
               required={false}
             >
               {getFieldDecorator(`reportUserName[${k}]`, {
