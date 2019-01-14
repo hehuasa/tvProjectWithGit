@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, TreeSelect, Row, Col, Input, message, Icon, Table, Modal, Select } from 'antd';
+import { Form, TreeSelect, Row, Col, Input, message, Icon, Table, Modal, Select, DatePicker } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
 import { alarmStatus } from '../../../../utils/utils';
@@ -118,6 +118,7 @@ export default class AlarmEventInfo extends PureComponent {
         let urls = '';
         const param = {};
         const { resourceID } = this.props.form.getFieldsValue(['resourceID']);
+        const { alarmAreaID } = this.props.form.getFieldsValue(['alarmAreaID']);
         if (resourceID) {
           urls = 'alarmDeal/getMonitorResource';
           param.resourceID = resourceID;
@@ -127,6 +128,7 @@ export default class AlarmEventInfo extends PureComponent {
           param.isQuery = true;
           param.fuzzy = true;
           param.orgID = orgID;
+          param.areaID = areaID;
           param.monitor = 1;
           param.pageNum = 1;
           param.pageSize = 10;
@@ -138,6 +140,7 @@ export default class AlarmEventInfo extends PureComponent {
           }).then(() => {
             this.setState({
               visible: true,
+              monitor: 1,
               clickWhether: id,
             });
             this.child.setOrgID(orgID);
@@ -147,6 +150,7 @@ export default class AlarmEventInfo extends PureComponent {
           this.setState({
             visible: true,
             clickWhether: id,
+            monitor: 1,
           });
         }
         break;
@@ -166,6 +170,8 @@ export default class AlarmEventInfo extends PureComponent {
           params.isQuery = true;
           params.fuzzy = true;
           params.orgID = orgID;
+          params.areaID = areaID;
+          params.monitor = 0;
         }
         this.props.dispatch({
           type: url,
@@ -176,6 +182,7 @@ export default class AlarmEventInfo extends PureComponent {
           this.setState({
             visible: true,
             clickWhether: id,
+            monitor: 0,
           });
         });
         break;
@@ -475,289 +482,310 @@ export default class AlarmEventInfo extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发位置"
-            >
-              {form.getFieldDecorator('eventPlace', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.place : null,
-                rules: [
-                  { required: !!isEvent, message: '事发位置必填' },
-                ],
-              })(
-                <Input disabled={!isEvent} placeholder="请输入事发位置" />
-              )}
-            </FormItem>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="报警类型"
+              >
+                {form.getFieldDecorator('eventPlace', {
+                  initialValue: alarmInfoConten.alarmTypeVO ? alarmInfoConten.alarmTypeVO.alarmTypeName : null,
+                })(
+                  <Input disabled={!isEvent} />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发位置"
+              >
+                {form.getFieldDecorator('eventPlace', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ?
+                    (alarmInfoConten.alarmExtendAlarmInfoVO.place || (
+                      alarmInfoConten.resourceInfoVO ? alarmInfoConten.resourceInfoVO.installPosition : null
+                    )) : null,
+                  rules: [
+                    { required: !!isEvent, message: '事发位置必填' },
+                  ],
+                })(
+                  <Input disabled={!isEvent} placeholder="请输入事发位置" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发部门"
+              >
+                {form.getFieldDecorator('orgID', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? `${alarmInfoConten.alarmExtendAlarmInfoVO.alarmOrgID || ''}` : '', // alarmInfo.orgName
+                  rules: [
+                    { required: isEvent, message: '事发部门不能为空' },
+                  ],
+                })(
+                  <TreeSelect
+                    disabled={!isEvent}
+                    showSearch
+                    style={{ width: '100%' }}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    placeholder="请选择事发部门"
+                    treeNodeFilterProp="title"
+                    allowClear
+                    treeDefaultExpandAll
+                    onChange={this.onSelectTreeChange}
+                  >
+                    {this.renderTreeNodes(apparatusList)}
+                  </TreeSelect>
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发区域"
+              >
+                {form.getFieldDecorator('alarmAreaID', {
+                  initialValue: alarmInfoConten.area ? alarmInfoConten.area.areaID : null,
+                })(
+                  <Select
+                    placeholder="请选择事发区域"
+                    // onChange={this.handleChange}
+                    optionFilterProp="title"
+                    showSearch
+                    style={{ width: '100%' }}
+                  >
+                    {this.props.alarmDeal.areaList.map(item => (
+                      <Option
+                        key={item.areaID}
+                        value={item.areaID}
+                        title={item.areaName}
+                      >{item.areaName}
+                      </Option>
+                    ))}
+                  </Select>
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发设备"
+              >
+                {form.getFieldDecorator('resourceID1', {
+                  initialValue: alarmInfoConten.resourceInfoVO ? alarmInfoConten.resourceInfoVO.resourceName : null,
+                  rules: [
+                    // { required: isEvent, message: '事发设备不能为空' },
+                  ],
+                })(
+                  <Input
+                    disabled
+                    addonAfter={<Icon type="search" onClick={() => this.onShowModal('', 2)} />}
+                    placeholder="请输入事发设备"
+                  />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="设备位置"
+              >
+                {form.getFieldDecorator('installPosition', {
+                  initialValue: alarmInfoConten.resourceInfoVO ? alarmInfoConten.resourceInfoVO.installPosition : null,
+                })(
+                  <Input disabled placeholder="设备位置" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="监测器具"
+              >
+                {form.getFieldDecorator('probeResourceID1', {
+                  initialValue: alarmInfoConten.monitorResourceInfoVO ? alarmInfoConten.monitorResourceInfoVO.resourceName : null,
+                  rules: [
+                    // { required: isEvent, message: '监测器具不能为空' },
+                  ],
+                })(
+                  <Input
+                    disabled
+                    addonAfter={<Icon type="search" onClick={() => this.onShowModal('', 1)} />}
+                    placeholder="请输入监测器具"
+                  />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="器具位置"
+              >
+                {form.getFieldDecorator('monitorPlace', {
+                  initialValue: alarmInfoConten.monitorResourceInfoVO ? alarmInfoConten.monitorResourceInfoVO.installPosition : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事件物质"
+              >
+                {form.getFieldDecorator('rawMaterialIds1', {
+                  initialValue: alarmInfoConten.rawMaterialInfoVO ? alarmInfoConten.rawMaterialInfoVO.rawMaterialName : null,
+                  rules: [
+                  ],
+                })(
+                  <Input
+                    disabled
+                    addonAfter={<Icon type="search" onClick={() => this.onShowModal('', 3)} />}
+                    placeholder="请输入事件物质"
+                  />
+                )}
+              </FormItem>
+            </Row>
+            <Row />
           </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事件名称"
-            >
-              {form.getFieldDecorator('eventName', {
-                initialValue: ((alarmInfoConten.alarmWay === 1) ? '自动报警' : '人工报警') +
+          <Col md={12}>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事件名称"
+              >
+                {form.getFieldDecorator('eventName', {
+                  initialValue: ((alarmInfoConten.alarmWay === 1) ? '自动报警' : '人工报警') +
                   (alarmInfoConten.org ? `${alarmInfoConten.org.orgnizationName}` : '') +
                   moment().format('YYYY-MM-DD HH:mm'),
-                rules: [
-                  { required: isEvent, message: '事件名称不能为空' },
-                ],
-              })(
-                <Input disabled={!isEvent} placeholder="请输入事件名称" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发部门"
-            >
-              {form.getFieldDecorator('orgID', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? `${alarmInfoConten.alarmExtendAlarmInfoVO.alarmOrgID || ''}` : '', // alarmInfo.orgName
-                rules: [
-                  { required: isEvent, message: '事发部门不能为空' },
-                ],
-              })(
-                <TreeSelect
-                  disabled={!isEvent}
-                  showSearch
-                  style={{ width: '100%' }}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  placeholder="请选择事发部门"
-                  treeNodeFilterProp="title"
-                  allowClear
-                  treeDefaultExpandAll
-                  onChange={this.onSelectTreeChange}
-                >
-                  {this.renderTreeNodes(apparatusList)}
-                </TreeSelect>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发区域"
-            >
-              {form.getFieldDecorator('alarmAreaID', {
-                initialValue: alarmInfoConten.area ? alarmInfoConten.area.areaID : null,
-              })(
-                <Select
-                  placeholder="请选择事发区域"
-                  // onChange={this.handleChange}
-                  optionFilterProp="title"
-                  showSearch
-                  style={{ width: '100%' }}
-                >
-                  {this.props.alarmDeal.areaList.map(item => (
-                    <Option
-                      key={item.areaID}
-                      value={item.areaID}
-                      title={item.areaName}
-                    >{item.areaName}
-                    </Option>
-                  ))}
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="监测器具"
-            >
-              {form.getFieldDecorator('probeResourceID1', {
-                initialValue: alarmInfoConten.monitorResourceInfoVO ? alarmInfoConten.monitorResourceInfoVO.resourceName : null,
-                rules: [
-                  // { required: isEvent, message: '监测器具不能为空' },
-                ],
-              })(
-                <Input
-                  disabled
-                  addonAfter={<Icon type="search" onClick={() => this.onShowModal('', 1)} />}
-                  placeholder="请输入监测器具"
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发原因"
-            >
-              {form.getFieldDecorator('incidentReason', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.incidentReason : null,
-                rules: [
-                ],
-              })(
-                <Input disabled={!isEvent} placeholder="请输入事发原因" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发设备"
-            >
-              {form.getFieldDecorator('resourceID1', {
-                initialValue: alarmInfoConten.resourceInfoVO ? alarmInfoConten.resourceInfoVO.resourceName : null,
-                rules: [
-                  // { required: isEvent, message: '事发设备不能为空' },
-                ],
-              })(
-                <Input
-                  disabled
-                  addonAfter={<Icon type="search" onClick={() => this.onShowModal('', 2)} />}
-                  placeholder="请输入事发设备"
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="设备位置"
-            >
-              {form.getFieldDecorator('installPosition', {
-                initialValue: alarmInfoConten.resourceInfoVO ? alarmInfoConten.resourceInfoVO.installPosition : null,
-              })(
-                <Input placeholder="设备位置" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事件物质"
-            >
-              {form.getFieldDecorator('rawMaterialIds1', {
-                initialValue: alarmInfoConten.rawMaterialInfoVO ? alarmInfoConten.rawMaterialInfoVO.rawMaterialName : null,
-                rules: [
-                ],
-              })(
-                <Input
-                  disabled
-                  addonAfter={<Icon type="search" onClick={() => this.onShowModal('', 3)} />}
-                  placeholder="请输入事件物质"
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="报警人"
-            >
-              {form.getFieldDecorator('alarmPerson', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.alarmUserName : null,
-                rules: [
-                ],
-              })(
-                <Search
-                  placeholder="选择报告人"
-                  onSearch={value => this.onSearchUser(value)}
-                />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发部位"
-            >
-              {form.getFieldDecorator('accidentPostion', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.accidentPostion : null,
-              })(
-                <Input disabled={!isEvent} placeholder="请输入事发部位" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="联系电话"
-            >
-              {form.getFieldDecorator('telPhone', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.alarmUserPhone : null,
-                rules: [
-                  { pattern: /^[0-9]*$/, message: '只能为数字' },
-                ],
-              })(
-                <Input disabled={!isEvent} placeholder="请输入联系电话" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="报警现状"
-            >
-              {form.getFieldDecorator('alarmStatuInfo', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.alarmStatuInfo : null,
-                rules: [
-                ],
-              })(
-                <Input disabled={!isEvent} placeholder="请输入报警现状" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="警情摘要"
-            >
-              {form.getFieldDecorator('alarmDes', {
-                initialValue: alarmInfoConten.alarmDes,
-                rules: [
-                ],
-              })(
-                <TextArea disabled={!isEvent} rows={3} placeholder="请输入警情摘要" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="已采取措施"
-            >
-              {form.getFieldDecorator('adoptMeasure', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.adoptMeasure : null,
-                rules: [
-                ],
-              })(
-                <TextArea disabled={!isEvent} rows={3} placeholder="请输入已采取措施" />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="处警说明"
-            >
-              {form.getFieldDecorator('extendAlarmDes', {
-                initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.extendAlarmDes : null,
-                rules: [
-                ],
-              })(
-                <TextArea rows={3} placeholder="请输入处警说明" />
-              )}
-            </FormItem>
+                  rules: [
+                    { required: isEvent, message: '事件名称不能为空' },
+                  ],
+                })(
+                  <Input disabled={!isEvent} placeholder="请输入事件名称" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="发生时间"
+              >
+                {form.getFieldDecorator('startTime', {
+                  initialValue: alarmInfoConten.startTime ? moment(alarmInfoConten.startTime) : moment(),
+                })(
+                  <DatePicker format="YYYY-MM-DD HH:mm:ss" showTime style={{ width: '100%' }} />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="报警人"
+              >
+                {form.getFieldDecorator('alarmPerson', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.alarmUserName : null,
+                  rules: [
+                  ],
+                })(
+                  <Search
+                    placeholder="选择报告人"
+                    onSearch={value => this.onSearchUser(value)}
+                  />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="联系电话"
+              >
+                {form.getFieldDecorator('telPhone', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.alarmUserPhone : null,
+                  rules: [
+                    { pattern: /^[0-9]*$/, message: '只能为数字' },
+                  ],
+                })(
+                  <Input disabled={!isEvent} placeholder="请输入联系电话" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="报警现状"
+              >
+                {form.getFieldDecorator('alarmStatuInfo', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.alarmStatuInfo : null,
+                  rules: [
+                  ],
+                })(
+                  <Input disabled={!isEvent} placeholder="请输入报警现状" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="警情摘要"
+              >
+                {form.getFieldDecorator('alarmDes', {
+                  initialValue: alarmInfoConten.alarmDes,
+                  rules: [
+                  ],
+                })(
+                  <TextArea disabled={!isEvent} rows={3} placeholder="请输入警情摘要" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="已采取措施"
+              >
+                {form.getFieldDecorator('adoptMeasure', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.adoptMeasure : null,
+                  rules: [
+                  ],
+                })(
+                  <TextArea disabled={!isEvent} rows={3} placeholder="请输入已采取措施" />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="处警说明"
+              >
+                {form.getFieldDecorator('extendAlarmDes', {
+                  initialValue: alarmInfoConten.alarmExtendAlarmInfoVO ? alarmInfoConten.alarmExtendAlarmInfoVO.extendAlarmDes : null,
+                  rules: [
+                  ],
+                })(
+                  <TextArea rows={3} placeholder="请输入处警说明" />
+                )}
+              </FormItem>
+            </Row>
           </Col>
         </Row>
         <CommonQuery

@@ -945,6 +945,11 @@ export default class ArcgisMap extends PureComponent {
         e.stopPropagation();
         return false;
       });
+      // 禁止地图双击事件
+      mapConstants.view.on('double-click', (e) => {
+        e.stopPropagation();
+        return false;
+      });
       mapConstants.view.on('drag', (evt) => {
         if (this.props.stopPropagation) {
           evt.stopPropagation();

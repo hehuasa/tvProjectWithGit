@@ -23,8 +23,8 @@ const imgArray = [
   { name: '重大危险源', sort: 21 },
   { name: '放射源', sort: 22 },
   { name: '呼吸机', sort: 23 },
-  { name: '空气呼吸机,', sort: 24 },
-  { name: '默认设备,', default: true },
+  { name: '空气呼吸机', sort: 24 },
+  { name: '默认设备', default: true },
 ];
 
 const createList = () => {

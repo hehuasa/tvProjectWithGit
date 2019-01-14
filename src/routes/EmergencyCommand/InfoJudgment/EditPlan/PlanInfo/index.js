@@ -429,7 +429,7 @@ export default class PlanInfo extends PureComponent {
     const { eventID, eventExecPlanID } = this.props;
     this.props.dispatch({
       type: 'emergency/getAnnexPage',
-      payload: { eventID, eventExecPlanID, pageNum, pageSize },
+      payload: { eventID, eventExecPlanID, pageNum, pageSize, isQuery: true, fuzzy: true, uploadType: 2 },
     });
   };
   render() {

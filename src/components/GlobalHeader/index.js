@@ -48,6 +48,10 @@ export default class GlobalHeader extends PureComponent {
     dispatch({
       type: 'alarm/getAlarmType',
     });
+    // 请求报警类型
+    dispatch({
+      type: 'alarm/getManualAlarmType',
+    });
     // 请求报警数据
     dispatch({
       type: 'alarm/fetch',
@@ -647,6 +651,7 @@ export default class GlobalHeader extends PureComponent {
             onCancel={this.onCancelAlarm}
             footer={footer}
             mask={false}
+            destroyOnClose
             width="80%"
           >
             <HandAlarmDeal form={this.props.form} />

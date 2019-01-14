@@ -8,14 +8,20 @@ import { hoveringAlarm } from '../../../../utils/mapService';
 
 
 export const getIcon = (alarm) => {
-  const legendLayer = mapLayers.FeatureLayers.find(value => value.mapIcon === alarm.ctrlResourceType);
+  let layerName = '';
+  let alarmIconName = '';
+  const legendLayer = mapLayers.FeatureLayers.find(value => value.ctrlResourceType && alarm.ctrlResourceType.indexOf(value.ctrlResourceType) !== -1);
   if (!legendLayer) {
     return undefined;
+  } else {
+    alarmIconName = legendLayer.mapLayerName;
   }
-  let normalIconObj = mapLegendList.find(value => legendLayer.mapLayerName.indexOf(value.name) !== -1);
-  let layerName = '';
+  let normalIconObj = mapLegendListWithAlarm.find(value => legendLayer.mapLayerName.indexOf(value.name) !== -1);
+  if (!normalIconObj) {
+    alarmIconName = '默认设备';
+  }
   try {
-    layerName = `${legendLayer.mapLayerName}${alarm.alarmType.dangerCoefficient === 0 ? 1 : alarm.alarmType.dangerCoefficient}`;
+    layerName = `${alarmIconName}${alarm.alarmType.dangerCoefficient === 0 ? 1 : alarm.alarmType.dangerCoefficient}`;
   } catch (e) {
   }
   if (legendLayer) {
@@ -26,6 +32,7 @@ export const getIcon = (alarm) => {
   }
   return normalIconObj;
 };
+
 
 export default class AlarmIcon extends Component {
   handleClick = ({ alarm, geometry }, iconIndex) => {
@@ -72,6 +79,9 @@ export default class AlarmIcon extends Component {
   render() {
     const { alarmIconData } = this.props;
     const icon = alarmIconData.map((item, index) => {
+      if (item.style === null) {
+        return null
+      }
       const urlObj = getIcon(item.alarm);
       if (urlObj) {
         return (

@@ -97,7 +97,7 @@ export default class SelectPlan extends PureComponent {
     // 获取预案列表
     dispatch({
       type: 'emergency/getExpandPlanPage',
-      payload: { pageNum, pageSize, planLevelID: eventLevel, statu: 0, eventID },
+      payload: { pageNum, pageSize, isExpand: 1, eventID },
     }).then(() => {
       const { expandPlanPage } = this.props;
       this.setState({
@@ -149,10 +149,9 @@ export default class SelectPlan extends PureComponent {
       dispatch({
         type: 'emergency/getExpandPlanPage',
         payload: {
+          isExpand: 1,
           pageNum: 1,
           pageSize: 5,
-          statu: 0,
-          planLevelID: eventLevel,
           eventID,
           ...fieldsValue },
       }).then(() => {
@@ -186,9 +185,9 @@ export default class SelectPlan extends PureComponent {
           return record.planPlanLevel.levelName;
         },
       }, {
-        title: '直接匹配特征',
+        title: '特征匹配',
         width: '18%',
-        dataIndex: 'drectFeature',
+        dataIndex: 'featureNames',
         render: (text) => {
           let str = '';
           if (text && text.length > 0) {
@@ -203,7 +202,7 @@ export default class SelectPlan extends PureComponent {
         width: '12%',
         dataIndex: 'weight',
         render: (text, record) => {
-          return !record.featureNames ? <span style={{ color: 'red' }} >{`${(text * 100).toFixed(2)} %`}</span> : null;
+          return !record.drectFeature ? <span style={{ color: 'red' }} >{`${(text * 100).toFixed(2)} %`}</span> : '直接匹配';
         },
       }, {
         title: '操作',

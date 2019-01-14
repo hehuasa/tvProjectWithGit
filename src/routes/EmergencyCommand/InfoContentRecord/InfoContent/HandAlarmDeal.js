@@ -217,23 +217,52 @@ export default class HandAlarmDeal extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col md={12} sm={24}>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="报警类型"
+              >
+                {form.getFieldDecorator('alarmTypeName', {
+                  initialValue: eventInfoReport.alarmType ? eventInfoReport.alarmType.alarmTypeName : '',
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发位置"
+              >
+                {form.getFieldDecorator('place', {
+                  initialValue: eventInfoReport.eventPlace,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发部门"
+              >
+                {form.getFieldDecorator('organization1', {
+                  initialValue: eventInfoReport.organization ? eventInfoReport.organization.orgnizationName : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row></Row>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事件名称"
-            >
-              {form.getFieldDecorator('eventName', {
-                initialValue: eventInfoReport.eventName,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              labelCol={{ span: 5 }}
+              wrapperCol={{ span: 15 }}
               label="事发区域"
             >
               {form.getFieldDecorator('alarmAreaID', {
@@ -257,207 +286,177 @@ export default class HandAlarmDeal extends PureComponent {
                 </Select>
               )}
             </FormItem>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事发设备"
+              >
+                {form.getFieldDecorator('resResourceInfo1', {
+                  initialValue: eventInfoReport.resResourceInfo ? eventInfoReport.resResourceInfo.resourceName : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="设备位置"
+              >
+                {form.getFieldDecorator('installPosition', {
+                  initialValue: eventInfoReport.resResourceInfo ? eventInfoReport.resResourceInfo.installPosition : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="监测器具"
+              >
+                {form.getFieldDecorator('probeResourceID1', {
+                  initialValue: eventInfoReport.probeResource ? eventInfoReport.probeResource.resourceName : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="器具位置"
+              >
+                {form.getFieldDecorator('probeResourceID1', {
+                  initialValue: eventInfoReport.probeResource ? eventInfoReport.probeResource.installPosition : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事件物质"
+              >
+                {form.getFieldDecorator('rawMaterialIds1', {
+                  initialValue: eventInfoReport.resRawMaterialInfos && eventInfoReport.resRawMaterialInfos[0] ? eventInfoReport.resRawMaterialInfos[0].rawMaterialName : null,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
           </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发位置"
-            >
-              {form.getFieldDecorator('place', {
-                initialValue: eventInfoReport.eventPlace,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="报警类型"
-            >
-              {form.getFieldDecorator('alarmTypeId', {
-                initialValue: eventInfoReport.alarmType ? eventInfoReport.alarmType.alarmTypeID : '',
-              })(
-                <Select disabled style={{ width: '100%' }} >
-                  {
-                    this.props.alarm.alarmTypeList.map(item => (
-                      <Option key={item.alarmTypeID} value={item.alarmTypeID}>{item.alarmTypeName}</Option>
-                    ))
-                  }
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发部门"
-            >
-              {form.getFieldDecorator('organization1', {
-                initialValue: eventInfoReport.organization ? eventInfoReport.organization.orgnizationName : null,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="报警现状"
-            >
-              {form.getFieldDecorator('alarmStatuInfo', {
-                initialValue: alarmStatus(eventInfoReport.alarmStatuInfo),
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="监测器具"
-            >
-              {form.getFieldDecorator('probeResourceID1', {
-                initialValue: eventInfoReport.probeResource ? eventInfoReport.probeResource.resourceName : null,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发原因"
-            >
-              {form.getFieldDecorator('incidentReason', {
-                initialValue: eventInfoReport.incidentReason,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发设备"
-            >
-              {form.getFieldDecorator('resResourceInfo1', {
-                initialValue: eventInfoReport.resResourceInfo ? eventInfoReport.resResourceInfo.resourceName : null,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="设备位置"
-            >
-              {form.getFieldDecorator('installPosition', {
-                initialValue: eventInfoReport.resResourceInfo ? eventInfoReport.resResourceInfo.installPosition : null,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事件物质"
-            >
-              {form.getFieldDecorator('rawMaterialIds1', {
-                initialValue: eventInfoReport.resRawMaterialInfos && eventInfoReport.resRawMaterialInfos[0] ? eventInfoReport.resRawMaterialInfos[0].rawMaterialName : null,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="报警人"
-            >
-              {form.getFieldDecorator('acceptAlarmUserID ', {
-                initialValue: eventInfoReport.alarmPerson,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="事发部位"
-            >
-              {form.getFieldDecorator('accidentPostion', {
-                initialValue: eventInfoReport.accidentPostion,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="联系电话"
-            >
-              {form.getFieldDecorator('telPhone', {
-                initialValue: eventInfoReport.telPhone,
-              })(
-                <Input disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="警情摘要"
-            >
-              {form.getFieldDecorator('alarmDes', {
-                initialValue: eventInfoReport.alarmDes,
-              })(
-                <TextArea rows={3} disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="已采取措施"
-            >
-              {form.getFieldDecorator('adoptMeasure', {
-                initialValue: eventInfoReport.adoptMeasure,
-              })(
-                <TextArea rows={3} disabled />
-              )}
-            </FormItem>
-          </Col>
-          <Col md={12} sm={24}>
-            <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              label="处警说明"
-            >
-              {form.getFieldDecorator('extendAlarmDes', {
-                initialValue: eventInfoReport.extendAlarmDes,
-              })(
-                <TextArea rows={3} disabled />
-              )}
-            </FormItem>
+          <Col md={12}>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事件名称"
+              >
+                {form.getFieldDecorator('eventName', {
+                  initialValue: eventInfoReport.eventName,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="事件名称"
+              >
+                {form.getFieldDecorator('eventName', {
+                  initialValue: eventInfoReport.eventName,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="报警人"
+              >
+                {form.getFieldDecorator('acceptAlarmUserID ', {
+                  initialValue: eventInfoReport.alarmPerson,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="联系电话"
+              >
+                {form.getFieldDecorator('telPhone', {
+                  initialValue: eventInfoReport.telPhone,
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="报警现状"
+              >
+                {form.getFieldDecorator('alarmStatuInfo', {
+                  initialValue: alarmStatus(eventInfoReport.alarmStatuInfo),
+                })(
+                  <Input disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="警情摘要"
+              >
+                {form.getFieldDecorator('alarmDes', {
+                  initialValue: eventInfoReport.alarmDes,
+                })(
+                  <TextArea rows={3} disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="已采取措施"
+              >
+                {form.getFieldDecorator('adoptMeasure', {
+                  initialValue: eventInfoReport.adoptMeasure,
+                })(
+                  <TextArea rows={3} disabled />
+                )}
+              </FormItem>
+            </Row>
+            <Row>
+              <FormItem
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 15 }}
+                label="处警说明"
+              >
+                {form.getFieldDecorator('extendAlarmDes', {
+                  initialValue: eventInfoReport.extendAlarmDes,
+                })(
+                  <TextArea rows={3} disabled />
+                )}
+              </FormItem>
+            </Row>
           </Col>
         </Row>
         <Modal

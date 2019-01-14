@@ -13,7 +13,6 @@ const modelNotExisted = (app, model) => (
 );
 
 // wrapper of dynamic ..
-// 测试修改
 const dynamicWrapper = (app, models, component) => {
   // () => require('module')
   // transformed by babel-plugin-dynamic-import-node-sync
@@ -38,7 +37,7 @@ const dynamicWrapper = (app, models, component) => {
   return dynamic({
     app,
     models: () => models.filter(
-      model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)
+        model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)
     ),
     // add routerData prop
     component: () => {
