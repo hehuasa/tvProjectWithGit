@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import styles from './index.less';
 import { commandType } from '../../../../../../utils/utils';
 import { commonData } from '../../../../../../../mock/commonData';
-import { win3, win12, win10, win20 } from '../../../../../../configIndex';
+import { win3, win12, win10, win20 } from '../../../../../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

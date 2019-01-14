@@ -28,7 +28,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-runtime": "^6.9.2",
     "bizcharts": "^3.4.2",
-    "bizcharts-plugin-slider": "^2.1.1",
     "classnames": "^2.2.5",
     "crypto-js": "^3.1.9-1",
     "dva": "^2.1.0",

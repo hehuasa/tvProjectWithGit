@@ -5,18 +5,6 @@ import { select, measure, delLayer, clearLayer } from '../../../utils/mapService
 import { mapConstants } from '../../../services/mapConstant';
 import styles from './index.less';
 import MyIcon from '../../../components/MyIcon/MyIcon';
-import zoomIn from '../../../assets/map/tools/放大.png';
-import zoomOut from '../../../assets/map/tools/缩小.png';
-import reset from '../../../assets/map/tools/地图还原.png';
-import circle from '../../../assets/map/tools/圈选.png';
-import length from '../../../assets/map/tools/测距.png';
-import area from '../../../assets/map/tools/测面积.png';
-import legendPic from '../../../assets/map/tools/图例.png';
-import layerList from '../../../assets/map/tools/图层.png';
-import esriLoader from 'esri-loader';
-import closePic from '../../../assets/map/tools/close.png';
-
-
 
 // 地图工具函数
 @connect(({ map, homepage, mapRelation }) => {
@@ -146,7 +134,7 @@ export default class MapTools extends PureComponent {
           <div title="放大"><Icon type="zoom-in" /></div>
           <div title="缩小"><Icon type="zoom-out" /></div>
           <div title="圈选" style={{ background: toolsBtnIndex === 2 ? '#999' : '' }}><MyIcon type="icon-weixuanzhongyuanquan" /></div>
-          <div title="测距" style={{ background: toolsBtnIndex === 0 ? '#999' : '' }}><MyIcon type="icon-chizi"/></div>
+          <div title="测距" style={{ background: toolsBtnIndex === 0 ? '#999' : '' }}><MyIcon type="icon-ruler"/></div>
           <div title="测面积" style={{ background: toolsBtnIndex === 1 ? '#999' : '' }}><MyIcon type="icon-mianji"/></div>
           <div title="图例" style={{ background: showLegend ? '#999' : '' }} ><MyIcon type="icon-tuceng"/></div>
           {/*<div title="标绘"><Icon title="标绘" type="highlight" /></div>*/}

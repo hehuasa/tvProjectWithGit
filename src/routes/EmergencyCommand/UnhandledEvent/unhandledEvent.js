@@ -9,7 +9,7 @@ import styles from './unhandledEvent.less';
 import { emgcIntervalInfo } from '../../../services/constantlyData';
 import { mapConstants } from '../../../services/mapConstant';
 import { changeVideoPosition, changeVideoSize, resetAccessStyle } from '../../../utils/utils';
-import { win3, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../configIndex';
+import { win3, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

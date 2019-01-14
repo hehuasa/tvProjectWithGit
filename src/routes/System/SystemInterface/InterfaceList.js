@@ -5,7 +5,7 @@ import Scrollbars from 'react-custom-scrollbars';
 import { Table, Select, Row, Col, DatePicker } from 'antd';
 import { bgColor, progressColor } from '../../DailyProduction/color/color';
 import styles from '../../DailyProduction/index.less';
-import { win8, win16, win15, win45, win3 } from '../../../configIndex';
+import { win8, win16, win15, win45, win3 } from '../../../utils/configIndex';
 
 const columns = [
   { title: '序号', width: win8, dataIndex: 'index', key: 'index' },

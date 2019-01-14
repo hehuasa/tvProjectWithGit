@@ -708,20 +708,6 @@ class AlarmInfo extends PureComponent {
         videoArray.push({ sort: index + 1, ...value });
       }
     }
-    // 检测对象列表数据
-    const monitorsCols = [
-      {
-        title: '序号',
-        dataIndex: 'sort',
-        width: 50,
-        align: 'center',
-      },
-      {
-        title: '资源名称',
-        dataIndex: 'resourceName',
-      // width: 120,
-      },
-    ];
     return (
       <div className={styles.warp}>
         <div className={styles.header}>

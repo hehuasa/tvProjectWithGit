@@ -5,7 +5,7 @@ import moment from 'moment';
 import styles from './index.less';
 import InsertCommand from './InsertCommand/index';
 import { emgcIntervalInfo } from '../../../../services/constantlyData';
-import { win3, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../../configIndex';
+import { win3, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../../utils/configIndex';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -345,7 +345,7 @@ export default class CommandList extends PureComponent {
 }
 
 
-{/* 
+{/*
    const extra = (
       <div className={styles.extra}>
         <span style={{ marginRight: 16 }}>指令分类</span>

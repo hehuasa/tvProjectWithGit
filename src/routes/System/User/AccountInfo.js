@@ -24,7 +24,7 @@ import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import styles from './TableList.less';
 import { commonData } from '../../../../mock/commonData';
 import { accountEnable } from '../../../services/api';
-import { win3, win20 } from '../../../configIndex';
+import { win3, win20 } from '../../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { Option } = Select;
