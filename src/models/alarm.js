@@ -1,4 +1,4 @@
-import { alarmList, clearTwinkle, getAlarmType } from '../services/api';
+import {alarmList, clearTwinkle, getAlarmType, getManualAlarmType} from '../services/api';
 import { groupingByType, groupingByArea, groupingByOverview } from '../utils/alarmService';
 
 export default {
@@ -9,6 +9,7 @@ export default {
     linkMap: 0,
     linkVideo: 0,
     alarmTypeList: [],
+    manualAlarmType: [],
     overviewShow: {
       showSafety: false,
       showEnv: false,
@@ -31,6 +32,14 @@ export default {
       const response = yield call(getAlarmType);
       yield put({
         type: 'saveAlarmType',
+        payload: response.data,
+      });
+    },
+    // 获取手动报警类型
+    *getManualAlarmType(_, { call, put }) {
+      const response = yield call(getManualAlarmType);
+      yield put({
+        type: 'saveManualAlarmType',
         payload: response.data,
       });
     },
@@ -178,6 +187,12 @@ export default {
       return {
         ...state,
         alarmTypeList: payload,
+      };
+    },
+    saveManualAlarmType(state, { payload }) {
+      return {
+        ...state,
+        manualAlarmType: payload,
       };
     },
     queryList(state, { payload }) {

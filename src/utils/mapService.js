@@ -1125,6 +1125,7 @@ export const measure = async (map, view, para, dispatch, handleMeasure) => {
                 }
                 break;
               case 'complete':
+                if (event.graphic)
                 {
                   const { geometry } = event.graphic;
                   close.geometry = new Point(geometry.paths[0][geometry.paths[0].length - 1][0], geometry.paths[0][geometry.paths[0].length - 1][1], view.spatialReference);
@@ -1160,6 +1161,7 @@ export const measure = async (map, view, para, dispatch, handleMeasure) => {
                 }
                 break;
               case 'complete':
+                if (event.graphic)
                 {
                   const { geometry } = event.graphic;
                   close.geometry = new Point(geometry.rings[0][geometry.rings[0].length - 1][0], geometry.rings[0][geometry.rings[0].length - 1][1], view.spatialReference);
@@ -2949,11 +2951,11 @@ export const addMapAlarms = ({ alarmIconData, dispatch, alarms, historyList }) =
       let index = 0;
 
       // 有报警探测的图层
-      const alarmLayerIds = [];
-      const layers = mapLayers.FeatureLayers.filter(value => value.isAlarmLayer);
-      for (const item of layers) {
-        alarmLayerIds.push(item.id);
-      }
+      // const alarmLayerIds = [];
+      // const layers = mapLayers.FeatureLayers.filter(value => value.isAlarmLayer);
+      // for (const item of layers) {
+      //   alarmLayerIds.push(item.id);
+      // }
 
       // 创建属性查询对象
       const findTask = new FindTask(mapLayers.baseLayer.layerAddress);

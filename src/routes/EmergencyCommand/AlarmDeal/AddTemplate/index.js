@@ -470,7 +470,7 @@ export default class AddTemplate extends PureComponent {
           {
             isHidden ? (
               <Row>
-                <Col span={10} className={styles.totalInfo}>
+                <Col span={24} className={styles.totalInfo}>
                   总共受伤：{this.state.sumSnjured || injuredSum} {' '}总共死亡：{this.state.sumDeaths || deathSum}
                 </Col>
               </Row>

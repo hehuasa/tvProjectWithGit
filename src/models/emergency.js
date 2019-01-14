@@ -834,7 +834,7 @@ export default {
     },
     //  扩大应急的方案列表
     *getExpandPlanPage({ payload }, { call, put }) {
-      const response = yield call(expandPlanPage, payload);
+      const response = yield call(getPlanInfoPage, payload);
       yield put({
         type: 'saveExpandPlanPage',
         payload: response.data,

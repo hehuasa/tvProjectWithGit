@@ -35,13 +35,36 @@ const onError = (e, dispatch) => {
   e.preventDefault();
 };
 
-const onReducer = (a) => {
-  console.log('a', a);
+
+const models = ['accessControl', 'accountInfo', 'activities', 'alarm', 'alarmDeal', 'alarmHistory', 'chart', 'combustibleGas', 'commonResourceTree',
+  'commonTree', 'constantlyData', 'constructMonitor', 'drillManage', 'emergency', 'emgcResource', 'flow', 'form', 'global', 'historyData', 'historyLine',
+  'homepage', 'login', 'majorList', 'map', 'mapRelation', 'oftenFunction', 'organization', 'outerDrain', 'panelBoard', 'paSystem',
+  'planManagement', 'productionDaily', 'resourceTree', 'roleInfo', 'sendMsg', 'sidebar', 'sysFunction', 'system', 'tabs', 'template', 'typeCode', 'user',
+  'userList', 'video', 'vocsMonitor',
+];
+const modelStates = [];
+for (const model of models) {
+  modelStates.push(import(`./models/${model}.js`).default);
+}
+const initState = {};
+for (const model of modelStates) {
+  initState[model.namespace] = model.state;
+}
+const onReducer = r => (state, action) => {
+  const newState = r(state, action);
+  if (action.type === 'login/logout') {
+    return {
+      routing: newState.routing,
+      ...initState,
+    };
+  } else {
+    return newState;
+  }
 };
 const app = dva({
   history: createHistory(),
   onError,
-  // onReducer,
+  onReducer,
 });
 
 // 2. Plugins

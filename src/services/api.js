@@ -1536,7 +1536,7 @@ export async function updateExpandLevel(params) {
 }
 // 预案列表 page接口
 export async function getPlanInfoPage(params) {
-  return request(`${path}/plan/planPlanInfo/WeightPage`, {
+  return request(`${path}/plan/planPlanInfo/weightPage`, {
     method: 'POST',
     body: params,
   });
@@ -2484,6 +2484,13 @@ export async function deleteOrgAnnex(params) {
 // 获取方案的应急组织
 export async function getImplOrgAnnex(params) {
   return request(`${path}/system/baseOrgaArchiveInfo/getByExecPlanID`, {
+    method: 'POST',
+    body: params,
+  });
+}
+// 手动报警获取报警类型
+export async function getManualAlarmType(params) {
+  return request(`${path}/system/alarmAlarmType/getManualAlarmType`, {
     method: 'POST',
     body: params,
   });

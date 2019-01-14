@@ -209,10 +209,10 @@ export default class EquipmentProductInfo extends PureComponent {
             return text === null ?
               '/' : (
                 <Row gutter={16}>
-                  <Col span={Number(text) > 120 ? 24 : 20}>
+                  <Col span={Number(text) > 120 ? 24 : 16}>
                     <Progress percent={Number(text)} bgColor={bgColor} progressColor={progressColor} />
                   </Col>
-                  <Col span={Number(text) > 120 ? 24 : 4}>
+                  <Col span={Number(text) > 120 ? 24 : 8}>
                     <span style={{ color: this.props.timeUsePre < text ? '' : 'red' }}>{`${text} %`}</span>
                   </Col>
                 </Row>

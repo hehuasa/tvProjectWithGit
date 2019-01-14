@@ -83,6 +83,8 @@ export default class SteamBalance extends PureComponent {
       for (const [index1, value] of cols.entries()) {
         obj[value.dataIndex] = {};
         obj[value.dataIndex].title = value.name || value.title;
+        console.log(111, index1)
+        console.log(222, temp)
         obj[value.dataIndex].value = temp[index1].collectValue;
       }
       obj.key = index;

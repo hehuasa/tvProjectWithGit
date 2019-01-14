@@ -114,13 +114,11 @@ export default class EventContent extends PureComponent {
     form.resetFields(['featureValue']);
     this.setState({
       visible: false,
-      selectedRows: [],
     });
   }
   handleCancel = (e) => {
     this.setState({
       visible: false,
-      selectedRows: [],
     });
   }
   // 下一页

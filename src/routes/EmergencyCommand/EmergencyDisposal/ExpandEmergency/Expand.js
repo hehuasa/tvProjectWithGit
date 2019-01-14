@@ -151,14 +151,14 @@ export default class Expand extends PureComponent {
         key: 'featureName',
         width: '25%',
       }, {
-        title: '预案特征值',
-        dataIndex: 'panFeatureValue',
-        key: 'panFeatureValue',
-        width: '20%',
-      }, {
         title: '事件特征值',
         dataIndex: 'emgcFeatureValue',
         key: 'emgcFeatureValue',
+        width: '20%',
+      }, {
+        title: '预案特征值',
+        dataIndex: 'panFeatureValue',
+        key: 'panFeatureValue',
         width: '20%',
       }, {
         title: '单位',

@@ -15,8 +15,7 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 const { TreeNode } = TreeSelect;
 
-
-@connect(({ panelBoard, emergency, user, homepage, video, global, accessControl }) => ({
+@connect(({ panelBoard, emergency, user, homepage, video, global, accessControl, loading }) => ({
   panelBoard,
   undoneEventList: emergency.undoneEventList,
   functionMenus: emergency.functionMenus,
@@ -26,6 +25,7 @@ const { TreeNode } = TreeSelect;
   videoPosition: video.position,
   videoShow: video.show,
   accessControlShow: accessControl.show,
+  loading,
 }))
 
 @Form.create()
@@ -268,7 +268,7 @@ export default class Analysis extends PureComponent {
     return arr.length > 0;
   };
   render() {
-    const { loading } = this.props.undoneEventList;
+    const loading = this.props.loading.effects['emergency/getFunctionMenus'];
     const columns = [{
       title: '事件状态',
       dataIndex: 'eventStatu',
