@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Form, Button, Row, Col, Input, Icon, message } from 'antd';
 import { commonData } from '../../../../../mock/commonData';
 import HandAlarmDeal from './HandAlarmDeal';
-import AddTemplate from '../../AlarmDeal/AddTemplate';
+import AddTemplate from './AddTemplate';
 import AddEventFeature from './AddEventFeature';
 
 import styles from './InfoContent.less';
@@ -154,7 +154,7 @@ export default class InfoContent extends PureComponent {
           template.postion = fieldsValue.location[i];
           template.injured = fieldsValue.injured[i];
           template.death = fieldsValue.deaths[i];
-          template.reportUserId = fieldsValue.reportUserId[i];
+          template.reportUserId = fieldsValue.reportUserID[i];
           template.reportUserName = fieldsValue.reportUserName[i];
           template.recordTime = fieldsValue.recordTime[i];
           fieldsValue.shangwan.push(JSON.parse(JSON.stringify(template)));
@@ -180,7 +180,6 @@ export default class InfoContent extends PureComponent {
 
   render() {
     const { form, emergency } = this.props;
-
     return (
       <div className={styles.infoContent}>
         <HandAlarmDeal form={form} />
@@ -188,6 +187,12 @@ export default class InfoContent extends PureComponent {
           <Row type="flex" >
             {
               emergency.eventFeaturesList.map((item) => {
+                if (item.featureValue === 'true') {
+                  item.featureValue = '是';
+                }
+                if (item.featureValue === 'false') {
+                  item.featureValue = '否';
+                }
  if (item.eventFeature !== '事发部门' && item.eventFeature !== '报警类型') {
                 return (
                   <Col key={item.entEmgcRFID} md={12} sm={24}>

@@ -47,12 +47,12 @@ const columns = [
     dataIndex: 'resourceName',
     key: 'resourceName',
     width: win10,
-  }];
+  }
+  ];
 
 @connect(({ alarm, map, alarmDeal, mapRelation }) => {
   return {
     list: JSON.parse(JSON.stringify(alarm.list)),
-    popupScale: map.popupScale,
     iconArray: alarm.iconArray,
     alarmDeal,
     infoPops: mapRelation.infoPops,
@@ -65,7 +65,8 @@ class AlarmCounting extends PureComponent {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick = (record) => {
-    const { popupScale, dispatch, infoPops, alarmIconData } = this.props;
+    const { dispatch, infoPops, alarmIconData } = this.props;
+    const { popupScale } = mapConstants;
     dispatch({
       type: 'resourceTree/saveClickedAlarmId',
       payload: record.alarmId,

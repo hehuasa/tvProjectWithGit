@@ -41,7 +41,6 @@ const setStyle = (node, array) => {
     list: alarm.list,
     listWithFault: alarm.listWithFault,
     scale: map.scale,
-    popupScale: map.popupScale,
     alarmTypeList: alarm.alarmTypeList,
     constantlyValue: map.constantlyValue,
     searchDeviceArray: map.searchDeviceArray,

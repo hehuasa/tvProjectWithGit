@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Developer\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js run build
+  C:\Program Files\nodejs\node.exe C:\Users\Developer\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js run start
 
 PATH: 
   C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\nodejs\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;"C:\Program Files\Java\jdk1.8.0_101\bin;C:\Program Files\Java\jdk1.8.0_101\jre\bin";C:\Program Files\TortoiseSVN\bin;D:\maven\apache-maven-3.5.0-bin\apache-maven-3.5.0\bin;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Git\cmd;D:\hehuasa\software\python\Scripts\;D:\hehuasa\software\python\;C:\Users\Developer\AppData\Local\Microsoft\WindowsApps;C:\Users\Developer\AppData\Roaming\npm;
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: D:\hehuasa\tvProjectWithGit\package.json: Unexpected token } in JSON at position 3413
+  SyntaxError: D:\hehuasa\tvProjectWithGit\package.json: Unexpected token } in JSON at position 3226
       at JSON.parse (<anonymous>)
       at C:\Users\Developer\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1130:59
       at Generator.next (<anonymous>)
@@ -30,7 +30,7 @@ npm manifest:
     "private": true,
     "scripts": {
       "precommit": "npm run lint-staged",
-      "start": "cross-env ESLINT=none BROWSER=none port=8000 roadhog dev",
+      "start": "cross-env ESLINT=none BROWSER=none port=8001 roadhog dev",
       "start:no-proxy": "cross-env NO_PROXY=true DISABLE_ESLINT=true roadhog dev",
       "build": "cross-env ESLINT=none roadhog build",
       "site": "roadhog-api-doc static && gh-pages -d dist",
@@ -46,14 +46,12 @@ npm manifest:
     },
     "dependencies": {
       "@antv/data-set": "^0.8.0",
-      "@antv/g6": "^2.1.2",
       "@babel/polyfill": "^7.0.0",
-      "antd": "^3.10.9",
+      "antd": "^3.9.3",
       "babel-plugin-transform-decorators-legacy": "^1.3.4",
       "babel-preset-env": "^1.6.1",
       "babel-runtime": "^6.9.2",
       "bizcharts": "^3.4.2",
-      "bizcharts-plugin-slider": "^2.1.1",
       "classnames": "^2.2.5",
       "crypto-js": "^3.1.9-1",
       "dva": "^2.1.0",
@@ -63,7 +61,6 @@ npm manifest:
       "esri-loader-react": "^2.0.3",
       "express-http-proxy": "^1.4.0",
       "fastclick": "^1.0.6",
-      "fetch-jsonp": "^1.1.3",
       "jquery": "^3.3.1",
       "lodash": "^4.17.11",
       "lodash-decorators": "^4.4.1",
@@ -89,7 +86,6 @@ npm manifest:
       "react-slick": "^0.20.0",
       "react-zmage": "^0.6.5",
       "slick-carousel": "^1.8.1",
-      "sockette": "^2.0.0",
       "url-polyfill": "^1.1.0",
       "wangeditor": "^3.1.1"
     },
@@ -109,8 +105,6 @@ npm manifest:
       "eslint-plugin-jsx-a11y": "^6.0.3",
       "eslint-plugin-markdown": "^1.0.0-beta.8",
       "eslint-plugin-react": "^7.0.1",
-      "esri-loader": "^2.3.0",
-      "esri-loader-react": "^2.0.3",
       "gh-pages": "^1.0.0",
       "husky": "^0.14.3",
       "jest": "^23.6.0",
@@ -149,22 +143,14 @@ Lockfile:
   
   "@ant-design/icons-react@~1.1.2":
     version "1.1.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@ant-design/icons-react/download/@ant-design/icons-react-1.1.2.tgz#df25c4560864f8a3b687b305c3238daff048ed72"
-  =======
     resolved "https://registry.yarnpkg.com/@ant-design/icons-react/-/icons-react-1.1.2.tgz#df25c4560864f8a3b687b305c3238daff048ed72"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       ant-design-palettes "^1.1.3"
       babel-runtime "^6.26.0"
   
   "@ant-design/icons@~1.1.16":
     version "1.1.16"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-1.1.16.tgz#ac6426216934e3f4bc108f2f48f92ed66789235e"
-  =======
     resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-1.1.16.tgz#ac6426216934e3f4bc108f2f48f92ed66789235e"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   "@antv/adjust@~0.1.0":
     version "0.1.0"
@@ -174,11 +160,7 @@ Lockfile:
   
   "@antv/attr@~0.0.7":
     version "0.0.7"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/attr/download/@antv/attr-0.0.7.tgz#333f252ce35fc3efdf8ad48046c263a6be2d7d04"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/attr/-/attr-0.0.7.tgz#333f252ce35fc3efdf8ad48046c263a6be2d7d04"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/util" "~1.2.5"
   
@@ -190,11 +172,7 @@ Lockfile:
   
   "@antv/component@~0.0.4":
     version "0.0.9"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/component/download/@antv/component-0.0.9.tgz#a1dde2d1d4b77aaa0d4360625908ae35dd3739a9"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/component/-/component-0.0.9.tgz#a1dde2d1d4b77aaa0d4360625908ae35dd3739a9"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/attr" "~0.0.7"
       "@antv/g" "~3.2.2"
@@ -258,11 +236,7 @@ Lockfile:
   
   "@antv/g6@^2.1.2":
     version "2.2.6"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/g6/download/@antv/g6-2.2.6.tgz#dca9f9474ae5bd2cae23fd9ff97f774b496c59ad"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/g6/-/g6-2.2.6.tgz#dca9f9474ae5bd2cae23fd9ff97f774b496c59ad"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/component" "~0.0.4"
       "@antv/g" "^3.3.0"
@@ -290,11 +264,7 @@ Lockfile:
   
   "@antv/g@~3.2.2":
     version "3.2.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/g/download/@antv/g-3.2.2.tgz#ab30f69a9d72e629912aee0461f54d276519c237"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/g/-/g-3.2.2.tgz#ab30f69a9d72e629912aee0461f54d276519c237"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/gl-matrix" "~2.7.1"
       "@antv/util" "~1.2.3"
@@ -313,21 +283,13 @@ Lockfile:
   
   "@antv/hierarchy@~0.3.13":
     version "0.3.15"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/hierarchy/download/@antv/hierarchy-0.3.15.tgz#218c664510c5052185dcc9924e8236d3fd22a020"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/hierarchy/-/hierarchy-0.3.15.tgz#218c664510c5052185dcc9924e8236d3fd22a020"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/util" "^1.2.4"
   
   "@antv/scale@^0.0.1":
     version "0.0.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/scale/download/@antv/scale-0.0.1.tgz#e544c037fac0038cbcab89343cb799318605600d"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/scale/-/scale-0.0.1.tgz#e544c037fac0038cbcab89343cb799318605600d"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/util" "~1.0.6"
       fecha "~2.3.3"
@@ -347,19 +309,11 @@ Lockfile:
   
   "@antv/util@~1.0.6":
     version "1.0.12"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@antv/util/download/@antv/util-1.0.12.tgz#b55e921f30f1c8410f3e24a2d889e82568c3df38"
-  
-  "@antv/util@~1.2.3", "@antv/util@~1.2.5":
-    version "1.2.5"
-    resolved "http://registry.npm.taobao.org/@antv/util/download/@antv/util-1.2.5.tgz#8896c5055ec29e4a344b5daa97bf82905f7d40cd"
-  =======
     resolved "https://registry.yarnpkg.com/@antv/util/-/util-1.0.12.tgz#b55e921f30f1c8410f3e24a2d889e82568c3df38"
   
   "@antv/util@~1.2.3", "@antv/util@~1.2.5":
     version "1.2.5"
     resolved "https://registry.yarnpkg.com/@antv/util/-/util-1.2.5.tgz#8896c5055ec29e4a344b5daa97bf82905f7d40cd"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@antv/gl-matrix" "^2.7.1"
   
@@ -1245,11 +1199,7 @@ Lockfile:
   
   "@types/d3-selection@1.0.10":
     version "1.0.10"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/@types/d3-selection/download/@types/d3-selection-1.0.10.tgz#dcfb0ddfcdfb1ad26aea4351323771e1aea96e84"
-  =======
     resolved "https://registry.yarnpkg.com/@types/d3-selection/-/d3-selection-1.0.10.tgz#dcfb0ddfcdfb1ad26aea4351323771e1aea96e84"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   "@types/history@*":
     version "4.7.0"
@@ -1535,11 +1485,7 @@ Lockfile:
   
   antd@^3.10.9:
     version "3.12.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/antd/download/antd-3.12.1.tgz#d1b3138ee907f7884f9eae2bfdee0b1b714bfe62"
-  =======
     resolved "https://registry.yarnpkg.com/antd/-/antd-3.12.1.tgz#d1b3138ee907f7884f9eae2bfdee0b1b714bfe62"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@ant-design/icons" "~1.1.16"
       "@ant-design/icons-react" "~1.1.2"
@@ -3603,11 +3549,7 @@ Lockfile:
   
   css-animation@^1.5.0:
     version "1.5.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/css-animation/download/css-animation-1.5.0.tgz#c96b9097a5ef74a7be8480b45cc44e4ec6ca2bf5"
-  =======
     resolved "https://registry.yarnpkg.com/css-animation/-/css-animation-1.5.0.tgz#c96b9097a5ef74a7be8480b45cc44e4ec6ca2bf5"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       component-classes "^1.2.5"
@@ -3738,17 +3680,6 @@ Lockfile:
   
   d3-array@1.0.1:
     version "1.0.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-array/download/d3-array-1.0.1.tgz#375c02874fcd96c16ed9f1bcf5b4a7be53f358e7"
-  
-  d3-axis@1:
-    version "1.0.12"
-    resolved "http://registry.npm.taobao.org/d3-axis/download/d3-axis-1.0.12.tgz#cdf20ba210cfbb43795af33756886fb3638daac9"
-  
-  d3-brush@1:
-    version "1.0.6"
-    resolved "http://registry.npm.taobao.org/d3-brush/download/d3-brush-1.0.6.tgz#33691f2032d9db6c5d8cb684ff255a9883629e21"
-  =======
     resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.0.1.tgz#375c02874fcd96c16ed9f1bcf5b4a7be53f358e7"
   
   d3-axis@1:
@@ -3758,7 +3689,6 @@ Lockfile:
   d3-brush@1:
     version "1.0.6"
     resolved "https://registry.yarnpkg.com/d3-brush/-/d3-brush-1.0.6.tgz#33691f2032d9db6c5d8cb684ff255a9883629e21"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-dispatch "1"
       d3-drag "1"
@@ -3768,11 +3698,7 @@ Lockfile:
   
   d3-chord@1:
     version "1.0.6"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-chord/download/d3-chord-1.0.6.tgz#309157e3f2db2c752f0280fedd35f2067ccbb15f"
-  =======
     resolved "https://registry.yarnpkg.com/d3-chord/-/d3-chord-1.0.6.tgz#309157e3f2db2c752f0280fedd35f2067ccbb15f"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-array "1"
       d3-path "1"
@@ -3794,11 +3720,7 @@ Lockfile:
   
   d3-contour@1:
     version "1.3.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-contour/download/d3-contour-1.3.2.tgz#652aacd500d2264cb3423cee10db69f6f59bead3"
-  =======
     resolved "https://registry.yarnpkg.com/d3-contour/-/d3-contour-1.3.2.tgz#652aacd500d2264cb3423cee10db69f6f59bead3"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-array "^1.1.1"
   
@@ -3808,19 +3730,11 @@ Lockfile:
   
   d3-dispatch@1.0.1:
     version "1.0.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-dispatch/download/d3-dispatch-1.0.1.tgz#4bd65a43cecff4318deb9df24552aa8bf281a840"
-  
-  d3-drag@1:
-    version "1.2.3"
-    resolved "http://registry.npm.taobao.org/d3-drag/download/d3-drag-1.2.3.tgz#46e206ad863ec465d88c588098a1df444cd33c64"
-  =======
     resolved "https://registry.yarnpkg.com/d3-dispatch/-/d3-dispatch-1.0.1.tgz#4bd65a43cecff4318deb9df24552aa8bf281a840"
   
   d3-drag@1:
     version "1.2.3"
     resolved "https://registry.yarnpkg.com/d3-drag/-/d3-drag-1.2.3.tgz#46e206ad863ec465d88c588098a1df444cd33c64"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-dispatch "1"
       d3-selection "1"
@@ -3839,21 +3753,13 @@ Lockfile:
   
   d3-fetch@1:
     version "1.1.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-fetch/download/d3-fetch-1.1.2.tgz#957c8fbc6d4480599ba191b1b2518bf86b3e1be2"
-  =======
     resolved "https://registry.yarnpkg.com/d3-fetch/-/d3-fetch-1.1.2.tgz#957c8fbc6d4480599ba191b1b2518bf86b3e1be2"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-dsv "1"
   
   d3-force@1:
     version "1.1.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-force/download/d3-force-1.1.2.tgz#16664d0ac71d8727ef5effe0b374feac8050d6cd"
-  =======
     resolved "https://registry.yarnpkg.com/d3-force/-/d3-force-1.1.2.tgz#16664d0ac71d8727ef5effe0b374feac8050d6cd"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-collection "1"
       d3-dispatch "1"
@@ -3862,19 +3768,11 @@ Lockfile:
   
   d3-format@1:
     version "1.3.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-format/download/d3-format-1.3.2.tgz#6a96b5e31bcb98122a30863f7d92365c00603562"
-  
-  d3-format@1.0.2:
-    version "1.0.2"
-    resolved "http://registry.npm.taobao.org/d3-format/download/d3-format-1.0.2.tgz#138618320b4bbeb43b5c0ff30519079fbbd7375e"
-  =======
     resolved "https://registry.yarnpkg.com/d3-format/-/d3-format-1.3.2.tgz#6a96b5e31bcb98122a30863f7d92365c00603562"
   
   d3-format@1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/d3-format/-/d3-format-1.0.2.tgz#138618320b4bbeb43b5c0ff30519079fbbd7375e"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   d3-geo-projection@~2.1.2:
     version "2.1.2"
@@ -3886,11 +3784,7 @@ Lockfile:
   
   d3-geo@1:
     version "1.11.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-geo/download/d3-geo-1.11.3.tgz#5bb08388f45e4b281491faa72d3abd43215dbd1c"
-  =======
     resolved "https://registry.yarnpkg.com/d3-geo/-/d3-geo-1.11.3.tgz#5bb08388f45e4b281491faa72d3abd43215dbd1c"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-array "1"
   
@@ -3940,17 +3834,6 @@ Lockfile:
   
   d3-polygon@1:
     version "1.0.5"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-polygon/download/d3-polygon-1.0.5.tgz#9a645a0a64ff6cbf9efda96ee0b4a6909184c363"
-  
-  d3-quadtree@1:
-    version "1.0.5"
-    resolved "http://registry.npm.taobao.org/d3-quadtree/download/d3-quadtree-1.0.5.tgz#305394840b01f51a341a0da5008585e837fe7e9b"
-  
-  d3-random@1:
-    version "1.1.2"
-    resolved "http://registry.npm.taobao.org/d3-random/download/d3-random-1.1.2.tgz#2833be7c124360bf9e2d3fd4f33847cfe6cab291"
-  =======
     resolved "https://registry.yarnpkg.com/d3-polygon/-/d3-polygon-1.0.5.tgz#9a645a0a64ff6cbf9efda96ee0b4a6909184c363"
   
   d3-quadtree@1:
@@ -3960,7 +3843,6 @@ Lockfile:
   d3-random@1:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/d3-random/-/d3-random-1.1.2.tgz#2833be7c124360bf9e2d3fd4f33847cfe6cab291"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   d3-sankey@^0.7.1, d3-sankey@~0.7.1:
     version "0.7.1"
@@ -3972,22 +3854,14 @@ Lockfile:
   
   d3-scale-chromatic@1:
     version "1.3.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-scale-chromatic/download/d3-scale-chromatic-1.3.3.tgz#dad4366f0edcb288f490128979c3c793583ed3c0"
-  =======
     resolved "https://registry.yarnpkg.com/d3-scale-chromatic/-/d3-scale-chromatic-1.3.3.tgz#dad4366f0edcb288f490128979c3c793583ed3c0"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-color "1"
       d3-interpolate "1"
   
   d3-scale@1.0.3:
     version "1.0.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-scale/download/d3-scale-1.0.3.tgz#4f9e8f0cc2ea0f3925ff04ac27adc09045fa4c90"
-  =======
     resolved "https://registry.yarnpkg.com/d3-scale/-/d3-scale-1.0.3.tgz#4f9e8f0cc2ea0f3925ff04ac27adc09045fa4c90"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-array "1"
       d3-collection "1"
@@ -3999,11 +3873,7 @@ Lockfile:
   
   d3-scale@2:
     version "2.1.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-scale/download/d3-scale-2.1.2.tgz#4e932b7b60182aee9073ede8764c98423e5f9a94"
-  =======
     resolved "https://registry.yarnpkg.com/d3-scale/-/d3-scale-2.1.2.tgz#4e932b7b60182aee9073ede8764c98423e5f9a94"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-array "^1.2.0"
       d3-collection "1"
@@ -4018,11 +3888,7 @@ Lockfile:
   
   d3-selection@1.0.2:
     version "1.0.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-selection/download/d3-selection-1.0.2.tgz#ae662afd4702ac9c5da039b2107a1764fa1c9070"
-  =======
     resolved "https://registry.yarnpkg.com/d3-selection/-/d3-selection-1.0.2.tgz#ae662afd4702ac9c5da039b2107a1764fa1c9070"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   d3-shape@1, d3-shape@^1.2.0:
     version "1.2.2"
@@ -4032,11 +3898,7 @@ Lockfile:
   
   d3-svg-legend@^2.25.6:
     version "2.25.6"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-svg-legend/download/d3-svg-legend-2.25.6.tgz#8d8dc1bd693c378ee48b6f823e8a24e68f2e1ad2"
-  =======
     resolved "https://registry.yarnpkg.com/d3-svg-legend/-/d3-svg-legend-2.25.6.tgz#8d8dc1bd693c378ee48b6f823e8a24e68f2e1ad2"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       "@types/d3-selection" "1.0.10"
       d3-array "1.0.1"
@@ -4048,21 +3910,13 @@ Lockfile:
   
   d3-time-format@2:
     version "2.1.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-time-format/download/d3-time-format-2.1.3.tgz#ae06f8e0126a9d60d6364eac5b1533ae1bac826b"
-  =======
     resolved "https://registry.yarnpkg.com/d3-time-format/-/d3-time-format-2.1.3.tgz#ae06f8e0126a9d60d6364eac5b1533ae1bac826b"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-time "1"
   
   d3-time@1:
     version "1.0.10"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-time/download/d3-time-1.0.10.tgz#8259dd71288d72eeacfd8de281c4bf5c7393053c"
-  =======
     resolved "https://registry.yarnpkg.com/d3-time/-/d3-time-1.0.10.tgz#8259dd71288d72eeacfd8de281c4bf5c7393053c"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   d3-timer@1, d3-timer@~1.0.6:
     version "1.0.9"
@@ -4081,11 +3935,7 @@ Lockfile:
   
   d3-transition@1.0.3:
     version "1.0.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-transition/download/d3-transition-1.0.3.tgz#91dc986bddb30973639320a85db72ce4ab1a27bb"
-  =======
     resolved "https://registry.yarnpkg.com/d3-transition/-/d3-transition-1.0.3.tgz#91dc986bddb30973639320a85db72ce4ab1a27bb"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-color "1"
       d3-dispatch "1"
@@ -4100,11 +3950,7 @@ Lockfile:
   
   d3-zoom@1:
     version "1.7.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3-zoom/download/d3-zoom-1.7.3.tgz#f444effdc9055c38077c4299b4df999eb1d47ccb"
-  =======
     resolved "https://registry.yarnpkg.com/d3-zoom/-/d3-zoom-1.7.3.tgz#f444effdc9055c38077c4299b4df999eb1d47ccb"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-dispatch "1"
       d3-drag "1"
@@ -4114,11 +3960,7 @@ Lockfile:
   
   d3@^5.4.0:
     version "5.7.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/d3/download/d3-5.7.0.tgz#f189d338bdde62acf02f308918e0ec34dd7568f9"
-  =======
     resolved "https://registry.yarnpkg.com/d3/-/d3-5.7.0.tgz#f189d338bdde62acf02f308918e0ec34dd7568f9"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       d3-array "1"
       d3-axis "1"
@@ -4475,11 +4317,7 @@ Lockfile:
   
   dom-to-image@^2.6.0:
     version "2.6.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/dom-to-image/download/dom-to-image-2.6.0.tgz#8a503608088c87b1c22f9034ae032e1898955867"
-  =======
     resolved "https://registry.yarnpkg.com/dom-to-image/-/dom-to-image-2.6.0.tgz#8a503608088c87b1c22f9034ae032e1898955867"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   dom-urls@^1.1.0:
     version "1.1.0"
@@ -6961,11 +6799,7 @@ Lockfile:
   
   ismobilejs@^0.5.1:
     version "0.5.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/ismobilejs/download/ismobilejs-0.5.1.tgz#0e3f825e29e32f84ad5ddbb60e9e04a894046488"
-  =======
     resolved "https://registry.yarnpkg.com/ismobilejs/-/ismobilejs-0.5.1.tgz#0e3f825e29e32f84ad5ddbb60e9e04a894046488"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   isobject@^2.0.0:
     version "2.1.0"
@@ -8438,11 +8272,7 @@ Lockfile:
   
   mini-store@^2.0.0:
     version "2.0.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/mini-store/download/mini-store-2.0.0.tgz#0843c048d6942ce55e3e78b1b67fc063022b5488"
-  =======
     resolved "https://registry.yarnpkg.com/mini-store/-/mini-store-2.0.0.tgz#0843c048d6942ce55e3e78b1b67fc063022b5488"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       hoist-non-react-statics "^2.3.1"
       prop-types "^15.6.0"
@@ -8551,11 +8381,7 @@ Lockfile:
   
   moment@^2.22.2:
     version "2.23.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/moment/download/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
-  =======
     resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   moo@^0.4.3:
     version "0.4.3"
@@ -9733,11 +9559,7 @@ Lockfile:
   
   prettier@^1.14.3:
     version "1.15.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/prettier/download/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
-  =======
     resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   pretty-bytes@^1.0.2:
     version "1.0.4"
@@ -9971,11 +9793,7 @@ Lockfile:
   
   raf@^3.4.1:
     version "3.4.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/raf/download/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
-  =======
     resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       performance-now "^2.1.0"
   
@@ -10052,11 +9870,7 @@ Lockfile:
   
   rc-animate@^2.5.4:
     version "2.6.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-animate/download/rc-animate-2.6.0.tgz#ca8440d042781af7a1329d84f97ea94794c5ec15"
-  =======
     resolved "https://registry.yarnpkg.com/rc-animate/-/rc-animate-2.6.0.tgz#ca8440d042781af7a1329d84f97ea94794c5ec15"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.6"
@@ -10080,11 +9894,7 @@ Lockfile:
   
   rc-calendar@~9.10.3:
     version "9.10.5"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-calendar/download/rc-calendar-9.10.5.tgz#7943ba07f8d225d466f02539b9e12ef98e2a607d"
-  =======
     resolved "https://registry.yarnpkg.com/rc-calendar/-/rc-calendar-9.10.5.tgz#7943ba07f8d225d466f02539b9e12ef98e2a607d"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "2.x"
@@ -10096,11 +9906,7 @@ Lockfile:
   
   rc-cascader@~0.17.0:
     version "0.17.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-cascader/download/rc-cascader-0.17.1.tgz#914481c3370b5fd8f82e4f9df9b6596dfeda14d5"
-  =======
     resolved "https://registry.yarnpkg.com/rc-cascader/-/rc-cascader-0.17.1.tgz#914481c3370b5fd8f82e4f9df9b6596dfeda14d5"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       array-tree-filter "^2.1.0"
       prop-types "^15.5.8"
@@ -10130,11 +9936,7 @@ Lockfile:
   
   rc-dialog@~7.3.0:
     version "7.3.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-dialog/download/rc-dialog-7.3.0.tgz#d5b8c4bb4f4b2ac38bb5a839ab9e255b8a88b1ac"
-  =======
     resolved "https://registry.yarnpkg.com/rc-dialog/-/rc-dialog-7.3.0.tgz#d5b8c4bb4f4b2ac38bb5a839ab9e255b8a88b1ac"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       rc-animate "2.x"
@@ -10150,11 +9952,7 @@ Lockfile:
   
   rc-drawer@~1.7.6:
     version "1.7.7"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-drawer/download/rc-drawer-1.7.7.tgz#b014d1de52457c85c4f3e1f0d647a54031dd260c"
-  =======
     resolved "https://registry.yarnpkg.com/rc-drawer/-/rc-drawer-1.7.7.tgz#b014d1de52457c85c4f3e1f0d647a54031dd260c"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.5"
@@ -10163,11 +9961,7 @@ Lockfile:
   
   rc-dropdown@~2.4.1:
     version "2.4.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-dropdown/download/rc-dropdown-2.4.1.tgz#aaef6eb3a5152cdd9982895c2a78d9b5f046cdec"
-  =======
     resolved "https://registry.yarnpkg.com/rc-dropdown/-/rc-dropdown-2.4.1.tgz#aaef6eb3a5152cdd9982895c2a78d9b5f046cdec"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "^6.26.0"
       classnames "^2.2.6"
@@ -10189,11 +9983,7 @@ Lockfile:
   
   rc-editor-mention@^1.1.7:
     version "1.1.12"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-editor-mention/download/rc-editor-mention-1.1.12.tgz#896bcb172112f18812e96fdd33ba603c0fc7306a"
-  =======
     resolved "https://registry.yarnpkg.com/rc-editor-mention/-/rc-editor-mention-1.1.12.tgz#896bcb172112f18812e96fdd33ba603c0fc7306a"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "^6.23.0"
       classnames "^2.2.5"
@@ -10206,11 +9996,7 @@ Lockfile:
   
   rc-form@^2.4.0:
     version "2.4.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-form/download/rc-form-2.4.0.tgz#7488619a2ed73fc2f776afc8705e587539d16e19"
-  =======
     resolved "https://registry.yarnpkg.com/rc-form/-/rc-form-2.4.0.tgz#7488619a2ed73fc2f776afc8705e587539d16e19"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       async-validator "~1.8.5"
       babel-runtime "6.x"
@@ -10230,11 +10016,7 @@ Lockfile:
   
   rc-input-number@~4.3.7:
     version "4.3.7"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-input-number/download/rc-input-number-4.3.7.tgz#5c11a2015812c414492d8f0408ef04bb48fd6e1c"
-  =======
     resolved "https://registry.yarnpkg.com/rc-input-number/-/rc-input-number-4.3.7.tgz#5c11a2015812c414492d8f0408ef04bb48fd6e1c"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.0"
@@ -10260,11 +10042,7 @@ Lockfile:
   
   rc-menu@~7.4.12:
     version "7.4.21"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-menu/download/rc-menu-7.4.21.tgz#8a728afd8db81312c913511b6502d9de596d72fd"
-  =======
     resolved "https://registry.yarnpkg.com/rc-menu/-/rc-menu-7.4.21.tgz#8a728afd8db81312c913511b6502d9de596d72fd"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "2.x"
@@ -10280,11 +10058,7 @@ Lockfile:
   
   rc-notification@~3.3.0:
     version "3.3.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-notification/download/rc-notification-3.3.0.tgz#af74fe7fc9ee4040eaa5e72dbd6d4088a3ecae2d"
-  =======
     resolved "https://registry.yarnpkg.com/rc-notification/-/rc-notification-3.3.0.tgz#af74fe7fc9ee4040eaa5e72dbd6d4088a3ecae2d"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "2.x"
@@ -10294,11 +10068,7 @@ Lockfile:
   
   rc-pagination@~1.17.7:
     version "1.17.8"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-pagination/download/rc-pagination-1.17.8.tgz#65583bebe13fffe4de7f418e1a6c86374ceabceb"
-  =======
     resolved "https://registry.yarnpkg.com/rc-pagination/-/rc-pagination-1.17.8.tgz#65583bebe13fffe4de7f418e1a6c86374ceabceb"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       prop-types "^15.5.7"
@@ -10306,22 +10076,14 @@ Lockfile:
   
   rc-progress@~2.2.6:
     version "2.2.6"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-progress/download/rc-progress-2.2.6.tgz#d5d07c07333b352a9ef13230c5940e13336c1e62"
-  =======
     resolved "https://registry.yarnpkg.com/rc-progress/-/rc-progress-2.2.6.tgz#d5d07c07333b352a9ef13230c5940e13336c1e62"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       prop-types "^15.5.8"
   
   rc-rate@~2.5.0:
     version "2.5.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-rate/download/rc-rate-2.5.0.tgz#72d4984a03d0a7a0e6779c7a79efcea27626abf6"
-  =======
     resolved "https://registry.yarnpkg.com/rc-rate/-/rc-rate-2.5.0.tgz#72d4984a03d0a7a0e6779c7a79efcea27626abf6"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       classnames "^2.2.5"
       prop-types "^15.5.8"
@@ -10330,11 +10092,7 @@ Lockfile:
   
   rc-select@^8.6.7:
     version "8.7.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-select/download/rc-select-8.7.0.tgz#7a79b58c7f0a402dff4ad8bb782c54adb17a3bd5"
-  =======
     resolved "https://registry.yarnpkg.com/rc-select/-/rc-select-8.7.0.tgz#7a79b58c7f0a402dff4ad8bb782c54adb17a3bd5"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "^6.23.0"
       classnames "2.x"
@@ -10351,11 +10109,7 @@ Lockfile:
   
   rc-slider@~8.6.3:
     version "8.6.4"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-slider/download/rc-slider-8.6.4.tgz#b9d9000180f2b89bb71b58717753164b479fc75f"
-  =======
     resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.4.tgz#b9d9000180f2b89bb71b58717753164b479fc75f"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.5"
@@ -10376,11 +10130,7 @@ Lockfile:
   
   rc-switch@~1.8.0:
     version "1.8.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-switch/download/rc-switch-1.8.0.tgz#cff32fd04c406d8c0c0397e69bc36350a333e236"
-  =======
     resolved "https://registry.yarnpkg.com/rc-switch/-/rc-switch-1.8.0.tgz#cff32fd04c406d8c0c0397e69bc36350a333e236"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "^6.23.0"
       classnames "^2.2.1"
@@ -10388,11 +10138,7 @@ Lockfile:
   
   rc-table@~6.4.0:
     version "6.4.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-table/download/rc-table-6.4.2.tgz#97fdb52fc7817915178aead974d77c21d20236a6"
-  =======
     resolved "https://registry.yarnpkg.com/rc-table/-/rc-table-6.4.2.tgz#97fdb52fc7817915178aead974d77c21d20236a6"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.5"
@@ -10407,11 +10153,7 @@ Lockfile:
   
   rc-tabs@~9.5.2:
     version "9.5.8"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-tabs/download/rc-tabs-9.5.8.tgz#c097e48999f704b5710307ca95db8bdfdf53c6a7"
-  =======
     resolved "https://registry.yarnpkg.com/rc-tabs/-/rc-tabs-9.5.8.tgz#c097e48999f704b5710307ca95db8bdfdf53c6a7"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "2.x"
@@ -10425,11 +10167,7 @@ Lockfile:
   
   rc-time-picker@~3.5.0:
     version "3.5.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-time-picker/download/rc-time-picker-3.5.0.tgz#bbe8d50a677eff1cd65cb645cb0fc29f83b91c35"
-  =======
     resolved "https://registry.yarnpkg.com/rc-time-picker/-/rc-time-picker-3.5.0.tgz#bbe8d50a677eff1cd65cb645cb0fc29f83b91c35"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       classnames "2.x"
       moment "2.x"
@@ -10446,11 +10184,7 @@ Lockfile:
   
   rc-tooltip@~3.7.3:
     version "3.7.3"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-tooltip/download/rc-tooltip-3.7.3.tgz#280aec6afcaa44e8dff0480fbaff9e87fc00aecc"
-  =======
     resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-3.7.3.tgz#280aec6afcaa44e8dff0480fbaff9e87fc00aecc"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       prop-types "^15.5.8"
@@ -10470,11 +10204,7 @@ Lockfile:
   
   rc-tree-select@~2.5.0:
     version "2.5.0"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-tree-select/download/rc-tree-select-2.5.0.tgz#826df8239d08a071993982cba0b9569db78d4098"
-  =======
     resolved "https://registry.yarnpkg.com/rc-tree-select/-/rc-tree-select-2.5.0.tgz#826df8239d08a071993982cba0b9569db78d4098"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "^6.23.0"
       classnames "^2.2.1"
@@ -10514,11 +10244,7 @@ Lockfile:
   
   rc-tree@~1.14.6:
     version "1.14.8"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-tree/download/rc-tree-1.14.8.tgz#31a9652d71c015370d7b6c2109c865244deb9fde"
-  =======
     resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-1.14.8.tgz#31a9652d71c015370d7b6c2109c865244deb9fde"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "^6.23.0"
       classnames "2.x"
@@ -10552,11 +10278,7 @@ Lockfile:
   
   rc-trigger@^2.6.2:
     version "2.6.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-trigger/download/rc-trigger-2.6.2.tgz#a9c09ba5fad63af3b2ec46349c7db6cb46657001"
-  =======
     resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-2.6.2.tgz#a9c09ba5fad63af3b2ec46349c7db6cb46657001"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.6"
@@ -10579,11 +10301,7 @@ Lockfile:
   
   rc-upload@~2.6.0:
     version "2.6.1"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/rc-upload/download/rc-upload-2.6.1.tgz#bf1a81a294e53920c8451b5752f90208d3ae2247"
-  =======
     resolved "https://registry.yarnpkg.com/rc-upload/-/rc-upload-2.6.1.tgz#bf1a81a294e53920c8451b5752f90208d3ae2247"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       babel-runtime "6.x"
       classnames "^2.2.5"
@@ -10840,11 +10558,7 @@ Lockfile:
   
   react-slick@~0.23.2:
     version "0.23.2"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/react-slick/download/react-slick-0.23.2.tgz#8d8bdbc77a6678e8ad36f50c32578c7c0f1c54f6"
-  =======
     resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.23.2.tgz#8d8bdbc77a6678e8ad36f50c32578c7c0f1c54f6"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
     dependencies:
       classnames "^2.2.5"
       enquire.js "^2.1.6"
@@ -13438,11 +13152,7 @@ Lockfile:
   
   wolfy87-eventemitter@~5.2.4:
     version "5.2.5"
-  <<<<<<< HEAD
-    resolved "http://registry.npm.taobao.org/wolfy87-eventemitter/download/wolfy87-eventemitter-5.2.5.tgz#e7af2adbb84e481c65edeb2a2e01032c8ff1b88f"
-  =======
     resolved "https://registry.yarnpkg.com/wolfy87-eventemitter/-/wolfy87-eventemitter-5.2.5.tgz#e7af2adbb84e481c65edeb2a2e01032c8ff1b88f"
-  >>>>>>> 0ea2e1b9784513a87ea29d1a190092788734b636
   
   wordwrap@0.0.2:
     version "0.0.2"

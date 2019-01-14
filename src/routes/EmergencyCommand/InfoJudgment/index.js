@@ -52,6 +52,11 @@ export default class InfoJudgment extends PureComponent {
             type: 'emergency/saveEventExecPlanID',
             payload: value,
           });
+          // 获取流程节点
+          this.props.dispatch({
+            type: 'emergency/getFlowNodeList',
+            payload: { eventExecPlanID: value },
+          });
           // 根据eventID获取预案基本信息
           this.props.dispatch({
             type: 'emergency/getPlanBaseInfo',

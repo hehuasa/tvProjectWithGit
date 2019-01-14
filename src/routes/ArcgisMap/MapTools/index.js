@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon } from 'antd';
 import { connect } from 'dva';
-import { select, measure, delLayer, clearLayer } from '../../../utils/mapService';
+import { select, measure, clearLayer } from '../../../utils/mapService';
 import { mapConstants } from '../../../services/mapConstant';
 import styles from './index.less';
 import MyIcon from '../../../components/MyIcon/MyIcon';
@@ -52,40 +52,51 @@ export default class MapTools extends PureComponent {
         mapView.goTo({ scale: mapView.scale + 1000 });
         break;
       case '测距':
-          clearLayer(mainMap, dispatch);
         dispatch({
           type: 'mapRelation/queryToolsBtnIndex',
           payload: toolsBtnIndex === 0 ? -1 : 0,
         });
         if (toolsBtnIndex !== 0) {
           this.setState({
-            showMeasure: 'polyline'
+            showMeasure: 'polyline',
           });
-            measure(mainMap, mapView, 'polyline', dispatch, this.handleMeasure);
+          measure(mainMap, mapView, 'polyline', dispatch, this.handleMeasure);
+        } else {
+          clearLayer(mainMap, dispatch);
+          this.setState({
+            showMeasure: '',
+          });
         }
         break;
       case '测面积':
-          clearLayer(mainMap, dispatch);
+        clearLayer(mainMap, dispatch);
         dispatch({
           type: 'mapRelation/queryToolsBtnIndex',
           payload: toolsBtnIndex === 1 ? -1 : 1,
         });
-          if (toolsBtnIndex !== 1) {
-            this.setState({
-              showMeasure: 'polygon'
-            });
-              measure(mainMap, mapView, 'polygon', dispatch, this.handleMeasure);
-          }
+        if (toolsBtnIndex !== 1) {
+          this.setState({
+            showMeasure: 'polygon',
+          });
+          measure(mainMap, mapView, 'polygon', dispatch, this.handleMeasure);
+        } else {
+          this.setState({
+            showMeasure: '',
+          });
+        }
         break;
       case '圈选':
-          clearLayer(mainMap, dispatch);
+        clearLayer(mainMap, dispatch);
         dispatch({
           type: 'mapRelation/queryToolsBtnIndex',
           payload: toolsBtnIndex === 2 ? -1 : 2,
         });
-          if (toolsBtnIndex !== 2) {
-              select({ map: mainMap, view: mapView, dispatch });
-          }
+        if (toolsBtnIndex !== 2) {
+          this.setState({
+            showMeasure: 'select',
+          });
+          select({ map: mainMap, view: mapView, dispatch, handleMeasure: this.handleMeasure });
+        }
         break;
       case '图例':
         this.setState({
@@ -120,10 +131,10 @@ export default class MapTools extends PureComponent {
       default: break;
     }
   };
-  handleMeasure = (key,value) => {
+  handleMeasure = (key, value) => {
     this.setState({
-      [key]: value
-    })
+      [key]: value,
+    });
   };
   render() {
     const { stopPropagation, toolsBtnIndex } = this.props;
@@ -140,11 +151,18 @@ export default class MapTools extends PureComponent {
           {/*<div title="标绘"><Icon title="标绘" type="highlight" /></div>*/}
           <div title="还原"><MyIcon type="icon-78"/></div>
         </div>
-        { showMeasure ? <div className={styles.measure}>
-          <h4>单击开始测量，双击结束测量</h4>
-          { showMeasure === 'polyline' ? <div>距离：{meters}</div> : null }
-          { showMeasure === 'polygon' ? <div>面积：{areas}</div> : null }
-        </div> : null }
+        { showMeasure ? (
+          <div className={styles.measure}>
+            { showMeasure === 'polyline' || showMeasure === 'polygon' ?
+              <div>
+                <h4>单击开始测量，双击结束测量</h4>
+                { showMeasure === 'polyline' ? <div>距离：{meters}</div> : null }
+                { showMeasure === 'polygon' ? <div>面积：{areas}</div> : null }
+              </div> : null }
+            { showMeasure === 'select' ? <h4>单击确定搜索中心与筛选范围</h4> : null }
+            { showMeasure === 'spaceQuery' ? <h4>拖动圆心平移圆圈，拖动边缘按钮缩放圆圈</h4> : null }
+          </div>
+) : null }
       </div>
     );
   }

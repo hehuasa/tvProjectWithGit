@@ -43,7 +43,7 @@ export default class GlobalHeader extends PureComponent {
     // 请求图层信息
     dispatch({
       type: 'map/fetchLayers',
-    })
+    });
     // 请求报警类型
     dispatch({
       type: 'alarm/getAlarmType',
@@ -166,8 +166,6 @@ export default class GlobalHeader extends PureComponent {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       const rawMaterialIds = [fieldsValue.rawMaterialIds];
-      const { alarmTypeId } = fieldsValue;
-
       fieldsValue.casualtys = [];
       fieldsValue.keys.map((obj, i) => {
         if (fieldsValue.location[i] == null && fieldsValue.injured[i] == null && fieldsValue.deaths[i] == null) {
@@ -184,12 +182,12 @@ export default class GlobalHeader extends PureComponent {
         template.postion = fieldsValue.location[i];
         template.injured = fieldsValue.injured[i];
         template.death = fieldsValue.deaths[i];
-        template.reportUserId = fieldsValue.reportUserId[i];
+        template.reportUserID = fieldsValue.reportUserID[i];
         template.reportUserName = fieldsValue.reportUserName[i];
         template.recordTime = fieldsValue.recordTime[i];
         fieldsValue.casualtys.push(JSON.parse(JSON.stringify(template)));
       });
-
+      fieldsValue.areaID = fieldsValue.alarmAreaID;
       delete fieldsValue.probeResourceID1;
       delete fieldsValue.resourceID1;
       delete fieldsValue.rawMaterialIds1;

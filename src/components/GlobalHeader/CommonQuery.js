@@ -108,6 +108,7 @@ export default class CommonQuery extends PureComponent {
     });
   }
   onhandleTableChange = (pagination, filtersArg, sorter) => {
+    const { monitor } = this.props;
     if (!this.props.isUsePage) {
       const { form } = this.props;
       form.validateFields((err, fieldsValue) => {
@@ -118,6 +119,7 @@ export default class CommonQuery extends PureComponent {
             payload: {
               pageNum: pagination.current,
               pageSize: pagination.pageSize,
+              monitor,
               resourceName: fieldsValue.resourceName,
               specialties: fieldsValue.specialties,
               profession: fieldsValue.profession,
@@ -144,7 +146,7 @@ export default class CommonQuery extends PureComponent {
   }
   onHandleSearch = (e) => {
     e.preventDefault();
-    const { form, useChangePage } = this.props;
+    const { form, useChangePage, monitor } = this.props;
     if (useChangePage) { useChangePage(); }
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -153,6 +155,7 @@ export default class CommonQuery extends PureComponent {
         payload: {
           pageNum: 1,
           pageSize: 10,
+          monitor,
           resourceName: fieldsValue.resourceName,
           profession: fieldsValue.profession,
           resourceClassify: fieldsValue.resourceClassify,

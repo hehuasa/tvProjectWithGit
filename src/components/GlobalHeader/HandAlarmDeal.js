@@ -215,6 +215,7 @@ export default class HandAlarmDeal extends PureComponent {
           param.isQuery = true;
           param.fuzzy = true;
           param.orgID = orgID;
+          param.areaID = areaID;
           param.monitor = 1;
           param.pageNum = 1;
           param.pageSize = 10;
@@ -227,6 +228,7 @@ export default class HandAlarmDeal extends PureComponent {
             isUsePage: isUse,
             visible: true,
             clickWhether: id,
+            monitor: 1,
             orgID,
           });
           this.child.setOrgID(orgID);
@@ -262,6 +264,7 @@ export default class HandAlarmDeal extends PureComponent {
             visible: true,
             clickWhether: id,
             orgID: null,
+            monitor: 0,
           });
         });
         break;
@@ -283,6 +286,7 @@ export default class HandAlarmDeal extends PureComponent {
             // resourceIDs,
             pageNum: 1,
             pageSize: 10,
+            monitor: 0,
             isQuery: true,
             fuzzy: true,
           },
@@ -578,7 +582,7 @@ export default class HandAlarmDeal extends PureComponent {
               {form.getFieldDecorator('alarmAreaID')(
                 <Select
                   placeholder="请选择事发区域"
-                  // onChange={this.handleChange}
+                  allowClear
                   optionFilterProp="title"
                   showSearch
                   style={{ width: '100%' }}

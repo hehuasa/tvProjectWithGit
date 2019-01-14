@@ -53,7 +53,6 @@ const getNowTime = () => { nowTime = new Date().getTime(); };
   mainMap: mapConstants.mainMap,
   mapView: mapConstants.view,
   infoPops: map.infoPops,
-  popupScale: map.popupScale,
   mapHeight: homepage.mapHeight,
   videoFooterHeight: homepage.videoFooterHeight,
   ctrlResourceType: resourceTree.ctrlResourceType,
@@ -549,7 +548,8 @@ class AlarmInfo extends PureComponent {
   };
   // 地图联动
   linkMap = () => {
-    const { resourceTree, infoPops, mapView, dispatch, popupScale } = this.props;
+    const { resourceTree, infoPops, mapView, dispatch } = this.props;
+    const { popupScale } = mapConstants;
     const { resourceInfo } = resourceTree;
     const { gISCode, resourceName, processNumber } = resourceInfo;
     searchByAttr({ searchText: gISCode, searchFields: ['ObjCode'] }).then((res) => {
@@ -645,6 +645,8 @@ class AlarmInfo extends PureComponent {
    */
   alarmDeal = () => {
     const { alarmBoardData } = this.props;
+    console.log('点击处理报警alarmBoardData', alarmBoardData)
+    console.log('this.state.alarmSelectIndex', this.state.alarmSelectIndex)
     this.props.dispatch({
       type: 'alarmDeal/saveAlarmInfo',
       payload: alarmBoardData[this.state.alarmSelectIndex],

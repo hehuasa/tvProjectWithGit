@@ -119,9 +119,9 @@ export const handleClick = (event, treeId, treeNode, d, that) => {
   }
 };
 export const handleSelected = (treeId, treeNode, d, that) => {
-  const { dispatch, popupScale, ztreeObj } = that.props;
+  const { dispatch, ztreeObj } = that.props;
   const { gISCode, resourceCode } = treeNode;
-  const { view } = mapConstants;
+  const { view, popupScale } = mapConstants;
   const obj = document.getElementById(`${treeNode.tId}`);
   let parent;
   // 生产监测 特殊处理
@@ -243,9 +243,8 @@ export const handleSelected = (treeId, treeNode, d, that) => {
   }
 };
 export const handleCheck = (event, treeId, treeNode, that) => {
-  console.log('commonTree', treeNode);
-  const { dispatch, ztreeObj, scale, popupScale, resourceGroupByArea, videoFooterHeight, video } = that.props;
-  const { mainMap, view, baseLayer } = mapConstants;
+  const { dispatch, ztreeObj, scale, resourceGroupByArea, videoFooterHeight, video } = that.props;
+  const { mainMap, view, baseLayer, popupScale } = mapConstants;
   const deviceArrayIndex = treeNode.checkClickFunTemplate + treeNode.treeID;
   const { treeID } = treeNode;
   // 隐藏视频

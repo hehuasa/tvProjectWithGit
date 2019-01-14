@@ -33,9 +33,9 @@ const dragEvent = {
   isDrag: false,
 };
 const mapStateToProps = ({ map, mapRelation, homepage, alarm, resourceTree, constantlyData, loading, global, emergency }) => {
-  const { infoWindow, scale, popupScale, baseLayer, trueMapShow, locateTrueMap, mapPoint, screenBeforePoint, searchDeviceArray, screenPoint,
+  const { infoWindow, scale, baseLayer, trueMapShow, locateTrueMap, mapPoint, screenBeforePoint, searchDeviceArray, screenPoint,
     constantlyValue, doorConstantlyValue, doorAreaConstantlyValue, gasConstantlyValue, envConstantlyValue, stopPropagation,
-    vocConstantlyValue, waterConstantlyValue, steamConstantlyValue, contextPosition, isDraw,
+    vocConstantlyValue, waterConstantlyValue, steamConstantlyValue, contextPosition,
     crackingConstantlyValue, generatorConstantlyValue, largeUnitConstantlyValue, boilerConstantlyValue,
   } = map;
   const { infoPops, vocsPopup, alarmIconData, eventIconData, envIconData, mapIconShow, resourceClusterPopup, accessPops, paPopup, popupShow, envIconShow, markShow, markData, markType, clusterPopups, constructMonitorClusterPopup,
@@ -58,8 +58,6 @@ const mapStateToProps = ({ map, mapRelation, homepage, alarm, resourceTree, cons
     mapHeight: homepage.mapHeight,
     scale,
     stopPropagation,
-    isDraw,
-    popupScale,
     baseLayer,
     popupShow,
     envIconShow,

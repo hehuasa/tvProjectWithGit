@@ -19,7 +19,7 @@ const SimpleInfo = ({ style, dispatch, attributes, show }) => {
   };
   const name = attributes.name || attributes['设备名称'] || attributes['建筑名称'] || attributes['罐区名称'] || attributes['区域名称'] || attributes['装置区名称'] || attributes['名称'];
   if (show) {
-    style.width = name.length * 14 + 24 + 24 + 8;
+    style.width = name.length * 15 + 24 + 24 + 8;
   }
   return (
     show ? (

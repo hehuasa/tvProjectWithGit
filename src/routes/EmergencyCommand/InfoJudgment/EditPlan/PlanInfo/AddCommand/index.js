@@ -75,11 +75,6 @@ export default class AddFeature extends PureComponent {
   };
   componentDidMount() {
     const { dispatch, eventID } = this.props;
-    // 根据eventID获取流程节点
-    dispatch({
-      type: 'emergency/getFlowNodeList',
-      payload: { eventID },
-    });
     // 根据eventID获取应急人员
     dispatch({
       type: 'emergency/getCommandReceiverList',
@@ -400,6 +395,22 @@ export default class AddFeature extends PureComponent {
                         <FormItem
                           labelCol={{ span: 8 }}
                           wrapperCol={{ span: 16 }}
+                          label="排列序号"
+                        >
+                          {form.getFieldDecorator('executeIndex', {
+                            initialValue: isAdd ? '' : commandInfo.executeIndex,
+                            rule: [{
+                              type: 'integer', message: '请输入正确的数字', transform(value) { if (value) { return Number(value); } },
+                            }],
+                          })(
+                            <Input placeholder="请输入排列序号" />
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col md={24}>
+                        <FormItem
+                          labelCol={{ span: 8 }}
+                          wrapperCol={{ span: 15 }}
                           label="注意事项"
                         >
                           {form.getFieldDecorator('attention', {
@@ -407,22 +418,6 @@ export default class AddFeature extends PureComponent {
                           rules: [],
                         })(
                           <TextArea placeholder="请输入注意事项" rows={4} />
-                        )}
-                        </FormItem>
-                      </Col>
-                      <Col md={24}>
-                        <FormItem
-                          labelCol={{ span: 8 }}
-                          wrapperCol={{ span: 15 }}
-                          label="排列序号"
-                        >
-                          {form.getFieldDecorator('executeIndex', {
-                          initialValue: isAdd ? '' : commandInfo.executeIndex,
-                          rule: [{
-                            type: 'integer', message: '请输入正确的数字', transform(value) { if (value) { return Number(value); } },
-                          }],
-                        })(
-                          <Input placeholder="请输入排列序号" />
                         )}
                         </FormItem>
                       </Col>

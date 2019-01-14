@@ -5,6 +5,7 @@ import AddTemplate from '../AddTemplate/index';
 export default class AlarmInfo extends PureComponent {
   componentDidMount() {
     const { alarmId } = this.props.alarmInfo;
+    console.log('报警处理页面打开', this.props.alarmInfo)
     if (alarmId) {
       this.props.dispatch({
         type: 'alarmDeal/getAlarmConten',

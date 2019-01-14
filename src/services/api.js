@@ -1,6 +1,6 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
-import jsonpFetch from '../utils/jsonpRequest';
+// import jsonpFetch from '../utils/jsonpRequest';
 import downLoad from '../utils/downLoad';
 
 const path = '/emgc';
@@ -57,6 +57,12 @@ export async function fakeMonitorSideData() {
 // }
 export async function alarmList() {
   return request(`${path}/system/alarmInfo/getAllUntreared`);
+}
+export async function alarmQuery(params) {
+  return request(`${path}/system/alarmInfo/getPageForQuery`, {
+    method: 'POST',
+    body: params,
+  });
 }
 
 export async function clearTwinkle(params) {
@@ -572,13 +578,13 @@ export async function updateTemplate(params) {
   });
 }
 
-export async function videoCtrl(params) {
-  // return request('/api/Service/Notify', {
-  //   method: 'POST',
-  //   body: params,
-  // }, { needParam: false });
-  return jsonpFetch(params);
-}
+// export async function videoCtrl(params) {
+//   // return request('/api/Service/Notify', {
+//   //   method: 'POST',
+//   //   body: params,
+//   // }, { needParam: false });
+//   return jsonpFetch(params);
+// }
 export async function test(params) {
   return request('http://127.0.0.1:4000/resource/resourceTree/getByParentTree', {
     method: 'POST',
@@ -2475,7 +2481,7 @@ export async function deleteOrgAnnex(params) {
     body: params,
   });
 }
-// 删除预案的应急组织
+// 获取方案的应急组织
 export async function getImplOrgAnnex(params) {
   return request(`${path}/system/baseOrgaArchiveInfo/getByExecPlanID`, {
     method: 'POST',

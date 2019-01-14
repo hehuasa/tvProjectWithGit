@@ -100,6 +100,10 @@ export default class PlanInfo extends PureComponent {
           commandVisible: false,
         });
         this.props.dispatch({
+          type: 'emergency/saveCheckedUser',
+          payload: [],
+        });
+        this.props.dispatch({
           type: 'emergency/getEmgcCommandByEventID',
           payload: { eventID, eventExecPlanID },
         });
@@ -622,6 +626,11 @@ export default class PlanInfo extends PureComponent {
         dataIndex: 'executeTime',
         width: win10,
         key: 'executeTime',
+      }, {
+        title: '排列序号',
+        dataIndex: 'executeIndex',
+        width: 100,
+        key: 'executeIndex',
       }, {
         title: '注意事项',
         dataIndex: 'attention',

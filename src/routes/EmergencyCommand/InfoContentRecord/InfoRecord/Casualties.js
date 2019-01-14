@@ -4,7 +4,7 @@ import { Form, Button, Row, Col, Input, Icon } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import styles from './InfoRecord.less';
 
-import AddTemplate from '../../AlarmDeal/AddTemplate';
+import AddTemplate from '../InfoContent/AddTemplate';
 
 @connect(({ emergency, user }) => ({
   emergency,
@@ -46,7 +46,7 @@ export default class Casualties extends PureComponent {
             position: fieldsValue.location[i],
             injured: fieldsValue.injured[i],
             death: fieldsValue.deaths[i],
-            reportUserId: fieldsValue.reportUserId[i],
+            reportUserID: fieldsValue.reportUserID[i],
             reportUserName: fieldsValue.reportUserName[i],
             recordTime: fieldsValue.recordTime[i],
           });

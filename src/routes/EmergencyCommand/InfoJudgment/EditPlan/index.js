@@ -51,6 +51,11 @@ export default class EditPlan extends PureComponent {
       type: 'emergency/saveEventExecPlanID',
       payload: value,
     });
+    // 获取流程节点
+    this.props.dispatch({
+      type: 'emergency/getFlowNodeList',
+      payload: { eventExecPlanID: value },
+    });
     // 根据eventID获取预案基本信息
     this.props.dispatch({
       type: 'emergency/getPlanBaseInfo',
@@ -78,7 +83,7 @@ export default class EditPlan extends PureComponent {
     });
     this.props.dispatch({
       type: 'emergency/getImplOrgAnnex',
-      payload: { eventID, uploadType: 1, eventExecPlanID: value },
+      payload: { eventExecPlanID: value },
     });
     this.props.dispatch({
       type: 'emergency/getImplEmgcProcess',
@@ -93,7 +98,6 @@ export default class EditPlan extends PureComponent {
   };
 
   render() {
-    const { planLevelList, viewNode, current, hideFooter, isFromPlan } = this.props;
     const extra = (
       <div>
           <span className={styles.textSelect}>方案选择</span>
@@ -106,6 +110,7 @@ export default class EditPlan extends PureComponent {
               <Option
                 key={item.eventExecPlanID}
                 value={item.eventExecPlanID}
+                dataRef={item}
               >{item.planName}
               </Option>
               ))}

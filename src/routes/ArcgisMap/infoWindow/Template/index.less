@@ -226,7 +226,7 @@
 }
 .simpleInfo {
   position: absolute;
-  padding-right: 24px;
+  padding-right: 8px;
   line-height: 32px;
   font-size: @public-font-m;
   color: #fff;
@@ -238,9 +238,13 @@
   &:hover {
     background: #2fa162;
   }
+  & i {
+    float: right;
+    line-height: 32px;
+  }
   & span {
     margin-right: 8px;
-    margin-left: 24px;
+    margin-left: 8px;
     &:hover {
       color: @btn-border;
     }

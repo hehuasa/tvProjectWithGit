@@ -2,8 +2,6 @@ import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import pathToRegexp from 'path-to-regexp';
 import { getMenuData } from './menu';
-import request from '../utils/request';
-import HotFurnaceInfo from '../routes/DailyProduction/HotFurnaceInfo';
 
 let routerDataCache;
 
@@ -396,6 +394,10 @@ export const getRouterData = (app) => {
     // 历史应急事件
     '/emgcDrill/historyDrill': {
       component: dynamicWrapper(app, ['emergency'], () => import('../routes/EmergencyCommand/UnhandledEvent/historyDrillEvent')),
+    },
+    // 历史报警列表
+    '/emgcManage/historyAlarmList': {
+      component: dynamicWrapper(app, ['alarmHistory', 'alarm'], () => import('../routes/EmergencyCommand/AlarmHistory/AlarmHistory')),
     },
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),

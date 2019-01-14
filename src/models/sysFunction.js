@@ -46,6 +46,7 @@ export default {
       response.data.sort((a, b) => {
         return a.sortIndex - b.sortIndex;
       });
+
       const trees = response1.data.filter(value => Number(value.treeType) === 1);
       trees.map((item) => {
         item.name = item.treeName;
@@ -321,7 +322,7 @@ export default {
       return {
         ...state,
         oftenTreeDisabled: payload,
-      }
-    }
+      };
+    },
   },
 };

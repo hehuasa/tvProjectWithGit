@@ -1,7 +1,5 @@
 import { alarmList, clearTwinkle, getAlarmType } from '../services/api';
-import { notification } from 'antd';
 import { groupingByType, groupingByArea, groupingByOverview } from '../utils/alarmService';
-import { FormatDuring } from '../utils/utils';
 
 export default {
   namespace: 'alarm',
@@ -86,10 +84,12 @@ export default {
         payload: listByFault,
       });
     },
-    *filter({ payload }, { put }) {
-      const { para, alarms, historyList } = payload;
-      const overView = groupingByOverview({ para, alarms });
-      overView.historyList = historyList;
+    *filter({ payload }, { put, select }) {
+      const { list, groupByOverview, overviewShow } = yield select(({ alarm }) => {
+        return alarm;
+      });
+      const overView = groupingByOverview({ para: overviewShow, alarms: list });
+      overView.historyList = groupByOverview.list;
       // 报警列表（按总览分类）
       yield put({
         type: 'queryOverView',
@@ -120,38 +120,48 @@ export default {
       });
     },
     *del({ payload }, { put, select }) {
-      const { list, listWithFault } = yield select(({ alarm }) => {
+      const { list, listWithFault, listByFault } = yield select(({ alarm }) => {
         return alarm;
       });
-      const listIndex = list.findIndex(value => value.alarmCode === payload.alarm.alarmCode);
-      const listWithFaultIndex = listWithFault.findIndex(value => value.alarmCode === payload.alarm.alarmCode);
+      // 报警列表（原始数值-- 不包含故障）
+      const listIndex = list.findIndex(value => value.alarmCode === payload.alarmCode);
       if (listIndex !== -1) {
         list.splice(listIndex, 1);
+        const group = groupingByType({ alarms: list });
+        const area = groupingByArea({ alarms: list });
+        yield put({
+          type: 'queryList',
+          payload: { list, count: list.length },
+        });
+        // 报警列表（按报警类型分类）
+        yield put({
+          type: 'queryGroup',
+          payload: group,
+        });
+        // 报警列表（按装置 分类）
+        yield put({
+          type: 'queryArea',
+          payload: area,
+        });
       }
+      // 报警列表（原始数值包含故障）
+      const listWithFaultIndex = listWithFault.findIndex(value => value.alarmCode === payload.alarmCode);
       if (listWithFaultIndex !== -1) {
         listWithFault.splice(listWithFaultIndex, 1);
+        yield put({
+          type: 'queryListWithFault',
+          payload: listWithFault,
+        });
       }
-      const group = groupingByType({ alarms: list });
-      const area = groupingByArea({ alarms: list });
-      // 报警列表（原始数值）
-      yield put({
-        type: 'queryListWithFault',
-        payload: listWithFault,
-      });
-      yield put({
-        type: 'queryList',
-        payload: { list, count: list.length },
-      });
-      // 报警列表（按报警类型分类）
-      yield put({
-        type: 'queryGroup',
-        payload: group,
-      });
-      // 报警列表（按装置分类）
-      yield put({
-        type: 'queryArea',
-        payload: area,
-      });
+      // 报警列表（只包含故障）
+      const listByFaultIndex = listByFault.findIndex(value => value.alarmCode === payload.alarmCode);
+      if (listWithFaultIndex !== -1) {
+        listByFault.splice(listByFaultIndex, 1);
+        yield put({
+          type: 'queryListByFault',
+          payload: listByFault,
+        });
+      }
     },
     *clearTwinkle({ payload }, { call }) {
       const response = yield call(clearTwinkle, payload);

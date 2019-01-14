@@ -448,15 +448,12 @@ export const addConstantItem = async ({ baseLayer, layers }) => {
 export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, radius }) => {
   esriLoader.loadModules([
     'esri/widgets/Sketch/SketchViewModel',
-    'esri/views/2d/draw/Draw',
-    'esri/geometry/Circle',
     'esri/geometry/Polyline',
     'esri/geometry/geometryEngine',
     'esri/Graphic',
     'esri/geometry/Point',
     'esri/layers/GraphicsLayer',
-    'esri/geometry/support/webMercatorUtils',
-  ]).then(([SketchViewModel, Draw, Circle, Polyline, geometryEngine, Graphic, Point, GraphicsLayer, WebMercatorUtils]) => {
+  ]).then(([SketchViewModel, Polyline, geometryEngine, Graphic, Point, GraphicsLayer]) => {
     // if (map.findLayerById('空间查询')) {
     //   return false;
     // }
@@ -587,64 +584,39 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
     //   }
     // });
     // // 鼠标按下事件
-    // btnDrag.pointerDownFun = view.on('pointer-down', (evt) => {
-    //   view.hitTest(evt).then(({ results }) => {
-    //     if (results.length > 0) {
-    //       // 拖动按钮
-    //       const dragBtn = results.filter((result) => {
-    //         return result.graphic.attributes.resizeCircle === true;
-    //       })[0];
-    //       if (dragBtn) {
-    //         if (dragBtn.graphic) {
-    //           if (!btnDrag.isStart) {
-    //             btnDrag.isStart = true;
-    //           }
-    //           // evt.stopPropagation();
-    //         }
-    //       }
-    //       // 拖动圆圈
-    //       const circle = results.filter((result) => {
-    //         return result.graphic.attributes.isCircle === true;
-    //       })[0];
-    //       if (circle) {
-    //         if (circle.graphic) {
-    //           center.originPoint = view.toMap({ x: evt.x, y: evt.y });
-    //           if (!btnDrag.circleMove) {
-    //             btnDrag.circleMove = true;
-    //           }
-    //           evt.stopPropagation();
-    //         }
-    //       }
-    //       // 关闭按钮
-    //       const close = results.filter((result) => {
-    //         return result.graphic.attributes.close;
-    //       })[0];
-    //       if (close) {
-    //         // 触发关闭
-    //         delLayer(map, ['空间查询', '地图搜索结果'], dispatch);
-    //         mapConstants.spaceQueryPolygon = {};
-    //         dispatch({
-    //           type: 'mapRelation/queryToolsBtnIndex',
-    //           payload: -1,
-    //         });
-    //         dispatch({
-    //           type: 'map/getDeviceArray',
-    //           payload: [],
-    //         });
-    //         dispatch({
-    //           type: 'map/infoWindow',
-    //           payload: { show: false, load: false },
-    //         });
-    //         // 关闭搜索结果面板
-    //         dispatch({
-    //           type: 'resourceTree/saveCtrlResourceType',
-    //           payload: '',
-    //         });
-    //         evt.stopPropagation();
-    //       }
-    //     }
-    //   });
-    // });
+    const closeClick = view.on('pointer-down', (evt) => {
+      view.hitTest(evt).then(({ results }) => {
+        if (results.length > 0) {
+          // 关闭按钮
+          const close = results.filter((result) => {
+            return result.graphic.attributes.close;
+          })[0];
+          if (close) {
+            // 触发关闭
+            delLayer(map, ['空间查询', '地图搜索结果'], dispatch);
+            mapConstants.spaceQueryPolygon = {};
+            dispatch({
+              type: 'mapRelation/queryToolsBtnIndex',
+              payload: -1,
+            });
+            dispatch({
+              type: 'map/getDeviceArray',
+              payload: [],
+            });
+            dispatch({
+              type: 'map/infoWindow',
+              payload: { show: false, load: false },
+            });
+            // 关闭搜索结果面板
+            dispatch({
+              type: 'resourceTree/saveCtrlResourceType',
+              payload: '',
+            });
+            evt.stopPropagation();
+          }
+        }
+      });
+    });
     // // 地图拖动事件，阻止默认事件冒泡
     // btnDrag.dragFun = view.on('drag', (evt) => {
     //   // 开始画图时禁止拖动
@@ -777,40 +749,47 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
       return false;
     }
     const spaceLayer = new GraphicsLayer({ id: '空间查询' });
-    let sketchViewModel, centerGraphic, edgeGraphic, polylineGraphic, bufferGraphic,
-      centerGeometryAtStart, labelGraphic;
-    let unit = 'meters';
+    let sketchViewModel,
+      centerGraphic,
+      edgeGraphic,
+      closeGraphic,
+      polylineGraphic,
+      bufferGraphic,
+      centerGeometryAtStart,
+      labelGraphic;
+    const unit = 'meters';
     const onMove = (event) => {
       // If the edge graphic is moving, keep the center graphic
       // at its initial location. Only move edge graphic
       if (event.toolEventInfo && event.toolEventInfo.mover.attributes) {
         const toolType = event.toolEventInfo.type;
-        console.log('toolType', toolType);
-        if (toolType === "move-stop") {
-                dispatch({
-                  type: 'resourceTree/saveCtrlResourceType',
-                  payload: '',
-                });
-                dispatch({
-                  type: 'map/getRecenter',
-                  payload: true,
-                });
-                dispatch({
-                  type: 'map/searchDeviceBySpace',
-                  payload: { view, geometry: bufferGraphic.geometry, ids, searchText },
-                }).then(() => {
-                  dispatch({
-                    type: 'resourceTree/saveCtrlResourceType',
-                    payload: 'searchResult',
-                  });
-                });
+        if (toolType === 'move-stop') {
+          view.goTo({ extent: bufferGraphic.geometry.extent.expand(1.6) }).then(() => {
+            dispatch({
+              type: 'resourceTree/saveCtrlResourceType',
+              payload: '',
+            });
+            dispatch({
+              type: 'map/getRecenter',
+              payload: true,
+            });
+            dispatch({
+              type: 'map/searchDeviceBySpace',
+              payload: { view, geometry: bufferGraphic.geometry, ids, searchText },
+            }).then(() => {
+              dispatch({
+                type: 'resourceTree/saveCtrlResourceType',
+                payload: 'searchResult',
+              });
+            });
+          })
         }
         if (event.toolEventInfo.mover.attributes.edge) {
-          if (toolType === "move-start") {
+          if (toolType === 'move-start') {
             centerGeometryAtStart = centerGraphic.geometry;
           }
           // keep the center graphic at its initial location when edge point is moving
-          else if (toolType === "move" || toolType === "move-stop") {
+          else if (toolType === 'move' || toolType === 'move-stop') {
             centerGraphic.geometry = centerGeometryAtStart;
           }
         }
@@ -818,16 +797,16 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
       // the center or edge graphic is being moved, recalculate the buffer
       const vertices = [
         [centerGraphic.geometry.x, centerGraphic.geometry.y],
-        [edgeGraphic.geometry.x, edgeGraphic.geometry.y]
+        [edgeGraphic.geometry.x, edgeGraphic.geometry.y],
       ];
 
       // client-side stats query of features that intersect the buffer
       calculateBuffer(vertices);
 
       // user is clicking on the view... call update method with the center and edge graphics
-      if ((event.state === "cancel" || event.state === "complete")) {
+      if ((event.state === 'cancel' || event.state === 'complete')) {
         sketchViewModel.update([edgeGraphic, centerGraphic], {
-          tool: "move"
+          tool: 'move',
         });
       }
     };
@@ -835,23 +814,23 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
       return new Graphic({
         geometry: geom,
         symbol: {
-          type: "text",
-          color: "#FFEB00",
-          text: length.toFixed(2) + " kilometers",
+          type: 'text',
+          color: '#FFEB00',
+          text: `${length.toFixed(2)} kilometers`,
           xoffset: 50,
           yoffset: 10,
           font: { // autocast as Font
             size: 14,
-            family: "sans-serif"
-          }
-        }
+            family: 'sans-serif',
+          },
+        },
       });
     };
     const calculateBuffer = (vertices) => {
       // Update the geometry of the polyline based on location of edge and center points
       polylineGraphic.geometry = new Polyline({
         paths: vertices,
-        spatialReference: view.spatialReference
+        spatialReference: view.spatialReference,
       });
       // Recalculate the polyline length and buffer polygon
       const length = geometryEngine.geodesicLength(polylineGraphic.geometry,
@@ -865,22 +844,23 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
       // the buffer polygon on the client
       // Update label graphic to show the length of the polyline
       labelGraphic.geometry = edgeGraphic.geometry;
+      closeGraphic.geometry = edgeGraphic.geometry;
       labelGraphic.symbol = {
-        type: "text",
+        type: 'text',
         color: 'rgba(116, 194, 235, 1)',
-        text: length.toFixed(2) + " 米",
-            haloColor: 'black',
-            haloSize: '1px',
+        text: `${length.toFixed(2)} 米`,
+        haloColor: 'black',
+        haloSize: '1px',
         xoffset: 50,
         yoffset: 10,
         font: {
           size: 12,
-          family: "sans-serif",
+          family: 'sans-serif',
           weight: 'bold',
-        }
-      }
+        },
+      };
     };
-    const drawBufferPolygon = (spaceLayer) => {
+    const drawBufferPolygon = () => {
       const centerPoint = point;
       const buffer = geometryEngine.geodesicBuffer(centerPoint, radius,
         unit);
@@ -890,72 +870,78 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
       // Store updated vertices
       const vertices = [
         [centerPoint.x, centerPoint.y],
-        [edgePoint.x, edgePoint.y]
+        [edgePoint.x, edgePoint.y],
       ];
 
       // Create center, edge, polyline and buffer graphics for the first time
       if (!centerGraphic) {
         const polyline = new Polyline({
           paths: vertices,
-          spatialReference: view.spatialReference
+          spatialReference: view.spatialReference,
         });
         // Create the graphics representing the line and buffer
         const pointSymbol = {
-          type: "simple-marker",
-          style: "circle",
+          type: 'simple-marker',
+          style: 'circle',
           size: 10,
-          color: [0, 255, 255, 0.5]
+          color: [0, 255, 255, 0.5],
         };
         centerGraphic = new Graphic({
           geometry: centerPoint,
           symbol: pointSymbol,
           attributes: {
-            center: "center"
-          }
+            center: 'center',
+          },
         });
 
         edgeGraphic = new Graphic({
           geometry: edgePoint,
           symbol: pointSymbol,
           attributes: {
-            edge: "edge"
-          }
+            edge: 'edge',
+          },
         });
-
+        closeGraphic = new Graphic({
+          geometry: edgePoint,
+          symbol: createCloseSy(),
+          attributes: {
+            close: true,
+          },
+        });
         polylineGraphic = new Graphic({
           geometry: polyline,
           symbol: {
-            type: "simple-line",
+            type: 'simple-line',
             color: 'red',
-            width: 2.5
-          }
+            width: 2.5,
+          },
         });
         bufferGraphic = new Graphic({
           geometry: buffer,
           symbol: {
-            type: "simple-fill",
+            type: 'simple-fill',
             color: [255, 1, 5, 0.2],
             outline: {
               color: [255, 1, 5, 1],
               width: 1,
-            }
-          }
+            },
+          },
         });
         labelGraphic = labelLength(edgePoint, radius);
-        view.goTo({ extent: buffer.extent.expand(1.6)}).then(() => {
+        view.goTo({ extent: buffer.extent.expand(1.6) }).then(() => {
           // Add graphics to layer
-          spaceLayer.addMany([centerGraphic, edgeGraphic]);
+          spaceLayer.addMany([centerGraphic, edgeGraphic, closeGraphic]);
           // once center and edge point graphics are added to the layer,
           // call sketch's update method pass in the graphics so that users
           // can just drag these graphics to adjust the buffer
-          setTimeout(function() {
+          setTimeout(() => {
             sketchViewModel.update([edgeGraphic, centerGraphic], {
-              tool: "move"
+              tool: 'move',
             });
           }, 1000);
 
           spaceLayer.addMany([bufferGraphic, polylineGraphic,
-            labelGraphic
+            labelGraphic,
           ]);
           dispatch({
             type: 'resourceTree/saveCtrlResourceType',
@@ -974,8 +960,7 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
               payload: 'searchResult',
             });
           });
-        })
-
+        });
       }
       // Move the center and edge graphics to the new location returned from search
       else {
@@ -985,15 +970,15 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
 
       // Query features that intersect the buffer
       calculateBuffer(vertices);
-    }
+    };
     spaceLayer.on('layerview-create', () => {
       sketchViewModel = new SketchViewModel({
-        view: view,
+        view,
         layer: spaceLayer,
       });
-      // sketchViewModel.updateOnGraphicClick = false;
+      sketchViewModel.updateOnGraphicClick = false;
       drawBufferPolygon(spaceLayer);
-      sketchViewModel.on("update", onMove);
+      sketchViewModel.on('update', onMove);
     });
     // spaceLayer.on('layerview-destroy', () => {
     //   // editAction.complete();
@@ -1012,49 +997,25 @@ export const spaceQuery = async ({ map, view, searchText, ids, dispatch, point, 
   });
 };
 // 选择（框选圈选）
-export const select = async ({ map, view, dispatch }) => {
+export const select = async ({ map, view, dispatch, handleMeasure }) => {
   esriLoader.loadModules([
     'esri/views/2d/draw/Draw',
-    'esri/Graphic',
     'esri/geometry/Point',
     'esri/layers/GraphicsLayer',
-  ]).then(([Draw, Graphic, Point, GraphicsLayer]) => {
+  ]).then(([Draw, Point, GraphicsLayer]) => {
     let action;
+    if (mapConstants.mainMap.findLayerById('圈选')) {
+      if (action) {
+        action.destroy();
+      }
+      return false;
+    }
     const measureLayer = new GraphicsLayer({ id: '圈选' });
     measureLayer.on('layerview-create', () => {
-      const labeling = (poinT) => {
-        const graphic = new Graphic(
-          poinT,
-          {
-            type: 'text',
-            color: 'red',
-            haloColor: 'black',
-            haloSize: '1px',
-            text: '点击确定搜索中心与筛选范围',
-            xoffset: '-20px',
-            yoffset: '-20px',
-            angle,
-            font: {
-              size: 12,
-              family: 'sans-serif',
-            },
-          }, { isText: true }
-        );
-        measureLayer.graphics.add(graphic);
-      };
       const toolBar = new Draw({ view });
       // 激活绘图工具(根据参数决定图形)
       view.focus();
       action = toolBar.create('polygon');
-      action.on('cursor-update', (e) => {
-        measureLayer.graphics.removeAll();
-        const point = new Point({
-          x: e.vertices[e.vertices.length - 1][0],
-          y: e.vertices[e.vertices.length - 1][1],
-          spatialReference: view.spatialReference,
-        });
-        labeling(point);
-      });
       action.on('vertex-add', (e) => {
         const point = new Point({
           x: e.vertices[e.vertices.length - 1][0],
@@ -1063,17 +1024,18 @@ export const select = async ({ map, view, dispatch }) => {
         });
         const screenPoint = view.toScreen(point);
         map.remove(measureLayer);
+        handleMeasure('showMeasure', '');
         dispatch({
           type: 'mapRelation/setSpaceQuery',
           payload: { load: true, show: true, style: { left: screenPoint.x, top: screenPoint.y }, point, screenPoint },
         });
         action.complete();
-        action.destroy();
       });
     });
     measureLayer.on('layerview-destroy', () => {
-      action.complete();
-      action.destroy();
+      if (action) {
+        action.destroy();
+      }
     });
     map.add(measureLayer);
   });
@@ -1082,14 +1044,11 @@ export const select = async ({ map, view, dispatch }) => {
 export const measure = async (map, view, para, dispatch, handleMeasure) => {
   esriLoader.loadModules([
     'esri/widgets/Sketch/SketchViewModel',
-    'esri/views/2d/draw/Draw',
-    'esri/geometry/Polyline',
     'esri/geometry/geometryEngine',
     'esri/Graphic',
     'esri/geometry/Point',
-    'esri/geometry/Polygon',
     'esri/layers/GraphicsLayer',
-  ]).then(([SketchViewModel, Draw, Polyline, geometryEngine, Graphic, Point, Polygon, GraphicsLayer]) => {
+  ]).then(([SketchViewModel, geometryEngine, Graphic, Point, GraphicsLayer]) => {
     if (map.findLayerById('测量')) {
       return false;
     }
@@ -1097,17 +1056,16 @@ export const measure = async (map, view, para, dispatch, handleMeasure) => {
       type: 'simple-marker',
       color: 'rgba(0,0,0,0)',
       size: 5,
-      outline: null
+      outline: null,
     };
     const measureLayer = new GraphicsLayer({ id: '测量' });
-    let close = new Graphic(
+    const close = new Graphic(
       view.center.clone(), closeSy, { close: true }
-      );
+    );
     measureLayer.add(close);
     // 关闭按钮
     const closeMeasure = view.on('click', (e) => {
       view.hitTest(e).then(({ results }) => {
-        console.log(measureLayer.graphics);
         if (results[0]) {
           if (results[0].graphic) {
             if (results[0].graphic.attributes) {
@@ -1126,18 +1084,19 @@ export const measure = async (map, view, para, dispatch, handleMeasure) => {
       });
     });
     view.focus();
+    let toolBar;
     measureLayer.on('layerview-create', () => {
       // 定义绘图对象
-      const toolBar = new SketchViewModel({
+      toolBar = new SketchViewModel({
         layer: measureLayer,
         view,
       });
       toolBar.updateOnGraphicClick = false;
-      toolBar.create(para, { mode: "click" });
+      toolBar.create(para, { mode: 'click' });
       toolBar.polylineSymbol = {
-        type: "simple-line",
+        type: 'simple-line',
         color: 'red',
-        width: 2
+        width: 2,
       };
       toolBar.polygonSymbol = {
         type: 'simple-fill',
@@ -1151,73 +1110,81 @@ export const measure = async (map, view, para, dispatch, handleMeasure) => {
       // 画图与测量
       switch (para) {
         case 'polyline':
-          toolBar.on("create", function(event) {
+          toolBar.on('create', (event) => {
             switch (event.state) {
               case 'start':
-              break;
+                break;
               case 'active':
-              {
-                const { toolEventInfo } = event;
-                const { type }  = toolEventInfo;
-                if (type === 'vertex-add') {
-                  const lineLength = Math.round(geometryEngine.geodesicLength(event.graphic.geometry, 'meters'));
-                  handleMeasure('meters',`${lineLength}米`);
+                {
+                  const { toolEventInfo } = event;
+                  const { type } = toolEventInfo;
+                  if (type === 'vertex-add') {
+                    const lineLength = Math.round(geometryEngine.geodesicLength(event.graphic.geometry, 'meters'));
+                    handleMeasure('meters', `${lineLength}米`);
+                  }
                 }
-              }
                 break;
               case 'complete':
-              {
-                const { geometry } = event.graphic;
-                close.geometry = new Point(geometry.paths[0][geometry.paths[0].length - 1][0], geometry.paths[0][geometry.paths[0].length - 1][1], view.spatialReference);
-                close.symbol = {
-                  type: 'picture-marker',
-                  url: closePic,
-                  width: '16px',
-                  height: '16px',
-                  yoffset: '-12px',
-                  xoffset: '-12px',
-                  angle,
-                };
-                toolBar.cancel();
-              }
-              break;
+                {
+                  const { geometry } = event.graphic;
+                  close.geometry = new Point(geometry.paths[0][geometry.paths[0].length - 1][0], geometry.paths[0][geometry.paths[0].length - 1][1], view.spatialReference);
+                  close.symbol = {
+                    type: 'picture-marker',
+                    url: closePic,
+                    width: '16px',
+                    height: '16px',
+                    yoffset: '-12px',
+                    xoffset: '-12px',
+                    angle,
+                  };
+                  toolBar.cancel();
+                }
+                break;
+              default: break;
             }
           });
           break;
         case 'polygon':
-          toolBar.on("create", function(event) {
+          toolBar.on('create', (event) => {
             switch (event.state) {
               case 'start':
                 break;
               case 'active':
-              {
-                const { toolEventInfo } = event;
-                const { added, type }  = toolEventInfo;
-                if (type === 'vertex-add') {
-                  const area = geometryEngine.geodesicArea(event.graphic.geometry, 'square-meters');
-                  handleMeasure('areas',`${area}平米`);
+                {
+                  const { toolEventInfo } = event;
+                  const { added, type } = toolEventInfo;
+                  if (type === 'vertex-add') {
+                    const area = geometryEngine.geodesicArea(event.graphic.geometry, 'square-meters');
+                    handleMeasure('areas', `${area}平米`);
+                  }
                 }
-              }
                 break;
               case 'complete':
-              {
-                const { geometry } = event.graphic;
-                close.geometry = new Point(geometry.rings[0][geometry.rings[0].length - 1][0], geometry.rings[0][geometry.rings[0].length - 1][1], view.spatialReference);
-                close.symbol = {
-                  type: 'picture-marker',
-                  url: closePic,
-                  width: '16px',
-                  height: '16px',
-                  yoffset: '-12px',
-                  xoffset: '-12px',
-                  angle,
-                };
-                toolBar.cancel();
-              }
+                {
+                  const { geometry } = event.graphic;
+                  close.geometry = new Point(geometry.rings[0][geometry.rings[0].length - 1][0], geometry.rings[0][geometry.rings[0].length - 1][1], view.spatialReference);
+                  close.symbol = {
+                    type: 'picture-marker',
+                    url: closePic,
+                    width: '16px',
+                    height: '16px',
+                    yoffset: '-12px',
+                    xoffset: '-12px',
+                    angle,
+                  };
+                  toolBar.cancel();
+                }
                 break;
+              default: break;
             }
           });
+          break;
+        default: break;
       }
+    });
+    measureLayer.on('layerview-destroy', () => {
+      if (toolBar)
+      toolBar.complete();
     });
     mapConstants.mainMap.add(measureLayer);
   });
@@ -1493,9 +1460,9 @@ export const clustering = async ({ view, dispatch, alarms, graphics, overviewSho
   });
 };
 // 报警聚合
-export const alarmClustering = async ({ view, dispatch, alarms, graphics, overviewShow, popupScale }) => {
+export const alarmClustering = async ({ dispatch, alarms, graphics, overviewShow, popupScale }) => {
   const data = [];
-   for (const graphic of graphics) {
+  for (const graphic of graphics) {
     const obj = {};
     // 位置、地理信息
     const geometry = graphic.geometry.centroid;
@@ -2650,7 +2617,7 @@ export const envMap = ({ view, map, graphics, dispatch }) => {
         dispatch({
           type: 'mapRelation/queryEnvIconData',
           payload: dataArray,
-        })
+        });
       }
     }
   });
@@ -2692,7 +2659,7 @@ export const switchAlarmIcon = ({ layer }) => {
 };
 // 删除警图标
 export const delAlarmAnimation = async (alarmIconData, alarm, dispatch) => {
-  const index = alarmIconData.find(value => value.alarm.resourceGisCode === alarm.resourceGisCode);
+  const index = alarmIconData.findIndex(value => value.alarm.resourceGisCode === alarm.resourceGisCode);
   alarmIconData.splice(index, 1);
   dispatch({
     type: 'mapRelation/queryAlarmIconData',
@@ -2727,97 +2694,97 @@ export const alarmAnimation = async ({ alarm, geometry, alarmIconData, dispatch 
   // esriLoader.loadModules([
   //   'esri/symbols/PictureMarkerSymbol',
   //   'esri/Graphic']).then(([PictureMarkerSymbol, Graphic]) => {
-    const point = mapConstants.view.toScreen(geometry);
-    const style = { left: point.x, top: point.y };
-    alarmIconData.push({ alarm, geometry, style });
-    dispatch({
-      type: 'mapRelation/queryAlarmIconData',
-      payload: alarmIconData,
-    });
-    // const legendLayer = mapLayers.FeatureLayers.find(value => value.mapIcon === alarm.ctrlResourceType);
-    // let normalIconObj = mapLegendList.find(value => legendLayer.mapLayerName.indexOf(value.name) !== -1);
-    // let layerName = '';
-    // try {
-    //   layerName = legendLayer.mapLayerName + alarm.alarmType.dangerCoefficient;
-    // } catch (e) {
-    // }
-    // if (legendLayer) {
-    //   normalIconObj = mapLegendListWithAlarm.find(value => layerName.indexOf(value.name) !== -1);
-    // }
-    // const pictureMarkerSymbol = new PictureMarkerSymbol({ url: normalIconObj.url, width: '32px', height: '32px', angle });
-    // const alarmGraphic = new Graphic(geometry, pictureMarkerSymbol, { ...alarm, symbolObj: pictureMarkerSymbol });
-    // // 新建报警图标
-    // mapConstants.alarmGraphics.push(alarmGraphic);
+  const point = mapConstants.view.toScreen(geometry);
+  const style = { left: point.x, top: point.y };
+  alarmIconData.push({ alarm, geometry, style });
+  dispatch({
+    type: 'mapRelation/queryAlarmIconData',
+    payload: alarmIconData,
+  });
+  // const legendLayer = mapLayers.FeatureLayers.find(value => value.mapIcon === alarm.ctrlResourceType);
+  // let normalIconObj = mapLegendList.find(value => legendLayer.mapLayerName.indexOf(value.name) !== -1);
+  // let layerName = '';
+  // try {
+  //   layerName = legendLayer.mapLayerName + alarm.alarmType.dangerCoefficient;
+  // } catch (e) {
+  // }
+  // if (legendLayer) {
+  //   normalIconObj = mapLegendListWithAlarm.find(value => layerName.indexOf(value.name) !== -1);
+  // }
+  // const pictureMarkerSymbol = new PictureMarkerSymbol({ url: normalIconObj.url, width: '32px', height: '32px', angle });
+  // const alarmGraphic = new Graphic(geometry, pictureMarkerSymbol, { ...alarm, symbolObj: pictureMarkerSymbol });
+  // // 新建报警图标
+  // mapConstants.alarmGraphics.push(alarmGraphic);
   // });
 };
 // 新建事件图标
 export const addEventIcon = (events, dispatch) => {
   // esriLoader.loadModules([
   //   'esri/layers/GraphicsLayer', 'esri/Graphic']).then(([GraphicsLayer, Graphic]) => {
-    // const { mainMap } = mapConstants;
-    // let eventLayer = mainMap.findLayerById('事件专题图');
-    // if (!eventLayer) {
-    //   eventLayer = new GraphicsLayer({ id: '事件专题图', minScale: mapConstants.popupScale });
-    //   mainMap.add(eventLayer);
-    // }
-    const eventSy = {
-      type: 'picture-marker',
-      url: eventIcon,
-      width: '32px',
-      height: '32px',
-      angle,
-    };
+  // const { mainMap } = mapConstants;
+  // let eventLayer = mainMap.findLayerById('事件专题图');
+  // if (!eventLayer) {
+  //   eventLayer = new GraphicsLayer({ id: '事件专题图', minScale: mapConstants.popupScale });
+  //   mainMap.add(eventLayer);
+  // }
+  const eventSy = {
+    type: 'picture-marker',
+    url: eventIcon,
+    width: '32px',
+    height: '32px',
+    angle,
+  };
     // 有报警探测的图层
-    const alarmLayerIds = [];
-    const eventArray = [];
-    let eventIndex = 0;
-    const layers = mapLayers.FeatureLayers.filter(value => value.isAlarmLayer);
-    for (const item of layers) {
-      alarmLayerIds.push(item.id);
-    }
-    for (const event of events) {
-      if (event.gISCode !== null) {
-        searchByAttr({ searchText: event.gISCode, searchFields: ['ObjCode'], layerIds: alarmLayerIds }).then((res) => {
-          if (res[0]) {
-            // 在报警列表里做一个标记
-            const index = mapConstants.alarmGraphics.findIndex(value => value.attributes.resourceGisCode === event.gISCode);
-            if (index !== -1) {
-              mapConstants.alarmGraphics[index].attributes.isEvent = true;
-            }
-            const newGeo = transToPoint(res[0].feature.geometry);
-            const { x, y } = mapConstants.view.toScreen(newGeo);
-            // const eventGraphic = new Graphic(newGeo, eventSy, { ...res[0].feature.attributes, event, isEvent: true });
-            // eventLayer.graphics.add(eventGraphic);
-            eventArray.push({
-              event: { ...res[0].feature.attributes, event, isEvent: true }, geometry: newGeo, style: { top: y, left: x },
-            });
-            eventIndex += 1;
-            if (eventIndex === events.length) {
-              dispatch({
-                type: 'mapRelation/queryEventIconData',
-                payload: eventArray,
-              });
-            }
-          } else {
-            eventIndex += 1;
-            if (eventIndex === events.length) {
-              dispatch({
-                type: 'mapRelation/queryEventIconData',
-                payload: eventArray,
-              });
-            }
+  const alarmLayerIds = [];
+  const eventArray = [];
+  let eventIndex = 0;
+  const layers = mapLayers.FeatureLayers.filter(value => value.isAlarmLayer);
+  for (const item of layers) {
+    alarmLayerIds.push(item.id);
+  }
+  for (const event of events) {
+    if (event.gISCode !== null) {
+      searchByAttr({ searchText: event.gISCode, searchFields: ['ObjCode'], layerIds: alarmLayerIds }).then((res) => {
+        if (res[0]) {
+          // 在报警列表里做一个标记
+          const index = mapConstants.alarmGraphics.findIndex(value => value.attributes.resourceGisCode === event.gISCode);
+          if (index !== -1) {
+            mapConstants.alarmGraphics[index].attributes.isEvent = true;
           }
-        });
-      } else {
-        eventIndex += 1;
-        if (eventIndex === events.length) {
-          dispatch({
-            type: 'mapRelation/queryEventIconData',
-            payload: eventArray,
+          const newGeo = transToPoint(res[0].feature.geometry);
+          const { x, y } = mapConstants.view.toScreen(newGeo);
+          // const eventGraphic = new Graphic(newGeo, eventSy, { ...res[0].feature.attributes, event, isEvent: true });
+          // eventLayer.graphics.add(eventGraphic);
+          eventArray.push({
+            event: { ...res[0].feature.attributes, event, isEvent: true }, geometry: newGeo, style: { top: y, left: x },
           });
+          eventIndex += 1;
+          if (eventIndex === events.length) {
+            dispatch({
+              type: 'mapRelation/queryEventIconData',
+              payload: eventArray,
+            });
+          }
+        } else {
+          eventIndex += 1;
+          if (eventIndex === events.length) {
+            dispatch({
+              type: 'mapRelation/queryEventIconData',
+              payload: eventArray,
+            });
+          }
         }
+      });
+    } else {
+      eventIndex += 1;
+      if (eventIndex === events.length) {
+        dispatch({
+          type: 'mapRelation/queryEventIconData',
+          payload: eventArray,
+        });
       }
     }
+  }
   // });
 };
 // 新建报警图标(传入PictureMarkerSymbol, Graphic)
@@ -2930,7 +2897,7 @@ export const hoveringAlarm = ({ geometry, alarm, infoPops, dispatch, iconData, i
   }
 };
 // 批量增删改报警图标
-export const addMapAlarms = ({ alarmIconData, iconObj, dispatch, scale, alarms, historyList }) => {
+export const addMapAlarms = ({ alarmIconData, dispatch, alarms, historyList }) => {
   dispatch({
     type: 'alarm/queryDrawing',
     payload: true,
@@ -2944,7 +2911,6 @@ export const addMapAlarms = ({ alarmIconData, iconObj, dispatch, scale, alarms, 
       const newAlarms = []; // 去重
       const newHistoryList = [];
       for (const item of alarms) {
-
         if (!newAlarms.find(value => value.resourceGisCode === item.resourceGisCode)) {
           newAlarms.push(item);
         }
@@ -2996,58 +2962,74 @@ export const addMapAlarms = ({ alarmIconData, iconObj, dispatch, scale, alarms, 
       // 返回几何信息
       findParams.returnGeometry = true;
       findParams.contains = false;
-      findParams.layerIds = alarmLayerIds;
+      // findParams.layerIds = alarmLayerIds;
       // 查询的字段
       findParams.searchFields = ['ObjCode'];
-
       // 新建或获取报警动画图层
       // const alarmLayer = mapConstants.mainMap.findLayerById('报警动画');
       for (const alarm of addArray) {
         if (alarm.resourceGisCode) {
           findParams.searchText = alarm.resourceGisCode;
-          const ShowFindResult = (findTaskResult) => {
-            const res = findTaskResult.results;
-            if (res.length > 0) {
-              index += 1;
-              // if (addArray.length === 1) {
-              //   view.goTo({ center: res[0].feature.geometry, scale: scale - 10 }).then(() => {
-              //     addAlarmAnimation({ PictureMarkerSymbol, Graphic, map, geometry: res[0].feature.geometry, alarm, iconObj, scale, layer: alarmLayer, dispatch }).then(() => {
-              //     });
-              //   });
-              // } else {
-              const point = mapConstants.view.toScreen(res[0].feature.geometry);
-              const style = { left: point.x, top: point.y };
-              alarmIconData.push({ alarm, geometry: res[0].feature.geometry, style });
-              // addAlarmAnimation({ PictureMarkerSymbol, Graphic, map, geometry: res[0].feature.geometry, alarm, iconObj, scale, layer: alarmLayer, dispatch });
-              // }
-              if (index === addArray.length) {
-                dispatch({
-                  type: 'alarm/queryDrawing',
-                  payload: false,
-                });
-                dispatch({
-                  type: 'mapRelation/queryAlarmIconData',
-                  payload: alarmIconData,
-                });
-                resolve();
+          const layer = mapLayers.FeatureLayers.find(value => value.ctrlResourceType && alarm.ctrlResourceType.indexOf(value.ctrlResourceType) !== -1);
+          if (layer) {
+            findParams.layerIds = [layer.id];
+            const ShowFindResult = (findTaskResult) => {
+              const res = findTaskResult.results;
+              if (res.length > 0) {
+                index += 1;
+                // if (addArray.length === 1) {
+                //   view.goTo({ center: res[0].feature.geometry, scale: scale - 10 }).then(() => {
+                //     addAlarmAnimation({ PictureMarkerSymbol, Graphic, map, geometry: res[0].feature.geometry, alarm, iconObj, scale, layer: alarmLayer, dispatch }).then(() => {
+                //     });
+                //   });
+                // } else {
+                const point = mapConstants.view.toScreen(res[0].feature.geometry);
+                const style = { left: point.x, top: point.y };
+                alarmIconData.push({ alarm, geometry: res[0].feature.geometry, style });
+                // addAlarmAnimation({ PictureMarkerSymbol, Graphic, map, geometry: res[0].feature.geometry, alarm, iconObj, scale, layer: alarmLayer, dispatch });
+                // }
+                if (index === addArray.length) {
+                  dispatch({
+                    type: 'alarm/queryDrawing',
+                    payload: false,
+                  });
+                  dispatch({
+                    type: 'mapRelation/queryAlarmIconData',
+                    payload: alarmIconData,
+                  });
+                  resolve();
+                }
+              } else {
+                alarmIconData.push({ alarm, geometry: null, style: null });
+                index += 1;
+                if (index === addArray.length) {
+                  dispatch({
+                    type: 'mapRelation/queryAlarmIconData',
+                    payload: alarmIconData,
+                  });
+                  dispatch({
+                    type: 'alarm/queryDrawing',
+                    payload: false,
+                  });
+                  resolve();
+                }
               }
-            } else {
-              alarmIconData.push({ alarm, geometry: null, style: null });
-              index += 1;
-              if (index === addArray.length) {
-                dispatch({
-                  type: 'mapRelation/queryAlarmIconData',
-                  payload: alarmIconData,
-                });
-                dispatch({
-                  type: 'alarm/queryDrawing',
-                  payload: false,
-                });
-                resolve();
-              }
+            };
+            findTask.execute(findParams).then(ShowFindResult);
+          } else {
+            index += 1;
+            if (index === addArray.length) {
+              dispatch({
+                type: 'mapRelation/queryAlarmIconData',
+                payload: alarmIconData,
+              });
+              dispatch({
+                type: 'alarm/queryDrawing',
+                payload: false,
+              });
+              resolve();
             }
-          };
-          findTask.execute(findParams).then(ShowFindResult);
+          }
         } else {
           index += 1;
           if (index === addArray.length) {
@@ -3183,7 +3165,7 @@ export const trueMapTem = async (map, view, geometry, dispatch) => {
   });
 };
 // 地图搜索后添加定位图标
-export const addSearchIcon = async (map, view, devices, dispatch, isRecenter) => {
+export const addSearchIcon = async (map, view, devices, dispatch) => {
   esriLoader.loadModules([
     'esri/layers/GraphicsLayer',
     'esri/symbols/PictureMarkerSymbol',
@@ -3213,10 +3195,9 @@ export const addSearchIcon = async (map, view, devices, dispatch, isRecenter) =>
         const testGraphic = new Graphic(geometry, {
           type: 'text',
           color: 'white',
-          haloColor: 'black',
-          haloSize: '1px',
           text: index + 1,
           angle,
+          xoffset: -0.2,
           font: {
             size: 10,
             family: 'sans-serif',

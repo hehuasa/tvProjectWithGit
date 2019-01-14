@@ -403,20 +403,20 @@ class BasicLayout extends React.PureComponent {
   };
   // 处理websocket
   onmessage = (alarmList) => {
-    let newAlarms;
-    newAlarms = this.handleAlarmData(window.socketAlarms.data[0], alarmList);
+    const newAlarms = this.handleAlarmData(window.socketAlarms.data[0], alarmList);
     window.socketAlarms.data.shift();
     if (window.socketAlarms.data.length > 0) {
-      this.onmessage(newAlarms)
+      this.onmessage(newAlarms);
     } else {
       const { dispatch, map, alarm } = this.props;
-      const { popupScale, infoPops } = map;
+      const { infoPops } = map;
+      const { popupScale } = mapConstants;
       const { linkMap, linkVideo } = alarm;
       window.socketAlarms.isDealing = false;
       // 更新报警列表
       dispatch({
         type: 'alarm/fetch',
-        payload: { list: newAlarms }
+        payload: { list: newAlarms },
       }).then(() => {
         dispatch(
           {
@@ -429,34 +429,28 @@ class BasicLayout extends React.PureComponent {
           }
         ).then(() => {
           // 更新报警聚合
-          const area = mapLayers.AreaLayers[0];
-          const subLayer = mapConstants.baseLayer.findSublayerById(area.id || null);
-          const queryArea = subLayer.createQuery();
-          queryArea.outFields = ['*'];
-          subLayer.queryFeatures(queryArea).then((res) => {
-            alarmClustering({ dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: res.features, overviewShow: this.props.alarm.overviewShow, popupScale }).then(() => {
-              dispatch({
-                type: 'sysFunction/queryOftenTreeDisabled',
-                payload: false,
-              });
-            })
+          alarmClustering({ dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: this.props.alarm.overviewShow, popupScale }).then(() => {
+            dispatch({
+              type: 'sysFunction/queryOftenTreeDisabled',
+              payload: false,
+            });
           });
           // 报警图标重画
           dispatch({
             type: 'sysFunction/queryOftenTreeDisabled',
             payload: true,
           });
-          addMapAlarms({ iconObj: this.props.alarmIconObj, dispatch, alarmIconData: this.props.alarmIconData, scale: popupScale, alarms: this.props.alarm.groupByOverview.list, historyList: this.props.alarm.groupByOverview.historyList }).then(() => {
+          addMapAlarms({ dispatch, alarmIconData: this.props.alarmIconData, alarms: this.props.alarm.groupByOverview.list, historyList: this.props.alarm.groupByOverview.historyList }).then(() => {
             dispatch({
               type: 'sysFunction/queryOftenTreeDisabled',
               payload: false,
             });
             // 联动地图与视频
             if (linkMap) {
-              for (const alarm of window.socketAlarms.update) {
+              for (const alarmU of window.socketAlarms.update) {
                 notification.warning({
                   message: '报警消息有更新',
-                  description: `设备名称: ${alarm.resourceName}`,
+                  description: `设备名称: ${alarmU.resourceName}`,
                   placement: 'bottomRight',
                   style: {
                     width: 300,
@@ -467,10 +461,10 @@ class BasicLayout extends React.PureComponent {
             }
             window.socketAlarms.update = [];
             if (linkMap) {
-              for (const alarm of window.socketAlarms.del) {
+              for (const alarmD of window.socketAlarms.del) {
                 notification.info({
                   message: '报警已处理或取消',
-                  description: `设备名称: ${alarm.resourceName}`,
+                  description: `设备名称: ${alarmD.resourceName}`,
                   placement: 'bottomRight',
                   style: {
                     width: 300,
@@ -480,12 +474,12 @@ class BasicLayout extends React.PureComponent {
               }
             }
             window.socketAlarms.del = [];
-            for (const [index, alarm] of window.socketAlarms.add.entries()) {
+            for (const [index, alarmA] of window.socketAlarms.add.entries()) {
               // 播放该设备关联的视频
               if (linkVideo) {
                 dispatch({
                   type: 'resourceTree/getBeMonitorsByResourceID',
-                  payload: { resourceID: alarm.resourceID, ctrlResourceType: '101.102.101' },
+                  payload: { resourceID: alarmA.resourceID, ctrlResourceType: '101.102.101' },
                 })
                   .then(() => {
                     if (this.props.resourceTree.resourceInfo.beMonitorObjs && this.props.resourceTree.resourceInfo.beMonitorObjs.length > 0) {
@@ -496,7 +490,7 @@ class BasicLayout extends React.PureComponent {
               }
               notification.warning({
                 message: '接收到新报警消息',
-                description: `设备名称: ${alarm.resourceName || ''}`,
+                description: `设备名称: ${alarmA.resourceName || ''}`,
                 placement: 'bottomRight',
                 style: {
                   width: 300,
@@ -505,11 +499,11 @@ class BasicLayout extends React.PureComponent {
               });
               if (index === window.socketAlarms.add.length - 1) {
                 if (linkMap) {
-                  alarm.isSelected = true;
+                  alarmA.isSelected = true;
                   // 出于性能与实际使用，只定位最后一条报警
                   dispatch({
                     type: 'map/searchDeviceByAttr',
-                    payload: { searchText: alarm.resourceGisCode, searchFields: ['ObjCode'] },
+                    payload: { searchText: alarmA.resourceGisCode, searchFields: ['ObjCode'] },
                   })
                     .then(() => {
                       if (!this.props.map.stopPropagation) {
@@ -521,10 +515,10 @@ class BasicLayout extends React.PureComponent {
                             // 请求报警对应的资源(如监控对象)
                             dispatch({
                               type: 'resourceTree/selectByGISCode',
-                              payload: { gISCode: alarm.resourceGisCode },
+                              payload: { gISCode: alarmA.resourceGisCode },
                             });
-                            const iconIndex = this.props.alarmIconData.findIndex(value => value.alarm.resourceGisCode === alarm.resourceGisCode);
-                            hoveringAlarm({ geometry: this.props.map.searchDeviceArray[0].feature.geometry, alarm, infoPops, dispatch, iconData: this.props.alarmIconData, iconDataType: 'alarm', iconIndex });
+                            const iconIndex = this.props.alarmIconData.findIndex(value => value.alarm.resourceGisCode === alarmA.resourceGisCode);
+                            hoveringAlarm({ geometry: this.props.map.searchDeviceArray[0].feature.geometry, alarm: alarmA, infoPops, dispatch, iconData: this.props.alarmIconData, iconDataType: 'alarm', iconIndex });
                             window.socketAlarms.add = [];
                           });
                       }
@@ -535,10 +529,8 @@ class BasicLayout extends React.PureComponent {
               }
             }
           });
-
-        })
-      })
-
+        });
+      });
     }
   };
   handleAlarm = (socketMessage) => {
@@ -546,10 +538,10 @@ class BasicLayout extends React.PureComponent {
       const { dispatch, map, alarm, alarmIconData } = this.props;
       const { mainMap, view } = mapConstants;
       const { linkMap, linkVideo } = alarm;
-      const { popupScale } = map;
-        // 判断是新增报警还是取消报警（or处理报警）
-        switch (Number(socketMessage.B.alarmStatue)) {
-          case 1: // 新增报警
+      const { popupScale } = mapConstants;
+      // 判断是新增报警还是取消报警（or处理报警）
+      switch (Number(socketMessage.B.alarmStatue)) {
+        case 1: // 新增报警
           {
             // 遍历查看是否报警信息更新
             let isNew = true;
@@ -568,25 +560,18 @@ class BasicLayout extends React.PureComponent {
                 type: 'alarm/add',
                 payload: { list: alarm.list, listWithFault: alarm.listWithFault },
               }).then(
-                () =>
-              {
-                dispatch({
-                  type: 'alarm/filter',
-                  payload: {
-                    historyList: this.props.alarm.groupByOverview.list,
-                    alarms: alarm.listWithFault,
-                    para: alarm.overviewShow,
-                  },
-                }).then(() => {
+                () => {
+                  dispatch({
+                    type: 'alarm/filter',
+                    payload: {
+                      historyList: this.props.alarm.groupByOverview.list,
+                      alarms: alarm.listWithFault,
+                      para: alarm.overviewShow,
+                    },
+                  }).then(() => {
                     // 更新报警聚合
-                    const area = mapLayers.AreaLayers[0];
-                    const subLayer = mapConstants.baseLayer.findSublayerById(area.id || null);
-                    const queryArea = subLayer.createQuery();
-                    queryArea.outFields = ['*'];
-                    subLayer.queryFeatures(queryArea).then((res) => {
-                      alarmClustering({ view, dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: res.features, overviewShow: this.props.alarm.overviewShow, popupScale }).then(() => {
-                        resolve();
-                      });
+                    alarmClustering({ view, dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: this.props.alarm.overviewShow, popupScale }).then(() => {
+                      resolve();
                     });
                     if (linkVideo === 0) {
                       // 播放该设备关联的视频
@@ -600,13 +585,12 @@ class BasicLayout extends React.PureComponent {
                         }
                       });
                     }
+                  });
                 });
-              });
               dispatch({
                 type: 'map/searchDeviceByAttr',
                 payload: { searchText: socketMessage.B.resourceGisCode, searchFields: ['ObjCode'] },
-              }).then(() =>
-              {
+              }).then(() => {
                 // 是否联动地图
                 switch (linkMap) {
                   case 0:
@@ -689,65 +673,58 @@ class BasicLayout extends React.PureComponent {
                 payload: { list: alarm.list, listWithFault: alarm.listWithFault },
               }).then(() => {
                 resolve();
-              })
+              });
             }
           }
-            break;
-          default: // 报警取消或被处理
-            notification.info({
-              message: '报警已处理或取消',
-              description: `设备名称: ${socketMessage.B.resourceName}`,
-              placement: 'bottomRight',
-              style: {
-                width: 300,
-                marginLeft: 80,
-              },
-            });
-            // 删除报警消息
-            for (const item of alarm.list) {
-              if (item.alarmCode === socketMessage.B.alarmCode) {
-                alarm.list.splice(alarm.list.findIndex(value => value === item), 1);
-                break;
-              }
+          break;
+        default: // 报警取消或被处理
+          notification.info({
+            message: '报警已处理或取消',
+            description: `设备名称: ${socketMessage.B.resourceName}`,
+            placement: 'bottomRight',
+            style: {
+              width: 300,
+              marginLeft: 80,
+            },
+          });
+          // 删除报警消息
+          for (const item of alarm.list) {
+            if (item.alarmCode === socketMessage.B.alarmCode) {
+              alarm.list.splice(alarm.list.findIndex(value => value === item), 1);
+              break;
             }
-            const needDelAlarm = alarm.list.find(value => value.alarmCode === socketMessage.B.alarmCode);
-            if (needDelAlarm) {
+          }
+          const needDelAlarm = alarm.list.find(value => value.alarmCode === socketMessage.B.alarmCode);
+          if (needDelAlarm) {
+            dispatch({
+              type: 'alarm/del',
+              payload: { alarm: socketMessage.B },
+            }).then(() => {
               dispatch({
-                type: 'alarm/del',
-                payload: { alarm: socketMessage.B },
+                type: 'alarm/filter',
+                payload: {
+                  historyList: this.props.alarm.groupByOverview.list,
+                  alarms: this.props.alarm.listWithFault,
+                  para: this.props.alarm.overviewShow,
+                },
               }).then(() => {
-                dispatch({
-                  type: 'alarm/filter',
-                  payload: {
-                    historyList: this.props.alarm.groupByOverview.list,
-                    alarms: this.props.alarm.listWithFault,
-                    para: this.props.alarm.overviewShow,
-                  },
-                }).then(() => {
-                  // 更新报警聚合
-                  const area = mapLayers.AreaLayers[0];
-                  const subLayer = mapConstants.baseLayer.findSublayerById(area.id);
-                  const queryArea = subLayer.createQuery();
-                  queryArea.outFields = ['*'];
-                  subLayer.queryFeatures(queryArea).then((res) => {
-                    alarmClustering({ view, dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: res.features, overviewShow: this.props.alarm.overviewShow, popupScale }).then(() => {
-                      resolve();
-                    });
-                  });
+                // 更新报警聚合
+                alarmClustering({ view, dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: this.props.alarm.overviewShow, popupScale }).then(() => {
+                  resolve();
                 });
               });
+            });
 
-              // 删除报警图标
-              if (mainMap.findLayerById) {
-                delAlarmAnimation(alarmIconData, socketMessage.B, dispatch);
-              }
-            } else {
-              resolve();
+            // 删除报警图标
+            if (mainMap.findLayerById) {
+              delAlarmAnimation(alarmIconData, socketMessage.B, dispatch);
             }
-            break;
-        }
-    })
-
+          } else {
+            resolve();
+          }
+          break;
+      }
+    });
   };
   handleVideoPlay = (item) => {
     const { dispatch, videoFooterHeight } = this.props;
@@ -843,24 +820,24 @@ class BasicLayout extends React.PureComponent {
     // 判断是新增报警还是取消报警（or处理报警）
     switch (Number(socketMessage.B.alarmStatue)) {
       case 1: // 新增报警
-      {
+        {
         // 遍历查看是否报警信息更新
-        let isNew = true;
-        let isUpdate = false;
-        const alarmIndex = alarmList.findIndex(value => value.alarmCode === socketMessage.B.alarmCode);
-        if (alarmIndex !== -1) {
-          isNew = false;
-          if (alarmList[alarmIndex].alarmType.dangerCoefficient !== socketMessage.B.alarmType.dangerCoefficient) {
-            isUpdate = true;
-            window.socketAlarms.update.push(socketMessage.B);
+          let isNew = true;
+          let isUpdate = false;
+          const alarmIndex = alarmList.findIndex(value => value.alarmCode === socketMessage.B.alarmCode);
+          if (alarmIndex !== -1) {
+            isNew = false;
+            if (alarmList[alarmIndex].alarmType.dangerCoefficient !== socketMessage.B.alarmType.dangerCoefficient) {
+              isUpdate = true;
+              window.socketAlarms.update.push(socketMessage.B);
+            }
+            alarmList.splice(alarmIndex, 1, socketMessage.B);
+          } else {
+            window.socketAlarms.add.push(socketMessage.B);
+            alarmList.push(socketMessage.B);
           }
-          alarmList.splice(alarmIndex, 1, socketMessage.B);
-        } else {
-          window.socketAlarms.add.push(socketMessage.B);
-          alarmList.push(socketMessage.B)
-        }
         // console.log('判断完成 isNew isUpdate ', isNew, isUpdate);
-      }
+        }
         break;
       default:
         // 删除报警消息
@@ -870,10 +847,12 @@ class BasicLayout extends React.PureComponent {
         //     break;
         //   }
         // }
-        const delIndex = alarmList.findIndex(value => value.alarmCode === socketMessage.B.alarmCode);
-        if (delIndex !== -1) {
-          window.socketAlarms.del.push(socketMessage.B);
-          alarmList.splice(delIndex, 1);
+        {
+          const delIndex = alarmList.findIndex(value => value.alarmCode === socketMessage.B.alarmCode);
+          if (delIndex !== -1) {
+            window.socketAlarms.del.push(socketMessage.B);
+            alarmList.splice(delIndex, 1);
+          }
         }
         break;
     }
@@ -882,8 +861,8 @@ class BasicLayout extends React.PureComponent {
   // 处理视频插件的通讯
   onmessage1 = ({ data }) => {
     const { dispatch, map } = this.props;
-    const { view } = mapConstants;
-    const { infoPops, popupScale } = map;
+    const { view, popupScale } = mapConstants;
+    const { infoPops } = map;
     if (data === 'Avengers') {
       dispatch({
         type: 'video/getLoaded',
@@ -976,7 +955,7 @@ class BasicLayout extends React.PureComponent {
         { showDrpScreen ?
           <DrpScreen /> : (
             <div>
-              { mapConstants.view.scale ?  <Websocket onmessage={this.onmessage} alarmList={alarm.list} socketUrl={serviceUrl.socketUrl} currentUser={currentUser} /> : null }
+              { mapConstants.view.scale ? <Websocket onmessage={this.onmessage} alarmList={alarm.list} socketUrl={serviceUrl.socketUrl} currentUser={currentUser} /> : null }
               <VideoSocket onmessage={this.onmessage1} />
               <Header style={{ padding: 0, height: 90, lineHeight: 90 }}>
                 <GlobalHeader

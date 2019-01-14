@@ -2,7 +2,7 @@ import {
   addLayer, delLayer, addVocsIcon, transToPoint, addConstructIcon, alarmClustering,
   solidWarehouseDetail, paSystemDetail, addMapAlarms, getBordStyle,
 } from '../../utils/mapService';
-import {changeVideoPosition, changeVideoSize, resetAccessStyle, returnHome} from '../../utils/utils';
+import { changeVideoPosition, changeVideoSize, resetAccessStyle, returnHome } from '../../utils/utils';
 import { constantlyModal, infoConstantly, infoPopsModal } from '../../services/constantlyModal';
 import { mapConstants, mapLayers } from '../../services/mapConstant';
 
@@ -119,13 +119,13 @@ export const handleClick = (event, treeId, treeNode, that) => {
   }
 };
 export const handleSelected = (treeId, treeNode, that) => {
-  const { dispatch, popupScale, ztreeObj } = that.props;
+  const { dispatch, ztreeObj } = that.props;
   const { gISCode, resourceCode } = treeNode;
-  const { view } = mapConstants;
+  const { view, popupScale } = mapConstants;
   const obj = document.getElementById(`${treeNode.tId}`);
   let parent;
   // 生产监测 特殊处理
-  if (treeNode.checkClickFunTemplate === 'StatusGraphics' || treeNode.checkClickFunTemplate === 'DeviceMonitor' ) {
+  if (treeNode.checkClickFunTemplate === 'StatusGraphics' || treeNode.checkClickFunTemplate === 'DeviceMonitor') {
     const inputs = document.getElementsByName('StatusGraphics&DeviceMonitor');
     for (const input of inputs) {
       if (input.checked) {
@@ -242,8 +242,8 @@ export const handleSelected = (treeId, treeNode, that) => {
   }
 };
 export const handleCheck = (event, treeId, treeNode, that) => {
-  const { dispatch, ztreeObj, popupScale, videoFooterHeight, video } = that.props;
-  const { mainMap, view, baseLayer } = mapConstants;
+  const { dispatch, videoFooterHeight, video } = that.props;
+  const { mainMap, view, baseLayer, popupScale } = mapConstants;
   const deviceArrayIndex = treeNode.checkClickFunTemplate + treeNode.treeID;
   const { treeID } = treeNode;
   // 返回首页
@@ -289,100 +289,88 @@ export const handleCheck = (event, treeId, treeNode, that) => {
     switch (treeNode.checkClickFunTemplate) {
       // 'AlarmCounting', '报警统计看板'
       case 'AlarmMaping': // 聚合
-          if (treeNode.checkFunctionCode === '') {
-            return false;
-          }
+        if (treeNode.checkFunctionCode === '') {
+          return false;
+        }
 
-          if (treeNode.checked) {
-            const { overviewShow, alarmIconObj } = that.props;
-            switch (Number(treeNode.checkFunctionCode)) {
-              case 1:
-                overviewShow.showSafety = true; break;
-              case 2:
-                overviewShow.showEnv = true; break;
-              case 3:
-                overviewShow.showFault = true; break;
-              default: break;
-            }
-            that.props.dispatch({
-              type: 'alarm/filter',
-              payload: {
-                historyList: that.props.groupByOverview.list,
-                alarms: that.props.listWithFault,
-                para: overviewShow,
-              },
-            }).then(() => {
-              const subLayer = subLayers[0];
-              subLayer.visiable = true;
-              const query = subLayer.createQuery();
-              query.outFields = ['*'];
-              subLayer.queryFeatures(query).then((res) => {
-                alarmClustering({ view, dispatch, alarms: that.props.groupByOverview.list, graphics: res.features, overviewShow: that.props.overviewShow, popupScale });
-              });
-              // 地图报警图标
-              if (that.props.groupByOverview.list.length > 0) {
-                // ztreeObj.setChkDisabled(treeNode, true);
-                dispatch({
-                  type: 'sysFunction/queryOftenTreeDisabled',
-                  payload: true,
-                });
-              }
-              addMapAlarms({ iconObj: alarmIconObj, dispatch, alarmIconData: that.props.alarmIconData, scale: popupScale, alarms: that.props.groupByOverview.list, historyList: that.props.groupByOverview.historyList }).then(() => {
-                // ztreeObj.setChkDisabled(treeNode, false);
-                // that.setDisabled(false);
-                dispatch({
-                  type: 'sysFunction/queryOftenTreeDisabled',
-                  payload: false,
-                });
-              });
-            }
-            );
-          } else {
-            const { overviewShow, alarmIconObj } = that.props;
-            switch (Number(treeNode.checkFunctionCode)) {
-              case 1:
-                overviewShow.showSafety = false; break;
-              case 2:
-                overviewShow.showEnv = false; break;
-              case 3:
-                overviewShow.showFault = false; break;
-              default: break;
-            }
-            dispatch({
-              type: 'alarm/filter',
-              payload: {
-                historyList: that.props.groupByOverview.list,
-                alarms: that.props.listWithFault,
-                para: overviewShow,
-              },
-            }).then(() => {
-              const subLayer = subLayers[0];
-              subLayer.visiable = true;
-              const query = subLayer.createQuery();
-              query.outFields = ['*'];
-              subLayer.queryFeatures(query).then((res) => {
-                alarmClustering({ view, dispatch, alarms: that.props.groupByOverview.list, graphics: res.features, overviewShow: that.props.overviewShow, popupScale });
-              });
-              // 地图报警图标
-              if (that.props.groupByOverview.list.length > 0) {
-                // ztreeObj.setChkDisabled(treeNode, true);
-                // that.setDisabled(true)
-                dispatch({
-                  type: 'sysFunction/queryOftenTreeDisabled',
-                  payload: true,
-                });
-              }
-              addMapAlarms({ iconObj: alarmIconObj, dispatch, alarmIconData: that.props.alarmIconData, scale: popupScale, alarms: that.props.groupByOverview.list, historyList: that.props.groupByOverview.historyList }).then(() => {
-                // ztreeObj.setChkDisabled(treeNode, false);
-                // that.setDisabled(false);
-                dispatch({
-                  type: 'sysFunction/queryOftenTreeDisabled',
-                  payload: false,
-                });
-              });
-            }
-            );
+        if (treeNode.checked) {
+          const { overviewShow, alarmIconObj } = that.props;
+          switch (Number(treeNode.checkFunctionCode)) {
+            case 1:
+              overviewShow.showSafety = true; break;
+            case 2:
+              overviewShow.showEnv = true; break;
+            case 3:
+              overviewShow.showFault = true; break;
+            default: break;
           }
+          that.props.dispatch({
+            type: 'alarm/filter',
+            payload: {
+              historyList: that.props.groupByOverview.list,
+              alarms: that.props.listWithFault,
+              para: overviewShow,
+            },
+          }).then(() => {
+            alarmClustering({ dispatch, alarms: that.props.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: that.props.overviewShow, popupScale });
+            // 地图报警图标
+            if (that.props.groupByOverview.list.length > 0) {
+              // ztreeObj.setChkDisabled(treeNode, true);
+              dispatch({
+                type: 'sysFunction/queryOftenTreeDisabled',
+                payload: true,
+              });
+            }
+            addMapAlarms({ iconObj: alarmIconObj, dispatch, alarmIconData: that.props.alarmIconData, scale: popupScale, alarms: that.props.groupByOverview.list, historyList: that.props.groupByOverview.historyList }).then(() => {
+              // ztreeObj.setChkDisabled(treeNode, false);
+              // that.setDisabled(false);
+              dispatch({
+                type: 'sysFunction/queryOftenTreeDisabled',
+                payload: false,
+              });
+            });
+          }
+          );
+        } else {
+          const { overviewShow, alarmIconObj } = that.props;
+          switch (Number(treeNode.checkFunctionCode)) {
+            case 1:
+              overviewShow.showSafety = false; break;
+            case 2:
+              overviewShow.showEnv = false; break;
+            case 3:
+              overviewShow.showFault = false; break;
+            default: break;
+          }
+          dispatch({
+            type: 'alarm/filter',
+            payload: {
+              historyList: that.props.groupByOverview.list,
+              alarms: that.props.listWithFault,
+              para: overviewShow,
+            },
+          }).then(() => {
+            alarmClustering({ view, dispatch, alarms: that.props.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: that.props.overviewShow, popupScale });
+            // 地图报警图标
+            if (that.props.groupByOverview.list.length > 0) {
+              // ztreeObj.setChkDisabled(treeNode, true);
+              // that.setDisabled(true)
+              dispatch({
+                type: 'sysFunction/queryOftenTreeDisabled',
+                payload: true,
+              });
+            }
+            addMapAlarms({ iconObj: alarmIconObj, dispatch, alarmIconData: that.props.alarmIconData, scale: popupScale, alarms: that.props.groupByOverview.list, historyList: that.props.groupByOverview.historyList }).then(() => {
+              // ztreeObj.setChkDisabled(treeNode, false);
+              // that.setDisabled(false);
+              dispatch({
+                type: 'sysFunction/queryOftenTreeDisabled',
+                payload: false,
+              });
+            });
+          }
+          );
+        }
         return false;
       // case 'ConstantlyMap': // 实时数据图
       //   {

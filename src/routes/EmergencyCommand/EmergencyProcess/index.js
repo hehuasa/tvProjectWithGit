@@ -20,7 +20,6 @@ const { Step } = Steps;
   rightCollapsed: global.rightCollapsed,
   videoPosition: video.position,
   videoShow: video.show,
-  popupScale: map.popupScale,
   searchDeviceArray: map.searchDeviceArray,
   resourceInfo: resourceTree.resourceInfo,
   accessControlShow: accessControl.show,
@@ -49,8 +48,8 @@ export default class EmergencyCommand extends PureComponent {
     });
   }
   returnMap = () => {
-    const { eventInfoReport, dispatch, popupScale } = this.props;
-    const { accessInfoExtent } = mapConstants;
+    const { eventInfoReport, dispatch } = this.props;
+    const { accessInfoExtent, popupScale } = mapConstants;
     const { gISCode } = eventInfoReport;
     dispatch({
       type: 'tabs/active',

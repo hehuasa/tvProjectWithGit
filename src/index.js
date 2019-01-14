@@ -34,10 +34,14 @@ const onError = (e, dispatch) => {
   }
   e.preventDefault();
 };
+
+const onReducer = (a) => {
+  console.log('a', a);
+};
 const app = dva({
   history: createHistory(),
   onError,
-  // onReducer: undo,
+  // onReducer,
 });
 
 // 2. Plugins
