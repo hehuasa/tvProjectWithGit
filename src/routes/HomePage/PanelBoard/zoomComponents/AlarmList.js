@@ -59,7 +59,6 @@ const columns = [
 @connect(({ alarm, map, mapRelation }) => ({
   alarm,
   list: JSON.parse(JSON.stringify(alarm.list)),
-  popupScale: map.popupScale,
   iconArray: alarm.iconArray,
   infoPops: mapRelation.infoPops,
   alarmIconData: mapRelation.alarmIconData,
@@ -76,7 +75,8 @@ class AlarmCounting extends PureComponent {
     });
   }
   handleClick = (record) => {
-    const { popupScale, dispatch, infoPops, alarmIconData } = this.props;
+    const { dispatch, infoPops, alarmIconData } = this.props;
+    const { popupScale } = mapConstants;
     dispatch({
       type: 'resourceTree/saveClickedAlarmId',
       payload: record.alarmId,

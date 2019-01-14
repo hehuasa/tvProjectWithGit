@@ -329,16 +329,7 @@ export default class PlanInfo extends PureComponent {
       },
     ];
       // 实施方案 事件特征表头
-    const featureCols = [
-      {
-        title: '特征编号',
-        dataIndex: 'featureCode',
-        width: 100,
-        key: 'featureCode',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureCode;
-        // },
-      }, {
+    const featureCols = [{
         title: '特征类型',
         dataIndex: 'featureTypeName',
         width: 100,
@@ -456,15 +447,6 @@ export default class PlanInfo extends PureComponent {
       // 实施方案 应急资源表头
     const resourceCols = [
       {
-        title: '资源编号',
-        dataIndex: 'resourceCode',
-        width: 100,
-        key: 'resourceCode',
-        render: (text, record) => {
-          return record.resResourceInfo ? record.resResourceInfo.resourceCode :
-            (record.resToolMaterialInfo ? record.resToolMaterialInfo.materialCode : '');
-        },
-      }, {
         title: '资源名称',
         dataIndex: 'resourceName',
         width: 100,

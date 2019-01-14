@@ -158,7 +158,7 @@ export default {
       const newData = [];
       for (const item of resourceInfos.data) {
         const data = response.data.filter(value => value.gISCode === item.gISCode);
-        if (data) {
+        if (data.length > 0) {
           newData.push(...data);
         } else {
           newData.push({

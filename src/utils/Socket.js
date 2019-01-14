@@ -1,5 +1,4 @@
-import Sockette from 'sockette';
-// import fetch from 'dva/fetch';
+
 
 const Socket = ({ onmessage, currentUser, parent }) => {
   // console.log('currentUser', currentUser.baseUserInfo.userID);

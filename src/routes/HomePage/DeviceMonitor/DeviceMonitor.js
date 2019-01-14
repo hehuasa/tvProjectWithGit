@@ -39,12 +39,6 @@ export default class DeviceMonitor extends PureComponent {
         this.setState({ data: datas });
       }
     }, 500);
-    // dispatch({
-    //   type: 'constantlyData/getDeviceMonitorData',
-    //   payload: { ctrlResourceType, selectRunDay: option.selectRunDay },
-    // }).then(() => {
-    //   this.getData(ctrlResourceType, option);
-    // });
     timer = setInterval(() => {
       let index1 = 0;
       const datas1 = [];
@@ -149,14 +143,14 @@ export default class DeviceMonitor extends PureComponent {
                       <div className={item[1] ? styles.quota2 : styles.quota1}>
                         <div className={styles.value}>{item[0].dataTypeName.indexOf('产气量') !== -1 ? parseFloat(Number(item[0].value / 10000).toFixed(2)) : parseFloat(Number(item[0].value).toFixed(2))} </div>
                         <div className={styles.units}> {`${item[0].dataTypeName}(${item[0].meterUnit})`}</div>
-                      </div>) : <div></div>}
-                    {item[1] ? (
+                      </div>) : null }
+                    { item[1] ? (
                       <div className={styles.quota2}>
                         <div className={styles.value}>{parseFloat(Number(item[1].value).toFixed(2))} </div>
                         <div className={styles.units}> {`${item[1].dataTypeName}(${item[1].meterUnit})`}</div>
                       </div>
-                    ) : <div>/</div>
-                    }
+) : null
+                  }
                   </div>
                   {item.processNumber.indexOf('锅炉') === -1 ? (
                     <div className={styles.name}>

@@ -141,7 +141,15 @@ export default class PlanInfo extends PureComponent {
     const { form } = this.props;
     form.resetFields();
     this.searchResource(1, 10);
-  }
+  };
+  // 预案附件
+  annexPageChange = (pageNum, pageSize) => {
+    const { planInfoID } = this.props.planBasicInfo;
+    this.props.dispatch({
+      type: 'planManagement/getAnnexPage',
+      payload: { planInfoID, uploadType: 2, pageNum, pageSize, isQuery: true, fuzzy: false },
+    });
+  };
   render() {
     const { isEdit, planResource, planCommand,
       eventFeature, planCommandInfo, resourceInfo, hideFooter, form,
@@ -310,8 +318,11 @@ export default class PlanInfo extends PureComponent {
         render: (text) => {
           let str = '';
           if (text) {
-            text.forEach((item) => {
-              str = item ? `${str}${item.postionName}, ` : `${str}`;
+            const length = text.length - 1;
+            text.forEach((item, index) => {
+              if (item) {
+                str = (length === index) ? `${str}${item.postionName}` : `${str}${item.postionName}, `;
+              }
             });
           }
           return str;
@@ -345,15 +356,6 @@ export default class PlanInfo extends PureComponent {
     // 实施方案 应急资源表头
     const resourceCols = [
       {
-        title: '资源编号',
-        dataIndex: 'resourceCode',
-        width: 100,
-        key: 'resourceCode',
-        render: (text, record) => {
-          return record.resResourceInfo ? record.resResourceInfo.resourceCode :
-            (record.resToolMaterialInfo ? record.resToolMaterialInfo.materialCode : '');
-        },
-      }, {
         title: '资源名称',
         dataIndex: 'resourceName',
         width: 100,

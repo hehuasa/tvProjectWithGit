@@ -9,7 +9,6 @@ import AlarmCountingRound from './AlarmCountingRound';
   groupByType: alarm.groupByType,
   mainMap: map.mainMap,
   view: map.mapView,
-  popupScale: map.popupScale,
 }))
 export default class AlarmCounting extends PureComponent {
   constructor(props) {
@@ -29,7 +28,6 @@ export default class AlarmCounting extends PureComponent {
             groupByType={this.props.groupByType}
             mainMap={this.props.mainMap}
             view={this.props.view}
-            scale={this.props.popupScale}
             dispatch={this.props.dispatch}
           />
         );
@@ -40,7 +38,6 @@ export default class AlarmCounting extends PureComponent {
             groupByType={this.props.groupByType}
             mainMap={this.props.mainMap}
             view={this.props.view}
-            scale={this.props.popupScale}
             dispatch={this.props.dispatch}
           />
         );
@@ -53,7 +50,6 @@ export default class AlarmCounting extends PureComponent {
             groupByType={this.props.groupByType}
             mainMap={this.props.mainMap}
             view={this.props.view}
-            scale={this.props.popupScale}
             dispatch={this.props.dispatch}
           />
         );

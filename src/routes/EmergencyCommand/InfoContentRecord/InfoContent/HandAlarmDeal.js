@@ -63,15 +63,13 @@ export default class HandAlarmDeal extends PureComponent {
       },
     },
   };
-  // componentDidMount() {
-  //   const {  eventID } = this.props;
-  //   this.props.dispatch({
-  //     type: 'emergency/queryEventInfoReport',
-  //     payload: {
-  //       id: eventID,
-  //     },
-  //   })
-  // }
+  componentDidMount() {
+    // 获取装置区域列表
+    this.props.dispatch({
+      type: 'alarmDeal/getAreaList',
+      payload: { areaType: 111.101 },
+    });
+  }
   // 选择查询
   onSearchUser = (value) => {
     this.props.dispatch({
@@ -165,7 +163,7 @@ export default class HandAlarmDeal extends PureComponent {
   };
 
   render() {
-    const { form, emergency } = this.props;
+    const { form, emergency, alarmDeal } = this.props;
     const { eventInfoReport } = this.props.emergency;
 
     return (
@@ -236,7 +234,29 @@ export default class HandAlarmDeal extends PureComponent {
             <FormItem
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
-            />
+              label="事发区域"
+            >
+              {form.getFieldDecorator('alarmAreaID', {
+                initialValue: eventInfoReport.area ? eventInfoReport.area.areaID : null,
+              })(
+                <Select
+                  placeholder="请选择事发区域"
+                  disabled
+                  optionFilterProp="title"
+                  showSearch
+                  style={{ width: '100%' }}
+                >
+                  {alarmDeal.areaList.map(item => (
+                    <Option
+                      key={item.areaID}
+                      value={item.areaID}
+                      title={item.areaName}
+                    >{item.areaName}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+            </FormItem>
           </Col>
           <Col md={12} sm={24}>
             <FormItem

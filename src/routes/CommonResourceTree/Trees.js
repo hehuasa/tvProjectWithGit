@@ -122,7 +122,6 @@ const cancleCheckedParten = (node, ztreeObj) => {
     listWithFault: alarm.listWithFault,
     scale: map.scale,
     video,
-    popupScale: map.popupScale,
     alarmTypeList: alarm.alarmTypeList,
     constantlyValue: map.constantlyValue,
     searchDeviceArray: map.searchDeviceArray,

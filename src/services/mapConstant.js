@@ -7,6 +7,7 @@ export const mapConstants = {
   currentExtent: {},
   spaceQueryPolygon: {},
   baseLayer: {},
+  areaGraphics: [],
   domWarp: {},
   popupScale: 0,
   accessBordPoints: {

@@ -58,6 +58,12 @@ export async function fakeMonitorSideData() {
 export async function alarmList() {
   return request(`${path}/system/alarmInfo/getAllUntreared`);
 }
+export async function alarmQuery(params) {
+  return request(`${path}/system/alarmInfo/getPageForQuery`, {
+    method: 'POST',
+    body: params,
+  });
+}
 
 export async function clearTwinkle(params) {
   return request(`${path}/system/alarmDeal/setDisplayAlarm`, {
@@ -2475,7 +2481,7 @@ export async function deleteOrgAnnex(params) {
     body: params,
   });
 }
-// 删除预案的应急组织
+// 获取方案的应急组织
 export async function getImplOrgAnnex(params) {
   return request(`${path}/system/baseOrgaArchiveInfo/getByExecPlanID`, {
     method: 'POST',

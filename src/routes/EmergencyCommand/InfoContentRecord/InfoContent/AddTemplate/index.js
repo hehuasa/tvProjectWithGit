@@ -49,7 +49,7 @@ const formItemLayout = {
 // };
 const formItemLayout1 = {
   labelCol: { span: 6 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 8 },
 };
 // const withOutLabel1 = {
 //   wrapperCol: { span: 6, offset: 6 },
@@ -287,7 +287,7 @@ export default class AddTemplate extends PureComponent {
 
     const formItems = keys.map((k, index) => {
       return (
-        <Row key={k} className={styles.rowPaddingRight}>
+        <Row type="flex" key={k}>
           {getFieldDecorator(`ID[${k}]`, {
             validateTrigger: ['onChange', 'onBlur'],
             initialValue: casualtiesData[index] ? casualtiesData[index].casualtyID : null,
@@ -298,10 +298,9 @@ export default class AddTemplate extends PureComponent {
               placeholder="已有数据id"
             />
           )}
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={5}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout
               label="伤亡位置"
               required={false}
             >
@@ -313,10 +312,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="受伤人数"
               required={false}
             >
@@ -335,10 +333,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="死亡人数"
               required={false}
             >
@@ -375,10 +372,9 @@ export default class AddTemplate extends PureComponent {
               placeholder="选择报告人"
             />
           )}
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="报告人"
               required={false}
             >
@@ -394,25 +390,25 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="电话"
               required={false}
             >
               {getFieldDecorator(`reportUserPhone[${k}]`, {
                 validateTrigger: ['onChange', 'onBlur'],
-                initialValue: casualtiesData[index] ? casualtiesData[index].reportUserPhone : null,
+                initialValue: casualtiesData[index] ?
+                  (casualtiesData[index].reportUser ?
+                    casualtiesData[index].reportUser.mobile : null) : null,
               })(
                 <Input placeholder="报告人电话" disabled />
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}  >
+          <Col sm={12} md={8} lg={6} >
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="时间"
               required={false}
               style={{ width: '100%' }}
@@ -426,7 +422,6 @@ export default class AddTemplate extends PureComponent {
                   showTime
                   format="YYYY-MM-DD HH:mm:ss"
                   placeholder="请选择记录时间"
-                  style={{ width: '100%' }}
                 />
               )}
             </FormItem>
@@ -470,7 +465,7 @@ export default class AddTemplate extends PureComponent {
           {
             isHidden ? (
               <Row>
-                <Col span={10} className={styles.totalInfo}>
+                <Col span={5}>
                   总共受伤：{this.state.sumSnjured || injuredSum} {' '}总共死亡：{this.state.sumDeaths || deathSum}
                 </Col>
               </Row>
@@ -480,7 +475,7 @@ export default class AddTemplate extends PureComponent {
             {formItems}
           </div>
           <FormItem {...formItemLayoutWithOutLabel}>
-            {this.props.hiddenAddButton ? null : (
+            { this.props.hiddenAddButton ? null : (
               <Button
                 type="dashed"
                 onClick={this.add}

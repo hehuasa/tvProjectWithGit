@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import AlarmInfo from './AlarmInfo/index';
 import Footer from './Footer/index';
 import styles from './index.less';
-import { addEventIcon, delAlarmAnimation } from '../../../utils/mapService';
+import { addEventIcon, alarmClustering, delAlarmAnimation } from '../../../utils/mapService';
 import { mapConstants } from '../../../services/mapConstant';
 
 const { TabPane } = Tabs;
@@ -82,17 +82,17 @@ export default class AlarmDeal extends PureComponent {
             template.postion = fieldsValue.location[i];
             template.injured = fieldsValue.injured[i];
             template.death = fieldsValue.deaths[i];
-            template.reportUserId = fieldsValue.reportUserId[i];
+            template.reportUserID = fieldsValue.reportUserID[i];
             template.reportUserName = fieldsValue.reportUserName[i];
             template.recordTime = fieldsValue.recordTime[i];
             fieldsValue.casualtys.push(JSON.parse(JSON.stringify(template)));
           });
         }
+        fieldsValue.areaID = fieldsValue.alarmAreaID;
         delete fieldsValue.rawMaterialIds;
         delete fieldsValue.probeResourceID1;
         delete fieldsValue.resourceID1;
         delete fieldsValue.rawMaterialIds1;
-
         dispatch({
           type: 'emergency/getAlarmEvent',
           payload: {
@@ -105,8 +105,17 @@ export default class AlarmDeal extends PureComponent {
           // dispatch({
           //   type: 'alarm/fetch',
           // });
-          // 删除地图报警图标
-          delAlarmAnimation(alarmIconData, alarmInfo, dispatch);
+          // 删除报警
+          dispatch({
+            type: 'alarm/del',
+            payload: alarmInfo,
+          }).then(() => {
+            dispatch({ type: 'alarm/filter' }).then(() => {
+              delAlarmAnimation(alarmIconData, alarmInfo, dispatch).then(() => {
+                alarmClustering({ dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: this.props.alarm.overviewShow, popupScale: mapConstants.popupScale });
+              });
+            });
+          });
           // 更新事件图标
           addEventIcon(this.props.undoneEventList, dispatch);
           // 更新头部应急事件下拉.
@@ -130,7 +139,7 @@ export default class AlarmDeal extends PureComponent {
   // 保存报警信息不生成事件
   editAlarm = () => {
     // e.preventDefault();
-    const { dispatch, alarmInfo, form } = this.props;
+    const { dispatch, alarmInfo, form, alarmIconData } = this.props;
     const { alarmId } = alarmInfo;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -144,7 +153,7 @@ export default class AlarmDeal extends PureComponent {
             template.postion = fieldsValue.location[i];
             template.injured = fieldsValue.injured[i];
             template.death = fieldsValue.deaths[i];
-            template.reportUserId = fieldsValue.reportUserId[i];
+            template.reportUserID = fieldsValue.reportUserID[i];
             template.reportUserName = fieldsValue.reportUserName[i];
             template.recordTime = fieldsValue.recordTime[i];
             fieldsValue.casualtys.push(JSON.parse(JSON.stringify(template)));
@@ -164,9 +173,17 @@ export default class AlarmDeal extends PureComponent {
             alarmId,
           },
         }).then(() => {
-          // dispatch({
-          //   type: 'alarm/fetch',
-          // });
+          // 删除报警
+          dispatch({
+            type: 'alarm/del',
+            payload: alarmInfo,
+          }).then(() => {
+            dispatch({ type: 'alarm/filter' }).then(() => {
+              delAlarmAnimation(alarmIconData, alarmInfo, dispatch).then(() => {
+                alarmClustering({ dispatch, alarms: this.props.alarm.groupByOverview.list, graphics: mapConstants.areaGraphics, overviewShow: this.props.alarm.overviewShow, popupScale: mapConstants.popupScale });
+              });
+            });
+          });
           // 关闭资源信息窗.
           dispatch({
             type: 'resourceTree/saveCtrlResourceType',
@@ -203,7 +220,6 @@ export default class AlarmDeal extends PureComponent {
   };
   render() {
     const { alarmDealTypeList } = this.props;
-    console.log(666, this.props.alarmInfo);
     const title = (
       <RadioGroup onChange={this.alarmDealTypeChange} defaultValue="104.103">
         {alarmDealTypeList.map((item) => {

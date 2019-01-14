@@ -54,6 +54,21 @@ const dragImg = [
   { id: '警察', name: '警察', src: cP },
   { id: '消防人员', name: '消防人员', src: fP },
 ];
+const medical = [
+  { id: 'jiuhu', name: '救护车', src: jiuhu },
+  { id: '医生', name: '医生', src: dP },
+  { id: '护士', name: '护士', src: nP },
+];
+const fireProtect = [
+  { id: 'xiaofang', name: '消防车', src: xiaofang },
+  { id: '消防人员', name: '消防人员', src: fP },
+];
+const material = [
+  { id: 'wuzi', name: '物资车', src: wuzi },
+];
+const safety = [
+  { id: '警察', name: '警察', src: cP },
+];
 const getCustomPanelStyle = (type) => {
   if (type) {
     return {
@@ -270,7 +285,6 @@ export default class Mark extends G6Register {
               delNodes.push(model.source);
               delNodes.push(model.target);
             }
-            console.log('_cfg', this.state.currentSelectNode);
             this.graph.remove(this.state.currentSelectNode);
             delNodes.push(this.state.currentSelectNode.id);
           }
@@ -466,10 +480,13 @@ export default class Mark extends G6Register {
     });
     e.stopPropagation();
   };
-  handleColorChange = ({ hex }) => {
+  handleColorChange = (color) => {
+    const { rgb } = color;
+    const { r, g, b, a } = rgb;
+    const rgbString = `rgba(${r},${g},${b},${a})`;
     const { currentSelectNode, currentColor } = this.state;
     this.graph.update(currentSelectNode, {
-      [currentColor.type]: hex,
+      [currentColor.type]: rgbString,
     });
   };
   handleChangeComplete =() => {
@@ -516,7 +533,7 @@ export default class Mark extends G6Register {
         </div>
         <div className={styles.left}>
           <Scrollbars style={{ height: mapHeight - 48 }}>
-            <Collapse defaultActiveKey={['1', '2', '3']}>
+            <Collapse defaultActiveKey={['1', '2']}>
               <Panel style={getCustomPanelStyle(0)} header={<PanelHead title="图层列表" isHeader />} key="1">
                 <Radio.Group onChange={this.handleChange} value={layerValue}>
                   {markType.map(item =>
@@ -536,9 +553,21 @@ export default class Mark extends G6Register {
 ))}
                 </div>
               </Panel>
-              <Panel style={getCustomPanelStyle(1)} header={<PanelHead title="图片标注" />} key="3">
+              <Panel style={getCustomPanelStyle(1)} header={<PanelHead title="安全" />} key="3">
                 <div className={styles.dragBox} onClick={this.handleNodeAdd}>
-                  {dragImg.map(item => (
+                  {safety.map(item => (
+                    <div className={styles.drag} style={{ background: createNode.type === item.id ? '#eee' : '' }} title={item.id} key={item.id}>
+                      <div draggable title={item.id} className={styles.pic}>
+                        <img src={item.src} alt={item.name} title={item.id} />
+                      </div>
+                      <div className={styles.mark} title={item.id}>{item.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </Panel>
+              <Panel style={getCustomPanelStyle(1)} header={<PanelHead title="消防" />} key="4">
+                <div className={styles.dragBox} onClick={this.handleNodeAdd}>
+                  {fireProtect.map(item => (
                     <div className={styles.drag} style={{ background: createNode.type === item.id ? '#eee' : '' }} title={item.id} key={item.id}>
                       <div draggable title={item.id} className={styles.pic}>
                         <img src={item.src} alt={item.name} title={item.id} />
@@ -546,6 +575,30 @@ export default class Mark extends G6Register {
                       <div className={styles.mark} title={item.id}>{item.name}</div>
                     </div>
                 ))}
+                </div>
+              </Panel>
+              <Panel style={getCustomPanelStyle(1)} header={<PanelHead title="医疗" />} key="5">
+                <div className={styles.dragBox} onClick={this.handleNodeAdd}>
+                  {medical.map(item => (
+                    <div className={styles.drag} style={{ background: createNode.type === item.id ? '#eee' : '' }} title={item.id} key={item.id}>
+                      <div draggable title={item.id} className={styles.pic}>
+                        <img src={item.src} alt={item.name} title={item.id} />
+                      </div>
+                      <div className={styles.mark} title={item.id}>{item.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </Panel>
+              <Panel style={getCustomPanelStyle(1)} header={<PanelHead title="物资" />} key="6">
+                <div className={styles.dragBox} onClick={this.handleNodeAdd}>
+                  {material.map(item => (
+                    <div className={styles.drag} style={{ background: createNode.type === item.id ? '#eee' : '' }} title={item.id} key={item.id}>
+                      <div draggable title={item.id} className={styles.pic}>
+                        <img src={item.src} alt={item.name} title={item.id} />
+                      </div>
+                      <div className={styles.mark} title={item.id}>{item.name}</div>
+                    </div>
+                  ))}
                 </div>
               </Panel>
             </Collapse>

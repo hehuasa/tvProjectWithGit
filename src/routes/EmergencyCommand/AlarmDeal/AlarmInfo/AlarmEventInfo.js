@@ -543,7 +543,9 @@ export default class AlarmEventInfo extends PureComponent {
               wrapperCol={{ span: 16 }}
               label="事发区域"
             >
-              {form.getFieldDecorator('alarmAreaID')(
+              {form.getFieldDecorator('alarmAreaID', {
+                initialValue: alarmInfoConten.area ? alarmInfoConten.area.areaID : null,
+              })(
                 <Select
                   placeholder="请选择事发区域"
                   // onChange={this.handleChange}
