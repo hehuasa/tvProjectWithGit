@@ -66,7 +66,7 @@ const createList = () => {
     return a.sort - b.sort > 0 ? 1 : -1;
   });
   // 按颜色排个序
-
+console.log('mapLegendListWithAlarm', mapLegendListWithAlarm);
   return { mapLegendList, mapLegendListWithAlarm };
 };
 

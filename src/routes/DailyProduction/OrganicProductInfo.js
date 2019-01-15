@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
 import Scrollbars from 'react-custom-scrollbars';
@@ -8,7 +8,6 @@ import OrganicProductInfoTrend from './chart/OrganicProductInfoTrend';
 import { bgColor, progressColor } from './color/color';
 import styles from './index.less';
 
-const { Option } = Select;
 @connect(({ productionDaily, homepage }) => ({
   organicProduct: productionDaily.organicProduct,
   timeUsePre: productionDaily.timeUsePre,
@@ -97,7 +96,7 @@ export default class DissociationInfo extends PureComponent {
         title: '罐存率',
         dataIndex: 'trunckCountPre',
         width: 260,
-        render: (text, record) => {
+        render: (text) => {
           return text === null ?
             '/' : (
               <Row gutter={16}>
@@ -135,7 +134,7 @@ export default class DissociationInfo extends PureComponent {
         title: '月出厂进度',
         dataIndex: 'monthOutPre',
         width: 260,
-        render: (text, record) => {
+        render: (text) => {
           return text === null ?
             '/' : (
               <Row gutter={16}>

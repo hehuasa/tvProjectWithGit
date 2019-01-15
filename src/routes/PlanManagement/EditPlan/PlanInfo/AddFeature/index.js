@@ -66,6 +66,7 @@ export default class AddFeature extends PureComponent {
     this.setState({
       feature: row,
     });
+    this.dataTypeChange(row.dataType);
     if (row.props.title) {
       const { featurePlan } = this.props;
       for (const item of featurePlan) {

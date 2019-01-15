@@ -63,12 +63,72 @@ export const groupingByOverview = (
               newList.count.envCount += 1; newList.list.push(alarm);
             }
             break;
+          // 故障报警
           case '901':
             if (para.showFault) {
               if (alarm.areaGisCode) {
                 newList.count.faultCount += 1;
                 newList.list.push(alarm);
               }
+            }
+            break;
+          case '501':
+          {
+            const { alarmLevel } = alarmType;
+            if (alarmLevel === 3) {
+              if (para.showEnv) {
+                newList.count.envCount += 1; newList.list.push(alarm);
+              }
+            } else {
+              if (para.showSafety) {
+                newList.count.safetyCount += 1; newList.list.push(alarm);
+              }
+            }
+          }
+            break;
+          case '502':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '503':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '504':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '505':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '506':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '507':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '508':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '509':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
+            }
+            break;
+          case '510':
+            if (para.showSafety) {
+              newList.count.safetyCount += 1; newList.list.push(alarm);
             }
             break;
           default: break;
