@@ -409,10 +409,10 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}  >
+          <Col sm={12} md={7}  >
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              labelCol={{ span: 9 }}
+              wrapperCol={{ span: 15 }}
               label="时间"
               required={false}
               style={{ width: '100%' }}
