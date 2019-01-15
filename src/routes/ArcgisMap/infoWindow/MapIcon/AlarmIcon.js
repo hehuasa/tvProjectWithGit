@@ -16,7 +16,9 @@ export const getIcon = (alarm) => {
   } else {
     alarmIconName = legendLayer.mapLayerName;
   }
-  let normalIconObj = mapLegendListWithAlarm.find(value => legendLayer.mapLayerName.indexOf(value.name) !== -1);
+  console.log('alarm', alarm);
+  console.log('layer', legendLayer);
+  let normalIconObj = mapLegendList.find(value => legendLayer.mapLayerName.indexOf(value.name) !== -1);
   if (!normalIconObj) {
     alarmIconName = '默认设备';
   }

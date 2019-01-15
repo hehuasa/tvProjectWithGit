@@ -66,6 +66,9 @@ export default class AddFeature extends PureComponent {
     this.setState({
       feature: row,
     });
+    if (row.props && row.props.dataRef) {
+      this.dataTypeChange(row.props.dataRef.dataType);
+    }
     if (row.props.title) {
       const { featurePlan } = this.props;
       for (const item of featurePlan) {
@@ -89,6 +92,7 @@ export default class AddFeature extends PureComponent {
         featureType: '',
         featureUnit: '',
         featureDes: '',
+        dataType: '102.101',
       });
     }
   };
@@ -164,7 +168,7 @@ export default class AddFeature extends PureComponent {
                 >
                   {
                     featurePlan.map((item, index) => (
-                      <Option title={`${item.planFeatureInfo.featureID}`} key={`${item.planFeatureInfo.featureID}`} value={item.planFeatureInfo.featureName} >{item.planFeatureInfo.featureName}</Option>
+                      <Option dataRef={item.planFeatureInfo} title={`${item.planFeatureInfo.featureID}`} key={`${item.planFeatureInfo.featureID}`} value={item.planFeatureInfo.featureName} >{item.planFeatureInfo.featureName}</Option>
                     ))
                   }
                 </Select>

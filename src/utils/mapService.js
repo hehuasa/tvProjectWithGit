@@ -2969,6 +2969,7 @@ export const addMapAlarms = ({ alarmIconData, dispatch, alarms, historyList }) =
       findParams.searchFields = ['ObjCode'];
       // 新建或获取报警动画图层
       // const alarmLayer = mapConstants.mainMap.findLayerById('报警动画');
+
       for (const alarm of addArray) {
         if (alarm.resourceGisCode) {
           findParams.searchText = alarm.resourceGisCode;
@@ -2985,9 +2986,10 @@ export const addMapAlarms = ({ alarmIconData, dispatch, alarms, historyList }) =
                 //     });
                 //   });
                 // } else {
-                const point = mapConstants.view.toScreen(res[0].feature.geometry);
+                const newPoint = transToPoint(res[0].feature.geometry);
+                const point = mapConstants.view.toScreen(newPoint);
                 const style = { left: point.x, top: point.y };
-                alarmIconData.push({ alarm, geometry: res[0].feature.geometry, style });
+                alarmIconData.push({ alarm, geometry: newPoint, style });
                 // addAlarmAnimation({ PictureMarkerSymbol, Graphic, map, geometry: res[0].feature.geometry, alarm, iconObj, scale, layer: alarmLayer, dispatch });
                 // }
                 if (index === addArray.length) {

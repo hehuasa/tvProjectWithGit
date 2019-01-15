@@ -127,6 +127,17 @@ export default class InfoJudgment extends PureComponent {
     const arr = processFuncMenus.filter(item => item.functionName === functionName);
     return arr.length > 0;
   };
+  // 判断是否有该功能权限
+  onTableChange = (activeKey) => {
+    const { eventID, dispatch } = this.props;
+    if (activeKey === '2') {
+      // 获取预案列表
+      dispatch({
+        type: 'emergency/getPlanInfoPage',
+        payload: { pageNum: 1, pageSize: 5, eventID, isExpand: 0 },
+      });
+    }
+  };
   // 将数据存在state
   initFuncMenus = () => {
     const { processFuncMenus } = this.props;
@@ -159,6 +170,7 @@ export default class InfoJudgment extends PureComponent {
         onTabClick={this.onChange}
         className={styles.infoJudgment}
         defaultActiveKey="2"
+        onChange={this.onTableChange}
       >
         <TabPane tab="事件信息记录" key="1">
           <InfoRecord />

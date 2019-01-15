@@ -2,12 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Scrollbars from 'react-custom-scrollbars';
 import moment from 'moment';
-import { Table, Select, DatePicker } from 'antd';
+import { Table, DatePicker } from 'antd';
 import Trend from '../chart/Trend';
 import { fakeData } from '../List/lib/data.js';
 import styles from '../index.less';
 
-const { Option } = Select;
 @connect(({ productionDaily, homepage }) => ({
   limisCenterControl: productionDaily.limisCenterControl,
   timeUsePre: productionDaily.timeUsePre,

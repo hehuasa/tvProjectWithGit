@@ -1,15 +1,11 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
-import { Form, Row, Col, Card, Input, Select, Icon, Button, Dropdown, Menu, TreeSelect, DatePicker, Modal, message, Divider, Popconfirm } from 'antd';
+import { Form, Card, Input, Modal } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardTable from '../../components/StandardTable';
 import { commonData } from '../../../mock/commonData';
 import WEditor from '../../components/WEditor/index';
 import styles from './productReportInfoMaintain.less';
-
-const FormItem = Form.Item;
-const { TextArea } = Input;
 
 const CreateForm = Form.create()((props) => {
   const { modalVisible, handleModalVisible, isAdd, form, handleAdd, onValueChange, productStatusInfo } = props;
@@ -50,7 +46,6 @@ export default class Analysis extends PureComponent {
     formValues: {},
     //  修改还是新增
     isAdd: true,
-    clickRow: null,
     productStatusInfo: '',
   };
   componentDidMount() {
@@ -73,9 +68,8 @@ export default class Analysis extends PureComponent {
     });
   };
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const { dispatch } = this.props;
     const { formValues } = this.state;
-
+    const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
     const filters = Object.keys(filtersArg).reduce((obj, key) => {
       const newObj = { ...obj };
       newObj[key] = getValue(filtersArg[key]);
@@ -127,9 +121,7 @@ export default class Analysis extends PureComponent {
       if (err) return;
       const values = {
         ...fieldsValue,
-        //   createTimes: fieldsValue.createTime ? fieldsValue.createTime.format('YYYY-MM-DD') : undefined,
       };
-      // if (values.createTime) { delete values.createTime; }
       const search = {};
       const pagination = {
         ...commonData.pageInitial,
@@ -144,9 +136,6 @@ export default class Analysis extends PureComponent {
     this.setState({
       modalVisible: !!flag,
       isAdd: true,
-    });
-    this.setState({
-      clickRow: null,
     });
   };
 
@@ -174,7 +163,7 @@ export default class Analysis extends PureComponent {
     });
   };
   // 修改函数
-  doUpdate = (fields) => {
+  doUpdate = () => {
     const obj = this.state.productStatusInfo;
     delete obj.reportDate;
     delete obj.sortIndex;
@@ -230,7 +219,6 @@ export default class Analysis extends PureComponent {
     this.setState({
       modalVisible: !this.state.modalVisible,
       isAdd: false,
-      clickRow: record,
     });
   };
   render() {

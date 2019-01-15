@@ -216,9 +216,6 @@ export const getRouterData = (app) => {
     '/productionDispatch/majorList': {
       component: dynamicWrapper(app, ['error', 'majorList'], () => import('../routes/productionDispatch/MajorList')), // 重点关注维护页面
     },
-    '/productionDispatch/manage': {
-      component: dynamicWrapper(app, ['productionDaily'], () => import('../routes/DailyProduction/Edit/index')),
-    },
     // '/productionDispatch/query': {
     //   component: dynamicWrapper(app, ['productionDaily'], () => import('../routes/DailyProduction/List/List')),
     // },

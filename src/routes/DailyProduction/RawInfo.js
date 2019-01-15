@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
 import Scrollbars from 'react-custom-scrollbars';
-import { Table, Select, Row, Col, DatePicker } from 'antd';
+import { Table, Row, Col, DatePicker } from 'antd';
 import Progress from '../../components/Progress/Progress';
 import RawInfoTrend from './chart/RawInfoTrend';
 import { bgColor, progressColor } from './color/color';
 import styles from './index.less';
 
-const { Option } = Select;
 @connect(({ productionDaily, homepage }) => ({
   rawMaterial: productionDaily.rawMaterial,
   timeUsePre: productionDaily.timeUsePre,
@@ -97,7 +96,7 @@ export default class DissociationInfo extends PureComponent {
         title: '罐存率',
         dataIndex: 'trunckCountPre',
         width: '60%',
-        render: (text, record) => {
+        render: (text) => {
           return text === null ?
             '/' : (
               <Row gutter={16}>

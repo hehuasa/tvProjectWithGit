@@ -256,6 +256,7 @@ export default class HandAlarmDeal extends PureComponent {
           params.isQuery = true;
           params.fuzzy = true;
           params.orgID = orgID;
+          params.areaID = areaID;
           params.monitor = 0;
         }
         this.props.dispatch({
@@ -483,6 +484,7 @@ export default class HandAlarmDeal extends PureComponent {
 
   render() {
     const { form, emergency, alarmDeal } = this.props;
+    console.log(56565, this.props.emergency.personList)
     return (
       <div className={styles.alarmReport}>
         <Row type="flex">
@@ -814,9 +816,9 @@ export default class HandAlarmDeal extends PureComponent {
             pagination={emergency.personPagination}
             rowSelection={this.state.personRowSelection}
             columns={columns}
-            dataSource={emergency.personList}
+            dataSource={this.props.emergency.personList}
             onChange={this.onhandleTableChange}
-            rowKey={record => record.userID}
+            rowKey={(record, index) => index}
             scroll={{ x: 1300 + win3 * columns.length, y: 260 }}
           />
         </Modal>

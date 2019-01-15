@@ -358,26 +358,28 @@ export default class TableList extends PureComponent {
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
-
-    const filters = Object.keys(filtersArg).reduce((obj, key) => {
-      const newObj = { ...obj };
-      newObj[key] = getValue(filtersArg[key]);
-      return newObj;
-    }, {});
-
-    const params = {
-      pageNum: pagination.current,
-      pageSize: pagination.pageSize,
-      ...formValues,
-      ...filters,
-    };
-    if (sorter.field) {
-      params.sorter = `${sorter.field}_${sorter.order}`;
-    }
-
-    dispatch({
-      type: 'accountInfo/accountRolePage',
-      payload: params,
+    const { form } = this.props;
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      const filters = Object.keys(filtersArg).reduce((obj, key) => {
+        const newObj = { ...obj };
+        newObj[key] = getValue(filtersArg[key]);
+        return newObj;
+      }, {});
+      const params = {
+        pageNum: pagination.current,
+        pageSize: pagination.pageSize,
+        ...formValues,
+        ...fieldsValue,
+        ...filters,
+      };
+      if (sorter.field) {
+        params.sorter = `${sorter.field}_${sorter.order}`;
+      }
+      dispatch({
+        type: 'accountInfo/accountRolePage',
+        payload: params,
+      });
     });
   };
   // 重置搜索条件

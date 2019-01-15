@@ -17,7 +17,6 @@ import userIcon from '../../assets/header/user.png';
 import settingIcon from '../../assets/header/setting.png';
 import { mapConstants } from '../../services/mapConstant';
 import { getBordStyle } from '../../utils/mapService';
-import { handleCheck } from '../../routes/ResourceTree/treeAction';
 
 const Option = Select.Option;
 const { confirm } = Modal;
@@ -472,9 +471,14 @@ export default class GlobalHeader extends PureComponent {
     });
   };
   handleMapLinkChange = (value) => {
-    console.log('value', value);
     this.props.dispatch({
       type: 'alarm/linkMap',
+      payload: Number(value),
+    });
+  };
+  handleIconShow = (value) => {
+    this.props.dispatch({
+      type: 'mapRelation/queryEventIconShow',
       payload: Number(value),
     });
   };
@@ -560,6 +564,15 @@ export default class GlobalHeader extends PureComponent {
             <Select defaultValue="0" className={styles.selectStyle} getPopupContainer={triggerNode => triggerNode.parentNode} onChange={this.handleMapLinkChange} >
               <Option value="1" title="自动定位">自动定位</Option>
               <Option value="0" title="不定位">不定位</Option>
+            </Select>
+          </div>
+        </div>
+        <div className={styles.controlIcon}>
+          <div>事件图标</div>
+          <div>
+            <Select defaultValue="0" className={styles.selectStyle} getPopupContainer={triggerNode => triggerNode.parentNode} onChange={this.handleIconShow} >
+              <Option value="1" title="显示">显示</Option>
+              <Option value="0" title="隐藏">隐藏</Option>
             </Select>
           </div>
         </div>

@@ -6,14 +6,11 @@ import {
   Col,
   Card,
   Form,
-  Input,
-  Icon,
   Button,
   Select,
   Table, Modal,
 } from 'antd';
 import styles from './index.less';
-import { formatDuring } from '../../../utils/utils';
 
 const alarmStatus = [
   { alarmStatue: 1, alarmStatueName: '未处理' },
@@ -234,22 +231,21 @@ export default class AlarmHistory extends PureComponent {
             <Col span={4}>所属装置：</Col><Col span={8}>{alarmDetail.orgName ? alarmDetail.orgName : '/'}</Col>
             <Col span={4}>报警类型：</Col><Col span={8}>{alarmDetail.alarmType ? alarmDetail.alarmType.alarmTypeName : '/'}</Col>
             <Col span={4}>报警级别：</Col><Col span={8}>{alarmDetail.alarmType ? alarmDetail.alarmType.dangerCoefficient : '/'}</Col>
-            <Col span={4}>事发部位：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.accidentPostion : '/'}</Col>
+            <Col span={4}>事发部位：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.accidentPostion ? alarmDetail.alarmExtendAlarmInfoVO.accidentPostion : '/' : '/'}</Col>
             {/* <Col span={4}>监测器具：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.accidentPostion : ''}</Col> */}
             {/* <Col span={4}>事件物质：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.accidentPostion : ''}</Col> */}
             {/* <Col span={4}>事件物质：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.accidentPostion : ''}</Col> */}
-            <Col span={4}>事发原因：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.incidentReason : '/'}</Col>
-            <Col span={4}>事发位置：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.place : '/'}</Col>
+            <Col span={4}>事发原因：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.incidentReason ? alarmDetail.alarmExtendAlarmInfoVO.incidentReason : '/' : '/'}</Col>
+            <Col span={4}>事发位置：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.place ? alarmDetail.alarmExtendAlarmInfoVO.place : '/' : '/'}</Col>
             <Col span={4}>警情摘要：</Col><Col span={8}>{alarmDetail.alarmDes ? alarmDetail.alarmDes : '/'}</Col>
             <Col span={4}>事发设备：</Col><Col span={8}>{alarmDetail.resourceName ? alarmDetail.resourceName : '/'}</Col>
-            <Col span={4}>报警现状：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.alarmStatuInfo : '/'}</Col>
-            <Col span={4}>补充报警描述：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.extendAlarmDes : '/'}</Col>
-            <Col span={4}>已采取措施：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/'}</Col>
-            <Col span={4}>处理人：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/'}</Col>
-            <Col span={4}>开始处理时间：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/'}</Col>
-            <Col span={4}>处理结束时间：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/'}</Col>
-            <Col span={4}>处理结果：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/'}</Col>
-            <Col span={4}>处理说明：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/'}</Col>
+            <Col span={4}>报警现状：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.alarmStatuInfo ? alarmDetail.alarmExtendAlarmInfoVO.alarmStatuInfo : '/' : '/'}</Col>
+            <Col span={4}>补充报警描述：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.extendAlarmDes ? alarmDetail.alarmExtendAlarmInfoVO.extendAlarmDes : '/' : '/'}</Col>
+            <Col span={4}>已采取措施：</Col><Col span={8}>{alarmDetail.alarmExtendAlarmInfoVO ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure ? alarmDetail.alarmExtendAlarmInfoVO.adoptMeasure : '/' : '/'}</Col>
+            <Col span={4}>处理人：</Col><Col span={8}>{alarmDetail.alarmAlarmDeal ? alarmDetail.alarmAlarmDeal.user ? alarmDetail.alarmAlarmDeal.user.userName : '/' : '/'}</Col>
+            <Col span={4}>处理结束时间：</Col><Col span={8}>{alarmDetail.alarmAlarmDeal ? alarmDetail.alarmAlarmDeal.dealTime ? moment(alarmDetail.alarmAlarmDeal.dealTime).format('YYYY-MM-DD HH:mm:ss') : '/' : '/'}</Col>
+            <Col span={4}>处理结果：</Col><Col span={8}>{alarmDetail.alarmAlarmDeal ? alarmDetail.alarmAlarmDeal.dealResult ? alarmDetail.alarmAlarmDeal.dealResult : '/' : '/'}</Col>
+            <Col span={4}>处理说明：</Col><Col span={8}>{alarmDetail.alarmAlarmDeal ? alarmDetail.alarmAlarmDeal.remark ? alarmDetail.alarmAlarmDeal.remark : '/' : '/'}</Col>
           </Card>
         </Modal>
       </div>

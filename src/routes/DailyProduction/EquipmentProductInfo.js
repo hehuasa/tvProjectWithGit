@@ -2,14 +2,13 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Scrollbars from 'react-custom-scrollbars';
 import moment from 'moment';
-import { Table, Select, Row, Col, DatePicker } from 'antd';
+import { Table, Row, Col, DatePicker } from 'antd';
 import Trend from './chart/Trend';
 import { fakeData } from './List/lib/data.js';
 import { bgColor, progressColor } from './color/color';
 import styles from './index.less';
 import Progress from '../../components/Progress/Progress';
 
-const { Option } = Select;
 @connect(({ userList, typeCode, organization, productionDaily, homepage }) => ({
   userList,
   typeCode,
@@ -20,7 +19,6 @@ const { Option } = Select;
 }))
 export default class EquipmentProductInfo extends PureComponent {
   state = {
-    equipmentList: [], // 装置列表
     data: [],
     showChart: false,
     sortIndex: '',
@@ -32,7 +30,6 @@ export default class EquipmentProductInfo extends PureComponent {
     this.props.dispatch({
       type: 'productionDaily/getDeviceProduction',
     }).then(() => {
-      // this.getEquipmentList(this.props.deviceProduction);
       this.dealData(this.props.deviceProduction);
       this.getStartTime(this.props.deviceProduction);
     });
@@ -61,18 +58,6 @@ export default class EquipmentProductInfo extends PureComponent {
       payload: { startDate },
     }).then(() => {
       this.dealData(this.props.deviceProduction);
-    });
-  };
-  // 获取所有装置
-  getEquipmentList = (data) => {
-    const arr = [];
-    data.forEach((obj) => {
-      if (!arr.filter(item => item.equipmentName === obj.equipmentName).length > 0) {
-        arr.push(obj);
-      }
-    });
-    this.setState({
-      equipmentList: arr,
     });
   };
   // 获取制表时间

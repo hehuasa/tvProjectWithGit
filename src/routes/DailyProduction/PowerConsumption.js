@@ -1,18 +1,16 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Scrollbars from 'react-custom-scrollbars';
-import { Table, Select, DatePicker } from 'antd';
+import { Table, DatePicker } from 'antd';
 import moment from 'moment';
 import styles from './index.less';
 import PowerConsumptionTrend from './chart/PowerConsumptionTrend';
 
-const { Option } = Select;
-@connect(({ productionDaily, loading, homepage }) => ({
+@connect(({ productionDaily, homepage }) => ({
   powerConsumption: productionDaily.powerConsumption,
   recycledWater: productionDaily.recycledWater,
   timeUsePre: productionDaily.timeUsePre,
   videoFooterHeight: homepage.videoFooterHeight,
-  loading,
 }))
 export default class GasBalance extends PureComponent {
   state = {
@@ -20,7 +18,6 @@ export default class GasBalance extends PureComponent {
     recycledWater: [],
     scrollX: 0,
     showChart: false,
-    record: {},
     dateTimes: null,
     itemName: '',
     chartName: '',

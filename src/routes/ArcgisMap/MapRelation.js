@@ -39,7 +39,7 @@ const mapStateToProps = ({ map, mapRelation, homepage, alarm, resourceTree, cons
     crackingConstantlyValue, generatorConstantlyValue, largeUnitConstantlyValue, boilerConstantlyValue,
   } = map;
   const { infoPops, vocsPopup, alarmIconData, eventIconData, envIconData, mapIconShow, resourceClusterPopup, accessPops, paPopup, popupShow, envIconShow, markShow, markData, markType, clusterPopups, constructMonitorClusterPopup,
-    alarmClusterPopup } = mapRelation;
+    alarmClusterPopup, eventIconShow } = mapRelation;
   const data = [];
   for (const item of constantlyData.constantlyComponents) {
     data.push(item);
@@ -68,6 +68,7 @@ const mapStateToProps = ({ map, mapRelation, homepage, alarm, resourceTree, cons
     eventIconData,
     envIconData,
     mapIconShow,
+    eventIconShow,
     trueMapShow,
     locateTrueMap,
     mapPoint,
@@ -165,7 +166,10 @@ export default class MapRelation extends PureComponent {
     });
   };
   render() {
-    const { stopPropagation, popupShow, markShow, envIconShow, resourceInfo, undoneEventList, alarmIconData, eventIconData, envIconData, mapIconShow, markData, markType, trueMapShow, dispatch, serviceUrl, contextPosition, screenPoint, mapPoint, resourceClusterPopup, constructMonitorClusterPopup, clusterPopups, infoPops, vocsPopup, alarmClusterPopup, accessPops, baseLayer, paPopup, mapHeight } = this.props;
+    const { stopPropagation, popupShow, markShow, envIconShow, resourceInfo, undoneEventList, alarmIconData, eventIconData, envIconData, mapIconShow,
+      eventIconShow,
+      markData, markType, trueMapShow, dispatch, serviceUrl, contextPosition, screenPoint, mapPoint, resourceClusterPopup, constructMonitorClusterPopup,
+      clusterPopups, infoPops, vocsPopup, alarmClusterPopup, accessPops, baseLayer, paPopup, mapHeight } = this.props;
     const { legendIndex } = this.state;
     const { allSublayers } = baseLayer;
     const getCurrentPopups = () => {
@@ -243,7 +247,7 @@ export default class MapRelation extends PureComponent {
             {/*<MeasurePop />*/}
             { popupShow && envIconShow ? <EnvIcon envIconData={envIconData} infoPops={infoPops} resourceInfo={resourceInfo} dispatch={dispatch} /> : null }
             <SpaceQuery />
-            { popupShow && mapIconShow ? <MapIcon mapIconData={{ alarmIconData, eventIconData }} resourceInfo={resourceInfo} infoPops={infoPops} dispatch={dispatch} undoneEventList={undoneEventList} /> : null }
+            { popupShow && mapIconShow ? <MapIcon mapIconData={{ alarmIconData, eventIconData }} eventIconShow={eventIconShow} resourceInfo={resourceInfo} infoPops={infoPops} dispatch={dispatch} undoneEventList={undoneEventList} /> : null }
           </div>
           { !markShow.show ? (
             <div className={styles.switch}>

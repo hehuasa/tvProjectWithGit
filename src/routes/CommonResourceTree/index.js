@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { connect } from 'dva';
 import Trees from './Trees';
-import {connect} from "dva/index";
 
 @connect(({ commonResourceTree }) => ({
   ajaxParam: commonResourceTree.ajaxParam,

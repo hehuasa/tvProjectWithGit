@@ -1,11 +1,9 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Table, Select, Card, Upload, message, Icon, Button } from 'antd';
-import { fakeData } from './List/lib/data.js';
+import { Table, Card, Upload, message, Icon } from 'antd';
 import styles from './index.less';
 
-const { Option } = Select;
 const { Dragger } = Upload;
 const cols = [
   { title: '文件名', dataIndex: 'fileName', width: '20%' },

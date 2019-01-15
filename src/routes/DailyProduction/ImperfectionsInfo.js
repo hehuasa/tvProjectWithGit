@@ -1,12 +1,10 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
 import Scrollbars from 'react-custom-scrollbars';
-import { Table, Select, Card, DatePicker } from 'antd';
-import { fakeData } from './List/lib/data.js';
+import { Table, Select, DatePicker } from 'antd';
 import styles from './index.less';
 
-const { Option } = Select;
 @connect(({ productionDaily, homepage }) => ({
   solidDefects: productionDaily.solidDefects,
   timeUsePre: productionDaily.timeUsePre,
@@ -50,7 +48,6 @@ export default class DissociationInfo extends PureComponent {
   render() {
     const { videoFooterHeight } = this.props;
     const { current } = videoFooterHeight;
-    const { showChart } = this.state;
     const cols = [
       {
         title: '信息',
