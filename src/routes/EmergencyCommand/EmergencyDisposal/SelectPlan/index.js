@@ -3,7 +3,6 @@ import { Select, Table, Modal, Button, Form, Row, Col, Input, Popconfirm } from 
 import { connect } from 'dva';
 import PlanInfo from './PlanInfo/index';
 import styles from './index.less';
-import { commonData } from '../../../../../mock/commonData';
 
 const Option = Select.Option;
 const FormItem = Form.Item;

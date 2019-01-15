@@ -1,29 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Select,
-  Table,
-  Button,
-  Dropdown,
-  Menu,
-  Tag,
-  TreeSelect,
-  Modal,
-  message,
-  Divider,
-  Popconfirm,
-} from 'antd';
+import { Row, Col, Card, Form, Input, Select, Table, Button, TreeSelect, Modal, Divider, Popconfirm } from 'antd';
 import StandardTable from '../../../components/StandardTable';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import styles from './TableList.less';
 import { commonData } from '../../../../mock/commonData';
-import { accountEnable } from '../../../services/api';
 import { win3, win20 } from '../../../configIndex';
 
 const FormItem = Form.Item;

@@ -57,6 +57,17 @@ export default class RawInfoTrend extends PureComponent {
       },
     });
   }
+  // componentWillReceiveProps(nextProps, nextContext) {
+  //   console.log('nextProps', nextProps);
+  //   if (nextProps.chartReRender !== undefined) {
+  //     setTimeout(() => {
+  //       const newData0 = transData(nextProps.history, 0);
+  //       this.chart.changeData(newData0);
+  //       // this.chart.repaint();
+  //     }, 500)
+  //   }
+  // }
+
   render() {
     const { history, name, height } = this.props;
     const chartHeight = Number(height) / 2 - 100;
@@ -70,6 +81,10 @@ export default class RawInfoTrend extends PureComponent {
             data={newData0}
             scale={cols}
             forceFit
+            onGetG2Instance={g2Chart => {
+              this.chart = g2Chart;
+              console.log("g2Chart", g2Chart);
+            }}
           >
             <Legend />
             <Axis

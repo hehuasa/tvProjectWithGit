@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Button, Icon, Modal, Form, Input, Upload, message } from 'antd';
-import styles from './index.less';
 
-const FormItem = Form.Item;
-const { TextArea } = Input;
 @connect(({ emergency }) => ({
   eventID: emergency.eventId,
   annexPage: emergency.annexPage,
@@ -38,7 +35,7 @@ export default class AddFeature extends PureComponent {
     return this.props.uploadType === 2 ? true : (isJPG || isPNG) && isLt5M;
   };
   render() {
-    const { add, handleCancel, visible, form, uploadType } = this.props;
+    const { add, handleCancel, visible, uploadType } = this.props;
     const props = {
       action: `/emgc/emgc/emgcEventExecPlanArchive/uploadsFiles?eventID=${this.props.eventID}`,
       listType: 'picture',

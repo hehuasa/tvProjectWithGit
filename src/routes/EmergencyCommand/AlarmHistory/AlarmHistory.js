@@ -1,15 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Button,
-  Select,
-  Table, Modal,
-} from 'antd';
+import { Row, Col, Card, Form, Button, Select, Table, Modal } from 'antd';
 import styles from './index.less';
 
 const alarmStatus = [

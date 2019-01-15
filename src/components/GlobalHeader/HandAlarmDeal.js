@@ -483,7 +483,6 @@ export default class HandAlarmDeal extends PureComponent {
 
   render() {
     const { form, emergency, alarmDeal } = this.props;
-    console.log(56565, this.props.emergency.personList)
     return (
       <div className={styles.alarmReport}>
         <Row type="flex">
@@ -691,7 +690,9 @@ export default class HandAlarmDeal extends PureComponent {
                 wrapperCol={{ span: 15 }}
                 label="发生时间"
               >
-                {form.getFieldDecorator('startTime', {})(<DatePicker format="YYYY-MM-DD HH:mm:ss" showTime style={{ width: '100%' }} />)}
+                {form.getFieldDecorator('startTime', {
+                  initialValue: moment(),
+                })(<DatePicker format="YYYY-MM-DD HH:mm:ss" showTime style={{ width: '100%' }} />)}
               </FormItem>
             </Row>
             <Row>

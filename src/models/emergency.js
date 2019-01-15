@@ -758,7 +758,6 @@ export default {
     // 报警归并
     *mergeAlarm({ payload }, { call, put }) {
       const response = yield call(mergeAlarm, payload);
-      console.log('报警归并', response);
     },
     //  扩大应急 编辑实时方案 选择实施方案
     *getIfFromPlan({ payload }, { call, put }) {

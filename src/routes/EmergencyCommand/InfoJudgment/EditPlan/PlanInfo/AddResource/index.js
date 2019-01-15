@@ -3,10 +3,8 @@ import { Row, Col, Modal, Form, Input, Radio, Icon } from 'antd';
 import { connect } from 'dva';
 import SelectMaterial from './SelectMaterial/index';
 import styles from './index.less';
-import { commonData } from '../../../../../../../mock/commonData';
 
 const FormItem = Form.Item;
-const { TextArea, Search } = Input;
 const RadioGroup = Radio.Group;
 @connect(({ emergency }) => ({
   emergency,

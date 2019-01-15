@@ -7,7 +7,6 @@ import styles from './InfoContent.less';
 const { TextArea } = Input;
 const { Option } = Select;
 const FormItem = Form.Item;
-const { Search } = Input;
 const columns = [
   {
     title: '用户名字',
@@ -53,7 +52,6 @@ export default class HandAlarmDeal extends PureComponent {
   state = {
     selectedRows: [], // 报警人选择的数据
     alarmPersonVisible: false, // 报警人弹框显示
-    searchPerson: null, // 查询输入值
     personRowSelection: {
       type: 'radio',
       onChange: (selectedRowKeys, selectedRows) => {
@@ -259,7 +257,6 @@ export default class HandAlarmDeal extends PureComponent {
                 )}
               </FormItem>
             </Row>
-            <Row></Row>
             <FormItem
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 15 }}

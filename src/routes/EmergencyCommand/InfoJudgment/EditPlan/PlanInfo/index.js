@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Icon, Popconfirm } from 'antd';
+import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Form, Popconfirm } from 'antd';
 import { connect } from 'dva';
 import Zmage from 'react-zmage';
 import AddFeature from './AddFeature/index';
@@ -7,12 +7,8 @@ import AddCommand from './AddCommand/index';
 import AddResource from './AddResource/index';
 import AddAnnex from './AddAnnex/index';
 import AddPlan from './AddPlan/AddPlan';
-import Footer from './Footer/index';
 import styles from './index.less';
 import { commandType } from '../../../../../utils/utils';
-import dealCard from '../../../../../assets/emergency/dealCard.png';
-import processImg from '../../../../../assets/emergency/process.png';
-import { Form } from 'antd/lib/index';
 import { win3, win8, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../../../configIndex';
 
 const Option = Select.Option;
@@ -47,7 +43,6 @@ export default class PlanInfo extends PureComponent {
     uploadType: null, // 文件上传类型
   };
   componentDidMount() {
-    const { eventID } = this.props;
     this.props.onRef(this);
   }
   // 打开事件特征的新增弹窗
@@ -533,6 +528,13 @@ export default class PlanInfo extends PureComponent {
         dataIndex: 'featureValue',
         width: win8,
         key: 'featureValue',
+        render: (text) => {
+          switch (text) {
+            case 'false': return '否';
+            case 'true': return '是';
+            default: return text;
+          }
+        },
       }, {
         title: '单位',
         dataIndex: 'featureUnit',

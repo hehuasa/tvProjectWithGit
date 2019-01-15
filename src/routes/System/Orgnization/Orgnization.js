@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Tree, Form, Input, Row, Col, Button, Icon, Select, Radio, Popconfirm, Transfer, Modal, Upload } from 'antd';
+import { Tree, Form, Input, Row, Col, Button, Select, Radio, Transfer, Modal } from 'antd';
 import { connect } from 'dva';
 import { Scrollbars } from 'react-custom-scrollbars';
 import styles from './Organization.less';
@@ -320,7 +320,7 @@ export default class Orgnization extends PureComponent {
     return arr.length > 0;
   };
   render() {
-    const { searchValue, expandedKeys, autoExpandParent, isAdd } = this.state;
+    const { expandedKeys, autoExpandParent, isAdd } = this.state;
     const { emgcOrgTree } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { contextMenu, selectedNodes, emgcLevelList } = this.props.organization;

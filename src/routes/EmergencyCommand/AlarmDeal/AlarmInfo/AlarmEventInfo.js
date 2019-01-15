@@ -2,12 +2,10 @@ import React, { PureComponent } from 'react';
 import { Form, TreeSelect, Row, Col, Input, message, Icon, Table, Modal, Select, DatePicker } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
-import { alarmStatus } from '../../../../utils/utils';
 import CommonQuery from '../../../../components/GlobalHeader/CommonQuery';
 
 import styles from './index.less';
 
-// const { TabPane } = Tabs;
 const FormItem = Form.Item;
 const { TextArea, Search } = Input;
 const { Option } = Select;
@@ -118,7 +116,6 @@ export default class AlarmEventInfo extends PureComponent {
         let urls = '';
         const param = {};
         const { resourceID } = this.props.form.getFieldsValue(['resourceID']);
-        const { alarmAreaID } = this.props.form.getFieldsValue(['alarmAreaID']);
         if (resourceID) {
           urls = 'alarmDeal/getMonitorResource';
           param.resourceID = resourceID;
@@ -223,10 +220,6 @@ export default class AlarmEventInfo extends PureComponent {
       default:
         break;
     }
-    // this.setState({
-    //   visible: true,
-    //   clickWhether: id,
-    // });
   };
   // 选择查询
   onSearchUser = (value) => {
@@ -442,7 +435,6 @@ export default class AlarmEventInfo extends PureComponent {
     form.getFieldDecorator('eventName', {
       initialValue: alarmInfo.eventName,
     });
-    const alarmEventInfoData = {};
     return (
       <div className={styles.alarmDeal}>
         <Row type="flex" >

@@ -3,7 +3,6 @@ import { Row, Col, Modal, Form, Input, Select, TreeSelect, Card, Table, Button }
 import { connect } from 'dva';
 import styles from './index.less';
 import { commandType } from '../../../../../../utils/utils';
-import { commonData } from '../../../../../../../mock/commonData';
 import { win3, win12, win10, win20 } from '../../../../../../configIndex';
 
 const FormItem = Form.Item;

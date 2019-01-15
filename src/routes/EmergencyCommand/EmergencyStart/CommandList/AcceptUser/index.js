@@ -5,8 +5,6 @@ import { getUUID } from '../../../../../utils/utils';
 import styles from './index.less';
 
 const FormItem = Form.Item;
-const { Option } = Select;
-const { TextArea } = Input;
 const columns = [
   {
     title: '姓名',

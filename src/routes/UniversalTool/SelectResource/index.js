@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Card, Form, Input, Radio, Table, Button, Select } from 'antd';
+import { Row, Col, Card, Form, Input, Table, Button, Select } from 'antd';
 import { connect } from 'dva';
-import { commonData } from '../../../../mock/commonData';
 import styles from './index.less';
 
 const FormItem = Form.Item;

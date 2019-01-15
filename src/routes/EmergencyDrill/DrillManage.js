@@ -9,13 +9,10 @@ import AddResourceTemplate from './AddResourceTemplate/index';
 import styles from './TableList.less';
 import { commonData } from '../../../mock/commonData';
 import { getUUID } from '../../utils/utils';
-// import userList from "../../../models/userList";
 
 const FormItem = Form.Item;
-const { Option } = Select;
 const { TextArea } = Input;
 const { TreeNode } = TreeSelect;
-const { RangePicker } = DatePicker;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 // 新增 修改页
 const CreateForm = Form.create()((props) => {

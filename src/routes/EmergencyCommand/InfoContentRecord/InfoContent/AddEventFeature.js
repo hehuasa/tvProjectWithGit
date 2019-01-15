@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Form, Button, Row, Col, Input, Modal, Table, Select, message } from 'antd';
-import { commonData } from '../../../../../mock/commonData';
 import styles from './InfoContent.less';
 
 const FormItem = Form.Item;
@@ -208,6 +207,4 @@ export default class AddEventFeature extends PureComponent {
     );
   }
 }
-// rowKey={record => record[featureID]}
-// pagination={paginationProps}
-// onChange={this.handleTableChange}
+

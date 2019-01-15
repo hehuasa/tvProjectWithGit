@@ -1,37 +1,17 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Select,
-  Icon,
-  Button,
-  Dropdown,
-  Table,
-  TreeSelect,
-  DatePicker,
-  Modal,
-  message,
-  Divider,
-  Popconfirm,
-} from 'antd';
+import { Row, Col, Card, Form, Input, Select, Button, Table, TreeSelect, Modal, Popconfirm } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import styles from './index.less';
 import { commonData } from '../../../../mock/commonData';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const { TextArea } = Input;
 const { TreeNode } = TreeSelect;
-const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 // 新增 修改页
 const CreateForm = Form.create()((props) => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
-  const { materialInfo, isAdd } = props;
+  const { isAdd } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;

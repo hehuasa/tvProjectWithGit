@@ -513,17 +513,6 @@ export default class MajorList extends PureComponent {
     const { modalVisible, isAdd, clickRow, statuData, dataSource, pagination, sorting } = this.state;
     const { data } = dataSource;
     const columns = [
-      // {
-      //   title: '序号',
-      //   dataIndex: 'sortIndex',
-      //   width: 80,
-      //   render: (text, b, c) => {
-      //     console.log('text', text);
-      //     console.log('b', b);
-      //     console.log('c', c);
-      //     return text
-      //   },
-      // },
       {
         title: '标题名称',
         dataIndex: 'title',

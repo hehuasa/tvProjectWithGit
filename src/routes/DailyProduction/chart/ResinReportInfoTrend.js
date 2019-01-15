@@ -7,9 +7,11 @@ import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 // import MonthPick from './MonthPick';
 const { DataSet } = new window.DataSet();
 import styles from './index.less';
+import { getMonthDayNums } from './unit';
 
 const monthOutCountTitle = '出厂量';
 const trunkCountTitle = '罐存';
+const monthOutPlan = '月计划';
 
 const cols = {
   dateFormat: {
@@ -25,7 +27,7 @@ const cols = {
 const transData = (data, type) => {
   let key;
   if (type === 0) {
-    key = trunkCountTitle;
+    key = [trunkCountTitle];
     for (const item of data) {
       item.dateFormat = moment(item.startDate).format('l');
       item[trunkCountTitle] = item.factoryStockCount;
@@ -34,20 +36,21 @@ const transData = (data, type) => {
       });
     }
   } else {
-    key = monthOutCountTitle;
-    for (const item of data) {
+    key = [monthOutCountTitle, monthOutPlan];
+    for (const [index, item] of data.entries()) {
       item.dateFormat = moment(item.startDate).format('l');
       item[monthOutCountTitle] = item.monthOutCount;
-      data.sort((a, b) => {
-        return a.startDate - b.startDate;
-      });
+      item[monthOutPlan] = item.monthOutPlan / getMonthDayNums(new Date()) * index.toFixed(2);
     }
+    data.sort((a, b) => {
+      return a.startDate - b.startDate;
+    });
   }
   const ds = new DataSet();
   const dv = ds.createView().source(data);
   dv.transform({
     type: 'fold',
-    fields: [key], // 展开字段集
+    fields: [...key], // 展开字段集
     key: 'date', // key字段
     value: 'value', // value字段
   });
@@ -74,6 +77,7 @@ export default class ResinReportInfoTrend extends PureComponent {
   }
   render() {
     const { history, name, height } = this.props;
+    console.log('height', height);
     const chartHeight = Number(height) / 2 - 100;
     const newData0 = transData(history, 0);
     const newData1 = transData(history, 1);

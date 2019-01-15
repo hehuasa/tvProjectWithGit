@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Modal, Form, Input, Radio, Table, Button, Select } from 'antd';
+import { Row, Col, Modal, Form, Input, Table, Button, Select } from 'antd';
 import { connect } from 'dva';
-import StandardTable from '../../../components/StandardTable';
 import styles from './index.less';
 
 const FormItem = Form.Item;

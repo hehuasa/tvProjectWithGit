@@ -1,21 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Select,
-  Icon,
-  Button,
-  Dropdown,
-  Menu,
-  TreeSelect,
-  Modal,
-  Divider,
-  Popconfirm,
-} from 'antd';
+import { Row, Col, Card, Form, Input, Icon, Button, TreeSelect, Modal, Divider, Popconfirm } from 'antd';
 import StandardTable from '../../components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './TableList.less';

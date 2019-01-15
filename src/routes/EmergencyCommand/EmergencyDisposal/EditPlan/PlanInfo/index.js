@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Icon, Popconfirm } from 'antd';
+import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import { connect } from 'dva';
 import Zmage from 'react-zmage';
 import AddFeature from './AddFeature/index';
@@ -9,9 +9,6 @@ import AddAnnex from './AddAnnex/index';
 import Footer from './Footer/index';
 import styles from './index.less';
 import { commandType } from '../../../../../utils/utils';
-import emgcOrg from '../../../../../assets/emergency/emgcOrg.png';
-import processImg from '../../../../../assets/emergency/process.png';
-import dealCard from '../../../../../assets/emergency/dealCard.png';
 
 const Option = Select.Option;
 const { TabPane } = Tabs;
@@ -281,7 +278,7 @@ export default class PlanInfo extends PureComponent {
   };
   render() {
     const { isEdit, planBaseInfo, emgcResource, emgcCommand, emgcFeature,
-      eventFeature, commandInfo, resourceInfo, hideFooter, planInfo } = this.props;
+      eventFeature, commandInfo, resourceInfo, hideFooter } = this.props;
     const { isAdd } = this.state;
     // 实施方案 基本信息表头
     const columns = [
@@ -330,50 +327,47 @@ export default class PlanInfo extends PureComponent {
     ];
       // 实施方案 事件特征表头
     const featureCols = [{
-        title: '特征类型',
-        dataIndex: 'featureTypeName',
-        width: 100,
-        key: 'featureTypeName',
-      }, {
-        title: '特征名称',
-        dataIndex: 'featureName',
-        width: 120,
-        key: 'featureName',
-      }, {
-        title: '规则',
-        dataIndex: 'featureExpresstion ',
-        width: 80,
-        key: 'featureExpresstion ',
-        render: (text, record) => {
-          return record.featureExpresstion;
-        },
-      }, {
-        title: '特征值',
-        dataIndex: 'featureValue',
-        width: 80,
-        key: 'featureValue',
-      }, {
-        title: '单位',
-        dataIndex: 'featureUnit',
-        width: 80,
-        key: 'featureUnit',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureUnit;
-        // },
-      }, {
-        title: '权重',
-        dataIndex: 'weight',
-        width: 80,
-        key: 'weight',
-      }, {
-        title: '特征描述',
-        dataIndex: 'featureDes',
-        width: 200,
-        key: 'featureDes',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureDes;
-        // },
+      title: '特征类型',
+      dataIndex: 'featureTypeName',
+      width: 100,
+      key: 'featureTypeName',
+    }, {
+      title: '特征名称',
+      dataIndex: 'featureName',
+      width: 120,
+      key: 'featureName',
+    }, {
+      title: '规则',
+      dataIndex: 'featureExpresstion ',
+      width: 80,
+      key: 'featureExpresstion ',
+      render: (text, record) => {
+        return record.featureExpresstion;
       },
+    }, {
+      title: '特征值',
+      dataIndex: 'featureValue',
+      width: 80,
+      key: 'featureValue',
+    }, {
+      title: '单位',
+      dataIndex: 'featureUnit',
+      width: 80,
+      key: 'featureUnit',
+      // render: (text, record) => {
+      //   return record.planFeatureInfo.featureUnit;
+      // },
+    }, {
+      title: '权重',
+      dataIndex: 'weight',
+      width: 80,
+      key: 'weight',
+    }, {
+      title: '特征描述',
+      dataIndex: 'featureDes',
+      width: 200,
+      key: 'featureDes',
+    },
     ];
       // 实施方案 预案指令表头
     const commandCols = [
