@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Legend } from 'bizcharts';
-import { DataSet } from '@antv/data-set';
 import { searchByAttr } from '../../../../../utils/mapService';
 import styles from '../panel.less';
+
+
+const { DataSet } = window.DataSet();
 
 export default class AlarmCountingRound extends PureComponent {
   handClick = (data) => {
@@ -86,7 +88,7 @@ export default class AlarmCountingRound extends PureComponent {
                 //   + '<span class="g2-legend-text">{value}</span>'
                 //   + '</li>'}
                 // g2-legend-marker={{
-                //   width: '10px', 
+                //   width: '10px',
                 //   height: '10px',
                 // }}
               />

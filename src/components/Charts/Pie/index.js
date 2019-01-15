@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Chart, Tooltip, Geom, Coord } from 'bizcharts';
-import { DataView } from '@antv/data-set';
 import { Divider } from 'antd';
 import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import autoHeight from '../autoHeight';
-
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
+const { DataView } = new window.DataSet();
 @autoHeight()
 export default class Pie extends Component {
   state = {

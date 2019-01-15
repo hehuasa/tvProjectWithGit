@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Chart, Geom, Coord, Shape } from 'bizcharts';
-import DataSet from '@antv/data-set';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import classNames from 'classnames';
@@ -10,6 +9,7 @@ import styles from './index.less';
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
 
+const { DataSet } = new window.DataSet();
 const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
 @autoHeight()

@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import { Popover, Button, Checkbox, Row, Col, Select } from 'antd';
 // import moment from 'moment';
 // import { connect } from 'dva';
-import { DataSet } from '@antv/data-set';
-import { objByArea, newdatabyDataName, getSelctData, lineData } from '../../utils/Panel';
+import { objByArea, newdatabyDataName, getSelctData } from '../../utils/Panel';
 import styles from '../HomePage/PanelBoard/components/panel.less';
 
 import HistoryDataLineChart from './HistoryDataLineChart';
@@ -12,7 +11,7 @@ const Option = Select.Option;
 
 // 多个指标，多个点位
 const ContentZb = ({ queryLineData, onCheckAllChange, onChange }) => {
-  // const { queryLineData } = queryLineData; // indeterminate, checkAll, plainOptions, checkedList, 
+  // const { queryLineData } = queryLineData; // indeterminate, checkAll, plainOptions, checkedList,
   return (
     <div className={styles.contentWarp}>
       <div style={{ borderBottom: '1px solid #E9E9E9' }}>
@@ -37,7 +36,7 @@ const ContentZb = ({ queryLineData, onCheckAllChange, onChange }) => {
   );
 };
 const ContentDot = ({ queryLineData, onCheckAllChange, onChange }) => {
-  // const { queryLineData } = queryLineData; //targetIndeterminate, targetCheckAll, targetCheckedList, target, 
+  // const { queryLineData } = queryLineData; //targetIndeterminate, targetCheckAll, targetCheckedList, target,
   return (
     <div className={styles.contentWarp}>
       <div style={{ borderBottom: '1px solid #E9E9E9' }}>

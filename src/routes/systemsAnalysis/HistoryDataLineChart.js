@@ -3,9 +3,9 @@
 import React, { PureComponent } from 'react';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import Slider from 'bizcharts-plugin-slider';
-import { DataSet } from '@antv/data-set';
-import { connect } from 'dva';
 import styles from './historyData.less';
+
+const { DataSet } = window.DataSet();
 
 const data = [{
   "month": 1528420108759,

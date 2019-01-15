@@ -3,9 +3,10 @@ import { Button, Card } from 'antd';
 import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
-import { DataSet } from '@antv/data-set';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 // import MonthPick from './MonthPick';
+
+const { DataSet } = window.DataSet();
 
 import styles from './index.less';
 

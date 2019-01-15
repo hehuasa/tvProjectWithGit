@@ -3,9 +3,9 @@ import { Button, Card } from 'antd';
 import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
-import { DataSet } from '@antv/data-set';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 
+const { DataSet } = window.DataSet();
 import styles from './index.less';
 
 const cotTitle = '进汽量（t/h）';

@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { Popover, Button, Checkbox, Row, Col, Select } from 'antd';
 // import moment from 'moment';
 // import { connect } from 'dva';
-import { DataSet } from '@antv/data-set';
-import { objByArea, newdatabyDataName, getSelctData, lineData } from '../../../../../utils/Panel';
+import { objByArea, newdatabyDataName, getSelctData } from '../../../../../utils/Panel';
 import CommonLineChart from './CommonLineChart';
 import styles from '../panel.less';
 
+const { DataSet } = window.DataSet();
 const Option = Select.Option;
 
 // 多个指标，多个点位

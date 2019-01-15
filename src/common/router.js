@@ -71,7 +71,7 @@ function getFlatMenuData(menus) {
 export const getRouterData = (app) => {
   const routerConfig = {
     '/': {
-      component: dynamicWrapper(app, ['user', 'login', 'tabs', 'sysFunction', 'commonTree', 'majorList', 'video', 'oftenFunction', 'alarmDeal', 'emergency', 'vocsMonitor', 'accessControl', 'constructMonitor'], () => import('../layouts/BasicLayout')),
+      component: dynamicWrapper(app, ['user', 'login', 'tabs', 'sysFunction', 'commonTree', 'majorList', 'video', 'oftenFunction', 'alarmDeal', 'emergency'], () => import('../layouts/BasicLayout')),
     },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
@@ -80,105 +80,105 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
     },
     '/homePage': {
-      component: dynamicWrapper(app, ['homepage', 'panelBoard', 'map', 'mapRelation', 'tabs', 'resourceTree', 'websocket', 'paSystem', 'alarm', 'video', 'combustibleGas', 'outerDrain', 'vocsMonitor', 'constantlyData', 'flow', 'accessControl', 'constructMonitor', 'organization'], () => import('../routes/HomePage/HomePage')),
+      component: dynamicWrapper(app, ['homepage', 'panelBoard', 'map', 'sidebar', 'mapRelation', 'tabs', 'resourceTree', 'websocket', 'paSystem', 'alarm', 'video', 'combustibleGas', 'outerDrain', 'vocsMonitor', 'constantlyData', 'flow', 'accessControl', 'constructMonitor', 'organization'], () => import('../routes/HomePage/HomePage')),
     },
-    '/monitorWarning/evr': {
-      component: dynamicWrapper(app, ['homepage', 'sidebar', 'map'], () => import('../routes/MonitorWarning/evr')),
-    },
-    '/monitorWarning/list': {
-      component: dynamicWrapper(app, [], () => import('../routes/List/TableList')),
-    },
-    '/monitorWarning/demo': {
-      component: dynamicWrapper(app, ['resourceTree'], () => import('../routes/Demo/Demo')),
-    },
-    '/monitorWarning/arcgis': {
-      component: dynamicWrapper(app, ['sidebar', 'map'], () => import('../routes/Exception/404')),
-    },
-    '/user/register': {
-      component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
-    },
-    '/user/register-result': {
-      component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
-    },
-    // '/analysis': {
-    //   component: dynamicWrapper(app, ['error', 'majorList'], () => import('../routes/Dashboard/Analysis')), // 重点关注维护页面
+    // '/monitorWarning/evr': {
+    //   component: dynamicWrapper(app, ['homepage', 'sidebar', 'map'], () => import('../routes/MonitorWarning/evr')),
     // },
-
-    '/dashboard/monitor': {
-      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
-    },
-    '/dashboard/arcgis': {
-      component: dynamicWrapper(app, ['monitor'], () => import('../routes/ArcgisMap/ArcgisMap')),
-    },
-    '/dashboard/workplace': {
-      component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
-      // hideInBreadcrumb: true,
-      // name: '工作台',
-      // authority: 'admin',
-    },
-    '/form/basic-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
-    },
-    '/form/step-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
-    },
-    '/form/step-form/info': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
-    },
-    '/form/step-form/confirm': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
-    },
-    '/form/step-form/result': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
-    },
-    '/form/advanced-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
-    },
-    '/list/table-list': {
-      component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
-    },
-    '/list/basic-list': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/BasicList')),
-    },
-    '/list/card-list': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
-    },
-    '/list/search': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/List')),
-    },
-    '/list/search/projects': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Projects')),
-    },
-    '/list/search/applications': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Applications')),
-    },
-    '/list/search/articles': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
-    },
-    '/profile/basic': {
-      component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
-    },
-    '/profile/advanced': {
-      component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/AdvancedProfile')),
-    },
-    '/result/success': {
-      component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),
-    },
-    '/result/fail': {
-      component: dynamicWrapper(app, [], () => import('../routes/Result/Error')),
-    },
-    '/exception/403': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
-    },
-    '/exception/404': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
-    },
-    '/exception/500': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
-    },
-    '/exception/trigger': {
-      component: dynamicWrapper(app, ['error'], () => import('../routes/Exception/triggerException')),
-    },
+    // '/monitorWarning/list': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/List/TableList')),
+    // },
+    // '/monitorWarning/demo': {
+    //   component: dynamicWrapper(app, ['resourceTree'], () => import('../routes/Demo/Demo')),
+    // },
+    // '/monitorWarning/arcgis': {
+    //   component: dynamicWrapper(app, ['sidebar', 'map'], () => import('../routes/Exception/404')),
+    // },
+    // '/user/register': {
+    //   component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
+    // },
+    // '/user/register-result': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
+    // },
+    // // '/analysis': {
+    // //   component: dynamicWrapper(app, ['error', 'majorList'], () => import('../routes/Dashboard/Analysis')), // 重点关注维护页面
+    // // },
+    //
+    // '/dashboard/monitor': {
+    //   component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
+    // },
+    // '/dashboard/arcgis': {
+    //   component: dynamicWrapper(app, ['monitor'], () => import('../routes/ArcgisMap/ArcgisMap')),
+    // },
+    // '/dashboard/workplace': {
+    //   component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
+    //   // hideInBreadcrumb: true,
+    //   // name: '工作台',
+    //   // authority: 'admin',
+    // },
+    // '/form/basic-form': {
+    //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
+    // },
+    // '/form/step-form': {
+    //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
+    // },
+    // '/form/step-form/info': {
+    //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
+    // },
+    // '/form/step-form/confirm': {
+    //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
+    // },
+    // '/form/step-form/result': {
+    //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
+    // },
+    // '/form/advanced-form': {
+    //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
+    // },
+    // '/list/table-list': {
+    //   component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
+    // },
+    // '/list/basic-list': {
+    //   component: dynamicWrapper(app, ['list'], () => import('../routes/List/BasicList')),
+    // },
+    // '/list/card-list': {
+    //   component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
+    // },
+    // '/list/search': {
+    //   component: dynamicWrapper(app, ['list'], () => import('../routes/List/List')),
+    // },
+    // '/list/search/projects': {
+    //   component: dynamicWrapper(app, ['list'], () => import('../routes/List/Projects')),
+    // },
+    // '/list/search/applications': {
+    //   component: dynamicWrapper(app, ['list'], () => import('../routes/List/Applications')),
+    // },
+    // '/list/search/articles': {
+    //   component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
+    // },
+    // '/profile/basic': {
+    //   component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
+    // },
+    // '/profile/advanced': {
+    //   component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/AdvancedProfile')),
+    // },
+    // '/result/success': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),
+    // },
+    // '/result/fail': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/Result/Error')),
+    // },
+    // '/exception/403': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
+    // },
+    // '/exception/404': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+    // },
+    // '/exception/500': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
+    // },
+    // '/exception/trigger': {
+    //   component: dynamicWrapper(app, ['error'], () => import('../routes/Exception/triggerException')),
+    // },
     '/system/user': {
       component: dynamicWrapper(app, ['error', 'userList', 'typeCode'], () => import('../routes/System/User/UserInfo')),
     },

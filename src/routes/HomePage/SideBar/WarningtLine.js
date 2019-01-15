@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { Chart, Tooltip, Geom, Legend, Axis } from 'bizcharts';
-import DataSet from '@antv/data-set';
+import { Chart, Tooltip, Geom, Axis } from 'bizcharts';
 import Slider from 'bizcharts-plugin-slider';
 // import { connect } from 'dva';
 
