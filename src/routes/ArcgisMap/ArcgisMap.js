@@ -745,7 +745,7 @@ export default class ArcgisMap extends PureComponent {
           payload: e.mapPoint,
         });
         // 首先清空报警选中
-        const { selectIconShow, alarmIconData, eventIconData, infoPops } = this.props;
+        const { selectIconShow, alarmIconData, eventIconData, infoPops, envIconData } = this.props;
         if (selectIconShow.show) {
           dispatch({
             type: 'mapRelation/querySelectIconShow',
@@ -756,6 +756,7 @@ export default class ArcgisMap extends PureComponent {
           switch (selectIconShow.type) {
             case 'alarm': newData = [...alarmIconData]; dispatchType = 'mapRelation/queryAlarmIconData'; break;
             case 'event': newData = [...eventIconData]; dispatchType = 'mapRelation/queryEventIconData'; break;
+            case 'env': newData = [...envIconData]; dispatchType = 'mapRelation/queryEnvIconData'; break;
             default: break;
           }
           for (const item of newData) {
