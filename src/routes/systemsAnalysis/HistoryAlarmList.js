@@ -1,34 +1,13 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Select,
-  Icon,
-  Button,
-  Dropdown,
-  Menu,
-  TreeSelect,
-  DatePicker,
-  Modal,
-  message,
-  Divider,
-  Popconfirm,
-} from 'antd';
+import { Row, Col, Card, Form, Input, Select, Icon, Button, TreeSelect, DatePicker } from 'antd';
 import StandardTable from '../../components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './TableList.less';
 import { commonData } from '../../../mock/commonData';
-// import userList from "../../../models/userList";
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const { TextArea } = Input;
-const { TreeNode } = TreeSelect;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
 @connect(({ userList, typeCode, organization }) => ({

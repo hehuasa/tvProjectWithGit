@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { TreeSelect, Form, Table, Row, Col, Input, Button, Modal, Select } from 'antd';
 import moment from 'moment';
 import styles from './index.less';
+import { win15 } from '../../configIndex';
 
 const FormItem = Form.Item;
 const { TreeNode } = TreeSelect;
@@ -10,37 +11,37 @@ const columnsTitle = () => {
     [{
       title: '机构名称',
       dataIndex: 'organization',
-      width: 200,
+      width: win15,
       render: (text) => {
         return text ? text.orgnizationName : '';
       },
     }, {
       title: '事发区域',
       dataIndex: 'area',
-      width: 200,
+      width: win15,
       render: (text) => {
         return text ? text.areaName : '';
       },
     }, {
       title: '资源名称',
       dataIndex: 'resourceName',
-      width: 200,
+      width: win15,
     }, {
       title: '规格型号',
       dataIndex: 'specification',
-      width: 200,
+      width: win15,
     }, {
       title: '所属专业',
       dataIndex: 'professionSystemName',
-      width: 200,
+      width: win15,
     }, {
       title: '工艺位号',
       dataIndex: 'processNumber',
-      width: 200,
+      width: win15,
     }, {
       title: '安装位置',
       dataIndex: 'installPosition',
-      // width: 200,
+      // width: win15,
     }]
   );
 };
@@ -49,39 +50,39 @@ const columnsTitleWZ = () => {
     [{
       title: '原料名称',
       dataIndex: 'rawMaterialName',
-      width: 200,
+      width: win15,
     }, {
       title: '相对密度',
       dataIndex: 'relativeDensity',
-      width: 200,
+      width: win15,
     }, {
       title: '相对蒸汽密度',
       dataIndex: 'relativeSteamDensity',
-      width: 200,
+      width: win15,
     }, {
       title: '爆炸范围',
       dataIndex: 'explosionRange',
-      width: 200,
+      width: win15,
     }, {
       title: '爆炸零界点',
       dataIndex: 'explosionPoint',
-      width: 200,
+      width: win15,
     }, {
       title: '溶解性',
       dataIndex: 'solubility',
-      width: 200,
+      width: win15,
     }, {
       title: '外观',
       dataIndex: 'shape',
-      width: 200,
+      width: win15,
     }, {
       title: '健康危害',
       dataIndex: 'healthHazards',
-      width: 200,
+      width: win15,
     }, {
       title: '物料类型',
       dataIndex: 'rawType',
-      width: 200,
+      // width: win15,
     }]
   );
 };
@@ -242,10 +243,13 @@ export default class CommonQuery extends PureComponent {
       onHandleCancel, rowSelection, alarmDeal, orgTree } = this.props;
     let columns = null;
     let newPagination = {};
+    let scroll_x = 0;
     if (clickWhether === 1 || clickWhether === 2) {
       columns = columnsTitle();
+      scroll_x = 1500 + columns.length;
     } else if (clickWhether === 3) {
       columns = columnsTitleWZ();
+      scroll_x = 1600 + columns.length;
     }
     if (!alarmDeal.pagination.current && !alarmDeal.pagination.pageSize && !alarmDeal.pagination.total) {
       newPagination = {};
@@ -392,29 +396,29 @@ export default class CommonQuery extends PureComponent {
                 </Form>
               </div>
             ) : (
-              <div className={styles.tableListForm}>
-                <Form layout="inline" >
-                  <Row type="flex" gutter={{ md: 8, lg: 24, xl: 48 }} >
-                    <Col md={6} sm={24}>
-                      <FormItem
-                        labelCol={{ span: 7 }}
-                        wrapperCol={{ span: 15 }}
-                        label="物料名称"
-                      >
-                        {form.getFieldDecorator('rawMaterialName', {
-                        })(
-                          <Input placeholder="请输入物料名称" />
-                        )}
-                      </FormItem>
-                    </Col>
-                    <Col >
-                      <Button type="primary" onClick={this.onSearchMaterial}>搜索</Button>
-                      {/* <Button style={{ marginLeft: 8 }} onClick={this.onHandleFormReset}>重置</Button> */}
-                    </Col>
-                  </Row>
-                </Form>
-              </div>
-            )
+                <div className={styles.tableListForm}>
+                  <Form layout="inline" >
+                    <Row type="flex" gutter={{ md: 8, lg: 24, xl: 48 }} >
+                      <Col md={6} sm={24}>
+                        <FormItem
+                          labelCol={{ span: 7 }}
+                          wrapperCol={{ span: 15 }}
+                          label="物料名称"
+                        >
+                          {form.getFieldDecorator('rawMaterialName', {
+                          })(
+                            <Input placeholder="请输入物料名称" />
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col >
+                        <Button type="primary" onClick={this.onSearchMaterial}>搜索</Button>
+                        {/* <Button style={{ marginLeft: 8 }} onClick={this.onHandleFormReset}>重置</Button> */}
+                      </Col>
+                    </Row>
+                  </Form>
+                </div>
+              )
           }
           <Table
             columns={columns}
@@ -423,7 +427,7 @@ export default class CommonQuery extends PureComponent {
             rowSelection={rowSelection}
             onChange={this.onhandleTableChange}
             rowKey={record => record.gISCode}
-            scroll={{ y: 320 }}
+            scroll={{ x: scroll_x, y: 290 }}
           />
 
         </Modal>

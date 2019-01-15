@@ -9,7 +9,6 @@ import { changeVideoPosition, changeVideoSize, resetAccessStyle } from '../../..
 import { infoPopsModal } from '../../../services/constantlyModal';
 import { hoveringAlarm } from '../../../utils/mapService';
 
-const { Step } = Steps;
 @connect(({ emergency, homepage, video, global, accessControl, map, resourceTree, mapRelation }) => ({
   flowNodeTemplateList: emergency.flowNodeTemplateList,
   eventID: emergency.eventId,
@@ -159,7 +158,7 @@ export default class EmergencyCommand extends PureComponent {
     }
   }
   render() {
-    const { onClick, eventInfoReport } = this.props;
+    const { onClick } = this.props;
     const { current, viewNode, flowNodeTemplateList } = this.props;
     return (
       <div className={styles.process}>

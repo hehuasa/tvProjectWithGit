@@ -8,19 +8,6 @@ const FormItem = Form.Item;
 const { TreeNode } = TreeSelect;
 const { TextArea } = Input;
 
-let timeout;
-
-const planStatu = [{
-  name: '启用',
-  key: 0,
-}, {
-  name: '停用',
-  key: 1,
-}, {
-  name: '草稿',
-  key: 3,
-}];
-
 @connect(({ planManagement, organization }) => ({
   planBaseInfo: planManagement.planBaseInfo,
   orgTreeData: organization.orgTree,
@@ -35,7 +22,7 @@ export default class AddPlan extends PureComponent {
   }
 
   render() {
-    const { add, handleCancel, visible, form, planBaseInfo } = this.props;
+    const { add, handleCancel, visible, form } = this.props;
     const renderDeptTreeNodes = (data) => {
       return data.map((item) => {
         if (item.children) {

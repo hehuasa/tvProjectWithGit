@@ -645,8 +645,6 @@ class AlarmInfo extends PureComponent {
    */
   alarmDeal = () => {
     const { alarmBoardData } = this.props;
-    console.log('点击处理报警alarmBoardData', alarmBoardData)
-    console.log('this.state.alarmSelectIndex', this.state.alarmSelectIndex)
     this.props.dispatch({
       type: 'alarmDeal/saveAlarmInfo',
       payload: alarmBoardData[this.state.alarmSelectIndex],

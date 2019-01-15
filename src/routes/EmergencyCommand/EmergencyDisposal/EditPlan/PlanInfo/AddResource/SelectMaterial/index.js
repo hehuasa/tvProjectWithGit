@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Modal, Form, Input, Radio, Table, Button, Select } from 'antd';
+import { Row, Col, Modal, Form, Input, Table, Button, Select } from 'antd';
 import { connect } from 'dva';
 import styles from './index.less';
 
@@ -119,9 +119,6 @@ export default class SelectMaterial extends PureComponent {
         dataIndex: 'materialCode',
         width: 100,
         key: 'materialCode',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureCode || '';
-        // },
       }, {
         title: '物资名称',
         dataIndex: 'materialName',
@@ -137,17 +134,11 @@ export default class SelectMaterial extends PureComponent {
         dataIndex: 'resourceCode',
         width: 100,
         key: 'resourceCode',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureCode || '';
-        // },
       }, {
         title: '资源名称',
         dataIndex: 'resourceName',
         width: 100,
         key: 'resourceName',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureCode || '';
-        // },
       }, {
         title: '资源分区',
         dataIndex: 'areaName',

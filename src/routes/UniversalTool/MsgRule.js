@@ -1,11 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
 import { Scrollbars } from 'react-custom-scrollbars';
-import {
-  Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, TreeSelect,
-  DatePicker, Modal, message, Divider, Popconfirm, Radio, Tabs, Tree, Table, InputNumber
-} from 'antd';
+import { Row, Col, Card, Form, Input, Select, Icon, Button, TreeSelect,
+  Modal, Divider, Popconfirm, Radio, Tabs, Tree, Table, InputNumber } from 'antd';
 import StandardTable from '../../components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './TableList.less';
@@ -27,10 +24,9 @@ const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const CreateForm = Form.create()((props) => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const { onLoadData, onCheck, msgGroupRowChange, msgGroupPageChange, addCustomUser, closeCustom,
-    customUsers, onAlarmRangeChange, onByOrgChange, onByProfessionChange, onAlarmTypeChange,
-    professionPageChange, alarmTypePageChange, orgTreeOnCheck, professionRowChange, alarmTypeRowChange,
+    customUsers, onAlarmRangeChange, professionPageChange, alarmTypePageChange, orgTreeOnCheck, professionRowChange, alarmTypeRowChange,
   } = props;
-  const { orgTree, msgGroup, alarmRange, byOrg, byProfession, alarmType, professionPage,
+  const { orgTree, msgGroup, alarmRange, professionPage,
     alarmTypePage, checkedOrgIDs, professionIDs, alarmTypeIDs, msgGroupIDs } = props;
   const { msgRuleInfo, isAdd } = props;
   const okHandle = () => {

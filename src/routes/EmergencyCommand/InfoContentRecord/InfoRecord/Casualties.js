@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Form, Button, Row, Col, Input, Icon } from 'antd';
+import { Form, Button, Row, Col } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import styles from './InfoRecord.less';
 

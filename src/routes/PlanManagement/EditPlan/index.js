@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, Card } from 'antd';
+import { Card } from 'antd';
 import { connect } from 'dva';
 import PlanInfo from './PlanInfo/index';
 import styles from './index.less';

@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Form, Button, Row, Col, Input, Icon, message } from 'antd';
+import { Form, Row, Col, Input, Icon, message } from 'antd';
 import { commonData } from '../../../../../mock/commonData';
 import HandAlarmDeal from './HandAlarmDeal';
 import AddTemplate from './AddTemplate';
-import AddEventFeature from './AddEventFeature';
 
 import styles from './InfoContent.less';
 
@@ -20,7 +19,6 @@ export default class InfoContent extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       // 展示特征 或 查询
       showFeature: true,
       // 搜索框值
@@ -44,7 +42,6 @@ export default class InfoContent extends PureComponent {
     //   type: 'emergency/queryInfoContent',
     // })
   }
-  // del
   onDelFeature = (id) => {
     this.props.dispatch({
       type: 'emergency/delEventFeatures',
@@ -56,127 +53,6 @@ export default class InfoContent extends PureComponent {
       message.success('删除成功');
     });
   };
-
-  // 新增事件特征
-  onShowModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-  // 关闭窗口
-  onHandleCancel = () => {
-    if (this.state.showFeature) {
-      this.setState({
-        visible: false,
-      });
-    } else {
-      this.setState({
-        showFeature: true,
-        selectedRows: [],
-      });
-    }
-  };
-  onEnterCancel = () => {
-    this.setState({
-      visible: false,
-      showFeature: true,
-      selectedRows: [],
-    });
-  }
-  // 显示查询
-  onShowFeature = () => {
-    this.setState({
-      showFeature: false,
-    });
-  }
-  // 搜索
-  onSearchFeature = (val) => {
-    const values = {
-      ...commonData.pageInitial,
-      fuzzy: true,
-      eventID: this.props.eventID,
-      featureValue: val,
-    };
-    // 防止将空作为查询条件
-    for (const obj in values) {
-      if (values[obj] === '' || values[obj] === undefined) {
-        delete values[obj];
-      }
-    }
-    this.props.dispatch({
-      type: 'emergency/searchEventFeatures',
-      payload: values,
-    });
-    this.setState({
-      featureValue: val,
-    });
-  };
-  // 下一页
-  onhandleTableChange = (pagination, filtersArg, sorter) => {
-    const params = {
-      pageNum: pagination.current,
-      pageSize: pagination.pageSize,
-      isQuery: true,
-      fuzzy: true,
-      eventID: this.props.eventID,
-      featureValue: this.state.featureValue,
-    };
-    this.props.dispatch({
-      type: 'emergency/searchEventFeatures',
-      payload: params,
-    });
-  }
-
-  // 生成报告
-  onGenerateReport = () => {
-    const { form, emergency } = this.props;
-    form.validateFields((err, fieldsValue) => {
-      if (err) { return; }
-      // if (emergency.eventFeaturesList.length > 0) {
-      fieldsValue.feature = emergency.eventFeaturesList;
-      // }
-      const rawMaterialIds = [fieldsValue.rawMaterialIds];
-      fieldsValue.rawMaterialIds = [fieldsValue.rawMaterialIds];
-      fieldsValue.shangwan = [];
-      fieldsValue.keys.map((obj, i) => {
-        if (fieldsValue.ID[i] === null) {
-          if (fieldsValue.location[i] == null && fieldsValue.injured[i] == null && fieldsValue.deaths[i] == null) {
-            return;
-          }
-          if (fieldsValue.injured[i] == null) {
-            fieldsValue.injured[i] = 0;
-          }
-          if (fieldsValue.deaths[i] == null) {
-            fieldsValue.deaths[i] = 0;
-          }
-
-          const template = {};
-          template.postion = fieldsValue.location[i];
-          template.injured = fieldsValue.injured[i];
-          template.death = fieldsValue.deaths[i];
-          template.reportUserId = fieldsValue.reportUserID[i];
-          template.reportUserName = fieldsValue.reportUserName[i];
-          template.recordTime = fieldsValue.recordTime[i];
-          fieldsValue.shangwan.push(JSON.parse(JSON.stringify(template)));
-        }
-      });
-
-      const jsonData = {
-        shangwan: fieldsValue.shangwan,
-        eventID: emergency.eventId,
-        feature: fieldsValue.feature,
-        userID: this.props.userID,
-      };
-
-      this.props.dispatch({
-        type: 'emergency/saveEmgcReport',
-        payload: {
-          jsonData: JSON.stringify(jsonData),
-          eventID: emergency.eventId,
-        },
-      });
-    });
-  }
 
   render() {
     const { form, emergency } = this.props;

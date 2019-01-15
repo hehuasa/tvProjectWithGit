@@ -1,40 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Form, Tabs, Row, Col, Input, Card, Radio, Button, Checkbox } from 'antd';
+import { Form, Card, Radio, Button, Checkbox } from 'antd';
 import { connect } from 'dva';
 import AlarmInfo from './AlarmInfo/index';
-import Footer from './Footer/index';
 import styles from './index.less';
 import { addEventIcon, alarmClustering, delAlarmAnimation } from '../../../utils/mapService';
 import { mapConstants } from '../../../services/mapConstant';
 
-const { TabPane } = Tabs;
-const { TextArea } = Input;
-const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
-const RealEvent = Form.create()((props) => {
-  const { form, save, cancel, type } = props;
-  return (
-    <div>
-      <Row type="flex">
-        <Col md={16} sm={24}>
-          <FormItem
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 15 }}
-            label="处警说明"
-          >
-            {form.getFieldDecorator('remark', {
-              initialValue: '',
-              rules: [],
-            })(
-              <TextArea rows={4} placeholder="请输入处警说明" />
-            )}
-          </FormItem>
-        </Col>
-      </Row>
-      <Footer save={() => save(props.form, type)} cancel={cancel} />
-    </div>
-  );
-});
 
 @connect(({ alarmDeal, emergency, alarm, mapRelation }) => ({
   alarmInfo: alarmDeal.alarmInfo,

@@ -82,6 +82,10 @@ export default class AlternatorTrend extends PureComponent {
             height={chartHeight}
             data={newData0}
             scale={cols}
+            onGetG2Instance={g2Chart => {
+              g2Chart.animate(false);
+              console.log("g2Chart", g2Chart);
+            }}
             forceFit
           >
             <Legend />

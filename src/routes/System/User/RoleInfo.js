@@ -6,10 +6,8 @@ import StandardTable from '../../../components/StandardTable';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import ConfigRoleAccount from './ConfigRoleAccount';
 import styles from './TableList.less';
-import CommonTree from '../../../components/Tree/CommonTree';
 import { commonData } from '../../../../mock/commonData';
 import SelectResource from './SelectResource/index';
-import login from '../../../models/login';
 
 const FormItem = Form.Item;
 const { Option } = Select;

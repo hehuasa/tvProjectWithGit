@@ -67,7 +67,7 @@ export default class DissociationInfo extends PureComponent {
     }
   };
   render() {
-    const { videoFooterHeight } = this.props;
+    const { videoFooterHeight, chartReRender } = this.props;
     const { current } = videoFooterHeight;
     const cols = [
       {
@@ -120,7 +120,7 @@ export default class DissociationInfo extends PureComponent {
           <div className={styles.left} />
         </div>
         <div className={styles.dataSource}>数据来源: 生产日报导入</div>
-        { showChart ? <RawInfoTrend click={this.rawClick} sortIndex={sortIndex} name={chartName} dateTimes={dateTimes} /> : (
+        { showChart ? <RawInfoTrend click={this.rawClick} sortIndex={sortIndex} name={chartName} dateTimes={dateTimes} chartReRender={chartReRender} /> : (
           <div className={styles.content}>
             <div className={styles.timeArea}>
               <div className={styles.timeProcess}>时间进度: {this.state.timeUsePre ? `${this.state.timeUsePre} %` : '' }</div>

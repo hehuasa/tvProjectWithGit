@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Tabs, Row, Col, Input, Icon, Button, Popconfirm } from 'antd';
+import { Tabs, Button, Popconfirm } from 'antd';
 import { connect } from 'dva';
 import InfoRecord from '../InfoContentRecord/InfoRecord/InfoRecord';
 import SelectPlan from './SelectPlan/index';

@@ -2,12 +2,11 @@ import React, { PureComponent } from 'react';
 import { Form, TreeSelect, Row, Col, Input, message, Icon, Table, Modal, Select, DatePicker } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
-import { alarmStatus } from '../../../../utils/utils';
 import CommonQuery from '../../../../components/GlobalHeader/CommonQuery';
 
 import styles from './index.less';
+import { win12, win20, win10, win3 } from '../../../../configIndex';
 
-// const { TabPane } = Tabs;
 const FormItem = Form.Item;
 const { TextArea, Search } = Input;
 const { Option } = Select;
@@ -21,35 +20,35 @@ let whether = true; // 是否运行查询
 const columns = [{
   title: '用户名字',
   dataIndex: 'userName',
-  width: 200,
+  width: win12,
 }, {
   title: '拼音',
   dataIndex: 'queryKey',
-  width: 120,
+  width: win12,
 }, {
   title: '性别',
   dataIndex: 'sex',
-  width: 100,
+  width: win10,
 }, {
   title: '手机号码',
   dataIndex: 'mobile',
-  width: 200,
+  width: win20,
 }, {
   title: '短号',
   dataIndex: 'shortNumber',
-  width: 120,
+  width: win12,
 }, {
   title: '电话号码',
   dataIndex: 'phoneNumber',
-  width: 120,
+  width: win12,
 }, {
   title: '邮箱',
   dataIndex: 'eMail',
-  width: 200,
+  width: win12,
 }, {
   title: '办公地址',
   dataIndex: 'officeAddr',
-  width: 200,
+  width: win12,
 }];
 
 
@@ -118,7 +117,6 @@ export default class AlarmEventInfo extends PureComponent {
         let urls = '';
         const param = {};
         const { resourceID } = this.props.form.getFieldsValue(['resourceID']);
-        const { alarmAreaID } = this.props.form.getFieldsValue(['alarmAreaID']);
         if (resourceID) {
           urls = 'alarmDeal/getMonitorResource';
           param.resourceID = resourceID;
@@ -223,10 +221,6 @@ export default class AlarmEventInfo extends PureComponent {
       default:
         break;
     }
-    // this.setState({
-    //   visible: true,
-    //   clickWhether: id,
-    // });
   };
   // 选择查询
   onSearchUser = (value) => {
@@ -442,7 +436,6 @@ export default class AlarmEventInfo extends PureComponent {
     form.getFieldDecorator('eventName', {
       initialValue: alarmInfo.eventName,
     });
-    const alarmEventInfoData = {};
     return (
       <div className={styles.alarmDeal}>
         <Row type="flex" >
@@ -827,7 +820,7 @@ export default class AlarmEventInfo extends PureComponent {
             dataSource={emergency.personList}
             onChange={this.onhandleTableChange}
             rowKey={record => record.userID}
-            scroll={{ x: 800, y: 600 }}
+            scroll={{ x: 1300 + win3 * columns.length, y: 260 }}
           />
         </Modal>
       </div>

@@ -2,10 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Form, Button, Row, Col, Input, DatePicker, Select, Modal, Table, message, Radio } from 'antd';
 import moment from 'moment';
-import InfoRecord from './InfoRecord';
-import { commonData } from '../../../../../mock/commonData';
 import styles from './InfoRecord.less';
-import { EDEADLK } from 'constants';
 
 const FormItem = Form.Item;
 const Search = Input.Search;

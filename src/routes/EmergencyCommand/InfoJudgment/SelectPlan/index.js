@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Select, Table, Modal, Button, Row, Col, Form, Input } from 'antd';
 import { connect } from 'dva';
-import Scrollbars from 'react-custom-scrollbars';
 import PlanInfo from './PlanInfo/index';
 import styles from './index.less';
+import { win30, win15, win20, win3 } from '../../../../configIndex';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -93,7 +93,6 @@ export default class SelectPlan extends PureComponent {
   state = {
     visible: false,
     planInfo: {}, // 预案详情
-    planTemple: {}, // 计划作为模板
     // 当前页
     pageNum: 1,
     // 每页显示条数
@@ -101,9 +100,7 @@ export default class SelectPlan extends PureComponent {
     total: '',
     isQuery: true,
     fuzzy: false,
-    selectedPlanID: '',
     selectedRows: [], // 已选的预案信息
-    selectedRowKeys: [], // 选中的预案
   };
   componentDidMount() {
     const { dispatch } = this.props;
@@ -133,7 +130,6 @@ export default class SelectPlan extends PureComponent {
   }
   page = (pageNum, pageSize) => {
     const { dispatch, eventID } = this.props;
-    const { isQuery, fuzzy } = this.state;
     // 获取预案列表
     dispatch({
       type: 'emergency/getPlanInfoPage',
@@ -155,7 +151,6 @@ export default class SelectPlan extends PureComponent {
   // 预案列表所搜函数
   handleSearch = (form) => {
     const { dispatch, eventID } = this.props;
-    const { isQuery } = this.state;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       dispatch({
@@ -190,7 +185,6 @@ export default class SelectPlan extends PureComponent {
     });
     this.setState({
       visible: true,
-      planTemple: record,
       planInfo: record,
     });
   };
@@ -235,23 +229,23 @@ export default class SelectPlan extends PureComponent {
       {
         title: '预案名称',
         dataIndex: 'planName',
-        width: '35%',
+        width: win30,
         key: 'planName',
         render: (text, record) => <a onClick={() => this.openModel(record)} href="javascript:;">{text}</a>,
       }, {
         title: '预案类别',
         dataIndex: 'planTypeName',
-        width: '15%',
+        width: win15,
         key: 'planTypeName',
       }, {
         title: '预案级别',
-        width: '15%',
+        width: win15,
         render: (text, record) => {
           return record.planPlanLevel ? record.planPlanLevel.levelName : '';
         },
       }, {
         title: '特征匹配',
-        width: '20%',
+        width: win20,
         dataIndex: 'featureNames',
         render: (text) => {
           let str = '';
@@ -302,6 +296,8 @@ export default class SelectPlan extends PureComponent {
               onChange: this.page,
             }}
             className={styles.tableStyle}
+            scroll={{ x: 1100 + win3 * columns.length, y: 300 }}
+
           />
         </div>
         <Modal

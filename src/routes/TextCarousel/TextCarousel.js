@@ -3,10 +3,6 @@ import { connect } from 'dva';
 import { Icon } from 'antd';
 import styles from './textCarousel.less';
 
-const delString = (string, unit) => {
-  const index = string.indexOf(unit);
-  return Number(string.substring(0, index));
-};
 let intervalTime = null;
 @connect(({ user, global, loading, tabs, majorList }) => ({
   user, global, loading, tabs, majorList,

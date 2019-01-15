@@ -3,57 +3,43 @@ import { connect } from 'dva';
 import { Form, Row, Col, Input, Icon, Button, DatePicker, Modal, Table, message } from 'antd';
 import moment from 'moment';
 import styles from './index.less';
+import { win20, win12, win10, win3 } from '../../../../configIndex';
 
 const FormItem = Form.Item;
 const Search = Input.Search;
 const columns = [{
   title: '用户名字',
   dataIndex: 'userName',
-  width: 200,
+  width: win12,
 }, {
   title: '拼音',
   dataIndex: 'queryKey',
-  width: 120,
+  width: win12,
 }, {
   title: '性别',
   dataIndex: 'sex',
-  width: 100,
+  width: win10,
 }, {
   title: '手机号码',
   dataIndex: 'mobile',
-  width: 200,
+  width: win20,
 }, {
   title: '短号',
   dataIndex: 'shortNumber',
-  width: 120,
+  width: win12,
 }, {
   title: '电话号码',
   dataIndex: 'phoneNumber',
-  width: 120,
+  width: win12,
 }, {
   title: '邮箱',
   dataIndex: 'eMail',
-  width: 200,
+  width: win12,
 }, {
   title: '办公地址',
   dataIndex: 'officeAddr',
-  width: 200,
+  width: win12,
 }];
-
-const formItemLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 10 },
-};
-// const withOutLabel = {
-//   wrapperCol: { span: 8, offset: 10 },
-// };
-const formItemLayout1 = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 16 },
-};
-// const withOutLabel1 = {
-//   wrapperCol: { span: 6, offset: 6 },
-// };
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
@@ -74,7 +60,6 @@ export default class AddTemplate extends PureComponent {
     sumDeaths: null, // 死亡人数
     selectedRows: [], // 选择的数据
     key: null, // 选择的那个放大镜的input的id
-    searchPerson: null, // 查询输入值
     rowSelection: {
       type: 'radio',
       onChange: (selectedRowKeys, selectedRows) => {
@@ -94,25 +79,6 @@ export default class AddTemplate extends PureComponent {
       },
     });
   }
-  // componentWillUpdate() {
-  // const { getFieldDecorator, getFieldValue, setFieldsValue } = this.props.form;
-  // const { emergency, isHidden } = this.props;
-  // const casualtiesData = this.props.casualtiesData || [];
-  // const valueKeys = [0];
-  // casualtiesData.map((item, index) => {
-  //   if (index !== 0) {
-  //     valueKeys.push(index);
-  //   }
-  // });
-  // const keys = getFieldValue('keys');
-  // console.log(111, keys, valueKeys)
-  // if (keys.length < valueKeys.length) {
-  //   setFieldsValue({
-  //     keys: valueKeys,
-  //   });
-  // }
-  // }
-
   // 选择查询
   onSearchUser = (value, key) => {
     this.props.dispatch({
@@ -264,7 +230,7 @@ export default class AddTemplate extends PureComponent {
   }
 
   render() {
-    const { getFieldDecorator, getFieldValue, setFieldsValue } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
     const { emergency, isHidden, isDisabled } = this.props;
     const casualtiesData = this.props.casualtiesData || [];
     const valueKeys = [0];
@@ -287,7 +253,7 @@ export default class AddTemplate extends PureComponent {
 
     const formItems = keys.map((k, index) => {
       return (
-        <Row key={k} className={styles.rowPaddingRight}>
+        <Row type="flex" key={k}>
           {getFieldDecorator(`ID[${k}]`, {
             validateTrigger: ['onChange', 'onBlur'],
             initialValue: casualtiesData[index] ? casualtiesData[index].casualtyID : null,
@@ -298,10 +264,9 @@ export default class AddTemplate extends PureComponent {
               placeholder="已有数据id"
             />
           )}
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={5}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout
               label="伤亡位置"
               required={false}
             >
@@ -313,10 +278,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="受伤人数"
               required={false}
             >
@@ -335,10 +299,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="死亡人数"
               required={false}
             >
@@ -375,10 +338,9 @@ export default class AddTemplate extends PureComponent {
               placeholder="选择报告人"
             />
           )}
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="报告人"
               required={false}
             >
@@ -394,10 +356,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="电话"
               required={false}
             >
@@ -409,10 +370,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={7}  >
+          <Col sm={12} md={8} lg={6} >
             <FormItem
-              labelCol={{ span: 9 }}
-              wrapperCol={{ span: 15 }}
+              formItemLayout1
               label="时间"
               required={false}
               style={{ width: '100%' }}
@@ -426,7 +386,6 @@ export default class AddTemplate extends PureComponent {
                   showTime
                   format="YYYY-MM-DD HH:mm:ss"
                   placeholder="请选择记录时间"
-                  style={{ width: '100%' }}
                 />
               )}
             </FormItem>
@@ -470,7 +429,7 @@ export default class AddTemplate extends PureComponent {
           {
             isHidden ? (
               <Row>
-                <Col span={24} className={styles.totalInfo}>
+                <Col span={5}>
                   总共受伤：{this.state.sumSnjured || injuredSum} {' '}总共死亡：{this.state.sumDeaths || deathSum}
                 </Col>
               </Row>
@@ -480,7 +439,7 @@ export default class AddTemplate extends PureComponent {
             {formItems}
           </div>
           <FormItem {...formItemLayoutWithOutLabel}>
-            {this.props.hiddenAddButton ? null : (
+            { this.props.hiddenAddButton ? null : (
               <Button
                 type="dashed"
                 onClick={this.add}
@@ -550,7 +509,7 @@ export default class AddTemplate extends PureComponent {
             columns={columns}
             dataSource={emergency.personList}
             onChange={this.onhandleTableChange}
-            scroll={{ x: 800, y: 600 }}
+            scroll={{ x: 1300 + win3 * columns.length, y: 260 }}
           />
         </Modal>
       </div>

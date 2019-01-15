@@ -512,10 +512,12 @@
         font-size: @public-font-m;
     }
     .ant-input-disabled {
-        background-color: initial;
+        // background-color: initial;
+        background-color: @ant-input-disabled-bg;
     }
     .ant-select-disabled .ant-select-selection {
-        background: initial;
+        // background: initial;
+        background-color: @ant-input-disabled-bg;
     }
     .ant-select-disabled {
         color: @public-color;
@@ -814,7 +816,13 @@
     .ant-table-thead>tr>th .anticon-filter>svg,
     .ant-table-thead>tr>th .ant-table-filter-icon>svg {
         margin-left: -10px;
-    } // ʱ������Сͼ��
+    } 
+    .ant-table-fixed-header .ant-table-scroll .ant-table-header{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        margin-bottom: 0 !important;
+    }
+    // ʱ������Сͼ��
     .ant-calendar-picker-clear,
     .ant-calendar-picker-icon {
         // position: absolute;

@@ -149,22 +149,30 @@ export default class Expand extends PureComponent {
         title: '特征',
         dataIndex: 'featureName',
         key: 'featureName',
-        width: '25%',
+        width: '20%',
       }, {
         title: '事件特征值',
         dataIndex: 'emgcFeatureValue',
         key: 'emgcFeatureValue',
         width: '20%',
+        render: (text) => {
+          if (text === 'true') {
+            return '是';
+          } else if (text === 'false') {
+            return '否';
+          }
+          return text;
+        },
       }, {
         title: '预案特征值',
         dataIndex: 'panFeatureValue',
         key: 'panFeatureValue',
-        width: '20%',
+        width: '30%',
       }, {
         title: '单位',
         dataIndex: 'featureUnit',
         key: 'featureUnit',
-        width: '15%',
+        width: '10%',
       }, {
         title: '备注',
         dataIndex: 'eventFeatureDes',

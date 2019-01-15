@@ -5,11 +5,13 @@ import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 // import MonthPick from './MonthPick';
+import { getMonthDayNums } from './unit';
 
 const { DataSet } = new window.DataSet();
 import styles from './index.less';
 
 const monthOutCountTitle = '出厂量';
+const monthOutPlan = '月计划';
 const trunkCountTitle = '罐存';
 
 const cols = {
@@ -26,7 +28,7 @@ const cols = {
 const transData = (data, type) => {
   let key;
   if (type === 0) {
-    key = trunkCountTitle;
+    key = [trunkCountTitle];
     for (const item of data) {
       item.dateFormat = moment(item.startDate).format('l');
       item[trunkCountTitle] = item.trunkCount;
@@ -35,20 +37,21 @@ const transData = (data, type) => {
       });
     }
   } else {
-    key = monthOutCountTitle;
-    for (const item of data) {
+    key = [monthOutCountTitle, monthOutPlan];
+    for (const [index, item] of data.entries()) {
       item.dateFormat = moment(item.startDate).format('l');
       item[monthOutCountTitle] = item.monthOutCount;
-      data.sort((a, b) => {
-        return a.startDate - b.startDate;
-      });
+      item[monthOutPlan] = item.monthOutPlan / getMonthDayNums(new Date()) * index.toFixed(2);
     }
+    data.sort((a, b) => {
+      return a.startDate - b.startDate;
+    });
   }
   const ds = new DataSet();
   const dv = ds.createView().source(data);
   dv.transform({
     type: 'fold',
-    fields: [key], // 展开字段集
+    fields: [...key], // 展开字段集
     key: 'date', // key字段
     value: 'value', // value字段
   });
@@ -191,14 +194,6 @@ export default class OrganicProductInfoTrend extends PureComponent {
               position="dateFormat*value"
               size={2}
               color={['date', [lineColor1, lineColor2]]}
-              // tooltip={['type*date*value', (type, day, value) => {
-              //             return {
-              //                 // 自定义 tooltip 上显示的 title 显示内容等。
-              //                 title: null,
-              //                 name: type,
-              //                 value: type === '月完成' ? history[0] ? value : history[0].monthPlan : '',
-              //             };
-              //         }]}
             />
             <Geom
               type="point"

@@ -17,12 +17,7 @@ const addKey = (featurePlan) => {
   });
   return newFeaturePlan;
 };
-// const mapStateToProps = (state) => {
-//   console.log(16, state)
-//   return {
-//     featurePlan: addKey(state.featurePlan),
-//   };
-// }
+
 @connect(({ planManagement }) => ({
   featurePlan: addKey(planManagement.featurePlan),
   eventFeaturePlan: planManagement.eventFeaturePlan,

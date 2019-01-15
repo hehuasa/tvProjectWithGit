@@ -5,7 +5,6 @@ import SelectMaterial from './SelectMaterial/index';
 import styles from './index.less';
 
 const FormItem = Form.Item;
-const { TextArea, Search } = Input;
 const RadioGroup = Radio.Group;
 @connect(({ emergency }) => ({
   emergency,
