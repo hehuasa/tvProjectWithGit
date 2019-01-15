@@ -2,14 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Scrollbars from 'react-custom-scrollbars';
 import moment from 'moment';
-import { Table, Select, Row, Col, DatePicker } from 'antd';
+import { Table, DatePicker } from 'antd';
 import Trend from '../chart/Trend';
 import { fakeData } from '../List/lib/data.js';
-import { bgColor, progressColor } from '../color/color';
 import styles from '../index.less';
 import ProductTable from './ProductTableComponent/index';
 
-const { Option } = Select;
 const locaArr = ['HDPE', 'LLDPE', 'ST-PP', 'JPP'];
 @connect(({ productionDaily, homepage }) => ({
   limisProduct: productionDaily.limisProduct,

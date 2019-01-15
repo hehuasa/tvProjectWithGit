@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Chart, Tooltip, Geom, Coord } from 'bizcharts';
-import { DataView } from '@antv/data-set';
 import { Divider } from 'antd';
 import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
@@ -10,6 +9,7 @@ import autoHeight from '../autoHeight';
 
 import styles from './index.less';
 
+const { DataView } = new window.DataSet();
 /* eslint react/no-danger:0 */
 @autoHeight()
 export default class Pie extends Component {

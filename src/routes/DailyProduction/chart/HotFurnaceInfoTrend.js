@@ -3,10 +3,10 @@ import { Button, Card } from 'antd';
 import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
-import { DataSet } from '@antv/data-set';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 import styles from './index.less';
 
+const { DataSet } = new window.DataSet();
 const cotTitle = '产汽量（t/h）';
 const loadValueTitle = '主汽温度（℃）';
 

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-// import $ from 'jquery';
-import { Alert, Modal } from 'antd';
-import MD5 from 'crypto-js/md5';
+import { Alert } from 'antd';
 import Login from '../../components/Login';
 import styles from './Login.less';
 import { switchCode } from '../../services/statusCode';
@@ -91,7 +89,7 @@ close = () => {
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
-          wrappedComponentRef={(ref) => {this.login = ref}}
+          wrappedComponentRef={(ref) => { this.login = ref }}
         >
 
           <VideoSocket onmessage={this.onmessage1} />

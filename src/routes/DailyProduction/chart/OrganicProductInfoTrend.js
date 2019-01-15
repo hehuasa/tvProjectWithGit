@@ -3,10 +3,10 @@ import { Button, Card } from 'antd';
 import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
-import { DataSet } from '@antv/data-set';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 // import MonthPick from './MonthPick';
 
+const { DataSet } = new window.DataSet();
 import styles from './index.less';
 
 const monthOutCountTitle = '出厂量';

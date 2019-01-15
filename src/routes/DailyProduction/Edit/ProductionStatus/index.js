@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { connect } from 'dva';
 import { Card, DatePicker, Button } from 'antd';
 import styles from './index.less';
@@ -22,7 +20,7 @@ class ProductionStatus extends PureComponent {
     });
   }
   // 时间搜索
-  onTimeChange = (date, dateString) => {
+  onTimeChange = (date) => {
     const startTimes = date ? (date.format('X') * 1000) : (moment().format('X') * 1000);
     this.props.dispatch({
       type: 'productionDaily/getProductionStatus',
