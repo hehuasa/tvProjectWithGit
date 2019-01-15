@@ -28,7 +28,7 @@ const columns = [{
 }, {
   title: '特征名称',
   dataIndex: 'featureName',
-  width: '80%',
+  width: '70%',
 }];
 
 @connect(({ emergency, user }) => ({
