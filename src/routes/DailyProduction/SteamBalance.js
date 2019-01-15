@@ -7,12 +7,11 @@ import Waterfall from './chart/Waterfall';
 import styles from './index.less';
 
 const render = (value) => {
-  return value === null ? '/' : <span>{value.value}</span>;
+  return value ? <span>{value.value}</span> : '/';
 };
 const cols = [
-  // { title: '蒸汽等级', dataIndex: 'itemName', width: 110, render },
+  { title: '蒸汽等级', dataIndex: 'itemName', width: 110, render },
   { title: <div className={styles.center}><span>热电联产</span><br /><span> 外送量</span></div>, name: '热电联产外送量', dataIndex: 'hotElectricity', width: 100, render },
-  // { title: '热电联产外送量', dataIndex: 'hotElectricity', width: 120, render },
   { title: <div className={styles.center}><span>减温减压器</span><br /><span> (转换输入)</span></div>, name: '减温减压器(转换输入)', dataIndex: 'desuperheatInput', width: 100, render },
   { title: <div className={styles.center}><span>减温减压器</span><br /><span> (转换输出)</span></div>, name: '减温减压器(转换输出)', dataIndex: 'desuperheatOut', width: 100, render },
   { title: <div className={styles.center}><span>乙烯及裂解</span><br /><span> 汽油加氢</span></div>, name: '乙烯及裂解汽油加氢', dataIndex: 'ethylene', width: 100, render },
@@ -76,19 +75,17 @@ export default class SteamBalance extends PureComponent {
       { property: '低压蒸汽', value: 'lowPressure' },
     ];
     const arr = [];
-
+    const dataArr = cols.slice(1, cols.length - 1);
     rawName.forEach((item, index) => {
       const obj = {};
       const temp = data[item.value];
-      for (const [index1, value] of cols.entries()) {
+      for (const [index1, value] of dataArr.entries()) {
         obj[value.dataIndex] = {};
         obj[value.dataIndex].title = value.name || value.title;
-        console.log(111, index1)
-        console.log(222, temp)
-        obj[value.dataIndex].value = temp[index1].collectValue;
+        obj[value.dataIndex].value = temp[index1] ? temp[index1].collectValue : '';
       }
       obj.key = index;
-      obj.itemName = item.property;
+      obj.itemName = { value: item.property };
       arr.push(obj);
     });
     this.setState({
@@ -139,7 +136,7 @@ export default class SteamBalance extends PureComponent {
           <div className={styles.left} />
         </div>
         <div className={styles.dataSource}>数据来源: 生产日报导入</div>
-        {showChart ? <Waterfall title={title} data={record} click={this.rawClick}  name={record.itemName} /> : (
+        {showChart ? <Waterfall title={title} data={record} click={this.rawClick} name={record.itemName} /> : (
           <div className={styles.content}>
             <div className={styles.timeArea}>
               <div className={styles.timeProcess}>时间进度: {this.state.timeUsePre ? `${this.state.timeUsePre} %` : '' }</div>

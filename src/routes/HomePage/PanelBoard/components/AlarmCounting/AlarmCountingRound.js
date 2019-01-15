@@ -3,9 +3,7 @@ import { Chart, Geom, Axis, Tooltip, Coord, Label, Legend } from 'bizcharts';
 import { searchByAttr } from '../../../../../utils/mapService';
 import styles from '../panel.less';
 
-
-const { DataSet } = window.DataSet();
-
+const { DataSet } = new window.DataSet();
 export default class AlarmCountingRound extends PureComponent {
   handClick = (data) => {
     const { view } = this.props;

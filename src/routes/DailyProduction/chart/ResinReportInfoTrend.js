@@ -6,8 +6,7 @@ import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 // import MonthPick from './MonthPick';
 
-const { DataSet } = window.DataSet();
-
+const { DataSet } = new window.DataSet();
 import styles from './index.less';
 
 const monthOutCountTitle = '出厂量';

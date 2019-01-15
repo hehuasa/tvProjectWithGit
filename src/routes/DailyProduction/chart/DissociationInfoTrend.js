@@ -6,9 +6,7 @@ import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 import styles from './index.less';
 
-
-const { DataSet } = window.DataSet();
-
+const { DataSet } = new window.DataSet();
 const cotTitle = 'COT（℃）';
 const loadValueTitle = '负荷（t/h）';
 

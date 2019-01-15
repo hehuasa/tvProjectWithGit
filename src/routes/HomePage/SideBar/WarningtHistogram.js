@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Chart, Axis, Tooltip, Geom, Legend } from 'bizcharts';
 
-
-const { DataSet } = window.DataSet();
+const { DataSet } = new window.DataSet();
 
 // import { connect } from 'dva';
 

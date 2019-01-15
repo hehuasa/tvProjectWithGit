@@ -5,7 +5,7 @@ import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 
-const { DataSet } = window.DataSet();
+const { DataSet } = new window.DataSet();
 import styles from './index.less';
 
 const cotTitle = '进汽量（t/h）';

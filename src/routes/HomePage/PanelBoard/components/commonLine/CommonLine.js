@@ -6,7 +6,7 @@ import { objByArea, newdatabyDataName, getSelctData } from '../../../../../utils
 import CommonLineChart from './CommonLineChart';
 import styles from '../panel.less';
 
-const { DataSet } = window.DataSet();
+const { DataSet } = new window.DataSet();
 const Option = Select.Option;
 
 // 多个指标，多个点位

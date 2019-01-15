@@ -37,7 +37,7 @@ const dynamicWrapper = (app, models, component) => {
   return dynamic({
     app,
     models: () => models.filter(
-        model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)
+      model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)
     ),
     // add routerData prop
     component: () => {
@@ -219,9 +219,9 @@ export const getRouterData = (app) => {
     '/productionDispatch/manage': {
       component: dynamicWrapper(app, ['productionDaily'], () => import('../routes/DailyProduction/Edit/index')),
     },
-    '/productionDispatch/query': {
-      component: dynamicWrapper(app, ['productionDaily'], () => import('../routes/DailyProduction/List/List')),
-    },
+    // '/productionDispatch/query': {
+    //   component: dynamicWrapper(app, ['productionDaily'], () => import('../routes/DailyProduction/List/List')),
+    // },
     // 生产日报 各装置生产情况
     '/productionDispatch/eqProductInfo': {
       component: dynamicWrapper(app, ['productionDaily'], () => import('../routes/DailyProduction/EquipmentProductInfo')),
