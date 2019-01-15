@@ -3,6 +3,7 @@ import { Form, Row, Col, Input, Select, Modal, Table, message, Button } from 'an
 import { connect } from 'dva';
 import { alarmStatus } from '../../../../utils/utils';
 import styles from './InfoContent.less';
+import { win12, win20, win10, win3 } from '../../../../configIndex';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -11,35 +12,35 @@ const columns = [
   {
     title: '用户名字',
     dataIndex: 'userName',
-    width: 200,
+    width: win12,
   }, {
     title: '拼音',
     dataIndex: 'queryKey',
-    width: 120,
+    width: win12,
   }, {
     title: '性别',
     dataIndex: 'sex',
-    width: 100,
+    width: win10,
   }, {
     title: '手机号码',
     dataIndex: 'mobile',
-    width: 200,
+    width: win20,
   }, {
     title: '短号',
     dataIndex: 'shortNumber',
-    width: 120,
+    width: win12,
   }, {
     title: '电话号码',
     dataIndex: 'phoneNumber',
-    width: 120,
+    width: win12,
   }, {
     title: '邮箱',
     dataIndex: 'eMail',
-    width: 200,
+    width: win12,
   }, {
     title: '办公地址',
     dataIndex: 'officeAddr',
-    width: 200,
+    width: win12,
   }];
 
 @connect(({ alarmDeal, emergency, alarm }) => ({
@@ -513,7 +514,7 @@ export default class HandAlarmDeal extends PureComponent {
             dataSource={emergency.personList}
             onChange={this.onhandleTableChange}
             rowKey={record => record.userID}
-            scroll={{ x: 800, y: 600 }}
+            scroll={{ x: 1300 + win3 * columns.length, y: 260 }}
           />
         </Modal>
       </div>
