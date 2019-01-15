@@ -6,10 +6,7 @@ import { Table, DatePicker } from 'antd';
 import styles from './index.less';
 import DissociationInfoTrend from './chart/DissociationInfoTrend';
 
-@connect(({ userList, typeCode, organization, productionDaily, homepage }) => ({
-  userList,
-  typeCode,
-  organization,
+@connect(({ productionDaily, homepage }) => ({
   crackingFurnace: productionDaily.crackingFurnace,
   timeUsePre: productionDaily.timeUsePre,
   videoFooterHeight: homepage.videoFooterHeight,

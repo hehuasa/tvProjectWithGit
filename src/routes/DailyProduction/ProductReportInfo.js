@@ -1,11 +1,10 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Row, Select, Col, Table, DatePicker } from 'antd';
+import { Row, Col, DatePicker } from 'antd';
 import Scrollbars from 'react-custom-scrollbars';
 import styles from './index.less';
 
-const { Option } = Select;
 @connect(({ productionDaily }) => ({
   productionStatus: productionDaily.productionStatus,
   timeUsePre: productionDaily.timeUsePre,

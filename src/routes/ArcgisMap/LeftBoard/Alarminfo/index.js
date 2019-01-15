@@ -4,7 +4,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from 'dva';
 import { Row, Col, Button, Collapse, Checkbox, Radio } from 'antd';
 import styles from './index.less';
-// import UniversalTemplate from './RealTimeData/universalTemplate';
+import UniversalTemplate from './RealTimeData/universalTemplate';
 import { mapConstants } from '../../../../services/mapConstant';
 // import SourceOfRisk from './SourceOfRisk/index';
 import levelGray from '../../../../assets/map/alarm/levelGray.png';
@@ -828,12 +828,12 @@ class AlarmInfo extends PureComponent {
                       ) :
                       null
                   }
-    {/*{universalData && universalData.length > 0 ? (*/}
-      {/*<Panel header={<div className={styles.panelHeader}>实时数据信息</div>} key="16" className={styles.type}>*/}
-        {/*<UniversalTemplate data={universalData} showDashBoard dispatch={this.props.dispatch} />*/}
-      {/*</Panel>*/}
-                  {/*) : null*/}
-                  {/*}*/}
+    {universalData && universalData.length > 0 ? (
+      <Panel header={<div className={styles.panelHeader}>实时数据信息</div>} key="16" className={styles.type}>
+        <UniversalTemplate data={universalData} showDashBoard dispatch={this.props.dispatch} />
+      </Panel>
+                  ) : null
+                  }
     {
                     resourceInfo && resourceInfo.ctrlResourceType.indexOf('101.201') === -1 ? (
                       <Panel header={<div className={styles.panelHeader}>基本信息</div>} key="1">

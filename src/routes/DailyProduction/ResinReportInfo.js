@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
 import Scrollbars from 'react-custom-scrollbars';
-import { Table, Select, Row, Col, DatePicker } from 'antd';
+import { Table, Row, Col, DatePicker } from 'antd';
 import Progress from '../../components/Progress/Progress';
 import { bgColor, progressColor } from './color/color';
 import ResinReportInfoTrend from './chart/ResinReportInfoTrend';
 import styles from './index.less';
 
-const { Option } = Select;
 @connect(({ productionDaily, homepage }) => ({
   resinProduct: productionDaily.resinProduct,
   solidDefects: productionDaily.solidDefects,
@@ -29,15 +28,6 @@ export default class DissociationInfo extends PureComponent {
       type: 'productionDaily/getResinProduct',
     }).then(() => {
       this.getStartTime(this.props.resinProduct);
-      // 请求固体残次品
-      // this.props.dispatch({
-      //   type: 'productionDaily/getSolidDefects',
-      // }).then(() => {
-      //   this.props.dispatch({
-      //     type: 'productionDaily/saveResinProduct',
-      //     payload: [...this.props.resinProduct, ...this.props.solidDefects],
-      //   });
-      // });
     });
   }
   // 获取时间进度
@@ -63,16 +53,6 @@ export default class DissociationInfo extends PureComponent {
       payload: { startDate },
     }).then(() => {
       this.getStartTime(this.props.resinProduct);
-      // 请求固体残次平
-      // this.props.dispatch({
-      //   type: 'productionDaily/getSolidDefects',
-      //   payload: { startDate },
-      // }).then(() => {
-      //   this.props.dispatch({
-      //     type: 'productionDaily/saveResinProduct',
-      //     payload: [...this.props.resinProduct, ...this.props.solidDefects],
-      //   });
-      // });
     });
   };
   // 点击行
@@ -93,14 +73,11 @@ export default class DissociationInfo extends PureComponent {
   render() {
     const { videoFooterHeight } = this.props;
     const { current } = videoFooterHeight;
-    const renderContent = (value, row, index) => {
+    const renderContent = (value, row) => {
       const obj = {
         children: value || '/',
         props: {},
       };
-      // if (index === this.props.resinProduct.length - 1) {
-      //   obj.props.colSpan = 0;
-      // }
       return obj;
     };
     const cols = [
@@ -108,7 +85,7 @@ export default class DissociationInfo extends PureComponent {
         title: '产品名称',
         dataIndex: 'resinName',
         width: 140,
-        render: (text, record, index) => {
+        render: (text, record) => {
           return text ? (
             <a
               href="#"
@@ -118,15 +95,6 @@ export default class DissociationInfo extends PureComponent {
             >{text}
             </a>
           ) : '/';
-          // if (index < this.props.resinProduct.length - 1) {
-          //   return text;
-          // }
-          // return {
-          //   children: this.props.solidDefects[0] ? this.props.solidDefects[0].info : '',
-          //   props: {
-          //     colSpan: 8,
-          //   },
-          // };
         },
       }, {
         title: '罐存',
@@ -137,7 +105,7 @@ export default class DissociationInfo extends PureComponent {
         title: '厂内库存率',
         dataIndex: 'facotryStockPre',
         width: 300,
-        render: (text, record, index) => {
+        render: (text) => {
           return {
             children: text === null ?
               '/' : (
@@ -150,9 +118,6 @@ export default class DissociationInfo extends PureComponent {
                   </Col>
                 </Row>
               ),
-            // props: {
-            //   colSpan: index === this.props.resinProduct.length - 1 ? 0 : 1,
-            // },
           };
         },
       }, {

@@ -40,7 +40,7 @@ const columnsTitle = () => {
     }, {
       title: '安装位置',
       dataIndex: 'installPosition',
-      width: 200,
+      // width: 200,
     }]
   );
 };

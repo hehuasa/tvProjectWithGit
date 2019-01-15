@@ -22,6 +22,7 @@ export default {
     },
     toolsBtnIndex: -1,
     mapIconShow: false,
+    eventIconShow: false,
     alarmIconData: [], // 需要在地图渲染的报警（资源树上聚合开关选中的）
     eventIconData: [], // 需要在地图渲染的事件
     envIconShow: false,
@@ -189,6 +190,13 @@ export default {
       return {
         ...state,
         eventIconData: payload,
+      };
+    },
+    // 事件图标显示隐藏
+    queryEventIconShow(state, { payload }) {
+      return {
+        ...state,
+        eventIconShow: payload,
       };
     },
     // 在地图显示的被选中的图标

@@ -91,7 +91,7 @@ class AlarmCounting extends PureComponent {
         type: 'alarmDeal/saveDealModel',
         payload: { isDeal: true },
       });
-    } else if (alarmType.profession === '107.999') {
+    } else {
       this.props.dispatch({
         type: 'alarmDeal/saveAlarmInfo',
         payload: record,
