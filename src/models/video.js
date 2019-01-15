@@ -1,4 +1,3 @@
-import { videoCtrl } from '../services/api';
 import { SocketVideo } from '../utils/Socket';
 
 const transLayout = ({ Layout, WindowCount }) => {

@@ -360,7 +360,7 @@ class BasicLayout extends React.PureComponent {
   handleEdit = (targetKey, addOrRemove) => {
     const { dispatch, video, videoFooterHeight, rightCollapsed, accessControlShow } = this.props;
     const { position } = video;
-    const { view, accessInfoExtent } = mapConstants;
+    const { accessInfoExtent } = mapConstants;
     mapConstants.domWarp = this.content;
     dispatch({
       type: 'tabs/del',
