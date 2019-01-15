@@ -2970,9 +2970,7 @@ export const addMapAlarms = ({ alarmIconData, dispatch, alarms, historyList }) =
       // 新建或获取报警动画图层
       // const alarmLayer = mapConstants.mainMap.findLayerById('报警动画');
 
-      console.log('addArray', addArray);
       for (const alarm of addArray) {
-
         if (alarm.resourceGisCode) {
           findParams.searchText = alarm.resourceGisCode;
           const layer = mapLayers.FeatureLayers.find(value => value.ctrlResourceType && alarm.ctrlResourceType.indexOf(value.ctrlResourceType) !== -1);
@@ -2980,9 +2978,6 @@ export const addMapAlarms = ({ alarmIconData, dispatch, alarms, historyList }) =
             findParams.layerIds = [layer.id];
             const ShowFindResult = (findTaskResult) => {
               const res = findTaskResult.results;
-              if (alarm.resourceGisCode === '28413') {
-                debugger;
-              }
               if (res.length > 0) {
                 index += 1;
                 // if (addArray.length === 1) {
