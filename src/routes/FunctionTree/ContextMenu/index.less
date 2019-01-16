@@ -1,4 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
+@import "../../../index.less";
 .context-menu {
     //width: 120px;
     position: fixed;
@@ -16,6 +17,6 @@
 
 .scrollbarsStyle {
     &>div:last-child>div:last-child {
-        background: #0096fc;
+        background-color: @scrollbars-bg !important;
     }
 }

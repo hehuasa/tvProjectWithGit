@@ -3,7 +3,7 @@ import { Form, Row, Col, Input, Select, Modal, Table, message, Button } from 'an
 import { connect } from 'dva';
 import { alarmStatus } from '../../../../utils/utils';
 import styles from './InfoContent.less';
-import { win12, win20, win10, win3 } from '../../../../configIndex';
+import { win12, win20, win10, win3 } from '../../../../utils/configIndex';
 
 const { TextArea } = Input;
 const { Option } = Select;

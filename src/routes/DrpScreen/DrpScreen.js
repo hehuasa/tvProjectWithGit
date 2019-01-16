@@ -248,7 +248,7 @@ export default class EquipmentProductInfo extends PureComponent {
           <Card title={title}>
             {/*<Grid style={gridStyle}>*/}
               <div className={styles.tableTtitle}>{titles[0]}</div>
-              <Scrollbars style={{ height }} ref={(ref) => { this.scrollLeft = ref; }}>
+              <Scrollbars style={{ height }} ref={(ref) => { this.scrollLeft = ref; }} className={styles.scrollbarsStyle}>
                 <div className={styles.bordered}>
 
 

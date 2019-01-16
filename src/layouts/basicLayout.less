@@ -7,7 +7,8 @@
     border-top: @homepage-panel-border;
     border-right: @homepage-panel-border;
 }
-.mainContent{
+
+.mainContent {
     border-top: @homepage-panel-border;
     border-left: @homepage-panel-border;
     border-right: @homepage-panel-border;
@@ -48,6 +49,7 @@
         }
     }
 }
+
 .side-right {
     position: relative;
     margin-left: 8px;
@@ -120,6 +122,12 @@
         & .ant-tabs-tabpane {
             height: 100%;
         }
+    }
+}
+
+.scrollbarsStyle {
+    &>div:last-child>div:last-child {
+        background-color: @scrollbars-bg  !important;
     }
 }
 
@@ -395,7 +403,12 @@
     :root .ant-tabs-tab-prev-icon-target,
     :root .ant-tabs-tab-next-icon-target {
         font-size: @public-font-m;
-    } // ��ť
+    }
+    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab .ant-tabs-close-x{
+        font-size: @public-font-m;
+        height: @public-font-m;
+    }
+    // ��ť
     .ant-btn {
         font-size: @public-font-size;
         border-radius: @table-border-radius;
@@ -442,8 +455,7 @@
     }
     .ant-btn-primary:hover,
     .ant-btn-primary:focus {
-        background: @ant-btn-background-color-hove;
-        // border: @public-border-size solid @public-border-color-hover;
+        background: @ant-btn-background-color-hove; // border: @public-border-size solid @public-border-color-hover;
         border: @public-border-size solid @public-border-color;
     }
     input:-internal-autofill-previewed,
@@ -485,11 +497,10 @@
         max-width: 100%;
         margin-top: -14px;
     }
-    .ant-select-search__field{
+    .ant-select-search__field {
         color: @public-color;
     }
-    .ant-select-tree-dropdown 
-    .ant-select-not-found{
+    .ant-select-tree-dropdown .ant-select-not-found {
         color: @public-color;
     }
     .ant-select-selection__rendered {
@@ -702,8 +713,7 @@
     .ant-calendar .ant-calendar-ok-btn:hover,
     .ant-calendar .ant-calendar-ok-btn:focus {
         color: #fff;
-        background-color: @ant-btn-background-color-hove;
-        // border-color: @public-border-color-hover;
+        background-color: @ant-btn-background-color-hove; // border-color: @public-border-color-hover;
         border-color: @public-border-color;
     }
     .ant-calendar-date:hover {
@@ -824,13 +834,12 @@
     .ant-table-thead>tr>th .anticon-filter>svg,
     .ant-table-thead>tr>th .ant-table-filter-icon>svg {
         margin-left: -10px;
-    } 
-    .ant-table-fixed-header .ant-table-scroll .ant-table-header{
+    }
+    .ant-table-fixed-header .ant-table-scroll .ant-table-header {
         overflow-x: hidden;
         overflow-y: scroll;
         margin-bottom: 0 !important;
-    }
-    // ʱ������Сͼ��
+    } // ʱ������Сͼ��
     .ant-calendar-picker-clear,
     .ant-calendar-picker-icon {
         // position: absolute;
@@ -844,7 +853,7 @@
     } // ��Ƭ
     .ant-card-bordered {
         background: @public-background-color; // border: @public-border-size solid @public-border-color;
-        border: @public-border-size solid @tabs-border-color-right !important;
+        border: @public-border-size solid @tabs-border-color-right  !important;
     }
     .ant-card-head {
         font-size: @public-font-size;
@@ -857,9 +866,9 @@
         margin: 0;
     }
     .ant-card {
-        background: @table-background !important;
-        color: @public-color !important;
-        font-size: @public-font-size !important;
+        background: @table-background  !important;
+        color: @public-color  !important;
+        font-size: @public-font-size  !important;
     }
     .ant-card-extra {
         color: @public-color;
@@ -888,8 +897,7 @@
     } // ѡ���
     .ant-select-dropdown {
         background: @public-background-color;
-        font-size: @public-font-size;
-        // border: @public-border-size solid @public-border-color-hover;
+        font-size: @public-font-size; // border: @public-border-size solid @public-border-color-hover;
         border: @public-border-size solid @public-border-color;
     }
     .ant-checkbox-checked .ant-checkbox-inner {
@@ -910,7 +918,19 @@
     .ant-select-dropdown-menu-item {
         color: @public-color;
         line-height: @public-height
-    } // modal
+    }
+    .ant-select-selection--multiple .ant-select-selection__choice{
+        background-color: @ant-btn-background-color-hove;
+        border: @public-border-size solid @border-color;
+    }
+    .ant-select-selection--multiple > ul > li, .ant-select-selection--multiple .ant-select-selection__rendered > ul > li{
+        height: 36px;
+        line-height: 30px;
+    }
+    :root .ant-select-selection--multiple .ant-select-selection__choice__remove{
+        font-size: @public-font-m;
+    }
+    // modal
     .ant-modal {
         font-size: @public-font-size;
         color: @public-color;
@@ -1007,8 +1027,7 @@
     }
     .ant-radio-wrapper {
         font-size: @public-font-size;
-        color: @public-color;
-        // left: 4px;
+        color: @public-color; // left: 4px;
         // top: 4px;
     }
     .ant-radio-wrapper:hover .ant-radio .ant-radio-inner,
@@ -1211,8 +1230,7 @@
         background: @ant-btn-background-color-hove;
         font-size: @public-font-m;
         height: @public-font-m + 12px;
-        line-height: @public-font-m + 10px;
-        // border: @public-border-size solid @public-border-color-hover;
+        line-height: @public-font-m + 10px; // border: @public-border-size solid @public-border-color-hover;
         border: @public-border-size solid @public-border-color;
     }
     .ant-tag,
@@ -1231,37 +1249,38 @@
     width: 10px;
     height: 10px;
 }
+
 ::-webkit-scrollbar-button {
     /*滚动条两端的按钮，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置2）*/
-    background: #224baa;
-    // background: #fff;
+    background: #224baa; // background: #fff;
 }
+
 ::-webkit-scrollbar-track {
     /*外层轨道，可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果（位置3）*/
-    background: #224baa;
-    // background: #fff;
+    background: #224baa; // background: #fff;
 }
+
 ::-webkit-scrollbar-track-piece {
     /*内层轨道，滚动条中间部分（位置4）*/
-    background: #224baa;
-    // background: #fff;
+    background: #224baa; // background: #fff;
 }
+
 ::-webkit-scrollbar-thumb {
     /*滚动条里面可以拖动的那部分（位置5）*/
-    background: #0096fc;
-    border-radius: 4px;
-    // background: #fff;
+    background: @scrollbars-bg;
+    border-radius: 4px; // background: #fff;
 }
+
 ::-webkit-scrollbar-corner {
     /*边角（位置6）*/
-    background: #82AFFF;
-    // background: #fff;
+    background: #82AFFF; // background: #fff;
 }
+
 ::-webkit-scrollbar-resizer {
     /*定义右下角拖动块的样式（位置7）*/
-    background: #FF0BEE;
-    // background: #fff;
+    background: #FF0BEE; // background: #fff;
 }
+
 input::-webkit-input-placeholder {
     /* placeholder颜色  */
     // color: red;

@@ -330,7 +330,7 @@ export default class Orgnization extends PureComponent {
         <div className={styles.content}>
           <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
             <Col md={6} sm={8} className={styles.nopd}>
-              <Scrollbars style={{ width: '100%', height: 768, marginBottom: 50 }}>
+              <Scrollbars style={{ width: '100%', height: 768, marginBottom: 50 }} className={styles.scrollbarsStyle}>
                 <div className={styles.tree}>
                   {this.judgeFunction('新增权限') ? (
                     <div className={styles.addNewTree} onClick={this.addNewRootNode}>

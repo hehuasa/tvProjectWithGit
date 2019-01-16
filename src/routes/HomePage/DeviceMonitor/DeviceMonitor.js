@@ -125,7 +125,7 @@ export default class DeviceMonitor extends PureComponent {
     const { data } = this.state;
     return (
       <div className={styles.warp}>
-        <Scrollbars style={{ height: mapHeight }}>
+        <Scrollbars style={{ height: mapHeight }} className={styles.scrollbarsStyle}>
           <div className={styles.deviceType}>{deviceMonitor.devicesName}</div>
           <div className={styles.close} onClick={this.handleClose}>
             <Icon type="close" style={{ fontSize: 20, fontWeight: 800 }} />

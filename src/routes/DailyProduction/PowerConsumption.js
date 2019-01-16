@@ -261,7 +261,7 @@ export default class GasBalance extends PureComponent {
                 />
               </div>
             </div>
-            <Scrollbars>
+            <Scrollbars className={styles.scrollbarsStyle}>
               <Table
                 dataSource={this.state.powerConsumption}
                 columns={cols}

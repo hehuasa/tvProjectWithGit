@@ -71,6 +71,7 @@ export default class ConstructMontior extends PureComponent {
           </div>
         </div>
         <Scrollbars
+          className={styles.scrollbarsStyle}
           autoHide
           autoHideTimeout={1000}
           autoHideDuration={200}

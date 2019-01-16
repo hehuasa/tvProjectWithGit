@@ -195,7 +195,7 @@ export default class EquipmentProductInfo extends PureComponent {
                 />
               </div>
             </div>
-            <Scrollbars>
+            <Scrollbars className={styles.scrollbarsStyle}>
               <Table
                 dataSource={fakeData[0].limisRawMaterial}
                 columns={cols}

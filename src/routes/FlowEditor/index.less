@@ -1,3 +1,5 @@
+@import "../../index.less";
+
 .warp {
   width: 100%;
   position: relative;
@@ -58,5 +60,11 @@
   & span {
     display: inline-block;
     width: 70px;
+  }
+}
+
+.scrollbarsStyle {
+  &>div:last-child>div:last-child {
+      background-color: @scrollbars-bg  !important;
   }
 }

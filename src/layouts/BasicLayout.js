@@ -1050,7 +1050,7 @@ class BasicLayout extends React.PureComponent {
                                     const Comp = routerData[item.key] ? routerData[item.key].component ? routerData[item.key].component : null : null;
                                     return (
                                       <TabPane tab={item.title} key={item.key} closable={item.closable}>
-                                        <Scrollbars>
+                                        <Scrollbars className={styles.scrollbarsStyle}>
                                           { Comp !== null ? (
                                             <Route
                                               path="/"

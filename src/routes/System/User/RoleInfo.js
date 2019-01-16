@@ -296,7 +296,7 @@ const SysFunction = Form.create()((props) => {
       destroyOnClose
       onCancel={() => handleModalShow()}
     >
-      <Scrollbars style={{ width: '100%', height: 500 }}>
+      <Scrollbars style={{ width: '100%', height: 500 }} className={styles.scrollbarsStyle}>
         <Tabs activeKey={`${activeKey}`} onChange={tabOnChange}>
           <TabPane tab="功能权限" key="1">
             <Tree
@@ -442,7 +442,7 @@ const RoleAccount = Form.create()((props) => {
       onCancel={() => handleAccountModalShow()}
       destroyOnClose
     >
-      <Scrollbars style={{ width: '100%', height: 600 }}>
+      <Scrollbars style={{ width: '100%', height: 600 }} className={styles.scrollbarsStyle}>
         <ConfigRoleAccount
           selectedRowKeys={selectedRowKeys}
           selectedRows={selectedRows}

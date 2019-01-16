@@ -717,6 +717,7 @@ class AlarmInfo extends PureComponent {
           </div>
         </div>
         <Scrollbars
+          className={styles.scrollbarsStyle}
           autoHideTimeout={1000}
           autoHideDuration={200}
           autoHeight

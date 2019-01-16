@@ -209,7 +209,7 @@ class WarehouseLogistics extends PureComponent {
             <Button type="primary" size="small" onClick={this.handleClick}> X </Button>
           </div>
         </div>
-        <Scrollbars style={{ height: 280 }}>
+        <Scrollbars style={{ height: 280 }} className={styles.scrollbarsStyle}>
           <Collapse bordered={false} defaultActiveKey={['0']}>
             <Panel header={<div className={styles.panelHeader}>固体仓库</div>} key="0" className={styles.type}>
               <Table

@@ -1,5 +1,5 @@
-@import '../../../index.less';
 @import "../../../../node_modules/antd/lib/style/themes/default.less";
+@import '../../../index.less';
 .side-right {
     position: relative;
     margin-left: 8px;
@@ -79,4 +79,10 @@
     float: right;
     line-height: 35px;
     color: @text-color;
+}
+
+.scrollbarsStyle {
+    &>div:last-child>div:last-child {
+        background-color: @scrollbars-bg !important;
+    }
 }

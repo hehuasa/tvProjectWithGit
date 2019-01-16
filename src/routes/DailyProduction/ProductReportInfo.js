@@ -67,7 +67,7 @@ export default class GasBalance extends PureComponent {
               />
             </div>
           </div>
-          <Scrollbars>
+          <Scrollbars className={styles.scrollbarsStyle}>
             <div className={styles.productInfo}>
 
               <div>

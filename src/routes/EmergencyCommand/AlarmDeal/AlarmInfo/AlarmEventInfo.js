@@ -5,7 +5,7 @@ import moment from 'moment';
 import CommonQuery from '../../../../components/GlobalHeader/CommonQuery';
 
 import styles from './index.less';
-import { win12, win20, win10, win3 } from '../../../../configIndex';
+import { win12, win20, win10, win3 } from '../../../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TextArea, Search } = Input;

@@ -532,7 +532,7 @@ export default class Mark extends G6Register {
 ))}
         </div>
         <div className={styles.left}>
-          <Scrollbars style={{ height: mapHeight - 48 }}>
+          <Scrollbars style={{ height: mapHeight - 48 }} className={styles.scrollbarsStyle}>
             <Collapse defaultActiveKey={['1', '2']}>
               <Panel style={getCustomPanelStyle(0)} header={<PanelHead title="图层列表" isHeader />} key="1">
                 <Radio.Group onChange={this.handleChange} value={layerValue}>

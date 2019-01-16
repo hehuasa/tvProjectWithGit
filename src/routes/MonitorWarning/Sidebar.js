@@ -211,7 +211,7 @@ class Sidebar extends PureComponent {
   render() {
     const { data, activeKeys } = this.props.sidebar;
     return (
-      <Scrollbars>
+      <Scrollbars className={styles.scrollbarsStyle}>
         <div className={styles['side-header']} onClick={this.handleClick}>
           <span>数据展示</span>
           {this.state.allFold === false ? <Icon type="up" className={styles['data-heading']} /> : <Icon type="down" className={styles['data-heading']} />}

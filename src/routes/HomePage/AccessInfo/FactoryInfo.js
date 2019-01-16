@@ -42,6 +42,7 @@ export default class FactoryInfo extends PureComponent {
             <span className={styles.time}>进厂时间</span>
           </li>
           <Scrollbars
+            className={styles.scrollbarsStyle}
             style={{ height: height }}
             ref={(ref) => this.data = ref }
           >

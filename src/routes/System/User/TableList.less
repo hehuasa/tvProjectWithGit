@@ -1,5 +1,6 @@
 @import "~antd/lib/style/themes/default.less";
 @import "../../../utils/utils.less";
+@import "../../../index.less";
 
 .tableList {
   .tableListOperator {
@@ -61,4 +62,9 @@
 }
 .treeTitle{
   line-height: 24px;
+}
+.scrollbarsStyle {
+  &>div:last-child>div:last-child {
+      background-color: @scrollbars-bg !important;
+  }
 }

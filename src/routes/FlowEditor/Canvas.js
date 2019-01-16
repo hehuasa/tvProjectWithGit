@@ -712,6 +712,7 @@ export default class Canvas extends PureComponent {
           <Layout>
             <Sider>
               <Scrollbars
+                className={styles.scrollbarsStyle}
                 autoHide
                 autoHideTimeout={1000}
                 autoHideDuration={200}

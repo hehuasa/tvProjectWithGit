@@ -194,7 +194,11 @@
     padding-left: 24px;
     min-height: 400px; // background-color: #f3f3f3;
 }
-
+.scrollbarsStyle {
+    &>div:last-child>div:last-child {
+        background-color: @scrollbars-bg !important;
+    }
+}
 // .infoJudgment{
 //   :global {
 //     & .ant-tabs-tab {

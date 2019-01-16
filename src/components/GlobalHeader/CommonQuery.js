@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { TreeSelect, Form, Table, Row, Col, Input, Button, Modal, Select } from 'antd';
 import moment from 'moment';
 import styles from './index.less';
-import { win15 } from '../../configIndex';
+import { win15 } from '../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TreeNode } = TreeSelect;
