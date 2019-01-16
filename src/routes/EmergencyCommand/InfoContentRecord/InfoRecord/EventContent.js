@@ -191,7 +191,6 @@ export default class EventContent extends PureComponent {
   }
   render() {
     const { form, emergency, current } = this.props;
-    console.log(7777, form.getFieldValue('dataType'))
     return (
       <div className={styles.eventContent}>
         <FormItem

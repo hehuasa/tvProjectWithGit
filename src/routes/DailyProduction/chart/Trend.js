@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
-import { getDatesData } from './unit';
+import {axisTextStyle, getDatesData, toolTipTheme} from './unit';
 import styles from './index.less';
 
 const cols = {
@@ -89,24 +89,13 @@ export default class Trend extends PureComponent {
             <Axis
               name="date"
               title={{ position: 'end',
-                textStyle: {
-                    fontSize: '16',
-                    textAlign: 'right',
-                    fill: titleColor,
-                    rotate: 0,
-                },
-            }}
-            />
-            <Tooltip crosshairs={{ type: 'y' }} />
-            <Axis
-              title={{ position: 'end',
-                  textStyle: {
-                      fontSize: '16',
-                      textAlign: 'right',
-                      fill: titleColor,
-                      rotate: 0,
-                  },
+                  textStyle: axisTextStyle,
               }}
+              label={{ textStyle: axisTextStyle }}
+            />
+              <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
+            <Axis
+                label={{ textStyle: axisTextStyle }}
               name="value"
               line={{
                           lineWidth: 1, // 设置线的宽度

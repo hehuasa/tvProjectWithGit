@@ -96,7 +96,6 @@ class CommonLine extends PureComponent {
       const ds = new DataSet();
       if (newData[0] && newData[0][0]) {
         for (const item of newData.entries()) {
-          debugger;
           const dv = ds.createView().source(item[1]);
           dv.transform({
             type: 'fold',

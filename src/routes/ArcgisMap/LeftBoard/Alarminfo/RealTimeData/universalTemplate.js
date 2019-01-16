@@ -139,7 +139,7 @@ export default class Environment extends PureComponent {
         <div>
           { showDashBoard ? (
             <div>
-              <Radio.Group onChange={this.handleEvrModeChange} value={evrMode} size="small" style={{ marginBottom: 8 }}>
+              <Radio.Group onChange={this.handleEvrModeChange} value={evrMode} size="large" style={{ marginBottom: 8 }}>
                 <Radio.Button value>实时数据</Radio.Button>
                 <Radio.Button value={false}>仪表盘</Radio.Button>
               </Radio.Group>

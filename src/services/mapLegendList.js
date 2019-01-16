@@ -24,6 +24,8 @@ const imgArray = [
   { name: '放射源', sort: 22 },
   { name: '呼吸机', sort: 23 },
   { name: '空气呼吸机', sort: 24 },
+  { name: '裂解炉', sort: 25 },
+  { name: '锅炉', sort: 26 },
   { name: '默认设备', default: true },
 ];
 

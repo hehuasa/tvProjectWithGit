@@ -42,6 +42,7 @@ export default class MapTools extends PureComponent {
     if (stopPropagation) {
       return false;
     }
+    console.log('@time-color')
     let title;
     (e.target.title) ? { title } = e.target : e.target.parentNode.title ? { title } = e.target.parentNode : { title } = e.target.parentNode.parentNode;
     switch (title) {
@@ -96,6 +97,10 @@ export default class MapTools extends PureComponent {
             showMeasure: 'select',
           });
           select({ map: mainMap, view: mapView, dispatch, handleMeasure: this.handleMeasure });
+        } else {
+          this.setState({
+            showMeasure: '',
+          });
         }
         break;
       case '图例':
@@ -144,12 +149,12 @@ export default class MapTools extends PureComponent {
         <div className={styles.tools} onClick={this.handleClick} style={{ zIndex: stopPropagation ? -1 : null }}>
           <div title="放大"><Icon type="zoom-in" /></div>
           <div title="缩小"><Icon type="zoom-out" /></div>
-          <div title="圈选" style={{ background: toolsBtnIndex === 2 ? '#999' : '' }}><MyIcon type="icon-weixuanzhongyuanquan" /></div>
-          <div title="测距" style={{ background: toolsBtnIndex === 0 ? '#999' : '' }}><MyIcon type="icon-ruler"/></div>
-          <div title="测面积" style={{ background: toolsBtnIndex === 1 ? '#999' : '' }}><MyIcon type="icon-mianji"/></div>
-          <div title="图例" style={{ background: showLegend ? '#999' : '' }} ><MyIcon type="icon-tuceng"/></div>
+          <div title="圈选" style={{ background: toolsBtnIndex === 2 ? '#999' : '' }}><MyIcon type="icon-weixuanzhongyuanquan" title="圈选"/></div>
+          <div title="测距" style={{ background: toolsBtnIndex === 0 ? '#999' : '' }}><MyIcon type="icon-ruler" title="测距"/></div>
+          <div title="测面积" style={{ background: toolsBtnIndex === 1 ? '#999' : '' }}><MyIcon type="icon-mianji" title="测面积"/></div>
+          <div title="图例" style={{ background: showLegend ? '#999' : '' }} ><MyIcon type="icon-tuceng" title="图例"/></div>
           {/*<div title="标绘"><Icon title="标绘" type="highlight" /></div>*/}
-          <div title="还原"><MyIcon type="icon-78"/></div>
+          <div title="还原"><MyIcon type="icon-78" title="还原"/></div>
         </div>
         { showMeasure ? (
           <div className={styles.measure}>

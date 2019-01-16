@@ -102,9 +102,15 @@ export default class DeviceMonitor extends PureComponent {
         }
       }
       for (const item of array) {
-        const runDay = runDayData.find(value => value.dissociationName === item.processNumber);
+        let runDay = runDayData.find(value => value.dissociationName.indexOf(item.processNumber) !== -1);
+        if (!runDay) {
+          runDay = runDayData.find(value => value.alternatorInfoName === item.processNumber);
+        }
+        if (!runDay) {
+          runDay = runDayData.find(value => value.hotFurnaceName === item.processNumber);
+        }
         if (runDay) {
-          item.dayCount = runDay.dayCount;
+          item.dayCount = runDay.dayCount || runDay.runDay;
           item.rawName = runDay.rawName;
         }
       }
@@ -152,7 +158,7 @@ export default class DeviceMonitor extends PureComponent {
 ) : null
                   }
                   </div>
-                  {item.processNumber.indexOf('锅炉') === -1 ? (
+                  {item.processNumber.indexOf('CFB') === -1 && item.processNumber.indexOf('发电机') === -1 ? (
                     <div className={styles.name}>
                       物料名称：  {item.rawName ? item.rawName : ''}
                     </div>

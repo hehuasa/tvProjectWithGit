@@ -7,7 +7,7 @@ export default class Legend extends React.PureComponent {
   render() {
     const { legendIndex, mapHeight } = this.props;
     const lists = mapLegendList.map(item =>
-      <div key={item.name} className={styles.row}><img src={item.url} alt={item.name} /><span>{item.name}</span></div>
+        item.name !== '默认设备' ? <div key={item.name} className={styles.row}><img src={item.url} alt={item.name} /><span>{item.name}</span></div> : null
     );
     return (
       <div className={styles.warp} style={{ zIndex: legendIndex }}>

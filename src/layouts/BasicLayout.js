@@ -210,7 +210,6 @@ class BasicLayout extends React.PureComponent {
     });
   };
   handleTabClick = (key, a, b, c) => {
-
     const { video, videoFooterHeight, dispatch, rightCollapsed, accessControlShow } = this.props;
     const { position } = video;
     const { view, accessInfoExtent } = mapConstants;
@@ -1067,7 +1066,7 @@ class BasicLayout extends React.PureComponent {
                             )}
                     </Tabs>
                   </Content>
-                  {/*<Footer style={{ padding: 0, position: 'relative', zIndex: 101 }}><HomePageVideo /></Footer>*/}
+                  {/* <Footer style={{ padding: 0, position: 'relative', zIndex: 101 }}><HomePageVideo /></Footer> */}
                 </Layout>
                 <Sider className={styles['side-right']} width={520} trigger={null} collapsible collapsed={rightCollapsed} collapsedWidth={0}><TriggerRight domWarp={this.content} accessControlShow={accessControlShow} /><PanelBoard /></Sider>
               </Layout>

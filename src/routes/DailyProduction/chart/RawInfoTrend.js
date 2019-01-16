@@ -8,11 +8,12 @@ import { textColor, lineColor1, lineColor2 } from '../color/color';
 
 const { DataSet } = new window.DataSet();
 import styles from './index.less';
+import {axisTextStyle, labelTextStyle, toolTipTheme} from "./unit";
 
 const trunkCountTitle = '罐存';
 
 const cols = {
-  date: {
+  dateFormat: {
     alias: '日期',
     range: [0, 1],
     tickCount: 6,
@@ -69,8 +70,7 @@ export default class RawInfoTrend extends PureComponent {
   // }
 
   render() {
-    const { history, name, height } = this.props;
-    const chartHeight = Number(height) / 2 - 100;
+    const { history, name } = this.props;
     const newData0 = transData(history, 0);
     return (
       <div className={styles.warp}>
@@ -81,33 +81,16 @@ export default class RawInfoTrend extends PureComponent {
             data={newData0}
             scale={cols}
             forceFit
-            onGetG2Instance={g2Chart => {
-              this.chart = g2Chart;
-              console.log("g2Chart", g2Chart);
-            }}
           >
             <Legend />
             <Axis
-              name="date"
-              title={{ position: 'end',
-                textStyle: {
-                  fontSize: '16',
-                  textAlign: 'right',
-                  fill: '#fff',
-                  rotate: 0,
-                },
-              }}
+              name="dateFormat"
+              title={{ position: 'end', textStyle: axisTextStyle }}
+              label={{ textStyle: axisTextStyle }}
             />
-            <Tooltip crosshairs={{ type: 'y' }} />
+            <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
             <Axis
-              title={{ position: 'end',
-                textStyle: {
-                  fontSize: '16',
-                  textAlign: 'right',
-                  fill: '#fff',
-                  rotate: 0,
-                },
-              }}
+                label={{ textStyle: labelTextStyle, offset: 20 }}
               name="value"
               line={{
                 lineWidth: 1, // 设置线的宽度

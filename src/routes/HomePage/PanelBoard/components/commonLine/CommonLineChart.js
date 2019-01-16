@@ -11,14 +11,14 @@ const label = {
     fill: '#fff', // 文本的颜色
     fontSize: '18', // 文本大小
     rotate: 0,
-    textBaseline: 'bottom' // 文本基准线，可取 top middle bottom，默认为middle
+    textBaseline: 'bottom', // 文本基准线，可取 top middle bottom，默认为middle
   },
-}
+};
 const grid = {
   lineStyle: {
     lineWidth: 2, // 网格线的宽度复制代码
   },
-}
+};
 // formatter: value => (moment(parseFloat(value)).format('YYYY-MM-DD HH:mm:ss')), // 格式化文本内容
 
 export default class CommonLineChart extends PureComponent {
@@ -77,7 +77,7 @@ export default class CommonLineChart extends PureComponent {
             <div className={styles.quotaName}>{quotaName}</div>
             <Chart
               height={400}
-              padding={['auto','auto','100','auto']}
+              padding={['auto', 'auto', '100', 'auto']}
               data={item}
               scale={cols}
               forceFit
@@ -116,30 +116,30 @@ export default class CommonLineChart extends PureComponent {
                 name="month"
                 label={{
                   formatter: val => moment(parseFloat(val)).format('HH:mm:ss'),
+                    rotate: 15,
                   textStyle: {
-                    textAlign: 'center', // 文本对齐方向，可取值为： start center end
+                    textAlign: 'start', // 文本对齐方向，可取值为： start center end
                     fill: '#fff', // 文本的颜色
                     fontSize: '18', // 文本大小
-                    rotate: 0,
-                    textBaseline: 'bottom' // 文本基准线，可取 top middle bottom，默认为middle
+                    textBaseline: 'bottom', // 文本基准线，可取 top middle bottom，默认为middle
                   },
                 }}
-                line={{ lineWidth: 2, stroke: '#ccc' }} 
+                line={{ lineWidth: 2, stroke: '#ccc' }}
               />
               <Axis name="temperature" line={{ lineWidth: 2, stroke: '#ccc' }} label={label} grid={grid} />
-              <Tooltip 
-                crosshairs={{ type: 'y' }} 
-                showTitle={false} 
-                g2-tooltip={{backgroundColor: '#090f25'}}
+              <Tooltip
+                crosshairs={{ type: 'y' }}
+                showTitle={false}
+                g2-tooltip={{ backgroundColor: '#090f25' }}
                 g2-tooltip-title={{
                    color: '#fff',
                    fontSize: '18px',
                  }}
-                 g2-tooltip-list-item={{
+                g2-tooltip-list-item={{
                    color: '#fff',
                    fontSize: '18px',
                  }}
-                 g2-tooltip-marker={{
+                g2-tooltip-marker={{
                    width: '10px',
                    height: '10px',
                  }}
@@ -160,16 +160,19 @@ export default class CommonLineChart extends PureComponent {
                         start={['min', value]}
                         end={['max', value]}
                         text={{
-                          content: `阈值为${value}`,
+                          content: `阈值:${value}`,
                           position: 'end',
                           style: {
                             textAlign: 'end',
-                            fill: '#333', // 文本颜色
+                            fill: '#fff', // 文本颜色
+                              fontSize: '14',
+                              // rotate: 30,
                           },
+                            offsetX: 30,
                         }}
                         lineStyle={{
-                          stroke: '#ffb4b4', // 线的颜色
-                          lineDash: [0, 2, 2], // 虚线的设置
+                          stroke: '#ff0003', // 线的颜色
+                          lineDash: null, // 虚线的设置
                           lineWidth: 3, // 线的宽度
                         }}
                       />

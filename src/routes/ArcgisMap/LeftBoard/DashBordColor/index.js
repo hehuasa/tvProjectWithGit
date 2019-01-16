@@ -107,7 +107,7 @@ export default class DashBordColor extends PureComponent {
                   offset: -10,
                   textStyle: {
                     fontSize: 12,
-                    fill: '#000',
+                    fill: '#fff',
                     textAlign: 'center',
                     textBaseline: 'middle',
                   } }}
@@ -228,7 +228,7 @@ export default class DashBordColor extends PureComponent {
                 position={['50%', '100%']}
                 html={() => {
  return (`<div style="width: 300px;text-align: center;font-size: 12px!important;">
-                <p style="font-size: 18px;color: #333;margin: 0;">${val}(${meterUnit})
+                <p style="font-size: 18px;color: #fff;margin: 0;">${val}(${meterUnit})
                 </p></div>`);
 }}
               />

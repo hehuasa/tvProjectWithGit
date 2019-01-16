@@ -835,6 +835,10 @@ export async function getAllNewsData(params) {
     body: params,
   });
 }
+// 特殊处理 裂解炉9A9B实时值
+export async function getA9AndB9() {
+  return request(`${path}/immediateData/immediateDataInfo/getA9AndB9`);
+}
 // 请求实时点位信息(包括历史数据)
 export async function findByTime(params) {
   return request(`${path}/immediateData/immediateDataInfo/findByTime`, {

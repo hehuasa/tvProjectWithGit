@@ -3,7 +3,7 @@ import { Button, Card } from 'antd';
 import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
-import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
+import { textColor, lineColor1, lineColor2 } from '../color/color';
 import { toolTipTheme, axisTextStyle, labelTextStyle } from './unit';
 import styles from './index.less';
 
@@ -73,39 +73,39 @@ export default class AlternatorTrend extends PureComponent {
   }
   render() {
     const { history, name, height, dateTimes, click } = this.props;
-    console.log('history', history);
     const chartHeight = Number(height) / 2 - 100;
     const newData0 = transData(history, 0);
     const newData1 = transData(history, 1);
     return (
       <div className={styles.warp}>
         <Card title={name}>
-          <div className={styles.title0}>
-            {cols.value0.alias}
-          </div>
+          <div className={styles.content} style={{ height: chartHeight }}>
+            <div className={styles.title}>
+              {cols.value0.alias}
+            </div>
             <Chart
-                padding={[50, 'auto', 'auto', 50]}
-                height={chartHeight}
-                data={newData0}
-                scale={cols}
-                forceFit
+              padding={[40, 50, 'auto', 'auto']}
+              height={chartHeight - 50}
+              data={newData0}
+              scale={cols}
+              forceFit
             >
               <Legend />
               <Axis
-                  name="dateFormat"
-                  title={{ position: 'end', textStyle: axisTextStyle }}
-                  label={{ textStyle: axisTextStyle }}
+                name="dateFormat"
+                title={{ position: 'end', textStyle: axisTextStyle }}
+                label={{ textStyle: axisTextStyle }}
               />
               <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
               <Axis
                   // title={{ position: 'end', textStyle: axisTextStyle }}
-                  name="value0"
-                  label={{ textStyle: labelTextStyle, offset: 20 }}
-                  line={{
+                name="value0"
+                label={{ textStyle: labelTextStyle, offset: 20 }}
+                line={{
                     lineWidth: 1, // 设置线的宽度
                     stroke: textColor, // 设置线的颜色
                   }}
-                  grid={{
+                grid={{
                     type: 'line', // 网格的类型
                     lineStyle: {
                       lineWidth: 0.1,
@@ -113,73 +113,75 @@ export default class AlternatorTrend extends PureComponent {
                     } }}
               />
               <Geom
-                  type="line"
-                  position="dateFormat*value0"
-                  size={2}
-                  color={['date', [lineColor1, lineColor2]]}
+                type="line"
+                position="dateFormat*value0"
+                size={2}
+                color={['date', [lineColor1, lineColor2]]}
               />
               <Geom
-                  type="point"
-                  position="dateFormat*value0"
-                  size={4}
-                  shape="circle"
-                  color={['date', [lineColor1, lineColor2]]}
-                  tooltip={null}
+                type="point"
+                position="dateFormat*value0"
+                size={4}
+                shape="circle"
+                color={['date', [lineColor1, lineColor2]]}
+                tooltip={null}
               />
             </Chart>
-          <div className={styles.title1}>
-            {cols.value1.alias}
           </div>
-          <Chart
-            padding={['auto', 50, 'auto', 'auto']}
-            height={chartHeight}
-            data={newData1}
-            scale={cols}
-            forceFit
-          >
-            <Legend />
-            <Axis
-              name="dateFormat"
-              title={{ position: 'end',
-                  textStyle: axisTextStyle,
-              }}
-              label={{ textStyle: axisTextStyle }}
-            />
-            <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
-            <Axis
-              title={{ position: 'end',
-                  textStyle: labelTextStyle,
-              }}
-              label={{ textStyle: axisTextStyle }}
-              name="value1"
-              line={{
-                lineWidth: 1, // 设置线的宽度
-                stroke: textColor, // 设置线的颜色
-              }}
-              grid={{
-                type: 'line', // 网格的类型
-                lineStyle: {
-                  lineWidth: 0.1,
-                  stroke: '#333', // 网格线的颜色
-                } }}
-            />
-            <Geom
-              type="line"
-              position="dateFormat*value1"
-              size={2}
-              color={['date', [lineColor1, lineColor2]]}
-            />
-            <Geom
-              type="point"
-              position="dateFormat*value1"
-              size={4}
-              shape="circle"
-              color={['date', [lineColor1, lineColor2]]}
-              tooltip={null}
-            />
-          </Chart>
+
+          <div className={styles.content} style={{ height: chartHeight }}>
+            <div className={styles.title}>
+              {cols.value1.alias}
+            </div>
+            <Chart
+              padding={[40, 50, 'auto', 'auto']}
+              height={chartHeight - 40}
+              data={newData1}
+              scale={cols}
+              forceFit
+            >
+              <Legend />
+              <Axis
+                name="dateFormat"
+                title={{ position: 'end',
+                    textStyle: axisTextStyle,
+                  }}
+                label={{ textStyle: axisTextStyle }}
+              />
+              <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
+              <Axis
+                label={{ textStyle: axisTextStyle }}
+                name="value1"
+                line={{
+                    lineWidth: 1, // 设置线的宽度
+                    stroke: textColor, // 设置线的颜色
+                  }}
+                grid={{
+                    type: 'line', // 网格的类型
+                    lineStyle: {
+                      lineWidth: 0.1,
+                      stroke: '#333', // 网格线的颜色
+                    } }}
+              />
+              <Geom
+                type="line"
+                position="dateFormat*value1"
+                size={2}
+                color={['date', [lineColor1, lineColor2]]}
+              />
+              <Geom
+                type="point"
+                position="dateFormat*value1"
+                size={4}
+                shape="circle"
+                color={['date', [lineColor1, lineColor2]]}
+                tooltip={null}
+              />
+            </Chart>
+          </div>
+
           <div className={styles.footer}>
-            <Button onClick={() => click({ startDate: dateTimes })}>关闭</Button>
+            <Button htmlType="button" onClick={() => click({ startDate: dateTimes })}>关闭</Button>
           </div>
         </Card>
       </div>

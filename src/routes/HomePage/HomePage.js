@@ -178,7 +178,7 @@ export default class HomePage extends PureComponent {
             zIndex="1002"
             visible={isDeal}
             mask={false}
-            width="60%"
+            width="80%"
             onCancel={this.hideModal}
             okText="确认"
             cancelText="取消"

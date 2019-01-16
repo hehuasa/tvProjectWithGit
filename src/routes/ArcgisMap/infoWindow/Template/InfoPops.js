@@ -43,7 +43,7 @@ class InfoPops extends PureComponent {
         <div className={styles.close} onClick={this.handleClick}>x</div>
         <div
           className={styles.bottom}
-          style={{ left: '50%',
+          style={{ left: '52%',
                     bottom: -16 }}
         />
       </div>

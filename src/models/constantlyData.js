@@ -3,7 +3,7 @@ import { lineData, getSelctData } from '../utils/Panel';
 import { addDoorIcon, envMap } from '../utils/mapService';
 import {
   getGuardCounting, getGuardDoorCounting, getConditionCalc, findByTime, getAllNewsData, getNewsData, getNewsDataByGroup, getNewsDataByCtrlResourceType,
-  getHotFurnaceRunDay, getAlternatorRunDay, getDissociationRunDay, resourceTreeByCtrlType,
+  getHotFurnaceRunDay, getAlternatorRunDay, getDissociationRunDay, resourceTreeByCtrlType, getA9AndB9,
 } from '../services/api';
 import { constantlyModal, constantlyPanelModal, constantlyConditionCalc } from '../services/constantlyModal';
 import { mapConstants } from '../services/mapConstant';
@@ -153,8 +153,23 @@ export default {
     },
     // 设备监测实时值
     *getDeviceMonitorData({ payload }, { call }) {
-      const resourceInfos = yield call(resourceTreeByCtrlType, { ctrlType: payload.ctrlResourceType });
+      const { ctrlResourceType } = payload;
+
+      const resourceInfos = yield call(resourceTreeByCtrlType, { ctrlType: ctrlResourceType });
       const response = yield call(getAllNewsData, payload);
+      if (ctrlResourceType === '103.102.102') {
+        const { data } = yield call(getA9AndB9);
+        const newData = [];
+        for (const item of data) {
+          const obj1 = { ...item }; obj1.dataTypeName = 'COT'; obj1.value = item.cot;
+          const res = resourceInfos.data.find(value => obj1.dissociationName.indexOf(value.processNumber) !== -1);
+          obj1.gISCode = res ? res.gISCode : ''; obj1.resResourceInfo = res; obj1.meterUnit = '℃'; obj1.processNumber = res ? res.processNumber : '';
+          const obj2 = { ...item }; obj2.dataTypeName = '运行负荷'; obj2.value = Number(item.loadValue) * 1000;
+          obj2.gISCode = res ? res.gISCode : ''; obj2.resResourceInfo = res; obj2.meterUnit = 't/h'; obj2.processNumber = res ? res.processNumber : '';
+          newData.push(obj1, obj2);
+        }
+        response.data.push(...newData);
+      }
       const newData = [];
       for (const item of resourceInfos.data) {
         const data = response.data.filter(value => value.gISCode === item.gISCode);
@@ -168,6 +183,8 @@ export default {
         }
       }
       let runDayUrl;
+      const yesterday = new Date();// 获取当前时间
+      yesterday.setDate(yesterday.getDate() - 1);// 设置天数 -1 天
       switch (payload.selectRunDay) {
         case 'proRptAlternatorInfo':
           runDayUrl = getAlternatorRunDay;
@@ -181,7 +198,7 @@ export default {
         default: break;
       }
       // 运行天数,同时更新实时数据
-      const runDayData = yield call(runDayUrl, { date: new Date().getTime() });
+      const runDayData = yield call(runDayUrl, { date: yesterday.getTime() });
       if (constantlyModal[payload.ctrlResourceType] === undefined) {
         constantlyModal[payload.ctrlResourceType] = {};
         constantlyModal[payload.ctrlResourceType].data = newData;

@@ -7,7 +7,7 @@ export default class Developing extends PureComponent {
       <div style={{ marginLeft: '2%', width: '96%' }}>
         {/* <Row> */}
         {/* <Col gutter={1} span={20}> */}
-        <h2 style={{ textAlign: 'center', margin: 40 }}>功能开发中。。。。。。</h2>
+        <h2 style={{ textAlign: 'center', margin: 40, color: '#fff' }}>功能开发中。。。。。。</h2>
         <Skeleton avatar paragraph={{ rows: 4 }} active />
           <Skeleton avatar paragraph={{ rows: 4 }} active />
         {/* </Col> */}
