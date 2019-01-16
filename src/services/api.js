@@ -1,6 +1,6 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
-import jsonpFetch from '../utils/jsonpRequest';
+// import jsonpFetch from '../utils/jsonpRequest';
 import downLoad from '../utils/downLoad';
 
 const path = '/emgc';
@@ -578,13 +578,13 @@ export async function updateTemplate(params) {
   });
 }
 
-export async function videoCtrl(params) {
-  // return request('/api/Service/Notify', {
-  //   method: 'POST',
-  //   body: params,
-  // }, { needParam: false });
-  return jsonpFetch(params);
-}
+// export async function videoCtrl(params) {
+//   // return request('/api/Service/Notify', {
+//   //   method: 'POST',
+//   //   body: params,
+//   // }, { needParam: false });
+//   return jsonpFetch(params);
+// }
 export async function test(params) {
   return request('http://127.0.0.1:4000/resource/resourceTree/getByParentTree', {
     method: 'POST',

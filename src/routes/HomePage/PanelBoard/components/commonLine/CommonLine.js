@@ -94,7 +94,6 @@ class CommonLine extends PureComponent {
     const allDv = [];
     if (newData.length > 0) {
       const ds = new DataSet();
-      console.log('newData[0]', newData[0]);
       if (newData[0] && newData[0][0]) {
         for (const item of newData.entries()) {
           debugger;

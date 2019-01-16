@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Popconfirm, Checkbox, Icon, Form, Input } from 'antd';
+import { Table, Tabs, Card, Divider, Button, Row, Col, Popconfirm, Checkbox, Form, Input } from 'antd';
 import { connect } from 'dva';
 import Zmage from 'react-zmage';
-import moment from 'moment';
-
 import styles from './index.less';
 import { commandType } from '../../../utils/utils';
 
-const Option = Select.Option;
 const FormItem = Form.Item;
-const { Meta } = Card;
 const { TabPane } = Tabs;
 const FeatureTitle = ({ onCheckboxFeature }) => {
   return (
@@ -37,20 +33,9 @@ const FeatureTitle = ({ onCheckboxFeature }) => {
 }))
 export default class PlanInfo extends PureComponent {
   state = {
-    planVisible: false, // 新增预案的弹窗是否打开
-    featureVisible: false, // 事件特征的弹窗是否打开
-    commandVisible: false, // 应急指令弹窗是否打开
-    resourceVisible: false, // 应急资源弹窗是否打开
-    annexVisible: false, // 预案附件弹窗是否打开
     isAdd: true, // 弹窗是否新增 false为修改状态
-    isDelete: false, // 是否删除事件特征里的特征
-    panRedirectFeatureID: null, // 主键id
-    featureID: null, //  编辑第一次时候，特征id
-    codeToggle: true, // 判断字段是否可用，是否可以提交
-    uploadType: 1, // uploadType:1 为组织、2为附件、3为处置卡
   };
   componentDidMount() {
-    const { eventID } = this.props;
     this.props.dispatch({
       type: 'user/currentUser',
     });
@@ -151,12 +136,9 @@ export default class PlanInfo extends PureComponent {
     });
   };
   render() {
-    const { isEdit, planResource, planCommand,
-      eventFeature, planCommandInfo, resourceInfo, hideFooter, form,
-    } = this.props;
+    const { isEdit, planResource, planCommand, form,} = this.props;
     // 新加参数
     const { planBasicInfo, eventFeatures } = this.props.planManagement;
-    const { isAdd } = this.state;
     // 实施方案 基本信息表头
     const columns = [
       {
@@ -242,6 +224,13 @@ export default class PlanInfo extends PureComponent {
         dataIndex: 'featureValue',
         width: 80,
         key: 'featureValue',
+        render: (text) => {
+          switch (text) {
+            case 'false': return '否';
+            case 'true': return '是';
+            default: return text;
+          }
+        },
       }, {
         title: '单位',
         dataIndex: 'featureUnit',
@@ -619,8 +608,7 @@ export default class PlanInfo extends PureComponent {
                         </Card>
                       </Col>
                     );
-                  })
-                  }
+                  })}
                 </Row>
               </div>
             </Card>

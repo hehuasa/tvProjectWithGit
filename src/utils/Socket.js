@@ -5,8 +5,8 @@ const Socket = ({ onmessage, currentUser, parent }) => {
   if (window.serviceUrl.socketUrl !== '') {
     const id = (Math.ceil(currentUser.baseUserInfo.userID * Math.random() * 100 * Math.random() * 10));
     // return new Sockette(`${window.serviceUrl.socketUrl}websocket?${id}`, {
-    // const socket = new WebSocket(`${window.serviceUrl.socketUrl}websocket?${id}`);
-    const socket = new WebSocket('ws://192.168.0.6:10048/websocket');
+    const socket = new WebSocket(`${window.serviceUrl.socketUrl}websocket?${id}`);
+    // const socket = new WebSocket('ws://192.168.0.6:10048/websocket');
     socket.onmessage = (message) => {
       // console.log('socketMessage', message);
       const { data } = message;

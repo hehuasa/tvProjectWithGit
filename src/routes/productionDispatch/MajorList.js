@@ -6,7 +6,7 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import { DndTable } from './DndTable';
 import { commonData } from '../../../mock/commonData';
 import styles from './majorList.less';
-import { win16, win20, win8, win10, win3 } from '../../configIndex';
+import { win16, win20, win8, win10, win3 } from '../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -513,17 +513,6 @@ export default class MajorList extends PureComponent {
     const { modalVisible, isAdd, clickRow, statuData, dataSource, pagination, sorting } = this.state;
     const { data } = dataSource;
     const columns = [
-      // {
-      //   title: '序号',
-      //   dataIndex: 'sortIndex',
-      //   width: 80,
-      //   render: (text, b, c) => {
-      //     console.log('text', text);
-      //     console.log('b', b);
-      //     console.log('c', c);
-      //     return text
-      //   },
-      // },
       {
         title: '标题名称',
         dataIndex: 'title',

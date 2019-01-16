@@ -7,19 +7,7 @@ const Option = Select.Option;
 const FormItem = Form.Item;
 const { TreeNode } = TreeSelect;
 const { TextArea } = Input;
-
 let timeout;
-
-const planStatu = [{
-  name: '启用',
-  key: 0,
-}, {
-  name: '停用',
-  key: 1,
-}, {
-  name: '草稿',
-  key: 3,
-}];
 
 @connect(({ planManagement, organization }) => ({
   planLevelList: planManagement.planLevelData,

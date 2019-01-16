@@ -64,6 +64,9 @@ export default class RawInfoTrend extends PureComponent {
             data={newData0}
             scale={cols}
             forceFit
+            onGetG2Instance={g2Chart => {
+              console.log("g2Chart", g2Chart);
+            }}
           >
             <Legend />
             <Axis

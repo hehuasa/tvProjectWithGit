@@ -7,11 +7,11 @@ const columns = [{
   key: 'serialNumber',
 },
 {
-  title: '作业区域',
-  dataIndex: 'area',
-  key: 'area',
+  title: '作业部门',
+  dataIndex: 'org',
+  key: 'org',
   render: (value) => {
-    return value.areaName;
+    return value.orgName;
   },
 }, {
   title: '作业类型',
@@ -24,7 +24,7 @@ const switchData = (data) => {
   const array = [];
   for (const item of data) {
     for (const item1 of item.data) {
-      item1.area = item.area;
+      item1.org = item.org;
       array.push(item1);
     }
   }

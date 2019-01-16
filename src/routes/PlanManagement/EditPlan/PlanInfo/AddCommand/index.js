@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Row, Col, Modal, Form, Input, Select, TreeSelect } from 'antd';
+import { Row, Col, Modal, Form, Input, Select } from 'antd';
 import { connect } from 'dva';
 import styles from './index.less';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-const { TreeNode } = TreeSelect;
 const Option = Select.Option;
 @Form.create()
 @connect(({ planManagement, emergency }) => ({

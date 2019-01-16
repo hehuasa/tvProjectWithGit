@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Button, Icon, Modal, Form, Input, Upload, message } from 'antd';
-import styles from './index.less';
 
-const FormItem = Form.Item;
-const { TextArea } = Input;
 @connect(({ planManagement }) => ({
   planBasicInfo: planManagement.planBasicInfo,
   annexPage: planManagement.annexPage,

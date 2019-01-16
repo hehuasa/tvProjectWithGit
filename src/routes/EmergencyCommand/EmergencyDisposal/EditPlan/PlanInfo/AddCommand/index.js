@@ -3,8 +3,12 @@ import { Row, Col, Modal, Form, Input, Select, TreeSelect, Card, Table, Button }
 import { connect } from 'dva';
 import styles from './index.less';
 import { commandType } from '../../../../../../utils/utils';
+<<<<<<< HEAD
 import { commonData } from '../../../../../../../mock/commonData';
+import { win3, win12, win10, win20 } from '../../../../../../utils/configIndex';
+=======
 import { win3, win12, win10, win20 } from '../../../../../../configIndex';
+>>>>>>> 696be26b5790ebd003139803f0a7cd8be2c0cded
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

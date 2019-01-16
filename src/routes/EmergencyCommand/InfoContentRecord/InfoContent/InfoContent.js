@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Form, Button, Row, Col, Input, Icon, message } from 'antd';
+import { Form, Row, Col, Input, Icon, message } from 'antd';
 import { commonData } from '../../../../../mock/commonData';
 import HandAlarmDeal from './HandAlarmDeal';
 import AddTemplate from './AddTemplate';
-import AddEventFeature from './AddEventFeature';
 
 import styles from './InfoContent.less';
 
@@ -20,7 +19,6 @@ export default class InfoContent extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       // 展示特征 或 查询
       showFeature: true,
       // 搜索框值
@@ -44,7 +42,6 @@ export default class InfoContent extends PureComponent {
     //   type: 'emergency/queryInfoContent',
     // })
   }
-  // del
   onDelFeature = (id) => {
     this.props.dispatch({
       type: 'emergency/delEventFeatures',
@@ -154,7 +151,7 @@ export default class InfoContent extends PureComponent {
           template.postion = fieldsValue.location[i];
           template.injured = fieldsValue.injured[i];
           template.death = fieldsValue.deaths[i];
-          template.reportUserId = fieldsValue.reportUserID[i];
+          template.reportUserId = fieldsValue.reportUserId[i];
           template.reportUserName = fieldsValue.reportUserName[i];
           template.recordTime = fieldsValue.recordTime[i];
           fieldsValue.shangwan.push(JSON.parse(JSON.stringify(template)));

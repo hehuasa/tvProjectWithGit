@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
+import { getDatesData } from './unit';
 import styles from './index.less';
 
 const cols = {
@@ -17,19 +18,6 @@ const cols = {
     tickCount: 6,
   },
 };
-const getDatesData = (dateTimes) => {
-  const array = [];
-  const days = Number(moment(dateTimes).daysInMonth()); // 本月有多少天
-  let index = 0;
-  let day = moment(dateTimes).endOf('month');
-  while (index < days) {
-    day = moment(day).subtract(1, 'days');
-    array.push(day.format('l'));
-    index += 1;
-  }
-  return array;
-};
-
 const transData = (data, dateTimes) => {
   const newData = [];
   const array = getDatesData(dateTimes);

@@ -27,7 +27,6 @@ import HomePageVideo from '../routes/HomePage/Video/HomePageVideo';
 import TriggerRight from '../routes/HomePage/Collapsed/TriggerRight';
 import PanelBoard from '../routes/HomePage/PanelBoard/index';
 import PanelZoom from '../routes/HomePage/PanelBoard/PanelZoom';
-// import OftenResourceTree from '../routes/OftenResourceTree';
 import CommonResourceTree from '../routes/CommonResourceTree';
 import DrpScreen from '../routes/DrpScreen/DrpScreen';
 import TextCarousel from '../routes/TextCarousel/TextCarousel';
@@ -120,6 +119,7 @@ class BasicLayout extends React.PureComponent {
     breadcrumbNameMap: PropTypes.object,
   };
   state = {
+    chartReRender: false,
     isMobile,
     leftCollapsed: false,
     visible: true,
@@ -209,7 +209,8 @@ class BasicLayout extends React.PureComponent {
       payload: type,
     });
   };
-  handleTabClick = (key) => {
+  handleTabClick = (key, a, b, c) => {
+
     const { video, videoFooterHeight, dispatch, rightCollapsed, accessControlShow } = this.props;
     const { position } = video;
     const { view, accessInfoExtent } = mapConstants;
@@ -238,6 +239,13 @@ class BasicLayout extends React.PureComponent {
         changeVideoSize(videoFooterHeight, dispatch, 'show');
         resetAccessStyle(accessControlShow, dispatch, accessInfoExtent);
       }
+    }
+
+    // 图表重新渲染
+    if (key === '/productionDispatch/rawInfo') {
+      this.setState({
+        chartReRender: !this.state.chartReRender,
+      });
     }
   };
   onClickSpeed = (key) => {
@@ -934,7 +942,7 @@ class BasicLayout extends React.PureComponent {
       map,
       accessControlShow,
     } = this.props;
-    const { showDrpScreen } = this.state;
+    const { showDrpScreen, chartReRender } = this.state;
     const { view } = mapConstants;
     const handleClick = () => {
       this.props.dispatch({
@@ -1036,7 +1044,6 @@ class BasicLayout extends React.PureComponent {
                       onTabClick={this.handleTabClick}
                       activeKey={tabs.activeKey}
                       className={styles['tabs-row']}
-                      // style={{ height: contentHeight }}
                       hideAdd
                     >
                       {tabs.tabs.map((item) => {
@@ -1047,7 +1054,7 @@ class BasicLayout extends React.PureComponent {
                                           { Comp !== null ? (
                                             <Route
                                               path="/"
-                                              render={props => <Comp {...props} functionInfo={item.functionInfo} title={item.title} />}
+                                              render={props => <Comp {...props} functionInfo={item.functionInfo} title={item.title} chartReRender={chartReRender} />}
                                             />
 ) :
                                             <Developing />}

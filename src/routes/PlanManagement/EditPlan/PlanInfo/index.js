@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import { Select, Table, Tabs, Card, Divider, Button, Row, Col, Popconfirm, Checkbox, Icon, Form, Input, Modal, Upload } from 'antd';
 import { connect } from 'dva';
 import Zmage from 'react-zmage';
-import moment from 'moment';
-
 import AddPlan from './AddPlan/AddPlan';
 import AddFeature from './AddFeature/index';
 import AddCommand from './AddCommand/index';
@@ -13,9 +11,7 @@ import Footer from './Footer/index';
 import styles from './index.less';
 import { commandType } from '../../../../utils/utils';
 
-const Option = Select.Option;
 const FormItem = Form.Item;
-const { Meta } = Card;
 const { TabPane } = Tabs;
 const FeatureTitle = ({ onCheckboxFeature }) => {
   return (
@@ -766,6 +762,13 @@ export default class PlanInfo extends PureComponent {
         dataIndex: 'featureValue',
         width: 80,
         key: 'featureValue',
+        render: (text) => {
+          switch (text) {
+            case 'false': return '否';
+            case 'true': return '是';
+            default: return text;
+          }
+        },
       }, {
         title: '单位',
         dataIndex: 'featureUnit',

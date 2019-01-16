@@ -1,6 +1,5 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
 import { Form, Row, Col, TreeSelect, Input, Card, Icon, InputNumber, Button } from 'antd';
 import styles from './index.less';
 import SelectMaterial from '../SelectMaterial/index';
@@ -8,7 +7,6 @@ import { getUUID } from '../../../utils/utils';
 
 const { TreeNode } = TreeSelect;
 const FormItem = Form.Item;
-const Search = Input.Search;
 @connect(({ drillManage, typeCode, organization }) => ({
   drillPage: drillManage.drillPage,
   orgList: drillManage.orgList,

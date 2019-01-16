@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Tabs, Button, Popconfirm, message, Card } from 'antd';
+import { Tabs, Button, Popconfirm, Card } from 'antd';
 
 import InfoContent from './InfoContent/InfoContent';
 import InfoRecord from './InfoRecord/InfoRecord';

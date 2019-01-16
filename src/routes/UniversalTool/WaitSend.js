@@ -1,34 +1,20 @@
-import React, {PureComponent, Fragment} from 'react';
-import {connect} from 'dva';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Select,
-  Icon,
-  Button,
-  Dropdown,
-  Menu,
-  Modal,
-  Divider,
-  Popconfirm,
-} from 'antd';
+import React, { PureComponent, Fragment } from 'react';
+import { connect } from 'dva';
+import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, Modal, Divider } from 'antd';
 import StandardTable from '../../components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './TableList.less';
-import {commonData} from '../../../mock/commonData';
+import { commonData } from '../../../mock/commonData';
 
 const FormItem = Form.Item;
-const {TextArea} = Input;
-const {Option} = Select;
+const { TextArea } = Input;
+const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
 // 新增 修改页
 const CreateForm = Form.create()((props) => {
-  const {modalVisible, form, handleAdd, handleModalVisible} = props;
-  const {sends, templateList, isAdd, list} = props;
+  const { modalVisible, form, handleAdd, handleModalVisible } = props;
+  const { sends, templateList, isAdd, list } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -53,19 +39,19 @@ const CreateForm = Form.create()((props) => {
             initialValue: isAdd ? '' : sends.shortMsgID,
             rules: [],
           })(
-            <Input type="hidden"/>
+            <Input type="hidden" />
           )}
         </FormItem>
         <FormItem
           label="短信模板"
-          labelCol={{span: 5}}
-          wrapperCol={{span: 12}}
+          labelCol={{ span: 5 }}
+          wrapperCol={{ span: 12 }}
         >
           {form.getFieldDecorator('gender', {
             initialValue: isAdd ? '' : '',
-            rules: [{required: true, message: '短信模板不能为空'}],
+            rules: [{ required: true, message: '短信模板不能为空' }],
           })(
-            <Select placeholder="请选择" style={{width: '100%'}}>
+            <Select placeholder="请选择" style={{ width: '100%' }}>
               <Option value="">请选择</Option>
               {templateList.map(type => (
                 <Option
@@ -80,14 +66,14 @@ const CreateForm = Form.create()((props) => {
         </FormItem>
         <FormItem
           label="接收人"
-          labelCol={{span: 5}}
-          wrapperCol={{span: 12}}
+          labelCol={{ span: 5 }}
+          wrapperCol={{ span: 12 }}
         >
           {form.getFieldDecorator('acceptNumber', {
             initialValue: isAdd ? '' : '',
-            rules: [{required: true, message: '该用户没有电话号码'}],
+            rules: [{ required: true, message: '该用户没有电话号码' }],
           })(
-            <Select placeholder="请选择" style={{width: '100%'}}>
+            <Select placeholder="请选择" style={{ width: '100%' }}>
               <Option value="">请选择</Option>
               {list.map(type => (
                 <Option
@@ -102,14 +88,14 @@ const CreateForm = Form.create()((props) => {
         </FormItem>
         <FormItem
           label="短信内容"
-          labelCol={{span: 5}}
-          wrapperCol={{span: 12}}
+          labelCol={{ span: 5 }}
+          wrapperCol={{ span: 12 }}
         >
           {form.getFieldDecorator('msgContent', {
             initialValue: isAdd ? '' : sends.msgContent,
-            rules: [{required: true, message: '短信内容不能为空'}],
+            rules: [{ required: true, message: '短信内容不能为空' }],
           })(
-            <TextArea/>
+            <TextArea />
           )}
         </FormItem>
       </Form>
@@ -117,7 +103,7 @@ const CreateForm = Form.create()((props) => {
   );
 });
 
-@connect(({template, userList, sendMsg}) => ({
+@connect(({ template, userList, sendMsg }) => ({
   template,
   userList,
   sendMsg,
@@ -136,7 +122,7 @@ export default class TableList extends PureComponent {
   };
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     // 请求搜索的账户类型
     dispatch({
       type: 'template/fetch',
@@ -156,7 +142,7 @@ export default class TableList extends PureComponent {
 
   // 获取分页数据
   page = (page) => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'sendMsg/page',
       payload: page,
@@ -179,7 +165,7 @@ export default class TableList extends PureComponent {
         return (
           <Fragment>
             <a href="javascript: void(0)" onClick={() => this.update(record)}>修改</a>
-            <Divider type="vertical"/>
+            <Divider type="vertical" />
             <a href="javascript: void(0)" onClick={() => this.send(record)}>发送</a>
           </Fragment>
         );
@@ -189,11 +175,11 @@ export default class TableList extends PureComponent {
   };
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const filters = Object.keys(filtersArg).reduce((obj, key) => {
-      const newObj = {...obj};
+      const newObj = { ...obj };
       newObj[key] = getValue(filtersArg[key]);
       return newObj;
     }, {});
@@ -206,8 +192,8 @@ export default class TableList extends PureComponent {
     };
     if (sorter.field) {
       // params.sorter = `${sorter.field}_${sorter.order}`;
-      const {field, order} = sorter;
-      params.sorter = {field, order};
+      const { field, order } = sorter;
+      params.sorter = { field, order };
     }
 
     dispatch({
@@ -217,7 +203,7 @@ export default class TableList extends PureComponent {
   };
   // 重置搜索条件
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -243,7 +229,7 @@ export default class TableList extends PureComponent {
   // 搜索函数
   handleSearch = (e) => {
     e.preventDefault();
-    const {form} = this.props;
+    const { form } = this.props;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       const values = {
@@ -346,20 +332,20 @@ export default class TableList extends PureComponent {
     delete record.createTime;
     this.props.dispatch({
       type: 'sendMsg/sendMsgs',
-      payload: {...record, createTimes},
+      payload: { ...record, createTimes },
     });
   }
 
   renderSimpleForm() {
-    const {getFieldDecorator} = this.props.form;
-    const {templateList} = this.props.template;
+    const { getFieldDecorator } = this.props.form;
+    const { templateList } = this.props.template;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="短信模板">
               {getFieldDecorator('userType')(
-                <Select placeholder="请选择" style={{width: '100%'}}>
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="">请选择</Option>
                   {templateList.map(type => (
                     <Option
@@ -375,9 +361,9 @@ export default class TableList extends PureComponent {
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">查询</Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>重置</Button>
-              <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-                展开 <Icon type="down"/>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
+              <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                展开 <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -387,21 +373,21 @@ export default class TableList extends PureComponent {
   }
 
   renderAdvancedForm() {
-    const {getFieldDecorator} = this.props.form;
-    const {templateList} = this.props.template;
+    const { getFieldDecorator } = this.props.form;
+    const { templateList } = this.props.template;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem
               label="短信模板"
-              labelCol={{span: 5}}
-              wrapperCol={{span: 12}}
+              labelCol={{ span: 5 }}
+              wrapperCol={{ span: 12 }}
             >
               {getFieldDecorator('gender', {
-                rules: [{required: true, message: '短信模板不能为空'}],
+                rules: [{ required: true, message: '短信模板不能为空' }],
               })(
-                <Select placeholder="请选择" style={{width: '100%'}}>
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="">请选择</Option>
                   {templateList.map(type => (
                     <Option
@@ -416,12 +402,12 @@ export default class TableList extends PureComponent {
             </FormItem>
           </Col>
         </Row>
-        <div style={{overflow: 'hidden'}}>
-          <span style={{float: 'right', marginBottom: 24}}>
+        <div style={{ overflow: 'hidden' }}>
+          <span style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">查询</Button>
-            <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>重置</Button>
-            <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-              收起 <Icon type="up"/>
+            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
+            <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+              收起 <Icon type="up" />
             </a>
           </span>
         </div>
@@ -434,10 +420,10 @@ export default class TableList extends PureComponent {
   }
 
   render() {
-    const {loading, sendMsg: {data}, sendMsg: {sends}} = this.props;
-    const {templateList} = this.props.template;
-    const {list} = this.props.userList;
-    const {selectedRows, modalVisible} = this.state;
+    const { loading, sendMsg: { data }, sendMsg: { sends } } = this.props;
+    const { templateList } = this.props.template;
+    const { list } = this.props.userList;
+    const { selectedRows, modalVisible } = this.state;
     const columns = this.initData();
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
@@ -471,7 +457,7 @@ export default class TableList extends PureComponent {
                     <Button onClick={() => this.deleteAll()}>批量删除</Button>
                     <Dropdown overlay={menu}>
                       <Button>
-                        更多操作 <Icon type="down"/>
+                        更多操作 <Icon type="down" />
                       </Button>
                     </Dropdown>
                   </span>

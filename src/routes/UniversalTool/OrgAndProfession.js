@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Card, Select, Tabs, Radio, Divider } from 'antd';
-import styles from './index.less';
+import { Form, Tabs, Radio, Divider } from 'antd';
 
-const FormItem = Form.Item;
-const { Option } = Select;
-const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
 const RadioGroup = Radio.Group;
 
@@ -14,12 +10,7 @@ const RadioGroup = Radio.Group;
 }))
 @Form.create()
 export default class OrgAndProfession extends PureComponent {
-  componentDidMount() {
-    const { dispatch } = this.props;
-  }
-
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
       <div>
         <Tabs defaultActiveKey="1">

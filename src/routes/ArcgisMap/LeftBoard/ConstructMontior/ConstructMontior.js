@@ -67,7 +67,7 @@ export default class ConstructMontior extends PureComponent {
         <div className={styles.header}>
           <div className={styles.name}>{`${list.list[0].baseOrganization.orgnizationName}作业监控`}</div>
           <div className={styles.close}>
-            <div onClick={this.handleClick}><img src={close} alt="关闭" /></div>
+            <div className={styles.button} onClick={this.handleClick}><img src={close} alt="关闭" /></div>
           </div>
         </div>
         <Scrollbars
@@ -106,7 +106,7 @@ export default class ConstructMontior extends PureComponent {
           </div>
         </Scrollbars>
         <div className={styles.btn}>
-          <Button size="small" onClick={this.openBoard}>打开看板</Button>
+          <Button htmlType="button" size="small" onClick={this.openBoard}>打开看板</Button>
         </div>
       </div>
     ) : <div />;

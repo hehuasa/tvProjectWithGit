@@ -17,9 +17,6 @@ const RadioGroup = Radio.Group;
 }))
 @Form.create()
 export default class SelectResource extends PureComponent {
-  state = {
-    selectedRow: {},
-  };
   componentDidMount() {
     // 请求区域
     this.props.dispatch({

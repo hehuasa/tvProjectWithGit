@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Table, Form, Input, Card, Row, Col, Button, Select } from 'antd';
-import styles from "./index.less";
+import styles from './index.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;

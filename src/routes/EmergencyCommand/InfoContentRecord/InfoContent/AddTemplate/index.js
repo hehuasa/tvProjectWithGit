@@ -41,20 +41,6 @@ const columns = [{
   width: win12,
 }];
 
-// const formItemLayout = {
-//   labelCol: { span: 8 },
-//   wrapperCol: { span: 10 },
-// };
-// const withOutLabel = {
-//   wrapperCol: { span: 8, offset: 10 },
-// };
-const formItemLayout1 = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-// const withOutLabel1 = {
-//   wrapperCol: { span: 6, offset: 6 },
-// };
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
@@ -75,7 +61,6 @@ export default class AddTemplate extends PureComponent {
     sumDeaths: null, // 死亡人数
     selectedRows: [], // 选择的数据
     key: null, // 选择的那个放大镜的input的id
-    searchPerson: null, // 查询输入值
     rowSelection: {
       type: 'radio',
       onChange: (selectedRowKeys, selectedRows) => {
@@ -95,25 +80,6 @@ export default class AddTemplate extends PureComponent {
       },
     });
   }
-  // componentWillUpdate() {
-  // const { getFieldDecorator, getFieldValue, setFieldsValue } = this.props.form;
-  // const { emergency, isHidden } = this.props;
-  // const casualtiesData = this.props.casualtiesData || [];
-  // const valueKeys = [0];
-  // casualtiesData.map((item, index) => {
-  //   if (index !== 0) {
-  //     valueKeys.push(index);
-  //   }
-  // });
-  // const keys = getFieldValue('keys');
-  // console.log(111, keys, valueKeys)
-  // if (keys.length < valueKeys.length) {
-  //   setFieldsValue({
-  //     keys: valueKeys,
-  //   });
-  // }
-  // }
-
   // 选择查询
   onSearchUser = (value, key) => {
     this.props.dispatch({
@@ -227,7 +193,6 @@ export default class AddTemplate extends PureComponent {
   onChangeInjured = (e) => {
     if (Number(e.target.value) || Number(e.target.value) === 0) {
       const { form } = this.props;
-      const injured = form.getFieldsValue().injured;
       const str = e.target.id;
       const index = Number(str.slice(str.indexOf('[') + 1, str.indexOf(']')));
       let sumSnjured = 0;
@@ -247,7 +212,6 @@ export default class AddTemplate extends PureComponent {
   onChangeDeath = (e) => {
     if (Number(e.target.value) || Number(e.target.value) === 0) {
       const { form } = this.props;
-      const deaths = form.getFieldsValue().deaths;
       const str = e.target.id;
       const index = Number(str.slice(str.indexOf('[') + 1, str.indexOf(']')));
       let sumDeaths = 0;
@@ -265,7 +229,7 @@ export default class AddTemplate extends PureComponent {
   }
 
   render() {
-    const { getFieldDecorator, getFieldValue, setFieldsValue } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
     const { emergency, isHidden, isDisabled } = this.props;
     const casualtiesData = this.props.casualtiesData || [];
     const valueKeys = [0];
@@ -299,10 +263,9 @@ export default class AddTemplate extends PureComponent {
               placeholder="已有数据id"
             />
           )}
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={5}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout
               label="伤亡位置"
               required={false}
             >
@@ -314,10 +277,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="受伤人数"
               required={false}
             >
@@ -336,10 +298,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="死亡人数"
               required={false}
             >
@@ -376,10 +337,9 @@ export default class AddTemplate extends PureComponent {
               placeholder="选择报告人"
             />
           )}
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="报告人"
               required={false}
             >
@@ -395,10 +355,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={8} lg={3}>
             <FormItem
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
+              formItemLayout1
               label="电话"
               required={false}
             >
@@ -412,10 +371,9 @@ export default class AddTemplate extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col sm={12} md={7}>
+          <Col sm={12} md={8} lg={6} >
             <FormItem
-              labelCol={{ span: 9 }}
-              wrapperCol={{ span: 15 }}
+              formItemLayout1
               label="时间"
               required={false}
               style={{ width: '100%' }}
@@ -472,7 +430,7 @@ export default class AddTemplate extends PureComponent {
           {
             isHidden ? (
               <Row>
-                <Col span={24}>
+                <Col span={5}>
                   总共受伤：{this.state.sumSnjured || injuredSum} {' '}总共死亡：{this.state.sumDeaths || deathSum}
                 </Col>
               </Row>
@@ -482,7 +440,7 @@ export default class AddTemplate extends PureComponent {
             {formItems}
           </div>
           <FormItem {...formItemLayoutWithOutLabel}>
-            {this.props.hiddenAddButton ? null : (
+            { this.props.hiddenAddButton ? null : (
               <Button
                 type="dashed"
                 onClick={this.add}

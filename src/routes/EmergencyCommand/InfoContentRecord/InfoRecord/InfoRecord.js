@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Form, Tabs, Button, Row, Col, Input, Icon, Card, Table } from 'antd';
+import { Tabs, Card, Table } from 'antd';
 import EventContent from './EventContent';
 import Casualties from './Casualties';
 import styles from './InfoRecord.less';
-import { emgcIntervalInfo } from "../../../../services/constantlyData";
+import { emgcIntervalInfo } from '../../../../services/constantlyData';
 
 const { TabPane } = Tabs;
 const columns = [{
@@ -86,4 +86,3 @@ export default class InfoRecord extends PureComponent {
     );
   }
 }
-// type="card"

@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Form, Tabs, Button, Steps, Select } from 'antd';
+import { Form, Tabs, Button, Steps } from 'antd';
 import { connect } from 'dva';
-import rightCicle from '../../../../assets/emergency/right-cicle.png';
-import rightCicleActive from '../../../../assets/emergency/right-cicle-active.png';
 import Expand from './Expand';
 import SelectPlan from '../SelectPlan/index';
 import EditPlan from '../EditPlan/index';

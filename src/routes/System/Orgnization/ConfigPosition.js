@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Radio, Form, Input, Row, Col, Button, Icon, Select, Card, Table, TreeSelect } from 'antd';
+import { Radio, Form, Input, Row, Col, Button, Card, Table, TreeSelect } from 'antd';
 import { connect } from 'dva';
 import styles from './Organization.less';
-import { commonData } from '../../../../mock/commonData';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;

@@ -6,11 +6,11 @@ import ReactFitText from 'react-fittext';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import autoHeight from '../autoHeight';
-
 import styles from './index.less';
 
 const { DataView } = new window.DataSet();
 /* eslint react/no-danger:0 */
+const { DataView } = new window.DataSet();
 @autoHeight()
 export default class Pie extends Component {
   state = {

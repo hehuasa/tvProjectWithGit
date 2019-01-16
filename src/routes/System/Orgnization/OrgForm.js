@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Tree, Form, Input, Row, Col, Button, Icon, Select, Radio } from 'antd';
-import { connect } from 'dva';
+import { Form, Input, Row, Col, Button, Select, Radio } from 'antd';
 import styles from './Organization.less';
 
 const FormItem = Form.Item;

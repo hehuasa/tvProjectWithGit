@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Form, Button, Row, Col, Input, Modal, Table, Select, message, Icon, } from 'antd';
+import { Form, Button, Row, Col, Input, Select, Icon } from 'antd';
 import styles from './reportTemplate.less';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 const data = [
@@ -8,30 +9,17 @@ const data = [
   { name: '事件2', entEmgcRFID: 2 },
   { name: '事件3', entEmgcRFID: 3 },
   { name: '事件4', entEmgcRFID: 4 },
-]
+];
 
 @Form.create()
 export default class ReportTemplate extends PureComponent {
-
-  //选择类型
+  // 选择类型
   onHandleChange = (value) => {
     console.log(`selected ${value}`);
   }
   // del
   onDelFeature = (id) => {
-    console.log(id)
-    // this.props.dispatch({
-    //   type: 'emergency/delEventFeatures',
-    //   payload: {
-    //     id: id.target.dataset.type,
-    //     eventID: this.props.emergency.eventId,
-    //   },
-    // }).then(() => {
-    //   message.success('删除成功');
-    // })
-  }
-  //add
-  onAddEvent = (id) => {
+    console.log(id);
     // this.props.dispatch({
     //   type: 'emergency/delEventFeatures',
     //   payload: {
@@ -144,12 +132,15 @@ export default class ReportTemplate extends PureComponent {
                     <Input
                       disabled
                       addonAfter={
-                        <Icon type="close"
+                        <Icon
+                          type="close"
                           className={styles.cursor}
                           onClick={this.onDelFeature}
                           data-type={item.entEmgcRFID}
                         />
-                      } placeholder="请输入事件名称" />
+                      }
+                      placeholder="请输入事件名称"
+                    />
                   </Col>
                 )
               )
@@ -161,6 +152,6 @@ export default class ReportTemplate extends PureComponent {
         </div>
 
       </div>
-    )
+    );
   }
-};
+}

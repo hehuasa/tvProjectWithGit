@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Button, Icon, Modal, Form, Input, Upload } from 'antd';
-import styles from './index.less';
+import { Button, Icon, Modal, Form, Upload } from 'antd';
 
-const FormItem = Form.Item;
-const { TextArea } = Input;
 @Form.create()
 export default class AddFeature extends PureComponent {
   render() {
-    const { add, handleCancel, visible, form } = this.props;
+    const { add, handleCancel, visible } = this.props;
     const props = {
       action: '//jsonplaceholder.typicode.com/posts/',
       listType: 'picture',

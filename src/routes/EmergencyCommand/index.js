@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Steps, Icon, Button } from 'antd';
 import EmergencyProcess from './EmergencyProcess/index';
 import InfoJudgment from './InfoJudgment/index';
 import EmergencyStart from './EmergencyStart/index';

@@ -1,27 +1,21 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import moment from 'moment';
 import Scrollbars from 'react-custom-scrollbars';
-import { Table, Select, Row, Col, DatePicker } from 'antd';
-import { bgColor, progressColor } from '../../DailyProduction/color/color';
+import { Table } from 'antd';
 import styles from '../../DailyProduction/index.less';
-import { win8, win16, win15, win45, win3 } from '../../../configIndex';
+import { win8, win16, win15, win45, win3 } from '../../../utils/configIndex';
 
 const columns = [
-  { title: '序号', width: win8, dataIndex: 'index', key: 'index' },
-  { title: '接口名', width: win16, dataIndex: 'pluginCaption', key: 'pluginCaption' },
-  { title: '接口编码', width: win15, dataIndex: 'pluginCode', key: 'pluginCode' },
-  { title: '接口状态', width: win15, dataIndex: 'pluginState', key: 'pluginState', render: text => (text ? '已连接' : '未连接') },
-  { title: '接口来源', width: win45, dataIndex: 'remark', key: 'remark' },
+  { title: '序号', width: 80, dataIndex: 'index', key: 'index' },
+  { title: '接口名', width: 160, dataIndex: 'pluginCaption', key: 'pluginCaption' },
+  { title: '接口状态', width: 100, dataIndex: 'pluginState', key: 'pluginState', render: text => (text ? '已连接' : '未连接') },
+  { title: '接口来源', dataIndex: 'remark', key: 'remark' },
 ];
 @connect(({ system }) => ({
   system,
   pluginList: system.pluginList,
 }))
 export default class DissociationInfo extends PureComponent {
-  state = {
-    dateTimes: null,
-  };
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -30,7 +24,7 @@ export default class DissociationInfo extends PureComponent {
   }
 
   render() {
-    const { loading, pluginList } = this.props;
+    const { pluginList } = this.props;
     const dataSource = pluginList.map((item, index) => {
       return { ...item, index: index + 1 };
     });

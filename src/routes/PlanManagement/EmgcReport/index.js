@@ -1,14 +1,14 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Form, Row, Col, Card, Input, Select, Icon, Button, Dropdown, Menu, TreeSelect, DatePicker, Modal, message, Divider, Popconfirm } from 'antd';
+import { Form, Row, Col, Card, Input, Button, Popconfirm } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import StandardTable from '../../../components/StandardTable';
 import { commonData } from '../../../../mock/commonData';
 import styles from './index.less';
 
+const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const FormItem = Form.Item;
-const { TextArea } = Input;
 @connect(({ planManagement }) => ({
   planManagement,
   emgcReport: planManagement.emgcReport,
@@ -18,15 +18,8 @@ const { TextArea } = Input;
 @Form.create()
 export default class Analysis extends PureComponent {
   state = {
-    // 弹框的显示控制
-    modalVisible: false,
-    // 搜索栏是否展开
-    expandForm: false,
     selectedRows: [],
     formValues: {},
-    //  修改 还是 新增为null
-    clickRow: null,
-
   };
   componentDidMount() {
     this.page(commonData.pageInitial);
@@ -124,7 +117,6 @@ export default class Analysis extends PureComponent {
   };
   renderForm() {
     const { getFieldDecorator } = this.props.form;
-    const { loading = false } = this.props.planManagement;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>

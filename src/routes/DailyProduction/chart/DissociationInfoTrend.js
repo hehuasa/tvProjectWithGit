@@ -89,6 +89,10 @@ export default class DissociationInfoTrend extends PureComponent {
             data={newData0}
             scale={cols}
             forceFit
+            onGetG2Instance={g2Chart => {
+              g2Chart.animate(false);
+              console.log("g2Chart", g2Chart);
+            }}
           >
             <Legend />
             <Axis

@@ -108,7 +108,7 @@ export default class EquipmentProductInfo extends PureComponent {
         <div className={styles.warp}>
           <div className={styles.title}>
             <div className={styles.left} />
-            <div className={styles.text}>实时提货列表清单</div>
+            <div className={styles.text}>{this.props.title}</div>
             <div className={styles.left} />
           </div>
           <div className={styles.dataSource}>数据来源: 物流系统</div>
