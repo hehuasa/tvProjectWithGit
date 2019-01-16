@@ -368,19 +368,6 @@ export default class HandAlarmDeal extends PureComponent {
               <FormItem
                 labelCol={{ span: 5 }}
                 wrapperCol={{ span: 15 }}
-                label="事件名称"
-              >
-                {form.getFieldDecorator('eventName', {
-                  initialValue: eventInfoReport.eventName,
-                })(
-                  <Input disabled />
-                )}
-              </FormItem>
-            </Row>
-            <Row>
-              <FormItem
-                labelCol={{ span: 5 }}
-                wrapperCol={{ span: 15 }}
                 label="报警人"
               >
                 {form.getFieldDecorator('acceptAlarmUserID ', {
