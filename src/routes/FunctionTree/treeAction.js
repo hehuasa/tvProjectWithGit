@@ -8,6 +8,20 @@ import { mapConstants, mapLayers } from '../../services/mapConstant';
 
 const loopObj = {};
 export const handleClick = (event, treeId, treeNode, that) => {
+  if (treeNode.treeName === '检修作业监控图') {
+    const arr = JSON.parse(sessionStorage.getItem('tabs')).tabs;
+    if (arr.some(item => item.key === '/test')) {
+      that.props.dispatch({
+        type: 'tabs/list',
+        payload: { activeKey: '/test', tabs: arr },
+      });
+    } else {
+      that.props.dispatch({
+        type: 'tabs/addTabs',
+        payload: { key: '/test', title: '检修作业监控图', functionInfo: {} },
+      });
+    }
+  }
   const openBoard = (boardType, param, name, nameKeys) => {
     const { expandKeys, activeKeys } = that.props.panelBoard;
     const newArr = [];
