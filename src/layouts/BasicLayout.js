@@ -1025,7 +1025,7 @@ class BasicLayout extends React.PureComponent {
                     </TabPane>
                   </Tabs>
                 </Sider>
-                <Layout>
+                <Layout className={styles.mainContent}>
                   <Content style={{ marginBottom: ' 8px', position: 'relative', height: contentHeight }}>
                     <div ref={(ref) => { this.content = ref; }} style={{ width: '100%', position: 'absolute', zIndex: -20, visibility: 'hidden' }} />
                     <PanelZoom />
