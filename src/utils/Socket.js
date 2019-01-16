@@ -20,7 +20,6 @@ const Socket = ({ onmessage, currentUser, parent }) => {
             // console.clear();
             onmessage(parent.props.alarmList);
           }, 200);
-
       }
     }
   };

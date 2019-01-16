@@ -5,6 +5,7 @@ import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 import styles from './index.less';
+import { toolTipTheme, axisTextStyle } from './unit';
 
 const { DataSet } = new window.DataSet();
 const cotTitle = 'COT（℃）';
@@ -89,32 +90,18 @@ export default class DissociationInfoTrend extends PureComponent {
             data={newData0}
             scale={cols}
             forceFit
-            onGetG2Instance={g2Chart => {
-              g2Chart.animate(false);
-              console.log("g2Chart", g2Chart);
-            }}
           >
             <Legend />
             <Axis
               name="dateFormat"
               title={{ position: 'end',
-                                textStyle: {
-                                    fontSize: '16',
-                                    textAlign: 'right',
-                                    fill: titleColor,
-                                    rotate: 0,
-                                },
+                                textStyle: axisTextStyle,
                             }}
             />
-            <Tooltip crosshairs={{ type: 'y' }} />
+            <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
             <Axis
               title={{ position: 'end',
-                                textStyle: {
-                                    fontSize: '16',
-                                    textAlign: 'right',
-                                    fill: titleColor,
-                                    rotate: 0,
-                                },
+                  textStyle: axisTextStyle,
                             }}
               name="value0"
               line={{
@@ -154,23 +141,13 @@ export default class DissociationInfoTrend extends PureComponent {
             <Axis
               name="dateFormat"
               title={{ position: 'end',
-                textStyle: {
-                  fontSize: '16',
-                  textAlign: 'right',
-                  fill: '#fff',
-                  rotate: 0,
-                },
+                  textStyle: axisTextStyle,
               }}
             />
-            <Tooltip crosshairs={{ type: 'y' }} />
+            <Tooltip crosshairs={{ type: 'y' }} { ...toolTipTheme } />
             <Axis
               title={{ position: 'end',
-                textStyle: {
-                  fontSize: '16',
-                  textAlign: 'right',
-                  fill: '#fff',
-                  rotate: 0,
-                },
+                  textStyle: axisTextStyle,
               }}
               name="value1"
               line={{

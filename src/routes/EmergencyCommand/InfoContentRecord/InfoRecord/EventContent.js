@@ -191,6 +191,7 @@ export default class EventContent extends PureComponent {
   }
   render() {
     const { form, emergency, current } = this.props;
+    console.log(7777, form.getFieldValue('dataType'))
     return (
       <div className={styles.eventContent}>
         <FormItem
@@ -199,6 +200,14 @@ export default class EventContent extends PureComponent {
         >
           {form.getFieldDecorator('featureID')(
             <Input placeholder="事件id" />
+          )}
+        </FormItem>
+        <FormItem
+          labelCol={{ span: 0 }}
+          wrapperCol={{ span: 0 }}
+        >
+          {form.getFieldDecorator('dataType')(
+            <Input type="hidden" />
           )}
         </FormItem>
         <Row type="flex" className={styles.rowPaddingRight}>

@@ -10,7 +10,6 @@ import styles from './index.less';
 
 const { DataView } = new window.DataSet();
 /* eslint react/no-danger:0 */
-const { DataView } = new window.DataSet();
 @autoHeight()
 export default class Pie extends Component {
   state = {

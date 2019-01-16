@@ -643,17 +643,6 @@ export default class PlanInfo extends PureComponent {
     // 实施方案 事件特征表头
     const featureCols = [
       {
-        title: '特征编号',
-        dataIndex: 'featureCode',
-        width: 100,
-        key: 'featureCode',
-        render: (text, record) => {
-          if (!record.planFeatureInfo) {
-            return 'null';
-          }
-          return record.planFeatureInfo.featureCode;
-        },
-      }, {
         title: '特征类型',
         dataIndex: 'featureTypeName',
         width: 100,

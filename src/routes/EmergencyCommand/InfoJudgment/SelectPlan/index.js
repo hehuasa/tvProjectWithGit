@@ -3,7 +3,7 @@ import { Select, Table, Modal, Button, Row, Col, Form, Input } from 'antd';
 import { connect } from 'dva';
 import PlanInfo from './PlanInfo/index';
 import styles from './index.less';
-import { win30, win15, win20, win3 } from '../../../../configIndex';
+import { win30, win15, win20, win3 } from '../../../../utils/configIndex';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -33,7 +33,7 @@ const SearchForm = Form.create()((props) => {
               label="预案类别"
             >
               {getFieldDecorator('planType')(
-                <Select 
+                <Select
                 dropdownMatchSelectWidth={false}
                 placeholder="请选择"
                 >

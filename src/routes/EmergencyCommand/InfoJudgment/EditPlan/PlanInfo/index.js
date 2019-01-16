@@ -9,14 +9,9 @@ import AddAnnex from './AddAnnex/index';
 import AddPlan from './AddPlan/AddPlan';
 import styles from './index.less';
 import { commandType } from '../../../../../utils/utils';
-<<<<<<< HEAD
 import dealCard from '../../../../../assets/emergency/dealCard.png';
 import processImg from '../../../../../assets/emergency/process.png';
-import { Form } from 'antd/lib/index';
 import { win3, win8, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../../../utils/configIndex';
-=======
-import { win3, win8, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../../../configIndex';
->>>>>>> 696be26b5790ebd003139803f0a7cd8be2c0cded
 
 const Option = Select.Option;
 const { TabPane } = Tabs;
@@ -502,14 +497,6 @@ export default class PlanInfo extends PureComponent {
     // 实施方案 事件特征表头
     const featureCols = [
       {
-        title: '特征编号',
-        dataIndex: 'featureCode',
-        width: win10,
-        key: 'featureCode',
-        // render: (text, record) => {
-        //   return record.planFeatureInfo.featureCode;
-        // },
-      }, {
         title: '特征类型',
         dataIndex: 'featureTypeName',
         width: win10,

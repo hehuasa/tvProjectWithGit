@@ -5,7 +5,7 @@ import moment from 'moment';
 import CommonQuery from './CommonQuery';
 import AddTemplate from '../../routes/EmergencyCommand/AlarmDeal/AddTemplate/index';
 import styles from '../../routes/EmergencyCommand/AlarmDeal/AlarmInfo/index.less';
-import { win20, win12, win10, win3 } from '../../configIndex';
+import { win20, win12, win10, win3 } from '../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TextArea, Search } = Input;

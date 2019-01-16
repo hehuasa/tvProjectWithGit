@@ -4,10 +4,10 @@ import moment from 'moment';
 import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
-
-const { DataSet } = new window.DataSet();
+import { toolTipTheme, axisTextStyle, labelTextStyle } from './unit';
 import styles from './index.less';
 
+const { DataSet } = new window.DataSet();
 const cotTitle = '进汽量（t/h）';
 const loadValueTitle = '发电量（MW）';
 
@@ -20,10 +20,12 @@ const cols = {
   value0: {
     alias: '单位： MW',
     range: [0, 1],
+    tickCount: 5,
   },
   value1: {
     alias: '单位： t/h',
     range: [0, 1],
+    tickCount: 5,
   },
 };
 const transData = (data, type) => {
@@ -71,46 +73,34 @@ export default class AlternatorTrend extends PureComponent {
   }
   render() {
     const { history, name, height, dateTimes, click } = this.props;
+    console.log('history', history);
     const chartHeight = Number(height) / 2 - 100;
     const newData0 = transData(history, 0);
     const newData1 = transData(history, 1);
     return (
       <div className={styles.warp}>
         <Card title={name}>
+          <div className={styles.title}>
+            {cols.value0.alias}
+          </div>
           <Chart
-            padding={['auto', 50, 'auto', 'auto']}
+            padding={['auto', 50, 'auto', 50]}
             height={chartHeight}
             data={newData0}
             scale={cols}
-            onGetG2Instance={g2Chart => {
-              g2Chart.animate(false);
-              console.log("g2Chart", g2Chart);
-            }}
             forceFit
           >
             <Legend />
             <Axis
               name="dateFormat"
-              title={{ position: 'end',
-                                textStyle: {
-                                    fontSize: '16',
-                                    textAlign: 'right',
-                                    fill: titleColor,
-                                    rotate: 0,
-                                },
-                            }}
+              title={{ position: 'end', textStyle: axisTextStyle }}
+              label={{ textStyle: axisTextStyle }}
             />
-            <Tooltip crosshairs={{ type: 'y' }} />
+            <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
             <Axis
-              title={{ position: 'end',
-                                textStyle: {
-                                    fontSize: '16',
-                                    textAlign: 'right',
-                                    fill: titleColor,
-                                    rotate: 0,
-                                },
-                            }}
+              // title={{ position: 'end', textStyle: axisTextStyle }}
               name="value0"
+              label={{ textStyle: labelTextStyle, offset: 20 }}
               line={{
                                 lineWidth: 1, // 设置线的宽度
                                 stroke: textColor, // 设置线的颜色
@@ -148,24 +138,16 @@ export default class AlternatorTrend extends PureComponent {
             <Axis
               name="dateFormat"
               title={{ position: 'end',
-                textStyle: {
-                  fontSize: '16',
-                  textAlign: 'right',
-                  fill: titleColor,
-                  rotate: 0,
-                },
+                  textStyle: axisTextStyle,
               }}
+              label={{ textStyle: axisTextStyle }}
             />
-            <Tooltip crosshairs={{ type: 'y' }} />
+            <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
             <Axis
               title={{ position: 'end',
-                textStyle: {
-                  fontSize: '16',
-                  textAlign: 'right',
-                  fill: titleColor,
-                  rotate: 0,
-                },
+                  textStyle: labelTextStyle,
               }}
+              label={{ textStyle: axisTextStyle }}
               name="value1"
               line={{
                 lineWidth: 1, // 设置线的宽度

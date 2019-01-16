@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Popover, Button, Checkbox, Row, Col, Select } from 'antd';
-<<<<<<< HEAD
+
 // import moment from 'moment';
 // import { connect } from 'dva';
-=======
-
->>>>>>> 696be26b5790ebd003139803f0a7cd8be2c0cded
 import { objByArea, newdatabyDataName, getSelctData } from '../../utils/Panel';
 import styles from '../HomePage/PanelBoard/components/panel.less';
 

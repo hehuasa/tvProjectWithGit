@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Form, Row, Col, Input, Icon, Button, DatePicker, Modal, Table, message } from 'antd';
 import moment from 'moment';
 import styles from './index.less';
-import { win12, win20, win10, win3 } from '../../../../../configIndex';
+import { win12, win20, win10, win3 } from '../../../../../utils/configIndex';
 
 const FormItem = Form.Item;
 const Search = Input.Search;

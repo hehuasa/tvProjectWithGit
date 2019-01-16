@@ -9,7 +9,7 @@ import styles from './index.less';
 const getInfoWindowStyle = ({ mapStyle, screenPoint }) => {
   const arrowLength = 7;
   return {
-    bottom: mapStyle.height - screenPoint.y + arrowLength + 8,
+    bottom: mapStyle.height - screenPoint.y + arrowLength + 16,
     left: screenPoint.x - 2,
   };
 };
@@ -44,7 +44,7 @@ class InfoPops extends PureComponent {
         <div
           className={styles.bottom}
           style={{ left: '50%',
-                    bottom: -8 }}
+                    bottom: -16 }}
         />
       </div>
     );
