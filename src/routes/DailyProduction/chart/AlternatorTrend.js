@@ -80,53 +80,56 @@ export default class AlternatorTrend extends PureComponent {
     return (
       <div className={styles.warp}>
         <Card title={name}>
-          <div className={styles.title}>
+          <div className={styles.title0}>
             {cols.value0.alias}
           </div>
-          <Chart
-            padding={['auto', 50, 'auto', 50]}
-            height={chartHeight}
-            data={newData0}
-            scale={cols}
-            forceFit
-          >
-            <Legend />
-            <Axis
-              name="dateFormat"
-              title={{ position: 'end', textStyle: axisTextStyle }}
-              label={{ textStyle: axisTextStyle }}
-            />
-            <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
-            <Axis
-              // title={{ position: 'end', textStyle: axisTextStyle }}
-              name="value0"
-              label={{ textStyle: labelTextStyle, offset: 20 }}
-              line={{
-                                lineWidth: 1, // 设置线的宽度
-                                stroke: textColor, // 设置线的颜色
-                            }}
-              grid={{
-                                type: 'line', // 网格的类型
-                                lineStyle: {
-                                    lineWidth: 0.1,
-                                    stroke: '#333', // 网格线的颜色
-                                } }}
-            />
-            <Geom
-              type="line"
-              position="dateFormat*value0"
-              size={2}
-              color={['date', [lineColor1, lineColor2]]}
-            />
-            <Geom
-              type="point"
-              position="dateFormat*value0"
-              size={4}
-              shape="circle"
-              color={['date', [lineColor1, lineColor2]]}
-              tooltip={null}
-            />
-          </Chart>
+            <Chart
+                padding={[50, 'auto', 'auto', 50]}
+                height={chartHeight}
+                data={newData0}
+                scale={cols}
+                forceFit
+            >
+              <Legend />
+              <Axis
+                  name="dateFormat"
+                  title={{ position: 'end', textStyle: axisTextStyle }}
+                  label={{ textStyle: axisTextStyle }}
+              />
+              <Tooltip crosshairs={{ type: 'y' }} {...toolTipTheme} />
+              <Axis
+                  // title={{ position: 'end', textStyle: axisTextStyle }}
+                  name="value0"
+                  label={{ textStyle: labelTextStyle, offset: 20 }}
+                  line={{
+                    lineWidth: 1, // 设置线的宽度
+                    stroke: textColor, // 设置线的颜色
+                  }}
+                  grid={{
+                    type: 'line', // 网格的类型
+                    lineStyle: {
+                      lineWidth: 0.1,
+                      stroke: '#333', // 网格线的颜色
+                    } }}
+              />
+              <Geom
+                  type="line"
+                  position="dateFormat*value0"
+                  size={2}
+                  color={['date', [lineColor1, lineColor2]]}
+              />
+              <Geom
+                  type="point"
+                  position="dateFormat*value0"
+                  size={4}
+                  shape="circle"
+                  color={['date', [lineColor1, lineColor2]]}
+                  tooltip={null}
+              />
+            </Chart>
+          <div className={styles.title1}>
+            {cols.value1.alias}
+          </div>
           <Chart
             padding={['auto', 50, 'auto', 'auto']}
             height={chartHeight}
