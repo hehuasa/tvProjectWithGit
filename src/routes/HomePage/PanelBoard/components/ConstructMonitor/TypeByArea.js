@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Chart, Axis, Geom, Tooltip } from 'bizcharts';
 import { searchByAttr } from '../../../../../utils/mapService';
-import LeftTitle from "../../LeftTitle/LeftTitle";
+import LeftTitle from '../../LeftTitle/LeftTitle';
 import { mapConstants } from '../../../../../services/mapConstant';
 
 const getCols = (length) => {
@@ -17,17 +17,16 @@ const label = {
     fill: '#fff', // 文本的颜色
     fontSize: '18', // 文本大小
     rotate: 0,
-    textBaseline: 'bottom' // 文本基准线，可取 top middle bottom，默认为middle
+    textBaseline: 'bottom', // 文本基准线，可取 top middle bottom，默认为middle
   },
-}
+};
 const grid = {
   lineStyle: {
     lineWidth: 2, // 网格线的宽度复制代码
   },
-}
+};
 
 export default class ConstructMonitor extends PureComponent {
-
   handleClick = (ev) => {
     const { dispatch, list } = this.props;
     const items = this.chart.getTooltipItems({ x: ev.x, y: ev.y });
@@ -64,7 +63,7 @@ export default class ConstructMonitor extends PureComponent {
     });
     const scales = getCols(data[0].count);
     return (
-        <Chart
+      <Chart
         height={400}
         data={data}
         forceFit
@@ -78,17 +77,17 @@ export default class ConstructMonitor extends PureComponent {
         <Axis
           name="orgName"
           label={{
-            // autoRotate: false,
-            // offset: 15,
+            autoRotate: false,
+            rotate: data.length > 3 ? 60 : 0,
+            offset: 15,
             // 设置文本的显示样式，还可以是个回调函数，回调函数的参数为该坐标轴对应字段的数值
             textStyle: {
               // textAlign: data.length > 5 ? 'end' : 'center', // 文本对齐方向，可取值为： start center end
-              textAlign: 'center', // 文本对齐方向，可取值为： start center end
+              textAlign: data.length > 3 ? 'start' : 'center', // 文本对齐方向，可取值为： start center end
               fill: '#fff', // 文本的颜色
               fontSize: '18', // 文本大小
               // fontWeight: 'bold', // 文本粗细
               // rotate: data.length > 3 ? -45 : 0,
-              rotate: 0,
             },
             textBaseline: 'bottom', // 文本基准线，可取 top middle bottom，默认为middle
           }}

@@ -5,6 +5,7 @@ import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 const { DataSet } = new window.DataSet();
+
 @autoHeight()
 export default class TimelineChart extends React.Component {
   render() {

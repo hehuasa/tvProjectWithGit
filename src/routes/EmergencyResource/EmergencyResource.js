@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Table, Form, Input, Button, Card, Row, Col, Modal, Popconfirm, message, Divider } from 'antd';
 import AddRes from './AddRes';
 import styles from './index.less';
-import { win12, win16, win10, win3 } from '../../configIndex';
+import { win12, win16, win10, win3 } from '../../utils/configIndex';
 
 const FormItem = Form.Item;
 

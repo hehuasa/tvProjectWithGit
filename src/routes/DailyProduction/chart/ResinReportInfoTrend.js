@@ -5,6 +5,7 @@ import { Chart, Axis, Geom, Tooltip, Legend } from 'bizcharts';
 import { connect } from 'dva';
 import { textColor, lineColor1, lineColor2, titleColor } from '../color/color';
 // import MonthPick from './MonthPick';
+
 const { DataSet } = new window.DataSet();
 import styles from './index.less';
 import { getMonthDayNums } from './unit';

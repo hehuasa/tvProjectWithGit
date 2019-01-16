@@ -5,7 +5,7 @@ import { connect } from 'dva';
 import { searchByAttr, hoveringAlarm, alarmOrEventClick } from '../../../../utils/mapService';
 import styles from './panel.less';
 import { mapConstants } from '../../../../services/mapConstant';
-import { win8, win10, win3 } from '../../../../configIndex';
+import { win8, win10, win3 } from '../../../../utils/configIndex';
 
 const columns = [
   {

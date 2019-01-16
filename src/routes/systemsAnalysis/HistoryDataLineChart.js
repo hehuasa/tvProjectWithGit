@@ -6,7 +6,8 @@ import Slider from 'bizcharts-plugin-slider';
 import styles from './historyData.less';
 
 const { DataSet } = new window.DataSet();
-const data = [{
+const data = [
+    {
   "month": 1528420108759,
   "y453454yyx": 17,
   "vu31e": 72,

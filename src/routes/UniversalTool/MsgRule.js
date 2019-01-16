@@ -11,7 +11,7 @@ import { commonData } from '../../../mock/commonData';
 import { getUUID } from '../../utils/utils';
 import {
   win3, win18,
-} from '../../configIndex';
+} from '../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { Option } = Select;

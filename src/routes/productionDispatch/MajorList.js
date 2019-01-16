@@ -6,7 +6,7 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import { DndTable } from './DndTable';
 import { commonData } from '../../../mock/commonData';
 import styles from './majorList.less';
-import { win16, win20, win8, win10, win3 } from '../../configIndex';
+import { win16, win20, win8, win10, win3 } from '../../utils/configIndex';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

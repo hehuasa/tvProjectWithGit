@@ -8,6 +8,7 @@ import styles from './index.less';
 
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
+
 const { DataSet } = new window.DataSet();
 const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 

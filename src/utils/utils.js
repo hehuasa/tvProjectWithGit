@@ -210,10 +210,10 @@ export const autoContentHeight = (domType, changingType) => {
       winHeight = winHeight - header - space - points - footer - tabs;
       break;
     case 'rightSide':
-      winHeight = winHeight - header - footer - points - space - tabs;
+      winHeight = winHeight - header - points - footer;
       break;
     case 'sideZoom':
-      winHeight = winHeight - footer - tabs - points - header - space;
+      winHeight = winHeight - header - points - footer;
       break;
     default: break;
   }
