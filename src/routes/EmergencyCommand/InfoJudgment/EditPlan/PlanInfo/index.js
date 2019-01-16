@@ -678,8 +678,7 @@ export default class PlanInfo extends PureComponent {
         width: win10,
         key: 'resourceName',
         render: (text, record) => {
-          return record.resResourceInfo ? record.resResourceInfo.resourceName :
-            (record.resToolMaterialInfo ? record.resToolMaterialInfo.materialName : '');
+          return record.resourceName || record.materialName;
         },
       }, {
         title: '规格型号',
@@ -687,7 +686,7 @@ export default class PlanInfo extends PureComponent {
         width: win12,
         key: 'type',
         render: (text, record) => {
-          return record.resToolMaterialInfo ? record.resToolMaterialInfo.model : '';
+          return record.resourceName ? record.specification : record.specifications;
         },
       }, {
         title: '数量',
@@ -699,27 +698,16 @@ export default class PlanInfo extends PureComponent {
         dataIndex: 'savePlace',
         width: win12,
         key: 'savePlace',
-        render: (text, record) => {
-          return record.resToolMaterialInfo ? record.resToolMaterialInfo.savePlace : '';
-        },
       }, {
         title: '保管人',
-        dataIndex: 'userID',
+        dataIndex: 'userName',
         width: win10,
-        key: 'userID',
-        render: (text, record) => {
-          return record.resToolMaterialInfo ?
-            (record.resToolMaterialInfo.baseUserInfo ?
-              record.resToolMaterialInfo.baseUserInfo.userName : '') : '';
-        },
+        key: 'userName',
       }, {
         title: '备注',
         dataIndex: 'remark',
         width: win20,
-        key: 'attention',
-        render: (text, record) => {
-          return record.resToolMaterialInfo ? record.resToolMaterialInfo.remark : '';
-        },
+        key: 'remark',
       }, {
         title: isEdit ? '操作' : '',
         width: win20,
