@@ -176,7 +176,7 @@ export default class EmergencyCommand extends PureComponent {
                 }}
                 onClick={() => {
                   if( item.sortIndex > current ){
-                    return ;
+                    return;
                   }
                   onClick(item.sortIndex, item.nodeType)
                 }}

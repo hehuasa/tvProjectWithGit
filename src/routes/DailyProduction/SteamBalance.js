@@ -148,7 +148,7 @@ export default class SteamBalance extends PureComponent {
                 />
               </div>
             </div>
-            <Scrollbars>
+            <Scrollbars className={styles.scrollbarsStyle}>
               <Table
                 onRow={(item) => {
                 return {

@@ -26,7 +26,7 @@ const DeviceInfo = ({ style, dispatch, attributes, arrowDirection, arrowStyle })
         <span className={styles.close} onClick={handleClick}>X</span>
       </div>
       <div className={styles.content}>
-        <Scrollbars>
+        <Scrollbars className={styles.scrollbarsStyle}>
           {
             attributesArray.map((item, i) => {
               return (

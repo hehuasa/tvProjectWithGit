@@ -213,7 +213,7 @@ export default class EquipmentProductInfo extends PureComponent {
                 />
               </div>
             </div>
-            <Scrollbars >
+            <Scrollbars className={styles.scrollbarsStyle}>
               <div className={styles.secondTitle}>产品质量情况</div>
               <Table
                 dataSource={fakeData[0].limisProduct}

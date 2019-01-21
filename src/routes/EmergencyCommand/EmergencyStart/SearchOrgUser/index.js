@@ -181,7 +181,7 @@ export default class SearchOrgUser extends PureComponent {
         <div className={styles.search}>
           <Form onSubmit={this.handleSearch} layout="inline">
             <Row type="flex">
-              <Col md={6} sm={24}>
+              <Col xxl={6} xl={8}>
                 <FormItem
                   labelCol={{ span: 8 }}
                   wrapperCol={{ span: 16 }}
@@ -192,7 +192,7 @@ export default class SearchOrgUser extends PureComponent {
                   )}
                 </FormItem>
               </Col>
-              <Col md={6} sm={24}>
+              <Col xxl={6} xl={8}>
                 <FormItem
                   labelCol={{ span: 8 }}
                   wrapperCol={{ span: 16 }}
@@ -203,7 +203,7 @@ export default class SearchOrgUser extends PureComponent {
                   )}
                 </FormItem>
               </Col>
-              <Col md={6} sm={24}>
+              <Col xxl={6} xl={8}>
                 <FormItem
                   labelCol={{ span: 8 }}
                   wrapperCol={{ span: 16 }}
@@ -214,7 +214,7 @@ export default class SearchOrgUser extends PureComponent {
                   )}
                 </FormItem>
               </Col>
-              <Col md={6} sm={24}>
+              <Col xxl={6} xl={8}>
                 <span className={styles.submitButtons}>
                   <Button type="primary" htmlType="submit">查询</Button>
                   <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>

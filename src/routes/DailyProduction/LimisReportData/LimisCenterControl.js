@@ -224,7 +224,7 @@ export default class EquipmentProductInfo extends PureComponent {
                 />
               </div>
             </div>
-            <Scrollbars >
+            <Scrollbars className={styles.scrollbarsStyle}>
               <div className={styles.secondTitle}>液体产品馏出口质量情况</div>
               <Table
                 dataSource={fakeData[0].outlet}

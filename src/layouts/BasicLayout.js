@@ -1032,7 +1032,7 @@ class BasicLayout extends React.PureComponent {
                     </TabPane>
                   </Tabs>
                 </Sider>
-                <Layout>
+                <Layout className={styles.mainContent}>
                   <Content style={{ marginBottom: ' 8px', position: 'relative', height: contentHeight }}>
                     <div ref={(ref) => { this.content = ref; }} style={{ width: '100%', position: 'absolute', zIndex: -20, visibility: 'hidden' }} />
                     <PanelZoom />
@@ -1049,7 +1049,7 @@ class BasicLayout extends React.PureComponent {
                                     const Comp = routerData[item.key] ? routerData[item.key].component ? routerData[item.key].component : null : null;
                                     return (
                                       <TabPane tab={item.title} key={item.key} closable={item.closable}>
-                                        <Scrollbars>
+                                        <Scrollbars className={styles.scrollbarsStyle}>
                                           { Comp !== null ? (
                                             <Route
                                               path="/"

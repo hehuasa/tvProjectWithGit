@@ -123,7 +123,7 @@ class QualityMonitor extends PureComponent {
             <Button type="primary" size="small" onClick={this.handleClick}> X </Button>
           </div>
         </div>
-        <Scrollbars style={{ height: 280 }}>
+        <Scrollbars style={{ height: 280 }} className={styles.scrollbarsStyle}>
           <Collapse bordered={false} defaultActiveKey={['0']}>
             <Panel header="点位在线分析" key="0">
               { showLevel === 'plantLevel' ? (

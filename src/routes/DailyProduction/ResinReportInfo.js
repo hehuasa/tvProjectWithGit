@@ -192,7 +192,7 @@ export default class DissociationInfo extends PureComponent {
               />
             </div>
           </div>
-          <Scrollbars>
+          <Scrollbars className={styles.scrollbarsStyle}>
             <Table
               onRow={(record) => {
               return {

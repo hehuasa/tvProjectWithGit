@@ -69,7 +69,7 @@ export default class HistoryDataLineControl extends PureComponent {
     // });
   }
   render() {
-    const { list, } = this.props.historyLine;
+    const { list } = this.props.historyLine;
     const queryLineData = list;
 
     const newQueryLineData = JSON.parse(JSON.stringify(queryLineData));

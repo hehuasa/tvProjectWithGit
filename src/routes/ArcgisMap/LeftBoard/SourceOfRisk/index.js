@@ -158,7 +158,7 @@ class SourceOfRisk extends PureComponent {
             <Button type="primary" size="small" onClick={this.handleClick}> X </Button>
           </div>
         </div>
-        <Scrollbars style={{ height: 280 }}>
+        <Scrollbars style={{ height: 280 }} className={styles.scrollbarsStyle}>
           <div>
             <Collapse bordered={false} defaultActiveKey={['0']}>
               { ctrlResourceType === 'sourceOfRisk' ? (

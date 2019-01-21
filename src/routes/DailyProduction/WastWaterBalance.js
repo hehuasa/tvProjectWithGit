@@ -144,7 +144,7 @@ export default class WastWaterBalance extends PureComponent {
                 />
               </div>
             </div>
-            <Scrollbars>
+            <Scrollbars className={styles.scrollbarsStyle}>
               <Table
                 onRow={(item, b, c) => {
                   return {

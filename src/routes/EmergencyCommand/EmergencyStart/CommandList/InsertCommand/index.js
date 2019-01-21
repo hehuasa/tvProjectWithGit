@@ -6,6 +6,7 @@ import { commandType } from '../../../../../utils/utils';
 import AcceptUser from '../AcceptUser/index';
 import CommandList from '../index';
 import { win3, win8, win10, win20, win12 } from '../../../../../utils/configIndex';
+
 const { TreeNode } = TreeSelect;
 const FormItem = Form.Item;
 const Option = Select.Option;

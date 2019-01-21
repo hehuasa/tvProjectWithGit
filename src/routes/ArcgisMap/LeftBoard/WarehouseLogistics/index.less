@@ -1,4 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
+@import "../../../../index.less";
 .warp{
   background-color: @component-background;
   & .header{
@@ -85,4 +86,9 @@
 .panelHeader{
   font-size: @font-size-base ;
   color: @primary-6;
+}
+.scrollbarsStyle {
+  &>div:last-child>div:last-child {
+      background-color: @scrollbars-bg  !important;
+  }
 }

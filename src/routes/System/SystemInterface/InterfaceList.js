@@ -36,7 +36,7 @@ export default class DissociationInfo extends PureComponent {
           <div className={styles.left} />
         </div>
         <div className={styles.content}>
-          <Scrollbars>
+          <Scrollbars className={styles.scrollbarsStyle}>
             <Table
               dataSource={dataSource}
               columns={columns}

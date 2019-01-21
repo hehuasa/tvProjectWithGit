@@ -186,7 +186,7 @@ export default class HotFurnaceInfo extends PureComponent {
                   />
                 </div>
               </div>
-              <Scrollbars>
+              <Scrollbars className={styles.scrollbarsStyle}>
                 <div>
                   <div className={styles.leftTable}>
                     <Table

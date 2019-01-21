@@ -1,14 +1,22 @@
 @import "~antd/lib/style/themes/default.less";
-.context-menu{
-  //width: 120px;
-  position: fixed;
-  z-index: 100;
+@import "../../../index.less";
+.context-menu {
+    //width: 120px;
+    position: fixed;
+    z-index: 100;
 }
-.item{
-  margin: 0 !important;
-  height: 30px !important;
-  line-height: 30px !important;
-  &:hover{
-    background: @item-active-bg;
-  }
+
+.item {
+    margin: 0 !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    &:hover {
+        background: @item-active-bg;
+    }
+}
+
+.scrollbarsStyle {
+    &>div:last-child>div:last-child {
+        background-color: @scrollbars-bg !important;
+    }
 }

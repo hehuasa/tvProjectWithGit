@@ -123,7 +123,7 @@ export default class EquipmentProductInfo extends PureComponent {
                   />
                 </div>
               </div>
-              <Scrollbars >
+              <Scrollbars className={styles.scrollbarsStyle}>
                 <Table
                   dataSource={this.props.takeCargoList}
                   columns={cols}

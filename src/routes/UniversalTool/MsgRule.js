@@ -166,6 +166,7 @@ const CreateForm = Form.create()((props) => {
       onCancel={() => handleModalVisible()}
     >
       <Scrollbars
+        className={styles.scrollbarsStyle}
         autoHide
         autoHideTimeout={1000}
         autoHideDuration={200}
@@ -233,6 +234,7 @@ const CreateForm = Form.create()((props) => {
                 <Row>
                   <Col span={10}>
                     <Scrollbars
+                      className={styles.scrollbarsStyle}
                       autoHeight
                       autoHeightMax={400}
                     >

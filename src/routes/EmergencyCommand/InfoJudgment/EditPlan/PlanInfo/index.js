@@ -9,8 +9,6 @@ import AddAnnex from './AddAnnex/index';
 import AddPlan from './AddPlan/AddPlan';
 import styles from './index.less';
 import { commandType } from '../../../../../utils/utils';
-import dealCard from '../../../../../assets/emergency/dealCard.png';
-import processImg from '../../../../../assets/emergency/process.png';
 import { win3, win8, win10, win11, win12, win13, win14, win15, win16, win17, win18, win19, win20, win21, win22, win23, win24, win25, win26, win27, win28, win29, win30, } from '../../../../../utils/configIndex';
 
 const Option = Select.Option;

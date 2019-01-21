@@ -206,7 +206,7 @@ class VOCs extends PureComponent {
             <Button type="primary" size="small" onClick={this.handleClick}> X </Button>
           </div>
         </div>
-        <Scrollbars style={{ height: 280 }}>
+        <Scrollbars style={{ height: 280 }} className={styles.scrollbarsStyle}>
           <Collapse bordered={false} defaultActiveKey={['0']}>
             <Panel header={this.state.list ? listTitle : infoTitle} key="0">
               { this.state.list ? (

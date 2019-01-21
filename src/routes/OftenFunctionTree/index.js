@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Trees from './Trees';
+import styles from './index.less';
 
 export default class ResourceTree extends PureComponent {
   handleContextMenu= (e) => {
@@ -14,7 +15,7 @@ export default class ResourceTree extends PureComponent {
   };
   render() {
     return (
-      <Scrollbars onContextMenu={this.handleContextMenu} style={{ paddingTop: 20, height: '100%' }} onClick={this.handClick}>
+      <Scrollbars onContextMenu={this.handleContextMenu} style={{ paddingTop: 20, height: '100%' }} onClick={this.handClick} className={styles.scrollbarsStyle}>
         <Trees />
       </Scrollbars>
     );

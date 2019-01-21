@@ -75,7 +75,7 @@ export default class Casualties extends PureComponent {
   render() {
     const { form, emergency } = this.props;
     return (
-      <Scrollbars>
+      <Scrollbars className={styles.scrollbarsStyle}>
         <div className={styles.eventContent}>
           <AddTemplate isHidden casualtiesData={emergency.casualties} isDisabled form={form} />
           <Row >
